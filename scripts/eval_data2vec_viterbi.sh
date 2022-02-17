@@ -4,4 +4,4 @@ python examples/speech_recognition/new/infer.py --config-dir examples/speech_rec
 	task.labels=ltr decoding.type=viterbi \
 	decoding.unique_wer_file=False \
 	dataset.gen_subset=dev-clean \
-	common_eval.path=/home/work/workspace/fairseq/examples/data2vec/data2vec_model/$model decoding.beam=5 distributed_training.distributed_world_size=1
+	common_eval.path=/home/work/workspace/models/data2vec_model/$model decoding.beam=5 distributed_training.distributed_world_size=1

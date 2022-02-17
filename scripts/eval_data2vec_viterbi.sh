@@ -5,5 +5,5 @@ python ../examples/speech_recognition/new/infer.py --config-dir ../examples/spee
 	task.labels=ltr decoding.type=viterbi \
 	decoding.unique_wer_file=False \
 	dataset.gen_subset=test-other \
-	decoding.beam=1 \
+	decoding.beam=5 \
 	common_eval.path=/home/work/workspace/models/data2vec_model/$model distributed_training.distributed_world_size=1

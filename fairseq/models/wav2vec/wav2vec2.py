@@ -4,6 +4,7 @@
 # LICENSE file in the root directory of this source tree.
 
 import math
+import contextlib
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
@@ -1013,6 +1014,7 @@ class TransformerEncoder(nn.Module):
         padding_mask=None,
         tgt_layer=None,
         min_layer=0,
+        layer_wise_detach=False
     ):
 
         if padding_mask is not None:
@@ -1043,17 +1045,34 @@ class TransformerEncoder(nn.Module):
 
         layer_results = []
         r = None
-        for i, layer in enumerate(self.layers):
-            dropout_probability = np.random.random() if self.layerdrop > 0 else 1
-            if not self.training or (dropout_probability > self.layerdrop):
-                x, (z, lr) = layer(
-                    x, self_attn_padding_mask=padding_mask, need_weights=False
-                )
-                if i >= min_layer:
-                    layer_results.append((x, z, lr))
-            if i == tgt_layer:
-                r = x
-                break
+
+        if layer_wise_detach: 
+        ## for layer wise CTC training
+            for i, layer in enumerate(self.layers):
+                dropout_probability = np.random.random() if self.layerdrop > 0 else 1
+                if not self.training or (dropout_probability > self.layerdrop):
+                    with torch.no_grad() if i < tgt_layer else contextlib.ExitStack():
+                        x, (z, lr) = layer(
+                            x, self_attn_padding_mask=padding_mask, need_weights=False
+                        )
+                        
+                    if i >= min_layer:
+                        layer_results.append((x, z, lr))
+                if i == tgt_layer:
+                    r = x
+                    break
+        else:
+            for i, layer in enumerate(self.layers):
+                dropout_probability = np.random.random() if self.layerdrop > 0 else 1
+                if not self.training or (dropout_probability > self.layerdrop):
+                    x, (z, lr) = layer(
+                        x, self_attn_padding_mask=padding_mask, need_weights=False
+                    )
+                    if i >= min_layer:
+                        layer_results.append((x, z, lr))
+                if i == tgt_layer:
+                    r = x
+                    break
 
         if r is not None:
             x = r

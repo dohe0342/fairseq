@@ -369,7 +369,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             x,
             padding_mask=padding_mask,
             layer=layer,
-            tft_layer=tgt_layer,
+            tgt_layer=tgt_layer,
             layer_wise_detach=branch_ctc
         )
 

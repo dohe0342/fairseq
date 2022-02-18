@@ -198,6 +198,7 @@ class Wav2Vec2CtcConfig(Wav2Vec2AsrConfig):
 class Wav2VecCtc(BaseFairseqModel):
     def __init__(self, cfg: Wav2Vec2CtcConfig, w2v_encoder: BaseFairseqModel):
         super().__init__()
+        print(cfg.branch_ctc)
         self.cfg = cfg
         self.w2v_encoder = w2v_encoder
         self.blank_weight = cfg.blank_weight

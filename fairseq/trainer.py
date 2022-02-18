@@ -1164,7 +1164,7 @@ class Trainer(object):
         else:
             logging_output = []
             for _ in range(len(logging_outputs)):
-                print(self._reduce_and_log_stats(logging_outputs[_], sample_size))
+                print(self._reduce_and_log_stats([logging_outputs[_]], sample_size))
                 logging_output.append(self._reduce_and_log_stats(logging_outputs[_], sample_size))
 
         return logging_output

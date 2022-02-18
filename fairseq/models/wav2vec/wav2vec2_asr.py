@@ -247,8 +247,8 @@ class Wav2VecCtc(BaseFairseqModel):
         else:
             return utils.softmax(logits.float(), dim=-1)
 
-    def forward(self, tgt_layer=None, **kwargs):
-        x = self.w2v_encoder(**kwargs) if tgt_layer else self.w2v_encoder(tgt_layer, **kwargs)
+    def forward(self, **kwargs, tgt_layer=None):
+        x = self.w2v_encoder(**kwargs) if not tgt_layer else self.w2v_encoder(**kwargs, tgt_layer)
         return x
 
 
@@ -883,7 +883,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         super().set_num_updates(num_updates)
         self.num_updates = num_updates
 
-    def forward(self, source, padding_mask, tgt_layer=None, **kwargs):
+    def forward(self, source, padding_mask, tgt_layer, **kwargs):
 
         w2v_args = {
             "source": source,

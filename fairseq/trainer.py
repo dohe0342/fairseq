@@ -793,7 +793,6 @@ class Trainer(object):
             extra_kwargs["ema_model"] = self.ema.get_model()
         
         if getattr(self.task, "uses_branch", False):
-            print('why here ;;;;;')
             extra_kwargs["uses_branch"] = True
 
         # forward and backward pass

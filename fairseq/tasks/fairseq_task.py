@@ -505,6 +505,7 @@ class FairseqTask(object):
                   gradient
                 - logging outputs to display while training
         """
+        print('fucking !!!!!!!!', uses_branch)
         if uses_branch:
             for i in range(12):     
                 model.train()

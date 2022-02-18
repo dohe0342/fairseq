@@ -883,7 +883,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         super().set_num_updates(num_updates)
         self.num_updates = num_updates
 
-    def forward(self, source, padding_mask, tgt_layer, **kwargs):
+    def forward(self, source, padding_mask, tgt_layer=None, **kwargs):
 
         w2v_args = {
             "source": source,

@@ -884,8 +884,8 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         self.num_updates = num_updates
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):
-        print('tgt layer = ', tgt_layer)
-        print('source = ', source)
+        #print('tgt layer = ', tgt_layer)
+        #print('source = ', source)
 
         w2v_args = {
             "source": source,
@@ -896,7 +896,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         ft = self.freeze_finetune_updates <= self.num_updates
 
         with torch.no_grad() if not ft else contextlib.ExitStack():
-            res = self.w2v_model.extract_features(tgt_layer, **w2v_args)
+            res = self.w2v_model.extract_features(**w2v_args, tgt_layer=tgt_layer)
 
             x = res["x"]
             padding_mask = res["padding_mask"]

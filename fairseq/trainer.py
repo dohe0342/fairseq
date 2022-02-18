@@ -1112,6 +1112,8 @@ class Trainer(object):
         if self.cfg.ema.store_ema and getattr(self.task, "uses_ema", False):
             extra_kwargs["ema_model"] = self.ema.get_model()
 
+        extra_kwargs["uses_branch"] = True
+        
         with torch.no_grad():
             self.model.eval()
             self.criterion.eval()

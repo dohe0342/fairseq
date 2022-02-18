@@ -530,10 +530,16 @@ class FairseqTask(object):
 
         return loss, sample_size, logging_output
 
-    def valid_step(self, sample, model, criterion):
+    def valid_step(self, sample, model, criterion, uses_branch=False):
         model.eval()
-        with torch.no_grad():
-            loss, sample_size, logging_output = criterion(model, sample)
+        if uses_branch:
+            with torch.no_grad():
+                for i in range(12):
+                    loss, sample_size, logging_output = criterion(model, sample, tgt_layer=i+1)
+        else:
+            with torch.no_grad():
+                loss, sample_size, logging_output = criterion(model, sample)
+
         return loss, sample_size, logging_output
 
     def optimizer_step(self, optimizer, model, update_num):

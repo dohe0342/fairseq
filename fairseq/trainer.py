@@ -1539,6 +1539,8 @@ class Trainer(object):
                 for key_to_delete in ["ppl", "wps", "wpb", "bsz"]:
                     if key_to_delete in logging_output:
                         del logging_output[key_to_delete]
+
+            print(logging_output)
             return logging_output
 
     def _check_xla_compilation(self):

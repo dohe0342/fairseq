@@ -781,6 +781,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
+            "branch_ctc": cfg.branch_ctc,
         }
 
         if cfg.w2v_args is None:
@@ -800,8 +801,6 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
             if isinstance(w2v_args, Namespace):
                 cfg.w2v_args = w2v_args = convert_namespace_to_omegaconf(w2v_args)
         
-        w2v_args.branch_ctc = True
-
         model_normalized = w2v_args.task.get(
             "normalize", w2v_args.model.get("normalize", False)
         )

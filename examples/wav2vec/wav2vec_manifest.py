@@ -22,7 +22,7 @@ def get_parser():
     )
     parser.add_argument(
         "--valid-percent",
-        default=0.01,
+        default=0.00,
         type=float,
         metavar="D",
         help="percentage of data to use as validation set (between 0 and 1)",
@@ -41,6 +41,12 @@ def get_parser():
         metavar="FRAG",
         help="if set, path must contain this substring for a file to be included in the manifest",
     )
+    parser.add_argument(
+        "--output",
+        default=None,
+        type=str,
+    )
+
     return parser
 
 
@@ -60,7 +66,7 @@ def main(args):
         else None
     )
 
-    with open(os.path.join(args.dest, "train.tsv"), "w") as train_f:
+    with open(os.path.join(args.dest, f"{args.output}.tsv"), "w") as train_f:
         print(dir_path, file=train_f)
 
         if valid_f is not None:

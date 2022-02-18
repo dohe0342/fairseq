@@ -483,7 +483,7 @@ class FairseqTask(object):
         )
 
     def train_step(
-        self, sample, model, criterion, optimizer, update_num, ignore_grad=False
+        self, sample, model, criterion, optimizer, update_num, ignore_grad=False, tgt_layer=False
     ):
         """
         Do forward and backward, and return the loss as computed by *criterion*
@@ -505,15 +505,28 @@ class FairseqTask(object):
                   gradient
                 - logging outputs to display while training
         """
-        model.train()
-        model.set_num_updates(update_num)
-        with torch.autograd.profiler.record_function("forward"):
-            with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
-                loss, sample_size, logging_output = criterion(model, sample)
-        if ignore_grad:
-            loss *= 0
-        with torch.autograd.profiler.record_function("backward"):
-            optimizer.backward(loss)
+        if tgt_layer:
+            for i in range(12):     
+                model.train()
+                model.set_num_updates(update_num)
+                with torch.autograd.profiler.record_function("forward"):
+                    with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
+                        loss, sample_size, logging_output = criterion(model, sample, tgt_layer=tgt_layer)
+                if ignore_grad:
+                    loss *= 0
+                with torch.autograd.profiler.record_function("backward"):
+                    optimizer.backward(loss)
+        else:
+            model.train()
+            model.set_num_updates(update_num)
+            with torch.autograd.profiler.record_function("forward"):
+                with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
+                    loss, sample_size, logging_output = criterion(model, sample)
+            if ignore_grad:
+                loss *= 0
+            with torch.autograd.profiler.record_function("backward"):
+                optimizer.backward(loss)
+
         return loss, sample_size, logging_output
 
     def valid_step(self, sample, model, criterion):

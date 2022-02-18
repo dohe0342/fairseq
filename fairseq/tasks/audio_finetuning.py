@@ -100,6 +100,14 @@ class AudioFinetuningConfig(AudioPretrainingConfig):
             "adds 'prev_output_tokens' to input and appends eos to target"
         },
     )
+    uses_branch: bool = field(
+        default=False,
+        metadata={
+            "help": "required for autoregressive decoders (like seq2seq models); "
+            "adds 'prev_output_tokens' to input and appends eos to target"
+        },
+    )
+
 
 
 @register_task("audio_finetuning", dataclass=AudioFinetuningConfig)

@@ -1065,17 +1065,9 @@ class Trainer(object):
                     )
 
                 # log stats
-                if extra_kwargs["uses_branch"]:
-                    logging_output = []
-                    for logging_output_ in logging_outputs:
-                        for _ in range(12):
-                            logging_output.append(self._reduce_and_log_stats(
-                                logging_output_[_], sample_size, grad_norm, layer_num=_+1
-                                ))
-                else:
-                    logging_output = self._reduce_and_log_stats(
-                        logging_outputs, sample_size, grad_norm
-                    )
+                logging_output = self._reduce_and_log_stats(
+                    logging_outputs, sample_size, grad_norm
+                )
 
                 # clear CUDA cache to reduce memory fragmentation
                 if (

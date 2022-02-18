@@ -1164,8 +1164,8 @@ class Trainer(object):
         else:
             logging_output = []
             for _ in range(len(logging_output)):
+                print(self._reduce_and_log_stats(logging_outputs[_], sample_size))
                 logging_output.append(self._reduce_and_log_stats(logging_outputs[_], sample_size))
-        print('here')
 
         return logging_output
 
@@ -1540,7 +1540,7 @@ class Trainer(object):
                 for key_to_delete in ["ppl", "wps", "wpb", "bsz"]:
                     if key_to_delete in logging_output:
                         del logging_output[key_to_delete]
-
+            
             return logging_output
 
     def _check_xla_compilation(self):

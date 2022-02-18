@@ -198,7 +198,6 @@ class Wav2Vec2CtcConfig(Wav2Vec2AsrConfig):
 class Wav2VecCtc(BaseFairseqModel):
     def __init__(self, cfg: Wav2Vec2CtcConfig, w2v_encoder: BaseFairseqModel):
         super().__init__()
-        print(cfg.branch_ctc)
         self.cfg = cfg
         self.w2v_encoder = w2v_encoder
         self.blank_weight = cfg.blank_weight
@@ -211,10 +210,8 @@ class Wav2VecCtc(BaseFairseqModel):
     @classmethod
     def build_model(cls, cfg: Wav2Vec2CtcConfig, task: FairseqTask):
         """Build a new model instance."""
-        w2v_encoder = Wav2VecEncoderBranchCtc(cfg, len(task.target_dictionary)) if cfg.branch_ctc else Wav2VecEncoder(cfg, len(task.target_dictionary))
-        print('1'*30)
-        print(w2v_encoder)
-        print('1'*30)
+        w2v_encoder = Wav2VecEncoderBranchCtc(cfg, len(task.target_dictionary)) if cfg.branch_ctc \
+                            else Wav2VecEncoder(cfg, len(task.target_dictionary))
         return cls(cfg, w2v_encoder)
 
     def get_logits(self, net_output, normalize=False):

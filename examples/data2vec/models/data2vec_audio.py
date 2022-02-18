@@ -308,6 +308,9 @@ class Data2VecAudioModel(BaseFairseqModel):
         tgt_layer=None,
         branch_ctc=False
     ):
+        print('1'*30)
+        print(tgt_layer)
+        print('1'*30)
         features = source
 
         if self.feature_grad_mult > 0:
@@ -523,9 +526,6 @@ class Data2VecAudioModel(BaseFairseqModel):
     def extract_features(
         self, source, padding_mask, mask=False, layer=None, tgt_layer=None
     ):
-        print('1'*30)
-        print(tgt_layer)
-        print('1'*30)
         res = self.forward(
             source,
             padding_mask,

@@ -308,9 +308,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         tgt_layer=None,
         branch_ctc=False
     ):
-        print('1'*30)
-        print(layer)
-        print('1'*30)
         features = source
 
         if self.feature_grad_mult > 0:

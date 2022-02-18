@@ -533,14 +533,19 @@ class FairseqTask(object):
     def valid_step(self, sample, model, criterion, uses_branch=False):
         model.eval()
         if uses_branch:
+            loss_list, sample_size_list, logging_output_list = [], [], []
             with torch.no_grad():
                 for i in range(12):
                     loss, sample_size, logging_output = criterion(model, sample, tgt_layer=i+1)
+                    loss_list.append(loss)
+                    sample_size_list.append(loss)
+                    logging_output_list.append(logging_output)
+            return loss_list, sample_size_list, logging_output_list
+                    
         else:
             with torch.no_grad():
                 loss, sample_size, logging_output = criterion(model, sample)
-
-        return loss, sample_size, logging_output
+            return loss, sample_size, logging_output
 
     def optimizer_step(self, optimizer, model, update_num):
         optimizer.step()

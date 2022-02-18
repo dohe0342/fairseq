@@ -1139,7 +1139,8 @@ class Trainer(object):
                         return self.valid_step(sample, raise_oom=True)
                 raise e
 
-            logging_outputs = [logging_output]
+            logging_outputs = logging_output if type(logging_output) == list else [logging_output]
+
             if is_dummy_batch:
                 if torch.is_tensor(sample_size):
                     sample_size.zero_()

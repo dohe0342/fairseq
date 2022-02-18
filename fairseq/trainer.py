@@ -1065,7 +1065,8 @@ class Trainer(object):
                     )
 
                 # log stats
-                logging_output = []
+                logging_temp = []
+                print(len(logging_output))
                 if extra_kwargs["uses_branch"]:
                     for _ in range(12):
                         logging_output.append(self._reduce_and_log_stats(

@@ -418,7 +418,7 @@ class BranchCtcCriterion(CtcCriterion):
         return loss, sample_size, logging_output
 
     @staticmethod
-    def reduce_metrics(logging_outputs, layer_num=0) -> None:
+    def reduce_metrics(logging_outputs, layer_num=12) -> None:
         """Aggregate logging outputs from data parallel training."""
 
         loss_sum = utils.item(sum(log.get(f"loss_{layer_num}", 0) for log in logging_outputs))

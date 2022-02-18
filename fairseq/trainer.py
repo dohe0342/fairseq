@@ -1065,6 +1065,7 @@ class Trainer(object):
                     )
 
                 # log stats
+                logging_outputs = [_[-1] for _ in logging_outputs]
                 logging_output = self._reduce_and_log_stats(
                     logging_outputs, sample_size, grad_norm
                 )

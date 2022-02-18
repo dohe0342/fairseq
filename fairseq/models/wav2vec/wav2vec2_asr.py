@@ -844,7 +844,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         
         self.proj = []
         if targ_d is not None:
-            for i in range(cfg.encoder_layers):
+            for i in range(w2v_args.model.encoder_layers):
                 self.proj.append(Linear(d, targ_d))
 
     def load_model_weights(self, state, model, cfg):

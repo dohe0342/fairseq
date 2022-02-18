@@ -1139,7 +1139,7 @@ class Trainer(object):
                         return self.valid_step(sample, raise_oom=True)
                 raise e
 
-            logging_outputs = logging_output if type(logging_output) == list else [logging_output]
+            logging_outputs = logging_output[:] if type(logging_output) == list else [logging_output]
 
             if is_dummy_batch:
                 if torch.is_tensor(sample_size):
@@ -1159,7 +1159,6 @@ class Trainer(object):
         if self.tpu:
             logging_outputs = self._xla_markstep_and_send_to_cpu(logging_outputs)
         
-        print(len(logging_outputs))
         if len(logging_outputs) == 1 :
             logging_output = self._reduce_and_log_stats(logging_outputs, sample_size)
         else:

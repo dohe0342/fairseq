@@ -894,9 +894,6 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         }
 
         ft = self.freeze_finetune_updates <= self.num_updates
-        print('1'*40)
-        print(self.w2v_model)
-        print('1'*40)
         with torch.no_grad() if not ft else contextlib.ExitStack():
             res = self.w2v_model.extract_features(**w2v_args, tgt_layer=tgt_layer)
 

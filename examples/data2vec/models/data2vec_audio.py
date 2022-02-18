@@ -364,6 +364,10 @@ class Data2VecAudioModel(BaseFairseqModel):
         else:
             x = features
             mask_indices = None
+        
+        print('1'*30)
+        print(branch_ctc)
+        print('1'*30)
 
         x, layer_results = self.encoder(
             x,

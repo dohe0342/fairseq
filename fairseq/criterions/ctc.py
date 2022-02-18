@@ -526,3 +526,9 @@ class CtcCriterion(FairseqCriterion):
         to True will improves distributed training speed.
         """
         return True
+
+
+@register_criterion("branch_ctc", dataclass=CtcCriterionConfig)
+class BranchCtcCriterion(CtcCriterion):
+    def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
+        super().__init__(CtcCriterionConfig, task)

@@ -483,8 +483,9 @@ class FairseqTask(object):
         )
 
     def train_step(
-        self, sample, model, criterion, optimizer, update_num, ignore_grad=False, tgt_layer=False
+        self, sample, model, criterion, optimizer, update_num, ignore_grad=False, uses_branch=False
     ):
+        print('fucking also here!!!!!!!')
         """
         Do forward and backward, and return the loss as computed by *criterion*
         for the given *model* and *sample*.

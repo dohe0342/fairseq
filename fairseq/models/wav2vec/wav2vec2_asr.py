@@ -833,17 +833,39 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         self.num_updates = 0
 
         targ_d = None
-        self.proj = None
+        self.proj1 = None
+        self.proj2 = None
+        self.proj3 = None
+        self.proj4 = None
+        self.proj5 = None
+        self.proj6 = None
+        self.proj7 = None
+        self.proj8 = None
+        self.proj9 = None
+        self.proj10 = None
+        self.proj11 = None
+        self.proj12 = None
 
         if output_size is not None:
             targ_d = output_size
         elif getattr(cfg, "decoder_embed_dim", d) != d:
             targ_d = cfg.decoder_embed_dim
         
-        self.proj = []
         if targ_d is not None:
-            for i in range(w2v_args.model.encoder_layers):
-                self.proj.append(Linear(d, targ_d).to('cuda'))
+            self.proj1 = Linear(d, targ_d)
+            self.proj2 = Linear(d, targ_d)
+            self.proj3 = Linear(d, targ_d)
+            self.proj4 = Linear(d, targ_d)
+            self.proj5 = Linear(d, targ_d)
+            self.proj6 = Linear(d, targ_d)
+            self.proj7 = Linear(d, targ_d)
+            self.proj8 = Linear(d, targ_d)
+            self.proj9 = Linear(d, targ_d)
+            self.proj10 = Linear(d, targ_d)
+            self.proj11 = Linear(d, targ_d)
+            self.proj12 = Linear(d, targ_d)
+        
+        self.proj = [self.proj1, self.proj2, self.proj3, self.proj4, self.proj5, self.proj6, self.proj7, self.proj8, self.proj9, self.proj10, self.proj11, self.proj12]
 
     def load_model_weights(self, state, model, cfg):
         if cfg.ddp_backend == "fully_sharded":
@@ -906,7 +928,6 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         x = self.final_dropout(x)
 
         if self.proj:
-            print(self.proj)
             x = self.proj[tgt_layer](x)
 
         return {

@@ -1065,8 +1065,10 @@ class Trainer(object):
                     )
 
                 # log stats
-                print(len(logging_outputs))
                 if extra_kwargs["uses_branch"]:
+                    for logging_output in logging_outputs:
+                        print(len(logging_output))
+
                     for _ in range(12):
                         logging_output.append(self._reduce_and_log_stats(
                             logging_outputs[_], sample_size, grad_norm, layer_num=_+1

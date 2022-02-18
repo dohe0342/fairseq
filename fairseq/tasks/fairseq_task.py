@@ -485,7 +485,6 @@ class FairseqTask(object):
     def train_step(
         self, sample, model, criterion, optimizer, update_num, ignore_grad=False, uses_branch=False
     ):
-        print('fucking also here!!!!!!!')
         """
         Do forward and backward, and return the loss as computed by *criterion*
         for the given *model* and *sample*.
@@ -506,7 +505,7 @@ class FairseqTask(object):
                   gradient
                 - logging outputs to display while training
         """
-        if tgt_layer:
+        if uses_branch:
             for i in range(12):     
                 model.train()
                 model.set_num_updates(update_num)

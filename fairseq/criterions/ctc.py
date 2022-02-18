@@ -461,20 +461,37 @@ class BranchCtcCriterion(CtcCriterion):
                 else float("nan"),
             )
         if w_total > 0:
-            metrics.log_derived(
-                f"wer_{layer_num}",
-                lambda meters: safe_round(
-                    meters[f"_w_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+            if layer_num == 12:
+                metrics.log_derived(
+                    f"wer",
+                    lambda meters: safe_round(
+                        meters[f"_w_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
                 )
-                if meters[f"_w_total_{layer_num}"].sum > 0
-                else float("nan"),
-            )
-            metrics.log_derived(
-                f"raw_wer_{layer_num}",
-                lambda meters: safe_round(
-                    meters[f"_wv_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                metrics.log_derived(
+                    f"raw_wer",
+                    lambda meters: safe_round(
+                        meters[f"_wv_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
                 )
-                if meters[f"_w_total_{layer_num}"].sum > 0
-                else float("nan"),
-            )
-
+            else:
+                metrics.log_derived(
+                    f"wer_{layer_num}",
+                    lambda meters: safe_round(
+                        meters[f"_w_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
+                )
+                metrics.log_derived(
+                    f"raw_wer_{layer_num}",
+                    lambda meters: safe_round(
+                        meters[f"_wv_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
+                )

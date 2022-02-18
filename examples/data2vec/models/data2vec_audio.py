@@ -366,7 +366,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             mask_indices = None
         
         print('1'*30)
-        print(branch_ctc)
+        print(self.encoder)
         print('1'*30)
 
         x, layer_results = self.encoder(

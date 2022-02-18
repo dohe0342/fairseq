@@ -790,9 +790,9 @@ class Trainer(object):
         # argument to the task.
         extra_kwargs = {}
         if self.cfg.ema.store_ema and getattr(self.task, "uses_ema", False):
-            extra_kwargs["ema_model"] = self.ema.get_model()
-        if getattr(self.task, "uses_branch", True):
-            extra_kwargs["uses_branch"] = True
+            extra_kwargs["ema_model"] = self.ema.get_model():
+        
+        extra_kwargs["uses_branch"] = True if self.task.uses_branch else False
 
         # forward and backward pass
         logging_outputs, sample_size, ooms = [], 0, 0

@@ -1056,14 +1056,14 @@ class TransformerEncoder(nn.Module):
             for i, layer in enumerate(self.layers):
                 dropout_probability = np.random.random() if self.layerdrop > 0 else 1
                 if not self.training or (dropout_probability > self.layerdrop):
-                    with torch.no_grad() if i < tgt_layer else contextlib.ExitStack():
+                    with torch.no_grad() if i < tgt_layer-1 else contextlib.ExitStack():
                         x, (z, lr) = layer(
                             x, self_attn_padding_mask=padding_mask, need_weights=False
                         )
                         
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
-                if i == tgt_layer:
+                if i == tgt_layer-1:
                     r = x
                     break
         else:

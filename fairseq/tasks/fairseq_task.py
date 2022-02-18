@@ -581,7 +581,7 @@ class FairseqTask(object):
             self.reduce_metrics(logging_outputs, criterion)
             return agg.get_smoothed_values()
 
-    def reduce_metrics(self, logging_outputs, criterion):
+    def reduce_metrics(self, logging_outputs, criterion, layer_num):
         """Aggregate logging outputs from data parallel training."""
         # backward compatibility for tasks that override aggregate_logging_outputs
         base_func = FairseqTask.aggregate_logging_outputs
@@ -604,8 +604,8 @@ class FairseqTask(object):
             )
         else:
             ntokens = sum(log.get("ntokens", 0) for log in logging_outputs)
-            metrics.log_scalar("wpb", ntokens, priority=180, round=1)
-            metrics.log_speed("wps", ntokens, priority=90, round=1)
+            metrics.log_scalar(f"wpb_{layer_num}", ntokens, priority=180, round=1)
+            metrics.log_speed(f"wps_{layer_num}", ntokens, priority=90, round=1)
 
         if not any("nsentences" in log for log in logging_outputs):
             warnings.warn(
@@ -613,9 +613,12 @@ class FairseqTask(object):
             )
         else:
             nsentences = sum(log.get("nsentences", 0) for log in logging_outputs)
-            metrics.log_scalar("bsz", nsentences, priority=190, round=1)
-
-        criterion.__class__.reduce_metrics(logging_outputs)
+            metrics.log_scalar(f"bsz_{layer_num}", nsentences, priority=190, round=1)
+        
+        if layer_num:
+            criterion.__class__.reduce_metrics(logging_outputs, layer_num=layer_num)
+        else:
+            criterion.__class__.reduce_metrics(logging_outputs)
 
     def state_dict(self):
         if self.state is not None:

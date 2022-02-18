@@ -1164,7 +1164,7 @@ class Trainer(object):
         else:
             logging_output = []
             for _ in range(len(logging_outputs)):
-                logging_output.append(self._reduce_and_log_stats([logging_outputs[_]], sample_size))
+                logging_output.append(self._reduce_and_log_stats([logging_outputs[_]], sample_size, layer_num=_+1))
 
         return logging_output
 
@@ -1497,7 +1497,7 @@ class Trainer(object):
                     + "-" * 80
                 )
 
-    def _reduce_and_log_stats(self, logging_outputs, sample_size, grad_norm=None):
+    def _reduce_and_log_stats(self, logging_outputs, sample_size, grad_norm=None, layer_num=0):
         if grad_norm is not None and (
             not torch.is_tensor(grad_norm) or torch.isfinite(grad_norm)
         ):
@@ -1517,7 +1517,7 @@ class Trainer(object):
 
         with metrics.aggregate() as agg:
             if logging_outputs is not None:
-                self.task.reduce_metrics(logging_outputs, self.get_criterion())
+                self.task.reduce_metrics(logging_outputs, self.get_criterion(), layer_num=layer_num)
                 del logging_outputs
 
             # extra warning for criterions that don't properly log a loss value

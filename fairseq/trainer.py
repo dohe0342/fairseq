@@ -1068,12 +1068,10 @@ class Trainer(object):
 
                 if extra_kwargs["uses_branch"]:
                     logging_output_list = []
-                    for i in range(1,13):
-                        print(-i)
-                        logging_outputs = [_[-i] for _ in logging_outputs]
-                        logging_output_list.append(self._reduce_and_log_stats(
-                            logging_outputs, sample_size, grad_norm
-                            ))
+                    logging_outputs = [_[-1] for _ in logging_outputs]
+                    logging_output_list.append(self._reduce_and_log_stats(
+                        logging_outputs, sample_size, grad_norm
+                        ))
                     logging_output = logging_output_list
                 else:
                     logging_output = self._reduce_and_log_stats(

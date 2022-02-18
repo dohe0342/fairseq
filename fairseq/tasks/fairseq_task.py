@@ -540,7 +540,8 @@ class FairseqTask(object):
                     loss_list.append(loss)
                     sample_size_list.append(loss)
                     logging_output_list.append(logging_output)
-            return loss_list, sample_size_list, logging_output_list
+                    print('i', logging_output)
+            return loss_list, sample_size_list[0], logging_output_list
                     
         else:
             with torch.no_grad():

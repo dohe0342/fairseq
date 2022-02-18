@@ -1158,7 +1158,13 @@ class Trainer(object):
         # log validation stats
         if self.tpu:
             logging_outputs = self._xla_markstep_and_send_to_cpu(logging_outputs)
-        logging_output = self._reduce_and_log_stats(logging_outputs, sample_size)
+
+        if len(logging_output) == 1 :
+            logging_output = self._reduce_and_log_stats(logging_outputs, sample_size)
+        else:
+            logging_output = []
+            for _ in range(len(logging_output)):
+                logging_output.append(self._reduce_and_log_stats(logging_outputs[_], sample_size))
 
         return logging_output
 

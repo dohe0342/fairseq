@@ -6,5 +6,3 @@ fairseq-hydra-train \
     task.data=/home/work/workspace/LibriSpeech/manifests \
     model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \
 	model.freeze_finetune_updates=80000 \
-	+model.branch_ctc=true \
-    

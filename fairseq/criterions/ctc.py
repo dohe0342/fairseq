@@ -300,7 +300,6 @@ class BranchCtcCriterion(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True, tgt_layer=False):
-        print(tgt_layer)
         net_output = model(tgt_layer=tgt_layer, **sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True
@@ -410,11 +409,11 @@ class BranchCtcCriterion(CtcCriterion):
 
                     w_len += len(targ_words)
 
-                logging_output["wv_errors"] = wv_errs
-                logging_output["w_errors"] = w_errs
-                logging_output["w_total"] = w_len
-                logging_output["c_errors"] = c_err
-                logging_output["c_total"] = c_len
+                logging_output[f"wv_errors_{tgt_layer}"] = wv_errs
+                logging_output[f"w_errors_{tgt_layer}"] = w_errs
+                logging_output[f"w_total_{tgt_layer}"] = w_len
+                logging_output[f"c_errors_{tgt_layer}"] = c_err
+                logging_output[f"c_total_{tgt_layer}"] = c_len
 
         return loss, sample_size, logging_output
 

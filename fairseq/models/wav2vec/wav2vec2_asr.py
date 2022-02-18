@@ -928,7 +928,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         x = self.final_dropout(x)
 
         if self.proj:
-            x = self.proj[tgt_layer](x)
+            x = self.proj[tgt_layer-1](x)
 
         return {
             "encoder_out": x,  # T x B x C

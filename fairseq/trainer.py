@@ -1069,7 +1069,7 @@ class Trainer(object):
                 if extra_kwargs["uses_branch"]:
                     for _ in range(12):
                         logging_output.append(self._reduce_and_log_stats(
-                            logging_outputs, sample_size, grad_norm, layer_num=_+1
+                            logging_outputs[_], sample_size, grad_norm, layer_num=_+1
                             ))
                 else:
                     logging_output = self._reduce_and_log_stats(

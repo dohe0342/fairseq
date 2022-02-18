@@ -342,7 +342,7 @@ class BranchCtcCriterion(CtcCriterion):
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         logging_output = {
-            "loss": utils.item(loss.data),  # * sample['ntokens'],
+            f"loss_{tgt_layer}": utils.item(loss.data),  # * sample['ntokens'],
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,

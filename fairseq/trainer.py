@@ -870,7 +870,7 @@ class Trainer(object):
                 # To handle gradient accumulation use case, we explicitly
                 # mark step here for every forward pass without a backward pass
                 self._xla_markstep_and_send_to_cpu()
-
+        
         if is_dummy_batch:
             if torch.is_tensor(sample_size):
                 sample_size.zero_()
@@ -1065,9 +1065,17 @@ class Trainer(object):
                     )
 
                 # log stats
-                logging_output = self._reduce_and_log_stats(
-                    logging_outputs, sample_size, grad_norm
-                )
+                logging_output = []
+                if extra_kwargs["uses_branch"]:
+                    for _ in range(12):
+                        logging_output.append(self._reduce_and_log_stats(
+                            logging_outputs, sample_size, grad_norm, layer_num=_+1
+                        )
+
+                else:
+                    logging_output = self._reduce_and_log_stats(
+                        logging_outputs, sample_size, grad_norm
+                    )
 
                 # clear CUDA cache to reduce memory fragmentation
                 if (

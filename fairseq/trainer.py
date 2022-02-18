@@ -1517,7 +1517,11 @@ class Trainer(object):
 
         with metrics.aggregate() as agg:
             if logging_outputs is not None:
-                self.task.reduce_metrics(logging_outputs, self.get_criterion(), layer_num=layer_num)
+                if layer_num:
+                    self.task.reduce_metrics(logging_outputs, self.get_criterion(), layer_num=layer_num)
+                else:
+                    self.task.reduce_metrics(logging_outputs, self.get_criterion())
+
                 del logging_outputs
 
             # extra warning for criterions that don't properly log a loss value

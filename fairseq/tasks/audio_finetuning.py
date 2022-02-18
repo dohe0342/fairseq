@@ -177,8 +177,12 @@ class AudioFinetuningTask(AudioPretrainingTask):
         model."""
         return self.state.target_dictionary
 
-    def valid_step(self, sample, model, criterion, uses_branch=False):
-        loss, sample_size, logging_output = super().valid_step(sample, model, criterion, uses_branch=uses_branch)
+    def valid_step(self, sample, model, criterion, uses_branch=False, layer_num=0):
+        if uses_branch:
+            loss, sample_size, logging_output = super().valid_step(sample, model, criterion, uses_branch=uses_branch)
+        else:
+            loss, sample_size, logging_output = super().valid_step(sample, model, criterion)
+
         if self.cfg.eval_wer and self.cfg.autoregressive:
             metrics = self._inference_with_wer(self.sequence_generator, sample, model)
             logging_output["_num_char_errors"] = metrics["num_char_errors"]
@@ -295,8 +299,12 @@ class AudioFinetuningTask(AudioPretrainingTask):
         eval_tokenization = "none" if self.cfg.eval_tokenized_bleu else "13a"
         return sacrebleu.corpus_bleu(hyps, [refs], tokenize=eval_tokenization)
 
-    def reduce_metrics(self, logging_outputs, criterion):
-        super().reduce_metrics(logging_outputs, criterion)
+    def reduce_metrics(self, logging_outputs, criterion, layer_num=0):
+        if layer_num:
+            super().reduce_metrics(logging_outputs, criterion, layer_num=layer_num)
+        else:
+            super().reduce_metrics(logging_outputs, criterion)
+
 
         if self.cfg.eval_wer:
             zero = torch.scalar_tensor(0.0)

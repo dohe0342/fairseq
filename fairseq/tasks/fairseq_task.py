@@ -581,7 +581,7 @@ class FairseqTask(object):
             self.reduce_metrics(logging_outputs, criterion)
             return agg.get_smoothed_values()
 
-    def reduce_metrics(self, logging_outputs, criterion, layer_num):
+    def reduce_metrics(self, logging_outputs, criterion, layer_num=0):
         """Aggregate logging outputs from data parallel training."""
         # backward compatibility for tasks that override aggregate_logging_outputs
         base_func = FairseqTask.aggregate_logging_outputs

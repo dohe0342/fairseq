@@ -1526,6 +1526,7 @@ class Trainer(object):
         with metrics.aggregate() as agg:
             if logging_outputs is not None:
                 if layer_num:
+                    print(layer_num)
                     self.task.reduce_metrics(logging_outputs, self.get_criterion(), layer_num=layer_num)
                 else:
                     self.task.reduce_metrics(logging_outputs, self.get_criterion())

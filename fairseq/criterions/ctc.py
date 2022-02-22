@@ -300,7 +300,6 @@ class BranchCtcCriterion(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True, tgt_layer=0):
-        print(tgt_layer)
         net_output = model(tgt_layer=tgt_layer, **sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True
@@ -451,6 +450,8 @@ class BranchCtcCriterion(CtcCriterion):
         metrics.log_scalar(f"_wv_errors_{layer_num}", wv_errors)
         w_total = sum(log.get(f"w_total_{layer_num}", 0) for log in logging_outputs)
         metrics.log_scalar(f"_w_total_{layer_num}", w_total)
+        
+        print(layer_num)
 
         if c_total > 0:
             metrics.log_derived(

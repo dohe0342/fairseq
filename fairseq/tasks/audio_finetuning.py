@@ -179,6 +179,7 @@ class AudioFinetuningTask(AudioPretrainingTask):
 
     def valid_step(self, sample, model, criterion, uses_branch=False, layer_num=0):
         if uses_branch:
+            print(layer_num)
             loss, sample_size, logging_output = super().valid_step(sample, model, criterion, uses_branch=uses_branch)
         else:
             loss, sample_size, logging_output = super().valid_step(sample, model, criterion)

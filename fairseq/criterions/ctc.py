@@ -420,7 +420,7 @@ class BranchCtcCriterion(CtcCriterion):
     @staticmethod
     def reduce_metrics(logging_outputs, layer_num=12) -> None:
         """Aggregate logging outputs from data parallel training."""
-
+        print(layer_num) 
         loss_sum = utils.item(sum(log.get(f"loss_{layer_num}", 0) for log in logging_outputs))
         ntokens = utils.item(sum(log.get("ntokens", 0) for log in logging_outputs))
         nsentences = utils.item(

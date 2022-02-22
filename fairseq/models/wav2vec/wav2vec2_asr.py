@@ -906,9 +906,6 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
         self.num_updates = num_updates
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):
-        #print('tgt layer = ', tgt_layer)
-        #print('source = ', source)
-
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

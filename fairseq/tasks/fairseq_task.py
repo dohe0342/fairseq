@@ -508,14 +508,14 @@ class FairseqTask(object):
 
         if uses_branch:
             loss_list, sample_size_list, logging_output_list = [], [], []
-            for i in range(12):     
+            for i in range(6,12): 
                 model.train()
                 model.set_num_updates(update_num)
                 with torch.autograd.profiler.record_function("forward"):
                     with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
                         loss, sample_size, logging_output = criterion(model, sample, tgt_layer=i+1)
                     loss_list.append(loss)
-                    sample_size_list.append(loss)
+                    sample_size_list.append(sample_size)
                     logging_output_list.append(logging_output)
 
                 if ignore_grad:
@@ -542,10 +542,10 @@ class FairseqTask(object):
         if uses_branch:
             loss_list, sample_size_list, logging_output_list = [], [], []
             with torch.no_grad():
-                for i in range(12):
+                for i in range(6,12):
                     loss, sample_size, logging_output = criterion(model, sample, tgt_layer=i+1)
                     loss_list.append(loss)
-                    sample_size_list.append(loss)
+                    sample_size_list.append(sample_size)
                     logging_output_list.append(logging_output)
             return loss_list, sample_size_list[0], logging_output_list
                     

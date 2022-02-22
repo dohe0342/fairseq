@@ -1172,7 +1172,7 @@ class Trainer(object):
             logging_output = []
             for _ in range(len(logging_outputs)):
             #for _ in range(, 12):
-                logging_output.append(self._reduce_and_log_stats([logging_outputs[_]], sample_size, layer_num=_+6))
+                logging_output.append(self._reduce_and_log_stats([logging_outputs[_]], sample_size, layer_num=_+7))
 
         return logging_output
 

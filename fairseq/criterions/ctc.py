@@ -451,8 +451,6 @@ class BranchCtcCriterion(CtcCriterion):
         w_total = sum(log.get(f"w_total_{layer_num}", 0) for log in logging_outputs)
         metrics.log_scalar(f"_w_total_{layer_num}", w_total)
         
-        print(layer_num)
-
         if c_total > 0:
             metrics.log_derived(
                 f"uer_{layer_num}",

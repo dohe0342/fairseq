@@ -301,7 +301,6 @@ class AudioFinetuningTask(AudioPretrainingTask):
 
     def reduce_metrics(self, logging_outputs, criterion, layer_num=0):
         if layer_num:
-            print(layer_num)
             super().reduce_metrics(logging_outputs, criterion, layer_num=layer_num)
         else:
             super().reduce_metrics(logging_outputs, criterion)

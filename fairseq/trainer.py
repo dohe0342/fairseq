@@ -885,18 +885,6 @@ class Trainer(object):
         # gather logging outputs from all replicas
         if self._sync_stats():
             train_time = self._local_cumulative_training_time()
-            '''
-            (
-                logging_outputs,
-                (
-                    sample_size,
-                    ooms,
-                    total_train_time,
-                ),
-            ) = self._aggregate_logging_outputs(
-                logging_outputs, sample_size, ooms, train_time, ignore=is_dummy_batch
-            )
-            '''
             if extra_kwargs["uses_branch"]: 
                 for i in range(len(logging_outputs)):
                     (

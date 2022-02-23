@@ -1174,8 +1174,8 @@ class Trainer(object):
         if self.data_parallel_world_size > 1:
             if extra_kwargs["uses_branch"]: 
                 for i in range(len(logging_outputs)):
-                    logging_outputs[i], (sample_size,) = self._aggregate_logging_outputs(
-                            logging_outputs[i],
+                    [logging_outputs[i]], (sample_size,) = self._aggregate_logging_outputs(
+                            [logging_outputs[i]],
                             sample_size,
                             ignore=is_dummy_batch,
                         )

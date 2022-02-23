@@ -18,7 +18,7 @@ task:
 
 dataset:
   num_workers: 6
-  max_tokens: 3200000
+  max_tokens: 2200000
   skip_invalid_size_inputs_valid_test: true
   train_subset: train-100
   valid_subset: dev-other
@@ -35,7 +35,7 @@ optimization:
   max_update: 80000
   lr: [0.00003]
   sentence_avg: true
-  update_freq: [1]
+  update_freq: [2]
 
 optimizer:
   _name: adam

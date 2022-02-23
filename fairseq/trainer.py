@@ -1173,15 +1173,12 @@ class Trainer(object):
         # gather logging outputs from all replicas
         if self.data_parallel_world_size > 1:
             if extra_kwargs["uses_branch"]: 
-                all_logging_outputs = []
                 for i in range(len(logging_outputs)):
-                    logging_output, (sample_size,) = self._aggregate_logging_outputs(
+                    logging_outputs[i], (sample_size,) = self._aggregate_logging_outputs(
                             logging_outputs[i],
                             sample_size,
                             ignore=is_dummy_batch,
                         )
-                    all_logging_outputs.append(logging_output)
-                logging_outputs = all_logging_outputs
             else:
                 logging_outputs, (sample_size,) = self._aggregate_logging_outputs(
                     logging_outputs,

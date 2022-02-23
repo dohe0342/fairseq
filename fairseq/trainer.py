@@ -792,6 +792,7 @@ class Trainer(object):
         if self.cfg.ema.store_ema and getattr(self.task, "uses_ema", False):
             extra_kwargs["ema_model"] = self.ema.get_model()
         
+        print(self.cfg.model.branch_ctc)
         extra_kwargs["uses_branch"] = self.cfg.model.branch_ctc
 
         # forward and backward pass

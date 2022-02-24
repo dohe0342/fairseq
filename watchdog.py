@@ -13,7 +13,16 @@ dirToWatchList = [
             "./fairseq/models/", 
             "./fairseq/models/wav2vec/",
             "./examples/wav2vec/",
-            "./examples/data2vec/"
+            "./examples/wav2vec/config/",
+            "./examples/wav2vec/config/finetuning/",
+            "./examples/wav2vec/config/pretraining/",
+            "./examples/data2vec/",
+            "./examples/data2vec/models/",
+            "./examples/data2vec/config/audio/pretraining/",
+            "./examples/speech_recognition/",
+            "./examples/speech_recognition/new/",
+            "./examples/speech_recognition/new/conf/",
+            "./examples/speech_recognition/new/decoders/"
             ]
 
 lastmod = [int(os.path.getmtime(dirToWatch)) for dirToWatch in dirToWatchList]

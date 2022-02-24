@@ -51,8 +51,9 @@ class BaseDecoder:
         encoder_input['tgt_layer']=12
         encoder_out3 = model(**encoder_input)
         
-        print(encoder_out1)
-        exit()
+        print(encoder_out1.size())
+        print(encoder_out2.size())
+        print(encoder_out2.size())
 
         if hasattr(model, "get_logits"):
             emissions = model.get_logits(encoder_out)

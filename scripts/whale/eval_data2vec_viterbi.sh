@@ -12,5 +12,5 @@ python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 	decoding.unique_wer_file=False \
 	dataset.gen_subset=test-other \
 	decoding.beam=5 \
-	common_eval.path=/home/work/workspace/models/data2vec_model/$model \
+	common_eval.path=/home/work/workspace/models/wav2vec_model/$model \
 	distributed_training.distributed_world_size=1

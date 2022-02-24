@@ -425,6 +425,12 @@ class Wav2VecEncoder(FairseqEncoder):
         model.remove_pretraining_modules()
 
         if state is not None and not cfg.no_pretrained_weights:
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            print('fuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             self.load_model_weights(state, model, cfg)
 
         super().__init__(task.source_dictionary)

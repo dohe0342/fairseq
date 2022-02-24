@@ -43,7 +43,6 @@ class BaseDecoder:
         encoder_input: Dict[str, Any],
     ) -> torch.FloatTensor:
         model = models[0]
-        print(model)
         encoder_input['tgt_layer']=12
         encoder_out = model(**encoder_input)
         if hasattr(model, "get_logits"):

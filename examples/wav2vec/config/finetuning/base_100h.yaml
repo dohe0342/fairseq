@@ -8,7 +8,7 @@ common:
 checkpoint:
   no_epoch_checkpoints: true
   best_checkpoint_metric: wer
-  save_dir: /home/work/workspace/fairseq/scripts/checkpoints
+  #save_dir: /home/work/workspace/fairseq/scripts/checkpoints
 
 task:
   _name: audio_finetuning
@@ -18,14 +18,14 @@ task:
 
 dataset:
   num_workers: 6
-  max_tokens: 3200000
+  max_tokens: 2200000
   skip_invalid_size_inputs_valid_test: true
   train_subset: train-100
   valid_subset: dev-other
 
 distributed_training:
   ddp_backend: legacy_ddp
-  distributed_world_size: 1
+  distributed_world_size: 6
 
 criterion:
   _name: ctc
@@ -35,7 +35,7 @@ optimization:
   max_update: 80000
   lr: [0.00003]
   sentence_avg: true
-  update_freq: [8]
+  update_freq: [2]
 
 optimizer:
   _name: adam

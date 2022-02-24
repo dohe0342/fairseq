@@ -292,7 +292,7 @@ class Wav2Vec2Config(FairseqDataclass):
 
     branch_ctc: bool = field(
         default=False,
-        metadata={"help": "make ctc layer after each encoder layer"},
+        metadata={"help": "use branch ctc. make ctc layer after each transformer layer"},
     )
 
 

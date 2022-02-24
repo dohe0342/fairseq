@@ -483,8 +483,9 @@ class Wav2VecEncoder(FairseqEncoder):
             if cfg.init_transformer:
                 keys = list(state["model"].keys())
                 for key in keys:
-                    del state["model"][key]
-                    print(key, ' delete done')
+                    if 'encoder.layer' in key:
+                        del state["model"][key]
+                        print(key, ' delete done')
                 model.load_state_dict(state["model"], strict=False)
             else:
                 model.load_state_dict(state["model"], strict=True)

@@ -478,9 +478,13 @@ class Wav2VecEncoder(FairseqEncoder):
 
             model.load_state_dict(new_big_dict, strict=False)
         else:
-            print(state["model"].keys())
             if "_ema" in state["model"]:
                 del state["model"]["_ema"]
+            if cfg.init_transformer:
+                keys = state["model"].keys()
+                for key in keys:
+                    del state["model"][key]
+                    print(key, ' delete done')
             model.load_state_dict(state["model"], strict=True)
 
     def set_num_updates(self, num_updates):

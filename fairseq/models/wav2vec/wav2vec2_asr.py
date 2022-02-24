@@ -194,7 +194,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
 
     init_transformer: bool = field(
         default=False,
-        metadata={"help": "make ctc layer after each encoder layer"},
+        metadata={"help": "newly initilize transofmer weight"},
     )
 
 

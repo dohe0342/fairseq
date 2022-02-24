@@ -3,7 +3,7 @@ model=$1
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
-	echo "====================$model // $subset===================="
+	echo "====================   $model // $subset   ===================="
 	python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \

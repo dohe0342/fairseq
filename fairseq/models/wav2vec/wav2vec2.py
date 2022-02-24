@@ -290,11 +290,6 @@ class Wav2Vec2Config(FairseqDataclass):
     )
     fp16: bool = field(default=False, metadata={"help": "If fp16 is being used"})
 
-    branch_ctc: bool = field(
-        default=False,
-        metadata={"help": "use branch ctc. make ctc layer after each transformer layer"},
-    )
-
 
 @register_model("wav2vec2", dataclass=Wav2Vec2Config)
 class Wav2Vec2Model(BaseFairseqModel):

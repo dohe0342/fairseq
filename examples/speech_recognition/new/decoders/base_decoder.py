@@ -43,8 +43,17 @@ class BaseDecoder:
         encoder_input: Dict[str, Any],
     ) -> torch.FloatTensor:
         model = models[0]
+
+        encoder_input['tgt_layer']=10
+        encoder_out1 = model(**encoder_input)
         encoder_input['tgt_layer']=11
-        encoder_out = model(**encoder_input)
+        encoder_out2 = model(**encoder_input)
+        encoder_input['tgt_layer']=12
+        encoder_out3 = model(**encoder_input)
+        
+        print(encoder_out1)
+        exit()
+
         if hasattr(model, "get_logits"):
             emissions = model.get_logits(encoder_out)
         else:

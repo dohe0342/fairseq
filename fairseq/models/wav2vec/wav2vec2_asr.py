@@ -485,7 +485,6 @@ class Wav2VecEncoder(FairseqEncoder):
                 for key in keys:
                     if 'encoder.layer' in key:
                         del state["model"][key]
-                        print(key, ' delete done')
                 model.load_state_dict(state["model"], strict=False)
             else:
                 model.load_state_dict(state["model"], strict=True)

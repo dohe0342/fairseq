@@ -6,6 +6,7 @@ dirToWatchList = [
             "./scripts/", 
             "./scripts/whale/", 
             "./scripts/summit/", 
+            "./fairseq_cli/", 
             "./fairseq/", 
             "./fairseq/tasks/", 
             "./fairseq/optim/",

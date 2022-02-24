@@ -193,7 +193,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
 
     init_transformer: bool = field(
-        default=True,
+        default=False,
         metadata={"help": "newly initilize transofmer weight"},
     )
 

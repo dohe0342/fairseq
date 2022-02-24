@@ -52,9 +52,16 @@ class BaseDecoder:
         encoder_out3 = model(**encoder_input)
         
         encoder_out = encoder_out1
+        '''
         encoder_out['encoder_out'] = (encoder_out1['encoder_out'] + \
                                       encoder_out2['encoder_out'] + \
                                       encoder_out3['encoder_out']) / 3.
+        '''
+        encoder_out['encoder_out'] = encoder_out1['encoder_out'].mul( \
+                                        encoder_out2['encoder_out'].mul( \
+                                            encoder_out3['encoder_out']
+                                        )
+                                    )
         #print(encoder_out1['encoder_out'].size())
         #print(encoder_out2['encoder_out'].size())
         #print(encoder_out3['encoder_out'].size())

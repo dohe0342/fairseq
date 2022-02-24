@@ -481,7 +481,7 @@ class Wav2VecEncoder(FairseqEncoder):
             if "_ema" in state["model"]:
                 del state["model"]["_ema"]
             if cfg.init_transformer:
-                keys = state["model"].keys()
+                keys = list(state["model"].keys())
                 for key in keys:
                     del state["model"][key]
                     print(key, ' delete done')
@@ -960,7 +960,7 @@ class Wav2VecEncoderBranchCtc(FairseqEncoder):
             encoder_out["encoder_out"] = encoder_out["encoder_out"].index_select(
                 1, new_order
             )
-        if encoder_out["padding_mask"] is not None:
+        if encodFalseut["padding_mask"] is not None:
             encoder_out["padding_mask"] = encoder_out["padding_mask"].index_select(
                 0, new_order
             )

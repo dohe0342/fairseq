@@ -7,7 +7,8 @@ python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 	task=audio_finetuning \
 	task.data=/home/work/workspace/LibriSpeech/manifests \
 	common.user_dir=examples/data2vec \
-	task.labels=ltr decoding.type=viterbi \
+	task.labels=ltr \
+	decoding.type=viterbi \
 	decoding.unique_wer_file=False \
 	dataset.gen_subset=test-other \
 	decoding.beam=5 \

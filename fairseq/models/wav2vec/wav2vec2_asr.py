@@ -197,6 +197,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         metadata={"help": "newly initilize transofmer weight"},
     )
 
+
 @dataclass
 class Wav2Vec2CtcConfig(Wav2Vec2AsrConfig):
     blank_weight: float = 0

@@ -198,8 +198,6 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
 
 
-
-
 @dataclass
 class Wav2Vec2CtcConfig(Wav2Vec2AsrConfig):
     blank_weight: float = 0

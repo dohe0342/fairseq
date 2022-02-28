@@ -528,10 +528,14 @@ class BranchCtcCriterionV2(CtcCriterion):
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         
         logging_output = {}
-        print('loss len = ', len(loss_list))
-        for loss in loss_list:
-            if i+7 in net_output['dropped_layer']:
-                logging_output[f"loss_{i}"] = 0.
+
+        for drop in net_output['dropped_layer']:
+            lprobs_list.insert(drop, 0)
+            loss_list.insert(drop, 0)
+        
+        for i, loss in enumerate(loss_list):
+            if loss == 0:
+                logging_output[f"loss_{i+7}"] = 0.
             else:
                 logging_output[f"loss_{i+7}"] = utils.item(loss.data)
 
@@ -544,7 +548,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 
             with torch.no_grad():
                 for enum, lprobs in enumerate(lprobs_list[::-1]):
-                    if enum+7 in net_output['dropped_layer']:
+                    if lprobs == 0:
                         tgt_layer = 12-enum
                         logging_output[f"wv_errors_{tgt_layer}"] = 0
                         logging_output[f"w_errors_{tgt_layer}"] = 0
@@ -552,7 +556,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                         logging_output[f"c_errors_{tgt_layer}"] = 0
                         logging_output[f"c_total_{tgt_layer}"] = 0
                         continue
-
+                    
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 
                     c_err = 0

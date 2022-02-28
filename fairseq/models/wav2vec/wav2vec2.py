@@ -1002,12 +1002,12 @@ class TransformerEncoder(nn.Module):
         self.apply(init_bert_params)
 
     def forward(self, x, padding_mask=None, layer=None, tgt_layer=None, layer_wise_detach=None):
-        x, layer_results = self.extract_features(x, padding_mask=padding_mask,tgt_layer=tgt_layer, layer_wise_detach=layer_wise_detach)
+        x, layer_results, dropped_layer = self.extract_features(x, padding_mask=padding_mask,tgt_layer=tgt_layer, layer_wise_detach=layer_wise_detach)
 
         if self.layer_norm_first and layer is None:
             x = self.layer_norm(x)
 
-        return x, layer_results
+        return x, layer_results, dropped_layer
 
     def extract_features(
         self,

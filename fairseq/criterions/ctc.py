@@ -535,7 +535,7 @@ class BranchCtcCriterionV2(CtcCriterion):
             import editdistance
 
             with torch.no_grad():
-                for lprobs in lprobs_list:
+                for enum, lprobs in enumerate(lprobs_list[::-1]):
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 
                     c_err = 0

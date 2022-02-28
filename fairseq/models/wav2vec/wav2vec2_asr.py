@@ -847,25 +847,31 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         }
     
     def get_logits(self, net_output, normalize=False):
-        logits = net_output["encoder_out"]
-        if self.blank_weight != 0:
-            if self.blank_mode == "add":
-                logits[..., 0] += self.blank_weight
-            elif self.blank_mode == "set":
-                logits[..., 0] = self.blank_weight
-            else:
-                raise Exception(f"invalid blank mode {self.blank_mode}")
+        logits_ = net_output["encoder_out"]
 
-        if net_output["padding_mask"] is not None and net_output["padding_mask"].any():
-            number_of_classes = logits.size(-1)
-            masking_tensor = torch.ones(
-                number_of_classes, device=logits.device
-            ) * float("-inf")
-            masking_tensor[0] = 0
-            logits[net_output["padding_mask"].T] = masking_tensor.type_as(logits)
+        logits_list = []
 
-        if normalize:
-            logits = utils.log_softmax(logits.float(), dim=-1)
+        for logits in logits_:
+            if self.blank_weight != 0:
+                if self.blank_mode == "add":
+                    logits[..., 0] += self.blank_weight
+                elif self.blank_mode == "set":
+                    logits[..., 0] = self.blank_weight
+                else:
+                    raise Exception(f"invalid blank mode {self.blank_mode}")
+
+            if net_output["padding_mask"] is not None and net_output["padding_mask"].any():
+                number_of_classes = logits.size(-1)
+                masking_tensor = torch.ones(
+                    number_of_classes, device=logits.device
+                ) * float("-inf")
+                masking_tensor[0] = 0
+                logits[net_output["padding_mask"].T] = masking_tensor.type_as(logits)
+
+            if normalize:
+                logits = utils.log_softmax(logits.float(), dim=-1)
+
+            logits_list.apppend(logits)
 
         return logits
 

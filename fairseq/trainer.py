@@ -1135,7 +1135,7 @@ class Trainer(object):
             extra_kwargs["ema_model"] = self.ema.get_model()
 
         #extra_kwargs["uses_branch"] = False
-        extra_kwargs["uses_branch"] = self.cfg.model.branch_ctc
+        extra_kwargs["uses_branch_v1"] = self.cfg.model.branch_ctc_v1
         
         with torch.no_grad():
             self.model.eval()
@@ -1172,7 +1172,7 @@ class Trainer(object):
 
         # gather logging outputs from all replicas
         if self.data_parallel_world_size > 1:
-            if extra_kwargs["uses_branch"]: 
+            if extra_kwargs["uses_branch_v1"]: 
                 for i in range(len(logging_outputs)):
                     [logging_outputs[i]], (sample_size,) = self._aggregate_logging_outputs(
                             [logging_outputs[i]],
@@ -1190,7 +1190,7 @@ class Trainer(object):
         if self.tpu:
             logging_outputs = self._xla_markstep_and_send_to_cpu(logging_outputs)
         
-        if extra_kwargs["uses_branch"]:
+        if extra_kwargs["uses_branch_v1"]:
             logging_output = []
             for _ in range(len(logging_outputs)):
                 logging_output.append(self._reduce_and_log_stats([logging_outputs[_]], sample_size, layer_num=10+_))

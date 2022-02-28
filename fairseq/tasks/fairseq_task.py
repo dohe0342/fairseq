@@ -554,7 +554,7 @@ class FairseqTask(object):
 
     def valid_step(self, sample, model, criterion, uses_branch_v1=False, uses_branch_v2=False):
         model.eval()
-        if uses_branch:
+        if uses_branch_v1:
             loss_list, sample_size_list, logging_output_list = [], [], []
             with torch.no_grad():
                 for i in range(9,12):

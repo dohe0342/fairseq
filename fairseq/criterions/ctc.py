@@ -484,7 +484,7 @@ class BranchCtcCriterionV2(CtcCriterion):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True):
         net_output = model(tgt_layer=tgt_layer, **sample["net_input"])
-        lprobs = model.get_normalized_probs(
+        lprobs_list = model.get_normalized_probs(
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
 
@@ -507,17 +507,17 @@ class BranchCtcCriterionV2(CtcCriterion):
             target_lengths = sample["target_lengths"]
         else:
             target_lengths = pad_mask.sum(-1)
-
+        
         with torch.backends.cudnn.flags(enabled=False):
-            loss = F.ctc_loss(
-                lprobs,
+            loss_list = [F.ctc_loss(
+                lprob,
                 targets_flat,
                 input_lengths,
                 target_lengths,
                 blank=self.blank_idx,
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
-            )
+            ) for lprob in lprobs]
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
@@ -535,68 +535,69 @@ class BranchCtcCriterionV2(CtcCriterion):
             import editdistance
 
             with torch.no_grad():
-                lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
+                for lprob in lprobs:
+                    lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 
-                c_err = 0
-                c_len = 0
-                w_errs = 0
-                w_len = 0
-                wv_errs = 0
-                for lp, t, inp_l in zip(
-                    lprobs_t,
-                    sample["target_label"]
-                    if "target_label" in sample
-                    else sample["target"],
-                    input_lengths,
-                ):
-                    lp = lp[:inp_l].unsqueeze(0)
+                    c_err = 0
+                    c_len = 0
+                    w_errs = 0
+                    w_len = 0
+                    wv_errs = 0
+                    for lp, t, inp_l in zip(
+                        lprobs_t,
+                        sample["target_label"]
+                        if "target_label" in sample
+                        else sample["target"],
+                        input_lengths,
+                    ):
+                        lp = lp[:inp_l].unsqueeze(0)
 
-                    decoded = None
-                    if self.w2l_decoder is not None:
-                        decoded = self.w2l_decoder.decode(lp)
-                        if len(decoded) < 1:
-                            decoded = None
-                        else:
-                            decoded = decoded[0]
+                        decoded = None
+                        if self.w2l_decoder is not None:
+                            decoded = self.w2l_decoder.decode(lp)
                             if len(decoded) < 1:
                                 decoded = None
                             else:
                                 decoded = decoded[0]
+                                if len(decoded) < 1:
+                                    decoded = None
+                                else:
+                                    decoded = decoded[0]
 
-                    p = (t != self.task.target_dictionary.pad()) & (
-                        t != self.task.target_dictionary.eos()
-                    )
-                    targ = t[p]
-                    targ_units = self.task.target_dictionary.string(targ)
-                    targ_units_arr = targ.tolist()
+                        p = (t != self.task.target_dictionary.pad()) & (
+                            t != self.task.target_dictionary.eos()
+                        )
+                        targ = t[p]
+                        targ_units = self.task.target_dictionary.string(targ)
+                        targ_units_arr = targ.tolist()
 
-                    toks = lp.argmax(dim=-1).unique_consecutive()
-                    pred_units_arr = toks[toks != self.blank_idx].tolist()
+                        toks = lp.argmax(dim=-1).unique_consecutive()
+                        pred_units_arr = toks[toks != self.blank_idx].tolist()
 
-                    c_err += editdistance.eval(pred_units_arr, targ_units_arr)
-                    c_len += len(targ_units_arr)
+                        c_err += editdistance.eval(pred_units_arr, targ_units_arr)
+                        c_len += len(targ_units_arr)
 
-                    targ_words = post_process(targ_units, self.post_process).split()
+                        targ_words = post_process(targ_units, self.post_process).split()
 
-                    pred_units = self.task.target_dictionary.string(pred_units_arr)
-                    pred_words_raw = post_process(pred_units, self.post_process).split()
+                        pred_units = self.task.target_dictionary.string(pred_units_arr)
+                        pred_words_raw = post_process(pred_units, self.post_process).split()
 
-                    if decoded is not None and "words" in decoded:
-                        pred_words = decoded["words"]
-                        w_errs += editdistance.eval(pred_words, targ_words)
-                        wv_errs += editdistance.eval(pred_words_raw, targ_words)
-                    else:
-                        dist = editdistance.eval(pred_words_raw, targ_words)
-                        w_errs += dist
-                        wv_errs += dist
+                        if decoded is not None and "words" in decoded:
+                            pred_words = decoded["words"]
+                            w_errs += editdistance.eval(pred_words, targ_words)
+                            wv_errs += editdistance.eval(pred_words_raw, targ_words)
+                        else:
+                            dist = editdistance.eval(pred_words_raw, targ_words)
+                            w_errs += dist
+                            wv_errs += dist
 
-                    w_len += len(targ_words)
+                        w_len += len(targ_words)
 
-                logging_output[f"wv_errors_{tgt_layer}"] = wv_errs
-                logging_output[f"w_errors_{tgt_layer}"] = w_errs
-                logging_output[f"w_total_{tgt_layer}"] = w_len
-                logging_output[f"c_errors_{tgt_layer}"] = c_err
-                logging_output[f"c_total_{tgt_layer}"] = c_len
+                    logging_output[f"wv_errors_{tgt_layer}"] = wv_errs
+                    logging_output[f"w_errors_{tgt_layer}"] = w_errs
+                    logging_output[f"w_total_{tgt_layer}"] = w_len
+                    logging_output[f"c_errors_{tgt_layer}"] = c_err
+                    logging_output[f"c_total_{tgt_layer}"] = c_len
 
         return loss, sample_size, logging_output
 

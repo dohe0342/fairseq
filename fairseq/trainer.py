@@ -1415,7 +1415,7 @@ class Trainer(object):
         ignore=False,
     ):
         if self.task.__class__.logging_outputs_can_be_summed(self.get_criterion()):
-            return self._fast_stat_sync_sum(
+            return self._ftst_stat_sync_sum(
                 logging_outputs, *extra_stats_to_sum, ignore=ignore
             )
         else:
@@ -1464,7 +1464,7 @@ class Trainer(object):
         *logging_outputs* cannot contain any nested dicts/lists.
         """
         data = {}
-
+        
         for i, stat in enumerate(extra_stats_to_sum):
             data["extra_stats_" + str(i)] = stat
         if len(logging_outputs) > 0:

@@ -707,6 +707,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.blank_weight = cfg.blank_weight
         self.blank_mode = cfg.blank_mode
+
         self.apply_mask = cfg.apply_mask
 
         arg_overrides = {
@@ -881,7 +882,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             if normalize:
                 logits = utils.log_softmax(logits.float(), dim=-1)
 
-            logits_list.apppend(logits)
+            logits_list.append(logits)
 
         return logits_list
 

@@ -535,15 +535,17 @@ class BranchCtcCriterionV2(CtcCriterion):
             lprobs_list.insert(drop, 0)
             loss_log_list.insert(drop, 0)
         
+        logging_output = {
+                "ntokens": ntokens
+                "nsentences": sample["id"].numel()
+                "sample_size": sample_size,
+        }
+
         for i, loss in enumerate(loss_log_list):
             if loss == 0:
                 logging_output[f"loss_{i+7}"] = 0.
             else:
                 logging_output[f"loss_{i+7}"] = utils.item(loss)
-
-        logging_output["ntokens"] = ntokens
-        logging_output["nsentences"] = sample["id"].numel()
-        logging_output["sample_size"] = sample_size
 
         if not model.training:
             import editdistance

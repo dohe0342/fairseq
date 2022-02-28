@@ -1099,6 +1099,7 @@ class TransformerEncoder(nn.Module):
                 )
             for i, layer_result in enumerate(layer_results):
                 if not layer_result:
+                    print(layer_result)
                     layer_results[i] = undo_pad(*layer_result)
 
         return x, layer_results

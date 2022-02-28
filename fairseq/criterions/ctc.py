@@ -510,14 +510,14 @@ class BranchCtcCriterionV2(CtcCriterion):
         
         with torch.backends.cudnn.flags(enabled=False):
             loss_list = [F.ctc_loss(
-                lprobs,
-                targets_flat,
-                input_lengths,
-                target_lengths,
-                blank=self.blank_idx,
-                reduction="sum",
-                zero_infinity=self.zero_infinity,
-            ) for lprobs in lprobs_list]
+                    lprobs,
+                    targets_flat,
+                    input_lengths,
+                    target_lengths,
+                    blank=self.blank_idx,
+                    reduction="sum",
+                    zero_infinity=self.zero_infinity,
+                ) for lprobs in lprobs_list]
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

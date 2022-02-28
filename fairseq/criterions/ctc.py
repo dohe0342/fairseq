@@ -529,7 +529,7 @@ class BranchCtcCriterionV2(CtcCriterion):
         
         logging_output = {}
         print('loss len = ', len(loss_list))
-        for i in range(6):
+        for loss in loss_list:
             if i+7 in net_output['dropped_layer']:
                 logging_output[f"loss_{i}"] = 0.
             else:

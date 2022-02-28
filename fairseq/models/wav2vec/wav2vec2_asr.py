@@ -918,7 +918,7 @@ class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
         }
 
 
-class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
+class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.apply_mask = cfg.apply_mask
 
@@ -945,7 +945,7 @@ class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
-            "branch_ctc_v1": cfg.branch_ctc_v1,
+            "branch_ctc_v2": cfg.branch_ctc_v2,
         }
 
         if cfg.w2v_args is None:

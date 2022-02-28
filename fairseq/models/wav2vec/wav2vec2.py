@@ -1046,6 +1046,8 @@ class TransformerEncoder(nn.Module):
         layer_results = []
         r = None
 
+        dropped_layer = []
+
         if layer_wise_detach: 
         ## for layer wise CTC training
             for i, layer in enumerate(self.layers):
@@ -1059,6 +1061,7 @@ class TransformerEncoder(nn.Module):
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
                 else:
+                    dropped_layer.append(i)
                     if i >= min_layer:
                         layer_results.append(0)
                 if i == tgt_layer-1:
@@ -1074,6 +1077,7 @@ class TransformerEncoder(nn.Module):
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
                 else:
+                    dropped_layer.append(i)
                     if i >= min_layer:
                         layer_results.append(0)
 

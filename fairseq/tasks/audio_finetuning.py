@@ -169,7 +169,7 @@ class AudioFinetuningTask(AudioPretrainingTask):
         model."""
         return self.state.target_dictionary
 
-    def valid_step(self, sample, model, criterion, uses_branch=False):
+    def valid_step(self, sample, model, criterion, uses_branch_v1=False, uses_branch_v2=False):
         if uses_branch:
             loss, sample_size, logging_output = super().valid_step(sample, model, criterion, uses_branch=uses_branch)
         else:

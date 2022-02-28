@@ -835,7 +835,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             x9 = res["layer_results"][7][0]
             x10 = res["layer_results"][8][0]
             x11 = res["layer_results"][9][0]
-            x12 = res["layer_results"][10][0]            
+            x12 = res["layer_results"][10][0] 
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C

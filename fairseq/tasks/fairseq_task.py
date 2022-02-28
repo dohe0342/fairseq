@@ -552,7 +552,7 @@ class FairseqTask(object):
 
             return loss, sample_size, logging_output
 
-    def valid_step(self, sample, model, criterion, uses_branch=False):
+    def valid_step(self, sample, model, criterion, uses_branch_v1=False, uses_branch_v2=False):
         model.eval()
         if uses_branch:
             loss_list, sample_size_list, logging_output_list = [], [], []

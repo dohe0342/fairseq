@@ -8,7 +8,6 @@ fairseq-hydra-train \
 	criterion._name=branch_ctc \
     task.data=/home/work/workspace/LibriSpeech/manifests \
     model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \
-	+task.uses_branch=true \
 	+model.branch_ctc=true \
 	#+model.overrides=uses_branch:true \
 	#task.overrides=uses_branch:true \

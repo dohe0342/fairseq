@@ -535,8 +535,7 @@ class FairseqTask(object):
                     loss_list[i] *= 0
             with torch.autograd.profiler.record_function("backward"):
                 for loss in loss_list:
-                    if loss != 0:
-                        optimizer.backward(loss, retain_graph=True)
+                    optimizer.backward(loss, retain_graph=True)
             return loss_list, sample_size, logging_output
 
         else:

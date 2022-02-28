@@ -488,8 +488,6 @@ class BranchCtcCriterionV2(CtcCriterion):
             net_output, log_probs=True
         )#.contiguous()  # (T, B, C) from the encoder
 
-        print(len(lprobs_list))
-
         lprobs_list = [lprobs.contiguous() for lprobs in lprobs_list]
 
         if "src_lengths" in sample["net_input"]:

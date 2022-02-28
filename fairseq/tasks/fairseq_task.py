@@ -525,6 +525,15 @@ class FairseqTask(object):
             return loss_list, sample_size_list[0], logging_output_list
         
         elif uses_branch_v2:
+            model.train()
+            model.set_num_updates(update_num)
+            with torch.autograd.profiler.record_function("forward"):
+                with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
+                    loss, sample_size, logging_output = criterion(model, sample)
+            if ignore_grad:
+                loss *= 0
+            with torch.autograd.profiler.record_function("backward"):
+                optimizer.backward(loss)
 
         else:
             model.train()

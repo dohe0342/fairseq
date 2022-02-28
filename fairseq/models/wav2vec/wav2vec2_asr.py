@@ -777,7 +777,7 @@ def Linear(in_features, out_features, bias=True):
     return m
 
 
-class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
+class Wav2VecEncoderBranchCtcV1(FairseqEncoder, Wav2VecEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.apply_mask = cfg.apply_mask
 

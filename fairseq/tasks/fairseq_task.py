@@ -536,6 +536,8 @@ class FairseqTask(object):
                 for loss in loss_list:
                     optimizer.backward(loss, retain_graph=True)
 
+            return loss_list, sample_size, logging_output
+
         else:
             model.train()
             model.set_num_updates(update_num)

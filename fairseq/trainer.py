@@ -1465,7 +1465,6 @@ class Trainer(object):
         """
         data = {}
 
-        print(len(logging_outputs))
         for i, stat in enumerate(extra_stats_to_sum):
             data["extra_stats_" + str(i)] = stat
         if len(logging_outputs) > 0:

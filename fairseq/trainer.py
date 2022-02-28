@@ -1473,7 +1473,7 @@ class Trainer(object):
                 if not ignore:
                     for log in logging_outputs:
                         if k in log:
-                            print(log[k])
+                            print(k, log[k])
 
                     v = sum(log[k] for log in logging_outputs if k in log)
                 else:

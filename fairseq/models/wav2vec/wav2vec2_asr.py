@@ -841,7 +841,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             x12 = self.proj[11](x)
 
         return {
-            "encoder_out": x,  # T x B x C
+            "encoder_out": [x7, x8, x9, x10, x11, x12],  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
         }

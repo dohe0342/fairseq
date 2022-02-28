@@ -873,7 +873,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
 
             logits_list.apppend(logits)
 
-        return logits
+        return logits_list
 
     def get_normalized_probs(self, net_output, log_probs):
         """Get normalized probabilities (or log probs) from a net's output."""

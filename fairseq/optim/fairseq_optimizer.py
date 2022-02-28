@@ -92,7 +92,7 @@ class FairseqOptimizer(object):
 
     def backward(self, loss, retain_graph=False):
         """Computes the sum of gradients of the given tensor w.r.t. graph leaves."""
-        loss.backward()
+        loss.backward(retain_graph)
 
     def all_reduce_grads(self, module):
         """Manually all-reduce gradients (if required)."""

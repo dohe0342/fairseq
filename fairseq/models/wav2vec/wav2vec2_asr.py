@@ -835,6 +835,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             "layer_results": res["layer_results"],
         }
 
+
 class TransformerDecoder(FairseqIncrementalDecoder):
     """
     Transformer decoder consisting of *args.decoder_layers* layers. Each layer

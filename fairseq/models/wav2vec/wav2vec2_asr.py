@@ -819,6 +819,12 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             res = self.w2v_model.extract_features(**w2v_args)
 
             x = res["x"]
+            x7 = res["x"]
+            x8 = res["x"]
+            x9 = res["x"]
+            x10 = res["x"]
+            x11 = res["x"]
+            x12 = res["x"]
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C

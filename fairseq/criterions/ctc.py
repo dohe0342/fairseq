@@ -541,12 +541,14 @@ class BranchCtcCriterionV2(CtcCriterion):
                 "nsentences": sample["id"].numel(),
                 "sample_size": sample_size,
         }
-
+        
+        '''
         for i, loss in enumerate(loss_log_list):
             if loss == 0:
                 logging_output[f"loss_{i+7}"] = torch.tensor(0.)
             else:
                 logging_output[f"loss_{i+7}"] = utils.item(loss)
+        '''
 
         if not model.training:
             import editdistance

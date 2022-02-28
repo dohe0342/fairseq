@@ -528,8 +528,9 @@ class BranchCtcCriterionV2(CtcCriterion):
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         
         logging_output = {}
-        #print('loss len = ', len(loss_list))
+        print('loss len = ', len(loss_list))
         for i in range(7,13):
+            print(i)
             if i-1 in net_output['dropped_layer']:
                 logging_output[f"loss_{i}"] = 0.
             else:

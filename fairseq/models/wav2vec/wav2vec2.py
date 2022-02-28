@@ -673,15 +673,15 @@ class Wav2Vec2Model(BaseFairseqModel):
             y = unmasked_features
             mask_indices = None
 
-        x, layer_results, dropped_layer = self.encoder(x, padding_mask=padding_mask, layer=layer)
+        x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
 
         if features_only:
             return {
                 "x": x,
                 "padding_mask": padding_mask,
                 "features": unmasked_features,
-                "layer_results": layer_results,
-                "dropped_layer": dropped_layer,
+                "layer_results": layer_results[:-1],
+                "dropped_layer": layer_results[-1],
             }
 
         if self.quantizer:

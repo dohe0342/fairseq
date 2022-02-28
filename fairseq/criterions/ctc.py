@@ -482,7 +482,7 @@ class BranchCtcCriterionV1(CtcCriterion):
 class BranchCtcCriterionV2(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
-    def forward(self, model, sample, reduce=True, tgt_layer=0):
+    def forward(self, model, sample, reduce=True):
         net_output = model(tgt_layer=tgt_layer, **sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

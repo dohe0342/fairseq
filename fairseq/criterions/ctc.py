@@ -550,7 +550,6 @@ class BranchCtcCriterionV2(CtcCriterion):
                         logging_output[f"w_total_{tgt_layer}"] = 0
                         logging_output[f"c_errors_{tgt_layer}"] = 0
                         logging_output[f"c_total_{tgt_layer}"] = 0
-
                         continue
 
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()

@@ -870,27 +870,27 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         
         result = []
         if self.proj:
-            if type(x7) == int:
+            if type(x7) != int:
                 x7 = self.final_dropout(x7)
                 x7 = self.proj[6](x7)
                 result.append(x7)
-            if type(x8) == int:
+            if type(x8) != int:
                 x8 = self.final_dropout(x8)
                 x8 = self.proj[7](x8)
                 result.append(x8)
-            if type(x9) == int:
+            if type(x9) != int:
                 x9 = self.final_dropout(x9)
                 x9 = self.proj[8](x9)
                 result.append(x9)
-            if type(x10) == int:
+            if type(x10) != int:
                 x10 = self.final_dropout(x10)
                 x10 = self.proj[9](x10)
                 result.append(x10)
-            if type(x11) == int:
+            if type(x11) != int:
                 x11 = self.final_dropout(x11)
                 x11 = self.proj[10](x11)
                 result.append(x11)
-            if type(x12) == int:
+            if type(x12) != int:
                 x12 = self.final_dropout(x12)
                 x12 = self.proj[11](x12)
                 result.append(x12)

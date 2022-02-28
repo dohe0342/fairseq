@@ -625,42 +625,43 @@ class BranchCtcCriterionV2(CtcCriterion):
             metrics.log_scalar(
                 "nll_loss", loss_sum / ntokens / math.log(2), ntokens, round=3
             )
-
-        c_errors = sum(log.get(f"c_errors_{layer_num}", 0) for log in logging_outputs)
-        metrics.log_scalar(f"_c_errors_{layer_num}", c_errors)
-        c_total = sum(log.get(f"c_total_{layer_num}", 0) for log in logging_outputs)
-        metrics.log_scalar(f"_c_total_{layer_num}", c_total)
-        w_errors = sum(log.get(f"w_errors_{layer_num}", 0) for log in logging_outputs)
-        metrics.log_scalar(f"_w_errors_{layer_num}", w_errors)
-        wv_errors = sum(log.get(f"wv_errors_{layer_num}", 0) for log in logging_outputs)
-        metrics.log_scalar(f"_wv_errors_{layer_num}", wv_errors)
-        w_total = sum(log.get(f"w_total_{layer_num}", 0) for log in logging_outputs)
-        metrics.log_scalar(f"_w_total_{layer_num}", w_total)
         
-        if c_total > 0:
-            metrics.log_derived(
-                f"uer_{layer_num}",
-                lambda meters: safe_round(
-                    meters[f"_c_errors_{layer_num}"].sum * 100.0 / meters[f"_c_total_{layer_num}"].sum, 3
+        for layer_num in range(6):
+            c_errors = sum(log.get(f"c_errors_{layer_num}", 0) for log in logging_outputs)
+            metrics.log_scalar(f"_c_errors_{layer_num}", c_errors)
+            c_total = sum(log.get(f"c_total_{layer_num}", 0) for log in logging_outputs)
+            metrics.log_scalar(f"_c_total_{layer_num}", c_total)
+            w_errors = sum(log.get(f"w_errors_{layer_num}", 0) for log in logging_outputs)
+            metrics.log_scalar(f"_w_errors_{layer_num}", w_errors)
+            wv_errors = sum(log.get(f"wv_errors_{layer_num}", 0) for log in logging_outputs)
+            metrics.log_scalar(f"_wv_errors_{layer_num}", wv_errors)
+            w_total = sum(log.get(f"w_total_{layer_num}", 0) for log in logging_outputs)
+            metrics.log_scalar(f"_w_total_{layer_num}", w_total)
+            
+            if c_total > 0:
+                metrics.log_derived(
+                    f"uer_{layer_num}",
+                    lambda meters: safe_round(
+                        meters[f"_c_errors_{layer_num}"].sum * 100.0 / meters[f"_c_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_c_total_{layer_num}"].sum > 0
+                    else float("nan"),
                 )
-                if meters[f"_c_total_{layer_num}"].sum > 0
-                else float("nan"),
-            )
-        if w_total > 0:
-            metrics.log_derived(
-                f"wer_{layer_num}",
-                lambda meters: safe_round(
-                    meters[f"_w_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+            if w_total > 0:
+                metrics.log_derived(
+                    f"wer_{layer_num}",
+                    lambda meters: safe_round(
+                        meters[f"_w_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
                 )
-                if meters[f"_w_total_{layer_num}"].sum > 0
-                else float("nan"),
-            )
-            metrics.log_derived(
-                f"raw_wer_{layer_num}",
-                lambda meters: safe_round(
-                    meters[f"_wv_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                metrics.log_derived(
+                    f"raw_wer_{layer_num}",
+                    lambda meters: safe_round(
+                        meters[f"_wv_errors_{layer_num}"].sum * 100.0 / meters[f"_w_total_{layer_num}"].sum, 3
+                    )
+                    if meters[f"_w_total_{layer_num}"].sum > 0
+                    else float("nan"),
                 )
-                if meters[f"_w_total_{layer_num}"].sum > 0
-                else float("nan"),
-            )
 

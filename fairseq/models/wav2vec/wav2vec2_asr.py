@@ -833,7 +833,12 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         x = self.final_dropout(x)
 
         if self.proj:
-            x = self.proj[tgt_layer-1](x)
+            x7 = self.proj[6](x)
+            x8 = self.proj[7](x)
+            x9 = self.proj[8](x)
+            x10 = self.proj[9](x)
+            x11 = self.proj[10](x)
+            x12 = self.proj[11](x)
 
         return {
             "encoder_out": x,  # T x B x C

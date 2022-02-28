@@ -1058,6 +1058,9 @@ class TransformerEncoder(nn.Module):
                         
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
+                else:
+                    if i >= min_layer:
+                        layer_results.append(None)
                 if i == tgt_layer-1:
                     r = x
                     break

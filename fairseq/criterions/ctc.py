@@ -484,7 +484,7 @@ class BranchCtcCriterionV2(CtcCriterion):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
-        lprobs_list = model.get_normalized_probs(
+        lprobs_list = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
         print(len(lprobs_list))

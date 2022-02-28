@@ -705,7 +705,8 @@ class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
 
 class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
-        self.cfg = cfg
+        self.blank_weight = cfg.blank_weight
+        self.blank_mode = cfg.blank_mode
         self.apply_mask = cfg.apply_mask
 
         arg_overrides = {

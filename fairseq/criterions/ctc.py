@@ -597,7 +597,8 @@ class BranchCtcCriterionV2(CtcCriterion):
                             wv_errs += dist
 
                         w_len += len(targ_words)
-
+                    
+                    tgt_layer = 12-enum
                     logging_output[f"wv_errors_{tgt_layer}"] = wv_errs
                     logging_output[f"w_errors_{tgt_layer}"] = w_errs
                     logging_output[f"w_total_{tgt_layer}"] = w_len

@@ -831,33 +831,32 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             
             x = res["x"]
 
-            if not res["layer_results"][6]:
-                print('here!!!!')
+            if res["layer_results"][6]:
                 x7 = res["layer_results"][6][0]
             else:
                 x7 = 0
 
-            if not res["layer_results"][7]:
+            if res["layer_results"][7]:
                 x8 = res["layer_results"][7][0]
             else:
                 x8 = 0
 
-            if not res["layer_results"][8]:
+            if res["layer_results"][8]:
                 x9 = res["layer_results"][8][0]
             else:
                 x9 = 0
 
-            if not res["layer_results"][9]:
+            if res["layer_results"][9]:
                 x10 = res["layer_results"][9][0]
             else:
                 x10 = 0
 
-            if not res["layer_results"][10]:
+            if res["layer_results"][10]:
                 x11 = res["layer_results"][10][0]
             else:
                 x11 = 0
 
-            if not res["layer_results"][11]:
+            if res["layer_results"][11]:
                 x12 = res["layer_results"][11][0] 
             else:
                 x12 = 0

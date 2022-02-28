@@ -495,8 +495,8 @@ class BranchCtcCriterionV2(CtcCriterion):
                 non_padding_mask = ~net_output["padding_mask"]
                 input_lengths = non_padding_mask.long().sum(-1)
             else:
-                input_lengths = lprobs[0].new_full(
-                    (lprobs[0].size(1),), lprobs[0].size(0), dtype=torch.long
+                input_lengths = lprobs_list[0].new_full(
+                    (lprobs_list[0].size(1),), lprobs_list[0].size(0), dtype=torch.long
                 )
 
         pad_mask = (sample["target"] != self.pad_idx) & (
@@ -510,14 +510,14 @@ class BranchCtcCriterionV2(CtcCriterion):
         
         with torch.backends.cudnn.flags(enabled=False):
             loss_list = [F.ctc_loss(
-                lprob,
+                lprobs,
                 targets_flat,
                 input_lengths,
                 target_lengths,
                 blank=self.blank_idx,
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
-            ) for lprob in lprobs]
+            ) for lprobs in lprobs_list]
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

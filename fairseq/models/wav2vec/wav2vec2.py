@@ -673,7 +673,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             y = unmasked_features
             mask_indices = None
 
-        x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
+        x, layer_results, dropped_layer = self.encoder(x, padding_mask=padding_mask, layer=layer)
 
         if features_only:
             return {
@@ -681,6 +681,7 @@ class Wav2Vec2Model(BaseFairseqModel):
                 "padding_mask": padding_mask,
                 "features": unmasked_features,
                 "layer_results": layer_results,
+                "dropped_layer": dropped_layer,
             }
 
         if self.quantizer:
@@ -1105,7 +1106,7 @@ class TransformerEncoder(nn.Module):
                 if layer_result:
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
 
-        return x, layer_results
+        return x, layer_results, dropped_layer
 
     def max_positions(self):
         """Maximum output length supported by the encoder."""

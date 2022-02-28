@@ -1043,7 +1043,7 @@ class TransformerEncoder(nn.Module):
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
 
-        layer_results = {}
+        layer_results = []
         r = None
 
         if layer_wise_detach: 

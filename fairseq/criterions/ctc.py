@@ -535,7 +535,7 @@ class BranchCtcCriterionV2(CtcCriterion):
             lprobs_list.insert(drop, 0)
             loss_log_list.insert(drop, 0)
         
-        for i, loss in enumerate(loss_list):
+        for i, loss in enumerate(loss_log_list):
             if loss == 0:
                 logging_output[f"loss_{i+7}"] = 0.
             else:

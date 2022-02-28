@@ -484,8 +484,6 @@ class BranchCtcCriterionV2(CtcCriterion):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
-        for key in net_output:
-            print(key)
         lprobs_list = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
         )#.contiguous()  # (T, B, C) from the encoder
@@ -532,8 +530,9 @@ class BranchCtcCriterionV2(CtcCriterion):
         logging_output = {}
         for i in range(7,13):
             if i+1 in net_output['dropped_layer']:
-                continue
-            logging_output[f"loss_{i}"] = utils.item(loss_list[i].data)
+                logging_output[f"loss_{i}"] = 0.
+            else:
+                logging_output[f"loss_{i}"] = utils.item(loss_list[i].data)
 
         logging_output["ntokens"] = ntokens
         logging_output["nsentences"] = sample["id"].numel()

@@ -527,8 +527,6 @@ class BranchCtcCriterionV2(CtcCriterion):
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         logging_output = {
-            "loss_10": utils.item(loss_list[-3].data),  # * sample['ntokens'],
-            "loss_11": utils.item(loss_list[-2].data),  # * sample['ntokens'],
             "loss_12": utils.item(loss_list[-1].data),  # * sample['ntokens'],
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),

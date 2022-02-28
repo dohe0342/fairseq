@@ -495,7 +495,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                 non_padding_mask = ~net_output["padding_mask"]
                 input_lengths = non_padding_mask.long().sum(-1)
             else:
-                input_lengths = lprobs.new_full(
+                input_lengths = lprobs[0].new_full(
                     (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
 

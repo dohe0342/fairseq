@@ -840,7 +840,7 @@ class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
         w2v_args.task.data = cfg.data
         task = tasks.setup_task(w2v_args.task)
         print('!'*20)
-        print(task)
+        print(task.source_dictionary)
         print('!'*20)
         model = task.build_model(w2v_args.model, from_checkpoint=True)
 

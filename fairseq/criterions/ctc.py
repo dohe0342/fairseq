@@ -544,6 +544,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                 for enum, lprobs in enumerate(lprobs_list[::-1]):
                     if enum+1 in net_output['droped_layer']:
                         continue
+
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 
                     c_err = 0

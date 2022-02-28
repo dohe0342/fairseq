@@ -845,7 +845,7 @@ class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
         if state is not None and not cfg.no_pretrained_weights:
             self.load_model_weights(state, model, cfg)
 
-        FairseqEncoder.__init__(self, task.source_dictionary)
+        FairseqEncoder.__init__(task.source_dictionary)
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model

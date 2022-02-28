@@ -1471,10 +1471,6 @@ class Trainer(object):
             log_keys = list(logging_outputs[0].keys())
             for k in log_keys:
                 if not ignore:
-                    for log in logging_outputs:
-                        if k in log:
-                            print(k, log[k])
-
                     v = sum(log[k] for log in logging_outputs if k in log)
                 else:
                     v = logging_outputs[0][k]

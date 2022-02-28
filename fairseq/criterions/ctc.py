@@ -529,12 +529,11 @@ class BranchCtcCriterionV2(CtcCriterion):
         
         logging_output = {}
         print('loss len = ', len(loss_list))
-        for i in range(7,13):
-            print(i)
-            if i-1 in net_output['dropped_layer']:
+        for i in range(6):
+            if i+7 in net_output['dropped_layer']:
                 logging_output[f"loss_{i}"] = 0.
             else:
-                logging_output[f"loss_{i}"] = utils.item(loss_list[i].data)
+                logging_output[f"loss_{i+7}"] = utils.item(loss_list[i].data)
 
         logging_output["ntokens"] = ntokens
         logging_output["nsentences"] = sample["id"].numel()

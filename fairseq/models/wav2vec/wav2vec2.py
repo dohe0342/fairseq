@@ -1101,7 +1101,7 @@ class TransformerEncoder(nn.Module):
                 if layer_result:
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
 
-        print('layer reulsts num = ', len(layer_reulsts))
+        print('layer reulsts num = ', len(layer_results))
 
         return x, layer_results
 

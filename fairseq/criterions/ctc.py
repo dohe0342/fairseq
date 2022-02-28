@@ -555,7 +555,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 
             with torch.no_grad():
                 for enum, lprobs in enumerate(lprobs_list[::-1]):
-                    if lprobs == 0:
+                    if type(lprobs) == int:
                         tgt_layer = 12-enum
                         logging_output[f"wv_errors_{tgt_layer}"] = 0
                         logging_output[f"w_errors_{tgt_layer}"] = 0

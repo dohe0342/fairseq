@@ -526,13 +526,18 @@ class BranchCtcCriterionV2(CtcCriterion):
         )
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
-        logging_output = {
-            "loss_12": utils.item(loss_list[-1].data),  # * sample['ntokens'],
-            "ntokens": ntokens,
-            "nsentences": sample["id"].numel(),
-            "sample_size": sample_size,
-        }
+        
+        logging_output = {}
+        for i in range(7,13):
+            if i+1 in net_output['dropped_layer']:
+                continue
+            logging_output[f"loss_{i}"] = utils.item(loss_list[i].data)
 
+        logging_output["ntokens"] = ntokens
+        logging_output["nsentences"] = sample["id"].numel()
+        logging_output["sample_size"] = sample_size,
+
+        "loss_12": utils.item(loss_list[-1].data),  # * sample['ntokens'],
         if not model.training:
             import editdistance
 

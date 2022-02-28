@@ -225,8 +225,8 @@ class Wav2VecCtc(BaseFairseqModel):
     @classmethod
     def build_model(cls, cfg: Wav2Vec2CtcConfig, task: FairseqTask):
         """Build a new model instance."""
-        w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary)) if cfg.branch_ctc_v1 \
-                            else Wav2VecEncoder(cfg, len(task.target_dictionary))
+        #w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary)) if cfg.branch_ctc_v1 \
+        #                    else Wav2VecEncoder(cfg, len(task.target_dictionary))
         
         if cfg.branch_ctc_v1:
             Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary))

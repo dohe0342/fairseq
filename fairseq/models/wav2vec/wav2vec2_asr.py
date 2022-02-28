@@ -804,7 +804,8 @@ class Wav2VecEncoderBranchCtcV1(FairseqEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
-            "branch_ctc": cfg.branch_ctc,
+            "branch_ctc_v1": cfg.branch_ctc_v1,
+            "branch_ctc_v2": cfg.branch_ctc_v2,
         }
 
         if cfg.w2v_args is None:

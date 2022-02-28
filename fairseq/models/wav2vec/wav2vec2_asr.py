@@ -829,6 +829,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         with torch.no_grad() if not ft else contextlib.ExitStack():
             res = self.w2v_model.extract_features(**w2v_args)
             
+            print(len(res["layer_results"]))
             x = res["x"]
             x7 = res["layer_results"][5][0].transpose(0,1)
             x8 = res["layer_results"][6][0].transpose(0,1)

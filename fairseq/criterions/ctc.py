@@ -543,7 +543,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 
         logging_output["ntokens"] = ntokens
         logging_output["nsentences"] = sample["id"].numel()
-        logging_output["sample_size"] = sample_size,
+        logging_output["sample_size"] = sample_size
 
         if not model.training:
             import editdistance

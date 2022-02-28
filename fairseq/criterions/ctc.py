@@ -537,7 +537,6 @@ class BranchCtcCriterionV2(CtcCriterion):
         logging_output["nsentences"] = sample["id"].numel()
         logging_output["sample_size"] = sample_size,
 
-        "loss_12": utils.item(loss_list[-1].data),  # * sample['ntokens'],
         if not model.training:
             import editdistance
 

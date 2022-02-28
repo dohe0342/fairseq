@@ -539,7 +539,7 @@ class BranchCtcCriterionV2(CtcCriterion):
             if loss == 0:
                 logging_output[f"loss_{i+7}"] = 0.
             else:
-                logging_output[f"loss_{i+7}"] = utils.item(loss.data)
+                logging_output[f"loss_{i+7}"] = utils.item(loss)
 
         logging_output["ntokens"] = ntokens
         logging_output["nsentences"] = sample["id"].numel()

@@ -845,6 +845,39 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
         }
+    
+    def get_logits(self, net_output, normalize=False):
+        logits = net_output["encoder_out"]
+        if self.blank_weight != 0:
+            if self.blank_mode == "add":
+                logits[..., 0] += self.blank_weight
+            elif self.blank_mode == "set":
+                logits[..., 0] = self.blank_weight
+            else:
+                raise Exception(f"invalid blank mode {self.blank_mode}")
+
+        if net_output["padding_mask"] is not None and net_output["padding_mask"].any():
+            number_of_classes = logits.size(-1)
+            masking_tensor = torch.ones(
+                number_of_classes, device=logits.device
+            ) * float("-inf")
+            masking_tensor[0] = 0
+            logits[net_output["padding_mask"].T] = masking_tensor.type_as(logits)
+
+        if normalize:
+            logits = utils.log_softmax(logits.float(), dim=-1)
+
+        return logits
+
+    def get_normalized_probs(self, net_output, log_probs):
+        """Get normalized probabilities (or log probs) from a net's output."""
+
+        logits = self.get_logits(net_output)
+
+        if log_probs:
+            return utils.log_softmax(logits.float(), dim=-1)
+        else:
+            return utils.softmax(logits.float(), dim=-1)
 
 
 class TransformerDecoder(FairseqIncrementalDecoder):

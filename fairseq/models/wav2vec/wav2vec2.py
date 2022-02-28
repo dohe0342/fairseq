@@ -1007,7 +1007,7 @@ class TransformerEncoder(nn.Module):
         if self.layer_norm_first and layer is None:
             x = self.layer_norm(x)
 
-        return x, layer_results, dropped_layer
+        return x, layer_results
 
     def extract_features(
         self,
@@ -1105,8 +1105,10 @@ class TransformerEncoder(nn.Module):
             for i, layer_result in enumerate(layer_results):
                 if layer_result:
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
+        
+        layer_results.append(dropped_layer)
 
-        return x, layer_results, dropped_layer
+        return x, layer_results
 
     def max_positions(self):
         """Maximum output length supported by the encoder."""

@@ -896,7 +896,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
                 res.append(x12)
 
         return {
-            "encoder_out": [x7, x8, x9, x10, x11, x12],  # T x B x C
+            "encoder_out": x12,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
         }

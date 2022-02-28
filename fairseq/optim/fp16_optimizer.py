@@ -94,7 +94,7 @@ class _FP16OptimizerMixin(object):
             self.scaler.loss_scale = state_dict["loss_scale"]
         self.fp32_optimizer.load_state_dict(state_dict, optimizer_overrides)
 
-    def backward(self, loss):
+    def backward(self, loss, retain_graph=False):
         """Computes the sum of gradients of the given tensor w.r.t. graph leaves.
 
         Compared to :func:`fairseq.optim.FairseqOptimizer.backward`, this

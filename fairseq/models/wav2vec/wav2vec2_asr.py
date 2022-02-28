@@ -777,7 +777,7 @@ def Linear(in_features, out_features, bias=True):
     return m
 
 
-class Wav2VecEncoderBranchCtcV1(FairseqEncoder, Wav2VecEncoder):
+class Wav2VecEncoderBranchCtcV1(Wav2VecEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.apply_mask = cfg.apply_mask
 
@@ -846,7 +846,7 @@ class Wav2VecEncoderBranchCtcV1(FairseqEncoder, Wav2VecEncoder):
         if state is not None and not cfg.no_pretrained_weights:
             self.load_model_weights(state, model, cfg)
 
-        super().__init__(task.source_dictionary)
+        super().super().__init__(task.source_dictionary)
 
         d = w2v_args.model.encoder_embed_dim
 

@@ -486,8 +486,9 @@ class BranchCtcCriterionV2(CtcCriterion):
         net_output = model(**sample["net_input"])
         lprobs_list = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
-        ).contiguous()  # (T, B, C) from the encoder
-        print(len(lprobs_list))
+        )#.contiguous()  # (T, B, C) from the encoder
+
+        lprobs_list = [lprobs.contiguous() for lprobs in lprobs_list]
 
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]

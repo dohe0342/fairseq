@@ -833,16 +833,33 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
 
             if not res["layer_results"][6]:
                 x7 = res["layer_results"][6][0]
+            else:
+                x7 = 0
+
             if not res["layer_results"][7]:
                 x8 = res["layer_results"][7][0]
+            else:
+                x8 = 0
+
             if not res["layer_results"][8]:
                 x9 = res["layer_results"][8][0]
+            else:
+                x9 = 0
+
             if not res["layer_results"][9]:
                 x10 = res["layer_results"][9][0]
+            else:
+                x10 = 0
+
             if not res["layer_results"][10]:
                 x11 = res["layer_results"][10][0]
+            else:
+                x11 = 0
+
             if not res["layer_results"][11]:
                 x12 = res["layer_results"][11][0] 
+            else:
+                x12 = 0
             
             padding_mask = res["padding_mask"]
 
@@ -852,12 +869,24 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         x = self.final_dropout(x)
 
         if self.proj:
-            x7 = self.proj[6](x)
-            x8 = self.proj[7](x)
-            x9 = self.proj[8](x)
-            x10 = self.proj[9](x)
-            x11 = self.proj[10](x)
-            x12 = self.proj[11](x)
+            if x7:
+                x7 = self.final_dropout(x7)
+                x7 = self.proj[6](x7)
+            if x8:
+                x8 = self.final_dropout(x8)
+                x8 = self.proj[7](x8)
+            if x9:
+                x9 = self.final_dropout(x9)
+                x9 = self.proj[8](x9)
+            if x10:
+                x10 = self.final_dropout(x10)
+                x10 = self.proj[9](x10)
+            if x11:
+                x11 = self.final_dropout(x11)
+                x11 = self.proj[10](x11)
+            if x12:
+                x12 = self.final_dropout(x12)
+                x12 = self.proj[11](x12)
 
         return {
             "encoder_out": [x7, x8, x9, x10, x11, x12],  # T x B x C

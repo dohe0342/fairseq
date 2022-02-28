@@ -543,7 +543,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 
         for i, loss in enumerate(loss_log_list):
             if loss == 0:
-                logging_output[f"loss_{i+7}"] = 0.
+                logging_output[f"loss_{i+7}"] = torch.tensor(0.)
             else:
                 logging_output[f"loss_{i+7}"] = utils.item(loss)
 

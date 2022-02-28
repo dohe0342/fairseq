@@ -792,7 +792,7 @@ class Trainer(object):
         if self.cfg.ema.store_ema and getattr(self.task, "uses_ema", False):
             extra_kwargs["ema_model"] = self.ema.get_model()
         
-        extra_kwargs["uses_branch"] = self.cfg.model.branch_ctc_v1
+        extra_kwargs["uses_branch_v1"] = self.cfg.model.branch_ctc_v1
 
         # forward and backward pass
         logging_outputs, sample_size, ooms = [], 0, 0
@@ -885,7 +885,7 @@ class Trainer(object):
         # gather logging outputs from all replicas
         if self._sync_stats():
             train_time = self._local_cumulative_training_time()
-            if extra_kwargs["uses_branch"]: 
+            if extra_kwargs["uses_branch_v1"]: 
                 for i in range(len(logging_outputs)):
                     (
                         logging_outputs[i],
@@ -1081,7 +1081,7 @@ class Trainer(object):
 
                 # log stats
 
-                if extra_kwargs["uses_branch"]:
+                if extra_kwargs["uses_branch_v1"]:
                     logging_outputs = [_[-1] for _ in logging_outputs]
                     logging_output = self._reduce_and_log_stats(
                         logging_outputs, sample_size, grad_norm

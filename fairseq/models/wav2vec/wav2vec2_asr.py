@@ -899,6 +899,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             "encoder_out": result,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
+            "dropped_layer": res["dropped_layer"],
         }
     
     def get_logits(self, net_output, normalize=False):

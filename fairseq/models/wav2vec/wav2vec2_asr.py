@@ -182,7 +182,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
     ddp_backend: str = II("distributed_training.ddp_backend")
 
-    branch_ctc: bool = field(
+    branch_ctc_v1: bool = field(
         default=False,
         metadata={"help": "make ctc layer after each encoder layer"},
     )

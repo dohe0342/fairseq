@@ -496,7 +496,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                 input_lengths = non_padding_mask.long().sum(-1)
             else:
                 input_lengths = lprobs[0].new_full(
-                    (lprobs.size(1),), lprobs.size(0), dtype=torch.long
+                    (lprobs[0].size(1),), lprobs[0].size(0), dtype=torch.long
                 )
 
         pad_mask = (sample["target"] != self.pad_idx) & (

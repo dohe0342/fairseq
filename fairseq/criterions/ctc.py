@@ -531,6 +531,8 @@ class BranchCtcCriterionV2(CtcCriterion):
         
         loss_log_list = [loss.data for loss in loss_list]
 
+        print(loss_log_list)
+
         for drop in net_output['dropped_layer']:
             lprobs_list.insert(drop, 0)
             loss_log_list.insert(drop, 0)

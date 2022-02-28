@@ -296,7 +296,7 @@ class CtcCriterion(FairseqCriterion):
 
 
 @register_criterion("branch_ctc_v1", dataclass=CtcCriterionConfig)
-class BranchCtcCriterion(CtcCriterion):
+class BranchCtcCriterionV1(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True, tgt_layer=0):

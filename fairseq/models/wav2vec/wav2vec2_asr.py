@@ -229,10 +229,8 @@ class Wav2VecCtc(BaseFairseqModel):
         #                    else Wav2VecEncoder(cfg, len(task.target_dictionary))
         
         if cfg.branch_ctc_v1:
-            print('v1' * 10)
             w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary))
         elif cfg.branch_ctc_v2:
-            print('v2' * 10)
             w2v_encoder = Wav2VecEncoderBranchCtcV2(cfg, len(task.target_dictionary))
         else:
             w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))
@@ -817,7 +815,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
         
         self.proj = [self.proj1, self.proj2, self.proj3, self.proj4, self.proj5, self.proj6, self.proj7, self.proj8, self.proj9, self.proj10, self.proj11, self.proj12]
 
-    def forward(self, tgt_layer, source, padding_mask, **kwargs):
+    def forward(self, source, padding_mask, **kwargs):
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

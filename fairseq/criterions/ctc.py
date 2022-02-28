@@ -605,7 +605,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                     logging_output[f"c_errors_{tgt_layer}"] = c_err
                     logging_output[f"c_total_{tgt_layer}"] = c_len
 
-        return loss, sample_size, logging_output
+        return loss_list, sample_size, logging_output
 
     @staticmethod
     def reduce_metrics(logging_outputs, layer_num=12) -> None:

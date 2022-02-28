@@ -301,7 +301,7 @@ class BranchCtcCriterionV1(CtcCriterion):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True, tgt_layer=0):
         net_output = model(tgt_layer=tgt_layer, **sample["net_input"])
-        print(net_output['net_output'].size())
+        print(net_output['encoder_out'].size())
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder

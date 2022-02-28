@@ -843,6 +843,7 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
                 x11 = res["layer_results"][10][0]
             if not res["layer_results"][11]:
                 x12 = res["layer_results"][11][0] 
+            
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C

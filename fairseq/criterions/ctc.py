@@ -536,8 +536,8 @@ class BranchCtcCriterionV2(CtcCriterion):
             loss_log_list.insert(drop, 0)
         
         logging_output = {
-                "ntokens": ntokens
-                "nsentences": sample["id"].numel()
+                "ntokens": ntokens,
+                "nsentences": sample["id"].numel(),
                 "sample_size": sample_size,
         }
 

@@ -544,7 +544,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 
             with torch.no_grad():
                 for enum, lprobs in enumerate(lprobs_list[::-1]):
-                    if enum+1 in net_output['droped_layer']:
+                    if enum+1 in net_output['dropped_layer']:
                         continue
 
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()

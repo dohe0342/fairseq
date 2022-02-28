@@ -797,10 +797,7 @@ class Trainer(object):
 
         # forward and backward pass
         logging_outputs, sample_size, ooms = [], 0, 0
-        count = 0
         for i, sample in enumerate(samples):  # delayed update loop
-            print(count)
-            count += 1
             sample, is_dummy_batch = self._prepare_sample(sample)
 
             def maybe_no_sync():

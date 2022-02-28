@@ -626,7 +626,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                 "nll_loss", loss_sum / ntokens / math.log(2), ntokens, round=3
             )
         
-        for layer_num in range(6):
+        for layer_num in range(7, 13):
             c_errors = sum(log.get(f"c_errors_{layer_num}", 0) for log in logging_outputs)
             metrics.log_scalar(f"_c_errors_{layer_num}", c_errors)
             c_total = sum(log.get(f"c_total_{layer_num}", 0) for log in logging_outputs)

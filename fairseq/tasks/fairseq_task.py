@@ -506,7 +506,7 @@ class FairseqTask(object):
                 - logging outputs to display while training
         """
 
-        if uses_branch:
+        if uses_branch_v1:
             loss_list, sample_size_list, logging_output_list = [], [], []
             for i in range(9,12): 
                 model.train()

@@ -245,6 +245,8 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
             "can not be specified together: " + str(cfg)
         )
 
+    print('fuck!!!!', trainer._optimizer)
+    
     extra_state = trainer.load_checkpoint(
         checkpoint_path,
         reset_optimizer,
@@ -252,7 +254,7 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
         optimizer_overrides,
         reset_meters=reset_meters,
     )
-
+    
     if (
         extra_state is not None
         and "best" in extra_state

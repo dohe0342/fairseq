@@ -215,7 +215,7 @@ class FairseqOptimizer(object):
         '''
 
         idx = 0
-        for group in self._optimizer.param_groups:
+        for group in self.fp32_optimizer.optimizer.param_groups:
             for p in group['params']:
                 # if p.grad is None: continue
                 p.grad = grads[idx]
@@ -234,7 +234,7 @@ class FairseqOptimizer(object):
 
         grads, shapes, has_grads = [], [], []
         for obj in objectives:
-            self._optimizer.zero_grad()
+            self.fp32_optimizer.zero_grad()
             obj.backward(retain_graph=True)
             grad, shape, has_grad = self._retrieve_grad()
             grads.append(self._flatten_grad(grad, shape))

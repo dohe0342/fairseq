@@ -280,6 +280,7 @@ class FairseqOptimizer(object):
                 has_grad.append(torch.ones_like(p).to(p.device))
         return grad, shape, has_grad
 
+
 class LegacyFairseqOptimizer(FairseqOptimizer):
     def __init__(self, args):
         self.args = args

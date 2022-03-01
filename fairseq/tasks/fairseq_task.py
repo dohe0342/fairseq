@@ -553,7 +553,6 @@ class FairseqTask(object):
             return loss_list, sample_size, logging_output
 
         else:
-
             model.train()
             model.set_num_updates(update_num)
             with torch.autograd.profiler.record_function("forward"):
@@ -566,7 +565,7 @@ class FairseqTask(object):
 
             return loss, sample_size, logging_output
 
-    def valid_step(self, sample, model, criterion, uses_branch_v1=False, uses_branch_v2=False):
+    def valid_step(self, sample, model, criterion, uses_branch_v1=False, uses_branch_v2=False, uses_branch_v3=False):
         model.eval()
         if uses_branch_v1:
             loss_list, sample_size_list, logging_output_list = [], [], []

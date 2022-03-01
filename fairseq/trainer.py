@@ -588,7 +588,10 @@ class Trainer(object):
 
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed
-            self._build_optimizer()
+            if self.cfg.uses_branch_v3:
+                self._build_optimizer(pcgrad=True)
+            else:
+                self._build_optimizer()
 
             # only reload optimizer and lr_scheduler if they match
             last_optim = self._optim_history[-1]

@@ -462,6 +462,7 @@ class Trainer(object):
         rank = 0 will load the checkpoint, and then broadcast it to all
         other ranks.
         """
+        print('fuck!!!!!', self._optimizer)
         extra_state, self._optim_history, last_optim_state = None, [], None
 
         logger.info(f"Preparing to load checkpoint {filename}")

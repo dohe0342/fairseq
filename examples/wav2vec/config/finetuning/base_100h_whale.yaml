@@ -8,7 +8,7 @@ common:
 checkpoint:
   no_epoch_checkpoints: true
   best_checkpoint_metric: wer
-    #save_dir: /home/work/workspace/fairseq/scripts/whale/loss_avg_exp
+  save_dir: /home/work/workspace/fairseq/scripts/whale/pcgrad_exp
 
 task:
   _name: audio_finetuning

@@ -2,14 +2,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-import pdb
 import numpy as np
 import copy
 import random
 
 
-class PCGrad():
+class PCGrad(FP16Optimizer):
     def __init__(self, optimizer, reduction='mean'):
+        super().__init__(cfg.optimizer)
+        
         self._optim, self._reduction = optimizer, reduction
         return
     

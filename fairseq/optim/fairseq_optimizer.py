@@ -15,6 +15,7 @@ class FairseqOptimizer(object):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
+        self.reduction = 'mean'
 
     @classmethod
     def add_args(cls, parser):

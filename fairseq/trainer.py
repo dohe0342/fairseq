@@ -279,7 +279,6 @@ class Trainer(object):
     @property
     def optimizer(self):
         if self._optimizer is None:
-            print('here!!!!!!!!!')
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
         return self._optimizer
 

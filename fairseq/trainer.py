@@ -277,7 +277,7 @@ class Trainer(object):
     @property
     def optimizer(self):
         if self._optimizer is None:
-            self._build_optimizer(pcgrad=self.cfg.model.uses_branch_v3)
+            self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
         return self._optimizer
 
     @property
@@ -585,7 +585,7 @@ class Trainer(object):
 
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed
-            self._build_optimizer(pcgrad=self.cfg.model.uses_branch_v3)
+            self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
 
             # only reload optimizer and lr_scheduler if they match
             last_optim = self._optim_history[-1]

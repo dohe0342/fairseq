@@ -289,7 +289,7 @@ class Trainer(object):
             self._build_optimizer()  # this will initialize self._lr_scheduler
         return self._lr_scheduler
 
-    def _build_optimizer(self):
+    def _build_optimizer(self, pcgrad=False):
         params = list(
             filter(
                 lambda p: p.requires_grad,

@@ -25,6 +25,7 @@ class PCGrad():
         '''
 
         return self._optim.zero_grad(set_to_none=True)
+    
     def step(self):
         '''
         update the parameters with the gradient

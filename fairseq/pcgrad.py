@@ -24,7 +24,8 @@ class PCGrad():
         clear the gradient of the parameters
         '''
 
-        return self._optim.zero_grad(set_to_none=True)
+        #return self._optim.zero_grad(set_to_none=True)
+        return self._optim.zero_grad()
     
     def step(self):
         '''

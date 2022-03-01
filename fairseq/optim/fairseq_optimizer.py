@@ -203,10 +203,10 @@ class FairseqOptimizer(object):
         if 1:#self._reduction:
             merged_grad[shared] = torch.stack([g[shared]
                                            for g in pc_grad]).mean(dim=0)
-        elif self._reduction == 'sum':
+        elif 0:#self._reduction == 'sum':
             merged_grad[shared] = torch.stack([g[shared]
                                            for g in pc_grad]).sum(dim=0)
-        else: exit('invalid reduction method')
+        #else: exit('invalid reduction method')
 
         merged_grad[~shared] = torch.stack([g[~shared]
                                             for g in pc_grad]).sum(dim=0)

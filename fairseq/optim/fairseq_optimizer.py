@@ -6,7 +6,10 @@
 import torch
 from fairseq import utils
 from fairseq.dataclass.utils import gen_parser_from_dataclass
-
+import torch
+import numpy as np
+import copy
+import random
 
 class FairseqOptimizer(object):
     def __init__(self, cfg):

@@ -674,7 +674,7 @@ class Trainer(object):
 
         else:
             logger.info("No existing checkpoint found {}".format(filename))
-        print('fuck!!!!!!', self._optimizer)
+
         return extra_state
 
     def get_train_iterator(

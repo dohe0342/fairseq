@@ -588,8 +588,6 @@ class Trainer(object):
             extra_state = state["extra_state"]
             self._optim_history = state["optimizer_history"]
 
-        print('fuck!!!!!', self._optimizer)
-        
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
@@ -676,7 +674,7 @@ class Trainer(object):
 
         else:
             logger.info("No existing checkpoint found {}".format(filename))
-
+        print('fuck!!!!!!', self._optimizer)
         return extra_state
 
     def get_train_iterator(

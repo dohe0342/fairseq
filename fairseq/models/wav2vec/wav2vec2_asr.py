@@ -236,6 +236,8 @@ class Wav2VecCtc(BaseFairseqModel):
             w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary))
         elif cfg.branch_ctc_v2:
             w2v_encoder = Wav2VecEncoderBranchCtcV2(cfg, len(task.target_dictionary))
+        elif cfg.branch_ctc_v3:
+            w2v_encoder = Wav2VecEncoderBranchCtcV2(cfg, len(task.target_dictionary))
         else:
             w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))
 

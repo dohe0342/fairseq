@@ -266,7 +266,7 @@ class FairseqOptimizer(object):
         '''
 
         grad, shape, has_grad = [], [], []
-        for group in self._optimizer.param_groups:
+        for group in self.fp32_optimizer.optimizer.param_groups:
             for p in group['params']:
                 # if p.grad is None: continue
                 # tackle the multi-head scenario

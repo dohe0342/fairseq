@@ -368,6 +368,9 @@ class Trainer(object):
         )
         self._lr_scheduler.step_update(0)
 
+        if pcgrad:
+            self._optimizer = PCGrad(self._optimizer)
+
     @property
     def is_fsdp(self):
         return self.cfg.distributed_training.ddp_backend == "fully_sharded"

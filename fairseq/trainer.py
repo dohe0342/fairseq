@@ -369,6 +369,7 @@ class Trainer(object):
         self._lr_scheduler.step_update(0)
 
         if pcgrad:
+            print('use pcgrad!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             self._optimizer = PCGrad(self._optimizer)
 
     @property

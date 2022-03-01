@@ -277,10 +277,7 @@ class Trainer(object):
     @property
     def optimizer(self):
         if self._optimizer is None:
-            if self.cfg.uses_branch_v3:
-                self._build_optimizer(pcgrad=True)
-            else:
-                self._build_optimizer()
+            self._build_optimizer(pcgrad=self.cfg.model.uses_branch_v3)
         return self._optimizer
 
     @property

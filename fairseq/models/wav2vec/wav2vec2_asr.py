@@ -194,7 +194,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
 
     branch_ctc_v3: bool = field(
         default=False,
-        metadata={"help": "make ctc layer after each encoder layer, loss average train"},
+        metadata={"help": "make ctc layer after each encoder layer, PCGrad train"},
     )
 
     ctc_num: int = field(

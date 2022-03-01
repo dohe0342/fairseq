@@ -17,12 +17,14 @@ class PCGrad():
     @property
     def optimizer(self):
         return self._optim
-    
+    '''
+
     def zero_grad(self):
-        #clear the gradient of the parameters
+        '''
+        clear the gradient of the parameters
+        '''
 
         return self._optim.zero_grad(set_to_none=True)
-    '''
     def step(self):
         '''
         update the parameters with the gradient

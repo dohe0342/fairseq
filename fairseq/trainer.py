@@ -30,6 +30,9 @@ from fairseq.nan_detector import NanDetector
 from fairseq.optim import lr_scheduler
 from fairseq.utils import safe_hasattr
 
+## for gradient surgery
+from pcgrad import PCGrad
+
 logger = logging.getLogger(__name__)
 
 

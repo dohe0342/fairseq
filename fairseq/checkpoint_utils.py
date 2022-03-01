@@ -245,8 +245,6 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
             "can not be specified together: " + str(cfg)
         )
 
-    print('1'*10, trainer._optimizer)
-    
     extra_state = trainer.load_checkpoint(
         checkpoint_path,
         reset_optimizer,
@@ -254,9 +252,7 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
         optimizer_overrides,
         reset_meters=reset_meters,
     )
-    
-    print('2'*10, trainer._optimizer)
-    
+
     if (
         extra_state is not None
         and "best" in extra_state
@@ -265,8 +261,6 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
     ):
         save_checkpoint.best = extra_state["best"]
 
-    print('3'*10, trainer._optimizer)
-    
     if extra_state is not None and not reset_dataloader:
         # restore iterator from checkpoint
         itr_state = extra_state["train_iterator"]
@@ -274,16 +268,13 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
             epoch=itr_state["epoch"], load_dataset=True, **passthrough_args
         )
         epoch_itr.load_state_dict(itr_state)
-        print('3'*10, trainer._optimizer)
     else:
         epoch_itr = trainer.get_train_iterator(
             epoch=1, load_dataset=True, **passthrough_args
         )
-        print('4'*10, trainer._optimizer)
 
     trainer.lr_step(epoch_itr.epoch)
-    print('5'*10, trainer._optimizer)
-    
+
     return extra_state, epoch_itr
 
 

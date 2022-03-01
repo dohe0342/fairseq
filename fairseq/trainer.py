@@ -588,9 +588,10 @@ class Trainer(object):
             extra_state = state["extra_state"]
             self._optim_history = state["optimizer_history"]
 
+        print('fuck!!!!!', self._optimizer)
+        
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed
-            print('fuck!!!!!', self._optimizer)
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
 
             # only reload optimizer and lr_scheduler if they match

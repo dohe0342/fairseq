@@ -255,6 +255,8 @@ def load_checkpoint(cfg: CheckpointConfig, trainer, **passthrough_args):
         reset_meters=reset_meters,
     )
     
+    print('fucking!!!!', trainer._optimizer)
+    
     if (
         extra_state is not None
         and "best" in extra_state

@@ -15,7 +15,6 @@ class FairseqOptimizer(object):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
-        self.reduction = 'mean'
 
     @classmethod
     def add_args(cls, parser):
@@ -201,7 +200,7 @@ class FairseqOptimizer(object):
                 if g_i_g_j < 0:
                     g_i -= (g_i_g_j) * g_j / (g_j.norm()**2)
         merged_grad = torch.zeros_like(grads[0]).to(grads[0].device)
-        if self._reduction:
+        if 1:#self._reduction:
             merged_grad[shared] = torch.stack([g[shared]
                                            for g in pc_grad]).mean(dim=0)
         elif self._reduction == 'sum':

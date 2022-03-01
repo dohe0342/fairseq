@@ -35,7 +35,6 @@ from pcgrad import PCGrad
 
 logger = logging.getLogger(__name__)
 
-
 class Trainer(object):
     """Main class for data parallel training.
 

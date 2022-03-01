@@ -462,7 +462,6 @@ class Trainer(object):
         rank = 0 will load the checkpoint, and then broadcast it to all
         other ranks.
         """
-        print('fuck!!!!!', self._optimizer)
         extra_state, self._optim_history, last_optim_state = None, [], None
 
         logger.info(f"Preparing to load checkpoint {filename}")
@@ -591,6 +590,7 @@ class Trainer(object):
 
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed
+            print('fuck!!!!!', self._optimizer)
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
 
             # only reload optimizer and lr_scheduler if they match

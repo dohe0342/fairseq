@@ -110,6 +110,7 @@ class InferenceProcessor:
                 #if 'w2v_model.encoder' in name and 'bias' in name:
                     param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
                     print(f'set {name} to 0.')
+                '''
                 if 'w2v_model.encoder' in name and 'fc1' in name and 'weight' in name:
                     weight = param # 3072 x 768
                     print(weight.size())
@@ -118,11 +119,7 @@ class InferenceProcessor:
                     cosine_sim_sort = cosine_sim[0].sort(reverse=True)
                     for cosine in cosine_sim_sort:
                         print(cosine)
-                    
-                    #for i in range(1):
-                        #for j in range(3072):
-                            #print(cosine_sim[i][j])
-                        #print()
+                ''' 
 
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary

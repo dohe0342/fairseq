@@ -116,6 +116,8 @@ class InferenceProcessor:
                     weight_norm = weight / weight.norm(dim=1)[:, None]
                     cosine_sim = torch.mm(weight_norm, weight_norm.T)
                     cosine_sim_sort = cosine_sim[0].sort()
+                    for cosine in cosine_sim_sort:
+                        print(cosine)
                     
                     #for i in range(1):
                         #for j in range(3072):

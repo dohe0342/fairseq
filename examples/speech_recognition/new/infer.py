@@ -116,8 +116,8 @@ class InferenceProcessor:
                     weight_norm = weight / weight.norm(dim=1)[:, None]
                     cosine_sim = torch.mm(weight_norm, weight_norm.T)
                     
-                    for i in range(100):
-                        for j in range(100):
+                    for i in range(1):
+                        for j in range(3072):
                             print(cosine_sim[i][j])
                         print()
 

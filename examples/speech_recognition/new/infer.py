@@ -105,7 +105,8 @@ class InferenceProcessor:
 
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():
-                if 'k_proj.bias' in name or 'q_proj.bias' in name:
+                #if 'k_proj.bias' in name or 'q_proj.bias' in name:
+                if 'w2v_model.encoder' in name and 'bias' in name:
                     param = torch.nn.Parameter(torch.zeros(param.size()[0]))
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary

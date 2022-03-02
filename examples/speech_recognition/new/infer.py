@@ -110,7 +110,8 @@ class InferenceProcessor:
                 #if 'w2v_model.encoder' in name and 'bias' in name:
                     param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
                     print(f'set {name} to 0.')
-                if 'w2v_model.encoder' in name and 'fc' in name and 'weight' in name:
+                if 'w2v_model.encoder' in name and 'fc1' in name and 'weight' in name:
+                    print(param.size())
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
 

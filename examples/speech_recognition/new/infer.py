@@ -112,7 +112,8 @@ class InferenceProcessor:
                     print(f'set {name} to 0.')
                 if 'w2v_model.encoder' in name and 'fc1' in name and 'weight' in name:
                     weight = param.T # 3072 x 768
-                    cosine_sim = torch.mm(weight, weight.T)
+                    cos = nn.CosineSimilarity(dim=1, eps=1e-6)
+                    cosine_sim = cos(weight, weight)
                     print(cosine_sim)
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary

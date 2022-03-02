@@ -111,7 +111,9 @@ class InferenceProcessor:
                     param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
                     print(f'set {name} to 0.')
                 if 'w2v_model.encoder' in name and 'fc1' in name and 'weight' in name:
-                    print(param.size())
+                    weight = param.T # 3072 x 768
+                    cosine_sim = torch.mm(weight, weight.T)
+                    print(cosine_sim)
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
 

@@ -70,7 +70,7 @@ class MultiheadAttention(nn.Module):
             nn.Linear(self.vdim, embed_dim, bias=bias), q_noise, qn_block_size
         )
         self.q_proj = quant_noise(
-            nn.Linear(embed_dim, embed_dim, bias=bias), q_noise, qn_block_size
+            nn.Linear(embed_dim, embed_dim, bias=False), q_noise, qn_block_size
         )
 
         self.out_proj = quant_noise(

@@ -310,6 +310,7 @@ class InferenceProcessor:
         return editdistance.eval(hyp_words, tgt_words), len(tgt_words)
 
     def process_sample(self, sample: Dict[str, Any]) -> None:
+        '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():
                 #if 'k_proj.bias' in name or 'q_proj.bias' in name:
@@ -317,7 +318,7 @@ class InferenceProcessor:
                     print(param)
                     #param = torch.nn.Parameter(torch.zeros(param.size()[0]))
                     #print(f'set {name} to 0.')
-                    
+        '''         
         self.gen_timer.start()
         hypos = self.task.inference_step(
             generator=self.generator,

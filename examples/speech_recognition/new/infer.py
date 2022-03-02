@@ -115,11 +115,12 @@ class InferenceProcessor:
                     print(weight.size())
                     weight_norm = weight / weight.norm(dim=1)[:, None]
                     cosine_sim = torch.mm(weight_norm, weight_norm.T)
+                    cosine_sim_sort = cosine_sim[0].sort()
                     
-                    for i in range(1):
-                        for j in range(3072):
-                            print(cosine_sim[i][j])
-                        print()
+                    #for i in range(1):
+                        #for j in range(3072):
+                            #print(cosine_sim[i][j])
+                        #print()
 
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary

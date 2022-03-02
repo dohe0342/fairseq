@@ -243,7 +243,6 @@ class Wav2VecCtc(BaseFairseqModel):
 
     def get_logits(self, net_output, normalize=False):
         logits = net_output["encoder_out"]
-        print(logits.size())
         if self.blank_weight != 0:
             if self.blank_mode == "add":
                 logits[..., 0] += self.blank_weight

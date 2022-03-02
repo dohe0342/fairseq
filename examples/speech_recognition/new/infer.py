@@ -115,6 +115,7 @@ class InferenceProcessor:
                     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
                     cosine_sim = cos(weight, weight)
                     print(cosine_sim)
+                    print(cosine_sim.size())
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
 

@@ -108,6 +108,7 @@ class InferenceProcessor:
                 #if 'k_proj.bias' in name or 'q_proj.bias' in name:
                 if 'w2v_model.encoder' in name and 'bias' in name:
                     param = torch.nn.Parameter(torch.zeros(param.size()[0]))
+                    print(f'set {name} to 0.')
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
 

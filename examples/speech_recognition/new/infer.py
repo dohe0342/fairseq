@@ -118,7 +118,7 @@ class InferenceProcessor:
                     
                     for i in range(100):
                         for j in range(100):
-                            print(cosin_sim[i][j])
+                            print(cosine_sim[i][j])
                         print()
 
         self.saved_cfg = saved_cfg

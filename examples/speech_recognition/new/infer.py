@@ -102,7 +102,7 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         self.models = models
-
+        '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():
                 #self.models[0].
@@ -110,6 +110,7 @@ class InferenceProcessor:
                 #if 'w2v_model.encoder' in name and 'bias' in name:
                     param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
                     print(f'set {name} to 0.')
+        '''
                 '''
                 if 'w2v_model.encoder' in name and 'fc1' in name and 'weight' in name:
                     weight = param # 3072 x 768

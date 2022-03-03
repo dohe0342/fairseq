@@ -928,7 +928,7 @@ class TransformerEncoder(nn.Module):
                 dropout=self.dropout,
                 attention_dropout=args.attention_dropout,
                 activation_dropout=args.activation_dropout,
-                activation_fn=args.activation_fn,
+                #activation_fn=args.activation_fn,
                 layer_norm_first=args.layer_norm_first,
             )
         elif args.layer_type == "conformer":

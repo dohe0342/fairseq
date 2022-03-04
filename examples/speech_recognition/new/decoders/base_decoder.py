@@ -67,7 +67,7 @@ class BaseDecoder:
         #print(encoder_out2['encoder_out'].size())
         #print(encoder_out3['encoder_out'].size())
         '''
-        encoder_out['encoder_out'] = encoder_out['encoder_out'][-2]
+        encoder_out['encoder_out'] = encoder_out['encoder_out'][-1]
 
         if hasattr(model, "get_logits"):
             emissions = model.get_logits(encoder_out)

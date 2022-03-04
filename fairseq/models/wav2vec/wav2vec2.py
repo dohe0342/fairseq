@@ -1107,7 +1107,7 @@ class TransformerEncoder(nn.Module):
                 if layer_result:
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
         
-        layer_results.append(dropped_layer)
+        #layer_results.append(dropped_layer)
 
         return x, layer_results
 

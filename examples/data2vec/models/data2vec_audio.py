@@ -417,7 +417,9 @@ class Data2VecAudioModel(BaseFairseqModel):
                     padding_mask=orig_padding_mask,
                     mask=False,
                 )
-
+            
+            for l in y["layer_results"]:
+                print(len(l))
             target_layer_results = [l[2] for l in y["layer_results"]]
 
             permuted = False

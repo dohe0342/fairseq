@@ -82,6 +82,11 @@ class Data2VecAudioConfig(Wav2Vec2Config):
         default=0.01,
         metadata={"help": "stop training if prediction var falls below this"},
     )
+    branch_ctc_v1: bool = field(
+        default=False,
+        metadata={"help": "stop training if prediction var falls below this"},
+    )
+
 
 
 def get_annealed_rate(start, end, curr_step, total_steps):

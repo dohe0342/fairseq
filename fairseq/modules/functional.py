@@ -1,4 +1,6 @@
 r"""Functional interface"""
+import sys
+sys.path[0] = '/opt/conda/lib/python3.8/site-packages/torch/nn'
 from typing import Callable, List, Optional, Tuple
 import math
 import warnings

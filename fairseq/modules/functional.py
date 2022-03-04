@@ -4533,6 +4533,7 @@ def multi_head_attention_forward(
     static_k: Optional[Tensor] = None,
     static_v: Optional[Tensor] = None,
 ) -> Tuple[Tensor, Optional[Tensor]]:
+    print('copy done')
     r"""
     Args:
         query, key, value: map a query and a set of key-value pairs to an output.

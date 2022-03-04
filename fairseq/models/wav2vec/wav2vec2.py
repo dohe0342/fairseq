@@ -3,6 +3,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+import time
 import math
 import contextlib
 from dataclasses import dataclass, field
@@ -1291,6 +1292,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = self.dropout3(x)
             x = residual + x
         else:
+            attn_time = time.time()
             x, attn = self.self_attn(
                 query=x,
                 key=x,
@@ -1298,21 +1300,31 @@ class TransformerSentenceEncoderLayer(nn.Module):
                 key_padding_mask=self_attn_padding_mask,
                 need_weights=False,
             )
+            attn_time = time.time() - attn_time
 
             x = self.dropout1(x)
             x = residual + x
 
             x = self.self_attn_layer_norm(x)
-
+            
+            fc1_time = time.time()
             residual = x
             x = self.activation_fn(self.fc1(x))
+            fc1_time = time.time() - fc1_time
             x = self.dropout2(x)
+
+            fc2_time = time.time()
             x = self.fc2(x)
+            fc2_time = time.time() - fc2_time
 
             layer_result = x
 
             x = self.dropout3(x)
             x = residual + x
             x = self.final_layer_norm(x)
+            
+            print('attn time = ', attn_time*1000)
+            print('fc1 time = ', fc1_time*1000)
+            print('fc2 time = ', fc2_time*1000)
 
         return x, (attn, layer_result)

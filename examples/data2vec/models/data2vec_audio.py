@@ -96,9 +96,6 @@ class Data2VecAudioConfig(Wav2Vec2Config):
     )
 
 
-
-
-
 def get_annealed_rate(start, end, curr_step, total_steps):
     r = end - start
     pct_remaining = 1 - curr_step / total_steps

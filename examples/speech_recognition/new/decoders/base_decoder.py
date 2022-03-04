@@ -76,9 +76,9 @@ class BaseDecoder:
                                       encoder_out['encoder_out'][-5] + \
                                       encoder_out['encoder_out'][-6]) / 6.
         '''
-        encoder_out['encoder_out'] = encoder_out['encoder_out'].mul( \
-                                     encoder_out['encoder_out'].mul( \
-                                     encoder_out['encoder_out']))
+        encoder_out['encoder_out'] = encoder_out['encoder_out'][-1].mul( \
+                                     encoder_out['encoder_out'][-2].mul( \
+                                     encoder_out['encoder_out'][-3]))
 
 
         if hasattr(model, "get_logits"):

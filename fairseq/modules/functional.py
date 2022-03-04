@@ -4778,8 +4778,11 @@ def multi_head_attention_forward(
     else:
         assert bias_k is None
         assert bias_v is None
-
+    
+    print('x size = ', query.size())
+    print('query size = ', q.size())
     q = q.contiguous().view(tgt_len, bsz * num_heads, head_dim).transpose(0, 1)
+    print('query after head size = ', q.size())
     if k is not None:
         k = k.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
     if v is not None:
@@ -4811,7 +4814,7 @@ def multi_head_attention_forward(
             key_padding_mask = pad(key_padding_mask, (0, 1))
 
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
-    print(attn_output_weights.size())
+    print('attn size = ', attn_output_weights.size())
     assert list(attn_output_weights.size()) == [bsz * num_heads, tgt_len, src_len]
 
     if attn_mask is not None:

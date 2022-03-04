@@ -324,9 +324,9 @@ class MultiheadAttention(nn.Module):
                 need_weights=need_weights,
                 attn_mask=attn_mask,
                 use_separate_proj_weight=True,
-                q_proj_weight=q_proj_weight=self.q_proj.weight,
-                k_proj_weight=k_proj_weight=self.k_proj.weight,
-                v_proj_weight=v_proj_weight=self.v_proj.weight,
+                q_proj_weight=self.q_proj.weight,
+                k_proj_weight=self.k_proj.weight,
+                v_proj_weight=self.v_proj.weight,
             )
 
         if incremental_state is not None:

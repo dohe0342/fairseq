@@ -85,7 +85,7 @@ class MultiheadAttention(nn.Module):
         self.qk_fused_weight = torch.mm(self.k_fused_weight.T, self.q.fused_weight)
 
         #self.k_proj = nn.Linear(self.kdim, embed_dim, bias=bias)
-        #self.v_proj = nn.Linear(self.vdim, embed_dim, bias=bias)        
+        #self.v_proj = nn.Linear(self.vdim, embed_dim, bias=bias)     
         #self.q_proj =nn.Linear(embed_dim, embed_dim, bias=bias) 
 
         self.out_proj = quant_noise(

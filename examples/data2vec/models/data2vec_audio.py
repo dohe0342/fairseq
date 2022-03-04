@@ -86,6 +86,16 @@ class Data2VecAudioConfig(Wav2Vec2Config):
         default=False,
         metadata={"help": "stop training if prediction var falls below this"},
     )
+    branch_ctc_v2: bool = field(
+        default=False,
+        metadata={"help": "stop training if prediction var falls below this"},
+    )
+    branch_ctc_v3: bool = field(
+        default=False,
+        metadata={"help": "stop training if prediction var falls below this"},
+    )
+
+
 
 
 

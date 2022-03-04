@@ -344,6 +344,7 @@ class MultiheadAttention(nn.Module):
                 q_proj_weight=self.q_proj.weight,
                 k_proj_weight=self.k_proj.weight,
                 v_proj_weight=self.v_proj.weight,
+                fuse=fuse
             )
 
         if incremental_state is not None:

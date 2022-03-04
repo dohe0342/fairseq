@@ -4780,6 +4780,7 @@ def multi_head_attention_forward(
         assert bias_v is None
 
     q = q.contiguous().view(tgt_len, bsz * num_heads, head_dim).transpose(0, 1)
+    print(q.size())
     if k is not None:
         k = k.contiguous().view(-1, bsz * num_heads, head_dim).transpose(0, 1)
     if v is not None:

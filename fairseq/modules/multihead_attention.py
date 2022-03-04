@@ -7,7 +7,8 @@ import math
 from typing import Dict, List, Optional, Tuple
 
 import torch
-import torch.nn.functional2 as F
+import torch.nn.functional as F
+#import torch.nn.functional2 as F
 #import functional as F
 from torch import Tensor, nn
 from torch.nn import Parameter

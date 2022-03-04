@@ -63,7 +63,7 @@ class MultiheadAttention(nn.Module):
         assert not self.self_attention or self.qkv_same_dim, (
             "Self-attention requires query, key and " "value to be of the same size"
         )
-
+        '''
         self.k_proj = quant_noise(
             nn.Linear(self.kdim, embed_dim, bias=bias), q_noise, qn_block_size
         )
@@ -73,6 +73,11 @@ class MultiheadAttention(nn.Module):
         self.q_proj = quant_noise(
             nn.Linear(embed_dim, embed_dim, bias=bias), q_noise, qn_block_size
         )
+        '''
+
+        self.k_proj = nn.Linear(self.kdim, embed_dim, bias=bias)
+        self.v_proj = nn.Linear(self.vdim, embed_dim, bias=bias)        
+        self.q_proj = nn.Linear(embed_dim, embed_dim, bias=bias) 
 
         self.out_proj = quant_noise(
             nn.Linear(embed_dim, embed_dim, bias=bias), q_noise, qn_block_size

@@ -4696,6 +4696,22 @@ def multi_head_attention_forward(
             qk_proj_weight_non_opt = torch.jit._unwrap_optional(fused_w)
             len1, len2 = qk_proj_weight_non_opt.size()
             assert len1 == (key.size(-1)+1) and len2 == (embed_dim+1)
+
+            query = torch.cat([query, torch.ones(1,1), dim=1)
+            key = torch.cat([key, torch.ones(1,1), dim=1)
+            
+            if in_proj_bias is not None:
+                #q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
+                #k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim : (embed_dim * 2)])
+
+                q = linear(
+
+                v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2) :])
+            else:
+                q = linear(query, q_proj_weight_non_opt, in_proj_bias)
+                k = linear(key, k_proj_weight_non_opt, in_proj_bias)
+                v = linear(value, v_proj_weight_non_opt, in_proj_bias)
+
         else:
             q_proj_weight_non_opt = torch.jit._unwrap_optional(q_proj_weight)
             len1, len2 = q_proj_weight_non_opt.size()
@@ -4709,14 +4725,14 @@ def multi_head_attention_forward(
             len1, len2 = v_proj_weight_non_opt.size()
             assert len1 == embed_dim and len2 == value.size(-1)
 
-        if in_proj_bias is not None:
-            q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
-            k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim : (embed_dim * 2)])
-            v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2) :])
-        else:
-            q = linear(query, q_proj_weight_non_opt, in_proj_bias)
-            k = linear(key, k_proj_weight_non_opt, in_proj_bias)
-            v = linear(value, v_proj_weight_non_opt, in_proj_bias)
+            if in_proj_bias is not None:
+                q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
+                k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim : (embed_dim * 2)])
+                v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2) :])
+            else:
+                q = linear(query, q_proj_weight_non_opt, in_proj_bias)
+                k = linear(key, k_proj_weight_non_opt, in_proj_bias)
+                v = linear(value, v_proj_weight_non_opt, in_proj_bias)
     q = q * scaling
 
     if attn_mask is not None:

@@ -41,6 +41,7 @@ criterion:
 optimization:
   max_update: 400000
   lr: [0.0005]
+  update_freq: [4]
 
 optimizer:
   _name: adam

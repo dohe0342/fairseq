@@ -4704,8 +4704,7 @@ def multi_head_attention_forward(
                 #q = linear(query, q_proj_weight_non_opt, in_proj_bias[0:embed_dim])
                 #k = linear(key, k_proj_weight_non_opt, in_proj_bias[embed_dim : (embed_dim * 2)])
 
-                q = linear(
-
+                q = linear(query, qk_proj_weight_non_opt)
                 v = linear(value, v_proj_weight_non_opt, in_proj_bias[(embed_dim * 2) :])
             else:
                 q = linear(query, q_proj_weight_non_opt, in_proj_bias)

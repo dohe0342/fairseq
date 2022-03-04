@@ -76,7 +76,8 @@ class MultiheadAttention(nn.Module):
         self.q_proj = quant_noise(
             nn.Linear(embed_dim, embed_dim, bias=bias), q_noise, qn_block_size
         )
-
+        
+        self.qk_proj = None
         if fuse:
             self.qk_proj = quant_noise(
                 nn.Linear(embed_dim+1, self.kdim+1, bias=False), q_noise, qn_block_size

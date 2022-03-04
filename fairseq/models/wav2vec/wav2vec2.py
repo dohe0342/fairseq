@@ -1223,6 +1223,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         activation_dropout: float = 0.1,
         activation_fn: str = "relu",
         layer_norm_first: bool = False,
+        fuse: bool = False,
     ) -> None:
 
         super().__init__()
@@ -1238,6 +1239,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             num_attention_heads,
             dropout=attention_dropout,
             self_attention=True,
+            fuse=fuse
         )
 
         self.dropout1 = nn.Dropout(dropout)
@@ -1250,7 +1252,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         self.self_attn_layer_norm = LayerNorm(self.embedding_dim)
         self.fc1 = nn.Linear(self.embedding_dim, ffn_embedding_dim)
         self.fc2 = nn.Linear(ffn_embedding_dim, self.embedding_dim)
-
+        
         # layer norm associated with the position wise feed-forward NN
         self.final_layer_norm = LayerNorm(self.embedding_dim)
 

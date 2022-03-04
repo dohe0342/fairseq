@@ -38,6 +38,7 @@ class MultiheadAttention(nn.Module):
         encoder_decoder_attention=False,
         q_noise=0.0,
         qn_block_size=8,
+        fuse=False
     ):
         super().__init__()
         self.embed_dim = embed_dim

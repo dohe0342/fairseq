@@ -68,13 +68,17 @@ class BaseDecoder:
         #print(encoder_out3['encoder_out'].size())
         '''
         #encoder_out['encoder_out'] = encoder_out['encoder_out'][-6]
-
+        '''
         encoder_out['encoder_out'] = (encoder_out['encoder_out'][-1] + \
                                       encoder_out['encoder_out'][-2] + \
                                       encoder_out['encoder_out'][-3] + \
                                       encoder_out['encoder_out'][-4] + \
                                       encoder_out['encoder_out'][-5] + \
                                       encoder_out['encoder_out'][-6]) / 6.
+        '''
+        encoder_out['encoder_out'] = encoder_out['encoder_out'].mul( \
+                                     encoder_out['encoder_out'].mul( \
+                                     encoder_out['encoder_out']))
 
 
         if hasattr(model, "get_logits"):

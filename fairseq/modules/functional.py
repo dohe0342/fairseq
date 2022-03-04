@@ -4697,7 +4697,7 @@ def multi_head_attention_forward(
             len1, len2 = qk_proj_weight_non_opt.size()
             assert len1 == (key.size(-1)+1) and len2 == (embed_dim+1)
 
-            query = torch.cat([query, torch.ones(1,1), dim=1)
+            query = torch.cat([query, torch.ones(1,1)], dim=1)
             key = torch.cat([key, torch.ones(1,1), dim=1)
             
             if in_proj_bias is not None:

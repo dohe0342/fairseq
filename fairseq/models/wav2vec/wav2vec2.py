@@ -1239,7 +1239,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             num_attention_heads,
             dropout=attention_dropout,
             self_attention=True,
-            fuse=fuse
+            fuse=fuse,
         )
 
         self.dropout1 = nn.Dropout(dropout)

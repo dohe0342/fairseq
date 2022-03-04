@@ -76,7 +76,7 @@ class MultiheadAttention(nn.Module):
 
         if fuse:
             self.qk_proj = quant_noise(
-                nn.Linear(embed_dim, self.kdim, bias=False), q_noise, qn_block_size
+                nn.Linear(embed_dim+1, self.kdim+1, bias=False), q_noise, qn_block_size
             )
         
             self.q_fused_weight = torch.cat([self.q_proj.weight.T, self.q_proj.bias.unsqueeze(0)]).T

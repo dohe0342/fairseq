@@ -42,6 +42,7 @@ class MultiheadAttention(nn.Module):
         fuse=False,
     ):
         super().__init__()
+        self.fuse = fuse
         self.embed_dim = embed_dim
         self.kdim = kdim if kdim is not None else embed_dim
         self.vdim = vdim if vdim is not None else embed_dim

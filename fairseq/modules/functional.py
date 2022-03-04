@@ -4815,6 +4815,7 @@ def multi_head_attention_forward(
 
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
     print('attn size = ', attn_output_weights.size())
+    print('')
     assert list(attn_output_weights.size()) == [bsz * num_heads, tgt_len, src_len]
 
     if attn_mask is not None:

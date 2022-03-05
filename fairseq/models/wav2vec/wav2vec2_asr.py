@@ -206,6 +206,12 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "newly initilize transofmer weight"},
     )
+    
+    add_spk_info: bool = field(
+        default=False,
+        metadata={"help": "add spk informatin"},
+    )
+
 
 @dataclass
 class Wav2Vec2CtcConfig(Wav2Vec2AsrConfig):

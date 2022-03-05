@@ -108,7 +108,6 @@ class AudioFinetuningConfig(AudioPretrainingConfig):
     )
 
 
-
 @register_task("audio_finetuning", dataclass=AudioFinetuningConfig)
 class AudioFinetuningTask(AudioPretrainingTask):
     """ """

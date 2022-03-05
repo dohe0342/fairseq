@@ -4834,7 +4834,8 @@ def multi_head_attention_forward(
 
     attn_output_weights = softmax(attn_output_weights, dim=-1)
     attn_output_weights = dropout(attn_output_weights, p=dropout_p, training=training)
-
+    
+    print('attn score size = ', attn_output_weights.size())
     attn_output = torch.bmm(attn_output_weights, v)
     assert list(attn_output.size()) == [bsz * num_heads, tgt_len, head_dim]
     attn_output = attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)

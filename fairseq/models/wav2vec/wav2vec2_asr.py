@@ -1033,7 +1033,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         self.num_updates = 0
 
         targ_d = None
-        self.proj=None
+        self.proj = None
         self.proj_ctc = None
         self.proj_spk = None
 

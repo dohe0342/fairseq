@@ -100,6 +100,13 @@ class AudioFinetuningConfig(AudioPretrainingConfig):
             "adds 'prev_output_tokens' to input and appends eos to target"
         },
     )
+    spk_num: int = field(
+        default=0,
+        metadata={
+            "adds 'prev_output_tokens' to input and appends eos to target"
+        },
+    )
+
 
 
 @register_task("audio_finetuning", dataclass=AudioFinetuningConfig)

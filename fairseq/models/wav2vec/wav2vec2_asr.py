@@ -1045,7 +1045,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             self.proj1 = Linear(d, targ_d)
             self.proj2 = Linear(d, targ_d)
                     
-        self.proj = [self.proj1, self.proj]
+        self.proj = [self.proj_ctc, self.proj_spk]
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):
         w2v_args = {

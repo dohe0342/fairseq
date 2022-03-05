@@ -1033,18 +1033,8 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         self.num_updates = 0
 
         targ_d = None
-        self.proj1 = None
-        self.proj2 = None
-        self.proj3 = None
-        self.proj4 = None
-        self.proj5 = None
-        self.proj6 = None
-        self.proj7 = None
-        self.proj8 = None
-        self.proj9 = None
-        self.proj10 = None
-        self.proj11 = None
-        self.proj12 = None
+        self.proj_ctc = None
+        self.proj_spk = None
 
         if output_size is not None:
             targ_d = output_size

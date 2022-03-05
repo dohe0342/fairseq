@@ -955,6 +955,146 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
             return [utils.softmax(logit.float(), dim=-1) for logit in logits]
 
 
+class Wav2VecEncoderSpkClf(Wav2VecEncoder):
+    def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
+        self.apply_mask = cfg.apply_mask
+
+        arg_overrides = {
+            "dropout": cfg.dropout,
+            "activation_dropout": cfg.activation_dropout,
+            "dropout_input": cfg.dropout_input,
+            "attention_dropout": cfg.attention_dropout,
+            "mask_length": cfg.mask_length,
+            "mask_prob": cfg.mask_prob,
+            "require_same_masks": getattr(cfg, "require_same_masks", True),
+            "pct_holes": getattr(cfg, "mask_dropout", 0),
+            "mask_selection": cfg.mask_selection,
+            "mask_other": cfg.mask_other,
+            "no_mask_overlap": cfg.no_mask_overlap,
+            "mask_channel_length": cfg.mask_channel_length,
+            "mask_channel_prob": cfg.mask_channel_prob,
+            "mask_channel_before": cfg.mask_channel_before,
+            "mask_channel_selection": cfg.mask_channel_selection,
+            "mask_channel_other": cfg.mask_channel_other,
+            "no_mask_channel_overlap": cfg.no_mask_channel_overlap,
+            "encoder_layerdrop": cfg.layerdrop,
+            "feature_grad_mult": cfg.feature_grad_mult,
+            "checkpoint_activations": cfg.checkpoint_activations,
+            "offload_activations": cfg.offload_activations,
+            "min_params_to_wrap": cfg.min_params_to_wrap,
+            "branch_ctc_v1": cfg.branch_ctc_v1,
+        }
+
+        if cfg.w2v_args is None:
+            state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
+            w2v_args = state.get("cfg", None)
+            if w2v_args is None:
+                w2v_args = convert_namespace_to_omegaconf(state["args"])
+            w2v_args.criterion = None
+            w2v_args.lr_scheduler = None
+            cfg.w2v_args = w2v_args
+
+            logger.info(w2v_args)
+
+        else:
+            state = None
+            w2v_args = cfg.w2v_args
+            if isinstance(w2v_args, Namespace):
+                cfg.w2v_args = w2v_args = convert_namespace_to_omegaconf(w2v_args)
+        
+        model_normalized = w2v_args.task.get(
+            "normalize", w2v_args.model.get("normalize", False)
+        )
+        assert cfg.normalize == model_normalized, (
+            "Fine-tuning works best when data normalization is the same. "
+            "Please check that --normalize is set or unset for both pre-training and here"
+        )
+
+        if hasattr(cfg, "checkpoint_activations") and cfg.checkpoint_activations:
+            with open_dict(w2v_args):
+                w2v_args.model.checkpoint_activations = cfg.checkpoint_activations
+
+        w2v_args.task.data = cfg.data
+        task = tasks.setup_task(w2v_args.task)
+        model = task.build_model(w2v_args.model, from_checkpoint=True)
+
+        model.remove_pretraining_modules()
+
+        if state is not None and not cfg.no_pretrained_weights:
+            self.load_model_weights(state, model, cfg)
+
+        FairseqEncoder.__init__(self, task.source_dictionary)
+        d = w2v_args.model.encoder_embed_dim
+
+        self.w2v_model = model
+
+        self.final_dropout = nn.Dropout(cfg.final_dropout)
+        self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.num_updates = 0
+
+        targ_d = None
+        self.proj1 = None
+        self.proj2 = None
+        self.proj3 = None
+        self.proj4 = None
+        self.proj5 = None
+        self.proj6 = None
+        self.proj7 = None
+        self.proj8 = None
+        self.proj9 = None
+        self.proj10 = None
+        self.proj11 = None
+        self.proj12 = None
+
+        if output_size is not None:
+            targ_d = output_size
+        elif getattr(cfg, "decoder_embed_dim", d) != d:
+            targ_d = cfg.decoder_embed_dim
+        
+        if targ_d is not None:
+            self.proj1 = Linear(d, targ_d)
+            self.proj2 = Linear(d, targ_d)
+            self.proj3 = Linear(d, targ_d)
+            self.proj4 = Linear(d, targ_d)
+            self.proj5 = Linear(d, targ_d)
+            self.proj6 = Linear(d, targ_d)
+            self.proj7 = Linear(d, targ_d)
+            self.proj8 = Linear(d, targ_d)
+            self.proj9 = Linear(d, targ_d)
+            self.proj10 = Linear(d, targ_d)
+            self.proj11 = Linear(d, targ_d)
+            self.proj12 = Linear(d, targ_d)
+        
+        self.proj = [self.proj1, self.proj2, self.proj3, self.proj4, self.proj5, self.proj6, self.proj7, self.proj8, self.proj9, self.proj10, self.proj11, self.proj12]
+
+    def forward(self, tgt_layer, source, padding_mask, **kwargs):
+        w2v_args = {
+            "source": source,
+            "padding_mask": padding_mask,
+            "mask": self.apply_mask and self.training,
+        }
+
+        ft = self.freeze_finetune_updates <= self.num_updates
+        with torch.no_grad() if not ft else contextlib.ExitStack():
+            res = self.w2v_model.extract_features(**w2v_args, tgt_layer=tgt_layer, branch_ctc=True)
+
+            x = res["x"]
+            padding_mask = res["padding_mask"]
+
+            # B x T x C -> T x B x C
+            x = x.transpose(0, 1)
+
+        x = self.final_dropout(x)
+
+        if self.proj:
+            x = self.proj[tgt_layer-1](x)
+
+        return {
+            "encoder_out": x,  # T x B x C
+            "padding_mask": padding_mask,  # B x T,
+            "layer_results": res["layer_results"],
+        }
+
 class TransformerDecoder(FairseqIncrementalDecoder):
     """
     Transformer decoder consisting of *args.decoder_layers* layers. Each layer

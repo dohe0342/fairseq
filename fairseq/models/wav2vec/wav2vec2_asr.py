@@ -1044,18 +1044,8 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         if targ_d is not None:
             self.proj1 = Linear(d, targ_d)
             self.proj2 = Linear(d, targ_d)
-            self.proj3 = Linear(d, targ_d)
-            self.proj4 = Linear(d, targ_d)
-            self.proj5 = Linear(d, targ_d)
-            self.proj6 = Linear(d, targ_d)
-            self.proj7 = Linear(d, targ_d)
-            self.proj8 = Linear(d, targ_d)
-            self.proj9 = Linear(d, targ_d)
-            self.proj10 = Linear(d, targ_d)
-            self.proj11 = Linear(d, targ_d)
-            self.proj12 = Linear(d, targ_d)
-        
-        self.proj = [self.proj1, self.proj2, self.proj3, self.proj4, self.proj5, self.proj6, self.proj7, self.proj8, self.proj9, self.proj10, self.proj11, self.proj12]
+                    
+        self.proj = [self.proj1, self.proj]
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):
         w2v_args = {

@@ -11,6 +11,7 @@ checkpoint:
   save_interval_updates: 25000
   keep_interval_updates: 1
   no_epoch_checkpoints: true
+  save_dir: /home/work/workspace/fairseq/scripts/whale/multirun/2022-03-04/18-15-58/0/checkpoints/checkpoint_last.pt
 
 task:
   _name: audio_pretraining

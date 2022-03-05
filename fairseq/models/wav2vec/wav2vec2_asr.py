@@ -243,7 +243,7 @@ class Wav2VecCtc(BaseFairseqModel):
         elif cfg.branch_ctc_v2 or cfg.branch_ctc_v3:
             w2v_encoder = Wav2VecEncoderBranchCtcV2(cfg, len(task.target_dictionary))
         elif add_apk_info:
-            w2v_encoder = Wav2VecEncoderSpkClf(cfg, len(task.target_dictionary))
+            w2v_encoder = Wav2VecEncoderSpkClf(cfg, len(task.target_dictionary), task.spk_num)
 
         else:
             w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))
@@ -1045,7 +1045,6 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         if targ_d is not None:
             self.proj1 = Linear(d, targ_d)
             self.proj2 = Linear(d, targ_d)
-                    
             self.proj = [self.proj_ctc, self.proj_spk]
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):

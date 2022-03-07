@@ -3,6 +3,7 @@ import time
 
 dirToWatchList = [
             "./",
+            "./workspace",
             "./scripts/", 
             "./scripts/whale/", 
             "./scripts/summit/", 

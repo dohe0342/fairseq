@@ -1342,11 +1342,6 @@ class LayerInstanceNorm(nn.LayerNorm):
                  device=None, dtype=None) -> None:
        super().__init__()
  
-    def reset_parameters(self) -> None:
-        if self.elementwise_affine:
-            init.ones_(self.weight)
-            init.zeros_(self.bias)
-
     def forward(self, input: Tensor) -> Tensor:
         return F.layer_norm(
             input, self.normalized_shape, self.weight, self.bias, self.eps)

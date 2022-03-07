@@ -1307,7 +1307,9 @@ class TransformerSentenceEncoderLayer(nn.Module):
 
             x = self.dropout1(x)
             x = residual + x
-
+            
+            ada_ln_p = random.random() < 0.2
+            if ada_ln_p >
             x = self.self_attn_layer_norm(x)
             
             fc1_time = time.time()

@@ -1311,7 +1311,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             
             ada_ln_p = random.random() < 0.05
             if ada_ln_p:
-                x = self.self._attn_layer_norm(x)
+                x = self.self_attn_ins_layer_norm(x)
             else:
                 x = self.self_attn_layer_norm(x)
             

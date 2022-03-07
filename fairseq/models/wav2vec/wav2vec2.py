@@ -1337,7 +1337,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         return x, (attn, layer_result)
 
 
-class LayerNorm(nn.LayerNorm):
+class LayerInstanceNorm(nn.LayerNorm):
     def __init__(self, normalized_shape: _shape_t, eps: float = 1e-5, elementwise_affine: bool = True,
                  device=None, dtype=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}

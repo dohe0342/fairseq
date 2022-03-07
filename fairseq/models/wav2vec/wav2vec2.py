@@ -1340,23 +1340,8 @@ class TransformerSentenceEncoderLayer(nn.Module):
 class LayerInstanceNorm(nn.LayerNorm):
     def __init__(self, normalized_shape: _shape_t, eps: float = 1e-5, elementwise_affine: bool = True,
                  device=None, dtype=None) -> None:
-        factory_kwargs = {'device': device, 'dtype': dtype}
-        super(LayerNorm, self).__init__()
-        if isinstance(normalized_shape, numbers.Integral):
-            # mypy error: incompatible types in assignment
-            normalized_shape = (normalized_shape,)  # type: ignore[assignment]
-        self.normalized_shape = tuple(normalized_shape)  # type: ignore[arg-type]
-        self.eps = eps
-        self.elementwise_affine = elementwise_affine
-        if self.elementwise_affine:
-            self.weight = Parameter(torch.empty(self.normalized_shape, **factory_kwargs))
-            self.bias = Parameter(torch.empty(self.normalized_shape, **factory_kwargs))
-        else:
-            self.register_parameter('weight', None)
-            self.register_parameter('bias', None)
-
-        self.reset_parameters()
-
+       super().__init__()
+ 
     def reset_parameters(self) -> None:
         if self.elementwise_affine:
             init.ones_(self.weight)

@@ -1433,12 +1433,12 @@ class LayerInstanceNorm(nn.Module):
             self.register_parameter('weight', None)
             self.register_parameter('bias', None)
 
-        self.reset_parameters()
+        #self.reset_parameters()
 
-    def reset_parameters(self) -> None:
-        if self.elementwise_affine:
-            init.ones_(self.weight)
-            init.zeros_(self.bias)
+    #def reset_parameters(self) -> None:
+    #    if self.elementwise_affine:
+    #        init.ones_(self.weight)
+    #        init.zeros_(self.bias)
 
     def forward(self, input):
         return F.layer_norm(

@@ -1440,7 +1440,7 @@ class LayerInstanceNorm(nn.modules):
             init.ones_(self.weight)
             init.zeros_(self.bias)
 
-    def forward(self, input: Tensor):
+    def forward(self, input):
         return F.layer_norm(
             input, self.normalized_shape, self.weight, self.bias, self.eps)
 

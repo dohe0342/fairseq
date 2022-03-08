@@ -1338,7 +1338,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         return x, (attn, layer_result)
 
 
-class LayerInstanceNorm(nn.modules):
+class LayerInstanceNorm(nn.Module):
     r"""Applies Layer Normalization over a mini-batch of inputs as described in
     the paper `Layer Normalization <https://arxiv.org/abs/1607.06450>`__
 

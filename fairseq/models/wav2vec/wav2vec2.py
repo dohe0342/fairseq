@@ -1419,7 +1419,7 @@ class LayerInstanceNorm(nn.Module):
     def __init__(self, normalized_shape, eps: float = 1e-5, elementwise_affine: bool = True,
                  device=None, dtype=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
-        super(LayerNorm, self).__init__()
+        super(LayerInstanceNorm, self).__init__()
         if isinstance(normalized_shape, numbers.Integral):
             # mypy error: incompatible types in assignment
             normalized_shape = (normalized_shape,)  # type: ignore[assignment]

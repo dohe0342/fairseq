@@ -1252,6 +1252,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         # layer norm associated with the self attention layer
         self.self_attn_layer_norm = LayerNorm(self.embedding_dim)
         self.self_attn_ins_layer_norm = LayerInstanceNorm(self.embedding_dim)
+        
         self.fc1 = nn.Linear(self.embedding_dim, ffn_embedding_dim)
         self.fc2 = nn.Linear(ffn_embedding_dim, self.embedding_dim)
         

@@ -1354,15 +1354,16 @@ class LayerInstanceNorm(nn.Module):
         self.normalized_shape = tuple(normalized_shape)  # type: ignore[arg-type]
         self.eps = eps
         self.elementwise_affine = elementwise_affine
+        '''
         if self.elementwise_affine:
             self.weight = nn.Parameter(torch.empty(self.normalized_shape, **factory_kwargs))
             self.bias = nn.Parameter(torch.empty(self.normalized_shape, **factory_kwargs))
         else:
             self.register_parameter('weight', None)
             self.register_parameter('bias', None)
-
+        
         #self.reset_parameters()
-
+        '''
     #def reset_parameters(self) -> None:
     #    if self.elementwise_affine:
     #        init.ones_(self.weight)

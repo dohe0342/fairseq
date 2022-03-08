@@ -1372,6 +1372,7 @@ class LayerInstanceNorm(nn.Module):
 
     def forward(self, input):
         print('input size = ', input.size())
+        return input
         #return F.layer_norm(
         #    input, self.normalized_shape, self.weight, self.bias, self.eps)
 

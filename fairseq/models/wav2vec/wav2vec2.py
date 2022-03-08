@@ -1416,7 +1416,7 @@ class LayerInstanceNorm(nn.modules):
     eps: float
     elementwise_affine: bool
 
-    def __init__(self, normalized_shape: _shape_t, eps: float = 1e-5, elementwise_affine: bool = True,
+    def __init__(self, normalized_shape, eps: float = 1e-5, elementwise_affine: bool = True,
                  device=None, dtype=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(LayerNorm, self).__init__()

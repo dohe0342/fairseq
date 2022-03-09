@@ -1382,9 +1382,9 @@ class LayerInstanceNorm(nn.Module):
 
         input = std*F.layer_norm(input, self.normalized_shape, self.weight, self.bias, self.eps) + mean
         
-
-        return F.layer_norm(
-            input, self.normalized_shape, self.weight, self.bias, self.eps)
+        return input
+        #return F.layer_norm(
+        #    input, self.normalized_shape, self.weight, self.bias, self.eps)
 
     def extra_repr(self) -> str:
         return '{normalized_shape}, eps={eps}, ' \

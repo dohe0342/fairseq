@@ -1373,6 +1373,9 @@ class LayerInstanceNorm(nn.Module):
         #return input
         mean = input.view(input.size()[1], -1).mean(dim=1)
         std = input.view(input.size()[1], -1).std(dim=1)
+
+        mean = mean[torch.randperm(mean.size()[0])]
+        std = std[torch.randperm(mean.size()[0])]
         input = F.layer_norm(input, self.normalized_shape, self.weight, self.bias, self.eps)
         
 

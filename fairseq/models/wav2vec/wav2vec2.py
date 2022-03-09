@@ -1361,7 +1361,6 @@ class LayerInstanceNorm(nn.Module):
         else:
             self.register_parameter('weight', None)
             self.register_parameter('bias', None)
-        print('insnorm weight = ', self.weight)
         
         #self.reset_parameters()
     #def reset_parameters(self) -> None:

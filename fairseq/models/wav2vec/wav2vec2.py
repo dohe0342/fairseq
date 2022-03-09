@@ -1365,8 +1365,6 @@ class LayerInstanceNorm(nn.Module):
         
         #self.reset_parameters()
         '''
-        self.weight = nn.Parameter(torch.ones(self.normalized_shape, **factory_kwargs))
-        self.bias = nn.Parameter(torch.ones(self.normalized_shape, **factory_kwargs))
     #def reset_parameters(self) -> None:
     #    if self.elementwise_affine:
     #        init.ones_(self.weight)

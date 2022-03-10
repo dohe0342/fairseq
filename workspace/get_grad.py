@@ -92,6 +92,7 @@ class InspectW2V2(object):
 
         return state, sample_size
 
+
 def platform(args, task=None, model_state=None):
     check_args(args)
 

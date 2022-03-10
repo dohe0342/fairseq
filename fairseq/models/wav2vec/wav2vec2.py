@@ -1075,7 +1075,7 @@ class TransformerEncoder(nn.Module):
                 dropout_probability = np.random.random() if self.layerdrop > 0 else 1
                 if not self.training or (dropout_probability > self.layerdrop):
                     x, (z, lr) = layer(
-                        x, self_attn_padding_mask=padding_mask, need_weights=False
+                        x, self_attn_padding_mask=padding_mask, need_weights=False, layer_num=i
                     )
                     if i >= min_layer:
                         layer_results.append((x, z, lr))

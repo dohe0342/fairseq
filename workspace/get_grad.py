@@ -134,6 +134,7 @@ def platform(args, task=None, model_state=None):
 
     return items
 
+
 if __name__ == "__main__":    
     parser = make_parser()
     args = options.parse_args_and_arch(parser)

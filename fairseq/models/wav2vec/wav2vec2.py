@@ -1337,7 +1337,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             if ada_ln_p:
                 x = self.self_attn_ins_layer_norm(x)
             else:
-                x = self.self_attn_layer_norm(x)
+                x = self.final_layer_norm(x)
 
             #print('attn time = ', attn_time*1000)
             #print('fc1 time = ', fc1_time*1000)

@@ -1334,7 +1334,8 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = residual + x
             x = self.final_layer_norm(x)
             
-            ada_ln_p = random.random() < 0.002 * (12-layer_num)
+            ada_ln_p = random.random() < max(0.01*(12-layer_num), 0)
+            
             if ada_ln_p:
                 x = self.self_attn_ins_layer_norm(x)
             else:

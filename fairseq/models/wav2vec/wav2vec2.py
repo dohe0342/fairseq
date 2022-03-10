@@ -1310,12 +1310,13 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = self.dropout1(x)
             x = residual + x
             
-            ada_ln_p = random.random() < 0.01
-            if ada_ln_p:
-                x = self.self_attn_ins_layer_norm(x)
-            else:
-                x = self.self_attn_layer_norm(x)
-            
+            #ada_ln_p = random.random() < 0.01
+            #if ada_ln_p:
+            #    x = self.self_attn_ins_layer_norm(x)
+            #else:
+            #    x = self.self_attn_layer_norm(x)
+            x = self.self_attn_layer_norm(x)
+
             fc1_time = time.time()
             residual = x
             x = self.activation_fn(self.fc1(x))
@@ -1332,6 +1333,12 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = residual + x
             x = self.final_layer_norm(x)
             
+            ada_ln_p = random.random() < 0.01
+            if ada_ln_p:
+                x = self.self_attn_ins_layer_norm(x)
+            else:
+                x = self.self_attn_layer_norm(x)
+
             #print('attn time = ', attn_time*1000)
             #print('fc1 time = ', fc1_time*1000)
             #print('fc2 time = ', fc2_time*1000)

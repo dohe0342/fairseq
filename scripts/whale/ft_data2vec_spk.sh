@@ -3,7 +3,7 @@ fairseq-hydra-train \
 	--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
     --config-name base_100h_whale \
 	common.user_dir=examples/data2vec \
-	checkpoint.best_checkpoint_metric=wer_12 \
+	checkpoint.best_checkpoint_metric=acc \
 	dataset.valid_subset=dev-other \
 	criterion._name=spk_clf \
     task.data=/home/work/workspace/LibriSpeech/manifests \

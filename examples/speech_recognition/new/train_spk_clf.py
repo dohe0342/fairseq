@@ -444,7 +444,9 @@ class InferenceProcessor:
         features = []
         for i, hypo in enumerate(hypos):
             features.append(hypo[0]['emission'].mean(0))
-            print(features[i].size())
+        
+        features = torch.tensor(features).to('cuda')
+        print(features[i].size())
 
         exit()
         ''' 

@@ -441,11 +441,14 @@ class InferenceProcessor:
             sample=sample,
         )
         
-        features = []
+        features = None
         for i, hypo in enumerate(hypos):
-            features.append(hypo[0]['emission'].mean(0))
+            if i == 0:
+                features = hypo[0]['emission'].mean(0)
+            else:
+                features = torch.stack(hypo[0]['emission'].mean(0))
         
-        features = torch.tensor(features).to('cuda')
+        
         print(features.size())
 
         exit()

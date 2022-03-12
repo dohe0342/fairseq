@@ -290,6 +290,7 @@ def train(
             else False
         ),
     )
+    print(progress)
     progress.update_config(_flatten_config(cfg))
 
     trainer.begin_epoch(epoch_itr.epoch)

@@ -696,6 +696,9 @@ class BranchCtcCriterionV2(CtcCriterion):
 class SpeakerClassification(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
+        self.train_spk_id = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
+        self.valid_spk_id = open('/home/work/workspace/LibriSpeech/manifests/dev-other.tsv', 'r').readlines()
+
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
         lprobs = model.w2v_encoder.get_normalized_probs(

@@ -801,6 +801,10 @@ class Trainer(object):
         logging_outputs, sample_size, ooms = [], 0, 0
         for i, sample in enumerate(samples):  # delayed update loop
             sample, is_dummy_batch = self._prepare_sample(sample)
+            for key in sample:
+                if type(key) == dict:
+                    for k in key:
+                        print(k)
             #print('sample size = ', sample['net_input']['source'].size())
 
             def maybe_no_sync():
@@ -816,7 +820,7 @@ class Trainer(object):
                     # The no_sync context manager results in increased memory
                     # usage with FSDP, since full-size gradients will be
                     # accumulated on each GPU. It's typically a better tradeoff
-                    # to do the extra communication with FSDP.
+                    # to do tkhe extra communication with FSDP.
                     and not self.is_fsdp
                 ):
                     return self.model.no_sync()

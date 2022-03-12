@@ -1043,8 +1043,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             targ_d = cfg.decoder_embed_dim
         
         if targ_d is not None:
-            self.proj1 = Linear(d, targ_d)
-            self.proj2 = Linear(d, targ_d)
+            self.proj = Linear(d, 251)
             self.proj = [self.proj_ctc, self.proj_spk]
 
     def forward(self, tgt_layer, source, padding_mask, **kwargs):

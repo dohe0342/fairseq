@@ -152,6 +152,7 @@ class InferenceProcessor:
         self.softmax = torch.nn.Softmax(dim=1)
 
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
+        self.spk = open('/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
 
     def __enter__(self) -> "InferenceProcessor":
         if self.cfg.decoding.results_path is not None:

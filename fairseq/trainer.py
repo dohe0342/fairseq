@@ -802,8 +802,7 @@ class Trainer(object):
         for i, sample in enumerate(samples):  # delayed update loop
             sample, is_dummy_batch = self._prepare_sample(sample)
             for key in sample:
-                for k in key:
-                    print(k)
+                print(key)
             #print('sample size = ', sample['net_input']['source'].size())
 
             def maybe_no_sync():

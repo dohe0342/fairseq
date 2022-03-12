@@ -337,7 +337,6 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
-        '''
         #print(sample)
         
         label_dict = {0: '',
@@ -380,6 +379,7 @@ class InferenceProcessor:
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]
         
+        print('target sentence = ')
         print(target_sentence)
         print('\n\n')
 
@@ -390,10 +390,9 @@ class InferenceProcessor:
             for i in range(len(conf)):
                 #print(label_dict[idx[i].item()], conf[i])
                 hypo_sentence += label_dict[idx[i].item()]
+            print('hypo sentence = ')
             print(hypo_sentence)
-
             exit()
-        '''
 
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)

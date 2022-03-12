@@ -102,7 +102,7 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         self.models = models
-        print(self.models.proj)
+        print(self.models[0].proj)
         #for name, p in self.models[0].named_parameters():
         #    print(name)
         '''

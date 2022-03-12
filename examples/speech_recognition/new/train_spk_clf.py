@@ -607,12 +607,20 @@ def main(cfg: InferConfig) -> float:
     optim = torch.optim.Adam(processor.spk_clf.parameters(), lr=0.00001)
     
     for i in range(20):
-        for sample in processor:
+        output = []
+        target = []
+
+        for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             #target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
             loss = criterion(prob, target)
             loss.backward()
             optim.step()
+
+            _, idx = prob.max(1)
+            print(idx)
+            print(target)
+            print('')
 
         processor.log_generation_time()
 

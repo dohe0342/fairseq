@@ -607,7 +607,7 @@ def main(cfg: InferConfig) -> float:
     
     for i in range(20):
         for sample in processor:
-            logits, softmax, target = processor.train_spk_clf(sample)
+            prob, target = processor.train_spk_clf(sample)
 
         processor.log_generation_time()
 

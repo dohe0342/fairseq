@@ -693,16 +693,14 @@ class BranchCtcCriterionV2(CtcCriterion):
 
 
 @register_criterion("spk_clf", dataclass=CtcCriterionConfig)
-class BranchCtcCriterionV2(CtcCriterion):
+class SpeakerClassification(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
-        lprobs_list = model.w2v_encoder.get_normalized_probs(
+        lprobs = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
-        )#.contiguous()  # (T, B, C) from the encoder
-
-        lprobs_list = [lprobs.contiguous() for lprobs in lprobs_list]
+        ).contiguous()  # (T, B, C) from the encoder
 
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
@@ -725,7 +723,7 @@ class BranchCtcCriterionV2(CtcCriterion):
             target_lengths = pad_mask.sum(-1)
         
         with torch.backends.cudnn.flags(enabled=False):
-            loss_list = [F.ctc_loss(
+            loss = F.ctc_loss(
                     lprobs,
                     targets_flat,
                     input_lengths,
@@ -733,7 +731,7 @@ class BranchCtcCriterionV2(CtcCriterion):
                     blank=self.blank_idx,
                     reduction="sum",
                     zero_infinity=self.zero_infinity,
-                ) for lprobs in lprobs_list]
+                ) 
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

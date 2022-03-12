@@ -448,8 +448,6 @@ class InferenceProcessor:
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
         
-        print(features.size())
-        exit()
         ''' 
         label_dict = {0: '',
                       1: '29',

@@ -446,7 +446,7 @@ class InferenceProcessor:
             sample=sample,
         )
         
-        features = Non
+        features = None
         target = []
         for i, hypo in enumerate(hypos):
             if i == 0:

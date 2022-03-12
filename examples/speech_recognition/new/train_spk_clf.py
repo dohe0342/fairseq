@@ -458,7 +458,7 @@ class InferenceProcessor:
         
         logits = self.spk_clf(features)
         prob = self.softmax(logits)
-        target = torch.LongTensor(target)
+        target = torch.LongTensor(target).to('cuda')
         print(target)
         exit()
         

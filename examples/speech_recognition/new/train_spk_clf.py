@@ -601,15 +601,18 @@ def main(cfg: InferConfig) -> float:
 
     #with InferenceProcessor(cfg) as processor:
     processor = InferenceProcessor(cfg)
-    loss = torch.nn.CrossEntropyLoss()
+    criterion = torch.nn.CrossEntropyLoss()
     optim = torch.optim.Adam(processor.spk_clf.parameters())
     
     for i in range(20):
         for sample in processor:
             prob, target = processor.train_spk_clf(sample)
-            print(prob.size())
-            print(target.size())
-            print('')
+            #print(prob.size())
+            #print(target.size())
+            #print('')
+            loss = criterion(prob, target)
+            loss.backward()
+            optim.step()
 
         processor.log_generation_time()
 

@@ -732,116 +732,87 @@ class SpeakerClassification(CtcCriterion):
                     reduction="sum",
                     zero_infinity=self.zero_infinity,
                 ) 
-
+        
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
-        
-        logging_output = {}
-        
-        #loss_log_list = [loss.data for loss in loss_list]
-        loss_log = loss.data
-
-        for drop in net_output['dropped_layer']:
-            lprobs_list.insert(drop, 0)
-            loss_log_list.insert(drop, 0)
-        
         logging_output = {
-                f"loss_12": utils.item(loss_list[-1].data),
-                "ntokens": ntokens,
-                "nsentences": sample["id"].numel(),
-                "sample_size": sample_size,
+            "loss": utils.item(loss.data),  # * sample['ntokens'],
+            "ntokens": ntokens,
+            "nsentences": sample["id"].numel(),
+            "sample_size": sample_size,
         }
-        
-        '''
-        for i, loss in enumerate(loss_log_list):
-            if loss == 0:
-                logging_output[f"loss_{i+7}"] = torch.tensor(0.)
-            else:
-                logging_output[f"loss_{i+7}"] = utils.item(loss)
-        '''
 
         if not model.training:
             import editdistance
 
             with torch.no_grad():
-                for enum, lprobs in enumerate(lprobs_list[::-1]):
-                    if type(lprobs) == int:
-                        tgt_layer = 12-enum
-                        logging_output[f"wv_errors_{tgt_layer}"] = 0
-                        logging_output[f"w_errors_{tgt_layer}"] = 0
-                        logging_output[f"w_total_{tgt_layer}"] = 0
-                        logging_output[f"c_errors_{tgt_layer}"] = 0
-                        logging_output[f"c_total_{tgt_layer}"] = 0
-                        continue
-                    
-                    lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
+                lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 
-                    c_err = 0
-                    c_len = 0
-                    w_errs = 0
-                    w_len = 0
-                    wv_errs = 0
-                    for lp, t, inp_l in zip(
-                        lprobs_t,
-                        sample["target_label"]
-                        if "target_label" in sample
-                        else sample["target"],
-                        input_lengths,
-                    ):
-                        lp = lp[:inp_l].unsqueeze(0)
+                c_err = 0
+                c_len = 0
+                w_errs = 0
+                w_len = 0
+                wv_errs = 0
+                for lp, t, inp_l in zip(
+                    lprobs_t,
+                    sample["target_label"]
+                    if "target_label" in sample
+                    else sample["target"],
+                    input_lengths,
+                ):
+                    lp = lp[:inp_l].unsqueeze(0)
 
-                        decoded = None
-                        if self.w2l_decoder is not None:
-                            decoded = self.w2l_decoder.decode(lp)
+                    decoded = None
+                    if self.w2l_decoder is not None:
+                        decoded = self.w2l_decoder.decode(lp)
+                        if len(decoded) < 1:
+                            decoded = None
+                        else:
+                            decoded = decoded[0]
                             if len(decoded) < 1:
                                 decoded = None
                             else:
                                 decoded = decoded[0]
-                                if len(decoded) < 1:
-                                    decoded = None
-                                else:
-                                    decoded = decoded[0]
 
-                        p = (t != self.task.target_dictionary.pad()) & (
-                            t != self.task.target_dictionary.eos()
-                        )
-                        targ = t[p]
-                        targ_units = self.task.target_dictionary.string(targ)
-                        targ_units_arr = targ.tolist()
+                    p = (t != self.task.target_dictionary.pad()) & (
+                        t != self.task.target_dictionary.eos()
+                    )
+                    targ = t[p]
+                    targ_units = self.task.target_dictionary.string(targ)
+                    targ_units_arr = targ.tolist()
 
-                        toks = lp.argmax(dim=-1).unique_consecutive()
-                        pred_units_arr = toks[toks != self.blank_idx].tolist()
+                    toks = lp.argmax(dim=-1).unique_consecutive()
+                    pred_units_arr = toks[toks != self.blank_idx].tolist()
 
-                        c_err += editdistance.eval(pred_units_arr, targ_units_arr)
-                        c_len += len(targ_units_arr)
+                    c_err += editdistance.eval(pred_units_arr, targ_units_arr)
+                    c_len += len(targ_units_arr)
 
-                        targ_words = post_process(targ_units, self.post_process).split()
+                    targ_words = post_process(targ_units, self.post_process).split()
 
-                        pred_units = self.task.target_dictionary.string(pred_units_arr)
-                        pred_words_raw = post_process(pred_units, self.post_process).split()
+                    pred_units = self.task.target_dictionary.string(pred_units_arr)
+                    pred_words_raw = post_process(pred_units, self.post_process).split()
 
-                        if decoded is not None and "words" in decoded:
-                            pred_words = decoded["words"]
-                            w_errs += editdistance.eval(pred_words, targ_words)
-                            wv_errs += editdistance.eval(pred_words_raw, targ_words)
-                        else:
-                            dist = editdistance.eval(pred_words_raw, targ_words)
-                            w_errs += dist
-                            wv_errs += dist
+                    if decoded is not None and "words" in decoded:
+                        pred_words = decoded["words"]
+                        w_errs += editdistance.eval(pred_words, targ_words)
+                        wv_errs += editdistance.eval(pred_words_raw, targ_words)
+                    else:
+                        dist = editdistance.eval(pred_words_raw, targ_words)
+                        w_errs += dist
+                        wv_errs += dist
 
-                        w_len += len(targ_words)
-                    
-                    tgt_layer = 12-enum
-                    logging_output[f"wv_errors_{tgt_layer}"] = wv_errs
-                    logging_output[f"w_errors_{tgt_layer}"] = w_errs
-                    logging_output[f"w_total_{tgt_layer}"] = w_len
-                    logging_output[f"c_errors_{tgt_layer}"] = c_err
-                    logging_output[f"c_total_{tgt_layer}"] = c_len
+                    w_len += len(targ_words)
 
-        return loss_list, sample_size, logging_output
+                logging_output["wv_errors"] = wv_errs
+                logging_output["w_errors"] = w_errs
+                logging_output["w_total"] = w_len
+                logging_output["c_errors"] = c_err
+                logging_output["c_total"] = c_len
+
+        return loss, sample_size, logging_output
 
     @staticmethod
     def reduce_metrics(logging_outputs, layer_num=12) -> None:

@@ -618,10 +618,9 @@ def main(cfg: InferConfig) -> float:
             print(target)
             print('')
 
-            #target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
-            #loss = criterion(prob, target)
-            #loss.backward()
-            #optim.step()
+            loss = criterion(prob, target)
+            loss.backward()
+            optim.step()
             
         processor.log_generation_time()
 

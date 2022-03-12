@@ -1068,6 +1068,8 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj(x)
+        
+        print(x.size())
 
         return {
             "encoder_out": x,  # T x B x C

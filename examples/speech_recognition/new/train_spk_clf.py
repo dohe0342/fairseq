@@ -151,7 +151,7 @@ class InferenceProcessor:
         self.spk_clf = torch.nn.Linear(768, 251)
         self.softmax = torch.nn.Softmax(dim=1)
 
-        self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r')
+        self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
 
     def __enter__(self) -> "InferenceProcessor":
         if self.cfg.decoding.results_path is not None:
@@ -446,12 +446,15 @@ class InferenceProcessor:
             sample=sample,
         )
         
-        features = None
+        features = Non
+        target = []
         for i, hypo in enumerate(hypos):
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0)
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
+
+            target.append(
         
         logits = self.spk_clf(features)
         prob = self.softmax(logits)

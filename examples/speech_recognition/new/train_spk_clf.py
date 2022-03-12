@@ -532,7 +532,7 @@ class InferenceProcessor:
         else:
             self.num_sentences += sample["id"].numel()
 
-        return logits, softmax
+        return logits, prob
 
     def log_generation_time(self) -> None:
         logger.info(

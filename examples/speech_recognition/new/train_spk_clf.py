@@ -612,16 +612,17 @@ def main(cfg: InferConfig) -> float:
 
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
-            #target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
-            loss = criterion(prob, target)
-            loss.backward()
-            optim.step()
-
             _, idx = prob.max(1)
             print(idx)
             print(target)
             print('')
 
+            #target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
+            loss = criterion(prob, target)
+            loss.backward()
+            optim.step()
+
+            
         processor.log_generation_time()
 
         if cfg.decoding.results_path is not None:

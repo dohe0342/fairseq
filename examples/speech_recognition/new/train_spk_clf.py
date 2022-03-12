@@ -444,9 +444,9 @@ class InferenceProcessor:
         features = None
         for i, hypo in enumerate(hypos):
             if i == 0:
-                features = hypo[0]['emission'].mean(0)
+                features = hypo[0]['emission'].mean(0).unsqueeze(0)
             else:
-                features = torch.stack([features, hypo[0]['emission'].mean(0)])
+                features = torch.stack([features, hypo[0]['emission'].mean(0).unsqueeze(0)])
         
         
         print(features.size())

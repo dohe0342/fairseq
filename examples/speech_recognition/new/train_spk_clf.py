@@ -454,10 +454,12 @@ class InferenceProcessor:
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
 
-            target.append(
+            target.append(self.tsv[sample['net_input']['id']+1])
         
         logits = self.spk_clf(features)
         prob = self.softmax(logits)
+        print(target)
+        exit()
         
         ''' 
         label_dict = {0: '',

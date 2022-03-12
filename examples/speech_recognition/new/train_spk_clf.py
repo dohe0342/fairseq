@@ -442,7 +442,8 @@ class InferenceProcessor:
         )
         #print(sample)
         print(self.task.inference_step)
-        for hypo in hypos:
+        for i, hypo in enumerate(hypos):
+            print(sample['net_input']['padding_mask'][i])
             print(hypo[0]['emission'].size())
         ''' 
         label_dict = {0: '',

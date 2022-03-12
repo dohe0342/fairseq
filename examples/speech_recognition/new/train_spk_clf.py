@@ -150,6 +150,7 @@ class InferenceProcessor:
 
         self.spk_clf = torch.nn.Sequential(torch.nn.Linear(768, 251),
                                         torch.nn.Softmax(dim=1))
+        self.spk_clf.to('cuda')
 
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.spk = open('/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()

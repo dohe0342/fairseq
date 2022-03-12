@@ -343,7 +343,7 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
-        print('')
+        print(self.task.inference_step)
         print(hypos[0][0]['emission'].size())
         exit()
         ''' 

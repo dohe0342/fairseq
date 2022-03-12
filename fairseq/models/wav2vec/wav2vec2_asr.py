@@ -1066,7 +1066,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         x = self.final_dropout(x)
 
         if self.proj:
-            x = self.proj[tgt_layer-1](x)
+            x = self.proj(x)
 
         return {
             "encoder_out": x,  # T x B x C

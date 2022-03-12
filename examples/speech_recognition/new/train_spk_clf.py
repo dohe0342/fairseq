@@ -344,7 +344,7 @@ class InferenceProcessor:
         )
         #print(sample)
         print('')
-        print(hypos['emissions'].size())
+        print(hypos[0]['emissions'].size())
         exit()
         ''' 
         label_dict = {0: '',

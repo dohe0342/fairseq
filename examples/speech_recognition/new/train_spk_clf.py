@@ -148,6 +148,9 @@ class InferenceProcessor:
 
         self.progress_bar = self.build_progress_bar()
 
+        self.spk_clf = torch.nn.Linear(768, 251)
+        self.softmax = torch.nn.Softmax(dim=1)
+
     def __enter__(self) -> "InferenceProcessor":
         if self.cfg.decoding.results_path is not None:
             self.hypo_words_file = self.get_res_file("hypo.word")
@@ -448,6 +451,9 @@ class InferenceProcessor:
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
         
+        logits = self.spk_clf(features)
+        prob = self.softmax(logits)
+        
         ''' 
         label_dict = {0: '',
                       1: '29',
@@ -525,6 +531,8 @@ class InferenceProcessor:
             self.num_sentences += sample["nsentences"]
         else:
             self.num_sentences += sample["id"].numel()
+
+        return logits, softmax
 
     def log_generation_time(self) -> None:
         logger.info(

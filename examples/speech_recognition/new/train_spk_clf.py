@@ -464,8 +464,8 @@ class InferenceProcessor:
         logits = self.spk_clf(features)
         prob = self.softmax(logits)
         target = torch.LongTensor(target).to('cuda')
-        print(target)
-        exit()
+        #print(target)
+        #exit()
         
         ''' 
         label_dict = {0: '',
@@ -545,7 +545,7 @@ class InferenceProcessor:
         else:
             self.num_sentences += sample["id"].numel()
 
-        return logits, prob
+        return logits, prob, target
 
     def log_generation_time(self) -> None:
         logger.info(

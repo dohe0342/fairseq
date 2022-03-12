@@ -443,7 +443,7 @@ class InferenceProcessor:
         #print(sample)
         print(self.task.inference_step)
         for i, hypo in enumerate(hypos):
-            print(sample['net_input']['padding_mask'][i])
+            print(sample['net_input']['padding_mask'][i].size())
             print(hypo[0]['emission'].size())
         exit()
         ''' 

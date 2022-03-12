@@ -603,7 +603,6 @@ def main(cfg: InferConfig) -> float:
     processor = InferenceProcessor(cfg)
     loss = torch.nn.CrossEntropyLoss()
     optim = torch.optim.Adam(processor.spk_clf.parameters())
-
     
     for i in range(20):
         for sample in processor:

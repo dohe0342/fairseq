@@ -440,11 +440,12 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
-        #print(sample)
-        print(self.task.inference_step)
+        
+        features = []
         for i, hypo in enumerate(hypos):
-            print(sample['net_input']['padding_mask'][i].size())
-            print(hypo[0]['emission'].size())
+            features.append(hypo[0]['emission'].mean(0))
+            print(features[i].size())
+
         exit()
         ''' 
         label_dict = {0: '',

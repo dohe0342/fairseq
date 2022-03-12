@@ -461,7 +461,7 @@ class InferenceProcessor:
 
             target.append(self.spk_idx[int(self.tsv[sample['id'][i]+1].split('/')[0])])
         
-        logits = self.spk_clf(features)
+        prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')
         #print(target)
         #exit()
@@ -544,7 +544,7 @@ class InferenceProcessor:
         else:
             self.num_sentences += sample["id"].numel()
 
-        return logits, prob, target
+        return prob, target
 
     def log_generation_time(self) -> None:
         logger.info(

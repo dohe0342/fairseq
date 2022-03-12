@@ -607,7 +607,7 @@ def main(cfg: InferConfig) -> float:
     for i in range(20):
         for sample in processor:
             prob, target = processor.train_spk_clf(sample)
-            target = torch.nn.functional.one_hot(target, num_classs=251).to('cuda')
+            target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
             #print(prob.size())
             #print(target.size())
             #print('')

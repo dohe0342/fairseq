@@ -424,7 +424,7 @@ class InferenceProcessor:
         else:
             self.num_sentences += sample["id"].numel()
 
-    def process_sample(self, sample: Dict[str, Any]) -> None:
+    def train_spk_clf(self, sample: Dict[str, Any]) -> None:
         '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():

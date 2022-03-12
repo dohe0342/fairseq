@@ -804,7 +804,7 @@ class Trainer(object):
             #for key in sample:
             #    for k in sample['net_input']:
             #        print(k)
-            print(sample[id])
+            print(sample['id'])
             #print('sample size = ', sample['net_input']['source'].size())
 
             def maybe_no_sync():

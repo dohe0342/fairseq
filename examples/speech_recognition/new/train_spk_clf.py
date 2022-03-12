@@ -151,6 +151,8 @@ class InferenceProcessor:
         self.spk_clf = torch.nn.Linear(768, 251)
         self.softmax = torch.nn.Softmax(dim=1)
 
+        self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r')
+
     def __enter__(self) -> "InferenceProcessor":
         if self.cfg.decoding.results_path is not None:
             self.hypo_words_file = self.get_res_file("hypo.word")
@@ -590,7 +592,6 @@ def main(cfg: InferConfig) -> float:
     with InferenceProcessor(cfg) as processor:
         for sample in processor:
             logits, softmax = processor.train_spk_clf(sample)
-            print(softmax.max(1))
 
         processor.log_generation_time()
 

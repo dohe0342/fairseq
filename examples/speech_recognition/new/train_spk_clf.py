@@ -341,7 +341,9 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
-        #print(sample)
+        print(sample)
+        print('')
+        print(hypos)
         ''' 
         label_dict = {0: '',
                       1: '29',

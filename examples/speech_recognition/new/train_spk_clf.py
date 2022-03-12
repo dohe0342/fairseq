@@ -344,7 +344,8 @@ class InferenceProcessor:
         )
         #print(sample)
         print(self.task.inference_step)
-        print(hypos[0][0]['emission'].size())
+        for hypo in hypos:
+            print(hypo[0]['emission'].size())
         ''' 
         label_dict = {0: '',
                       1: '29',

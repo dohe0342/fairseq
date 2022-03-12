@@ -344,6 +344,7 @@ class InferenceProcessor:
         print(sample)
         print('')
         print(hypos)
+        exit()
         ''' 
         label_dict = {0: '',
                       1: '29',

@@ -462,7 +462,6 @@ class InferenceProcessor:
             target.append(self.spk_idx[int(self.tsv[sample['id'][i]+1].split('/')[0])])
         
         logits = self.spk_clf(features)
-        prob = self.softmax(logits)
         target = torch.LongTensor(target).to('cuda')
         #print(target)
         #exit()

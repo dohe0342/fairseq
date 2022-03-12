@@ -600,10 +600,11 @@ def main(cfg: InferConfig) -> float:
 
     logger.info(cfg.common_eval.path)
 
-    with InferenceProcessor(cfg) as processor:
+    #with InferenceProcessor(cfg) as processor:
+    processor = InferenceProcessor(cfg)
+    for i in range(20):
         for sample in processor:
             logits, softmax, target = processor.train_spk_clf(sample)
-            print(target)
 
         processor.log_generation_time()
 

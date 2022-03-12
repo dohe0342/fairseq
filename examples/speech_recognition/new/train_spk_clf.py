@@ -458,6 +458,7 @@ class InferenceProcessor:
         
         logits = self.spk_clf(features)
         prob = self.softmax(logits)
+        target = torch.LongTensor(target)
         print(target)
         exit()
         

@@ -342,7 +342,7 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
-        print(sample)
+        #print(sample)
         print('')
         print(hypos)
         exit()

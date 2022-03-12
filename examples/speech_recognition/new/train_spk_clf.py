@@ -102,9 +102,9 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         self.models = models
-        #print(self.models[0])
-        for name, p in self.models[0].named_parameters():
-            print(name)
+        print(self.models.proj)
+        #for name, p in self.models[0].named_parameters():
+        #    print(name)
         '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():

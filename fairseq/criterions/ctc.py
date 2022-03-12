@@ -741,7 +741,8 @@ class SpeakerClassification(CtcCriterion):
         
         logging_output = {}
         
-        loss_log_list = [loss.data for loss in loss_list]
+        #loss_log_list = [loss.data for loss in loss_list]
+        loss_log = loss.data
 
         for drop in net_output['dropped_layer']:
             lprobs_list.insert(drop, 0)

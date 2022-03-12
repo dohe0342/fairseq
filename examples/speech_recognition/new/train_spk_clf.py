@@ -445,10 +445,8 @@ class InferenceProcessor:
         for i, hypo in enumerate(hypos):
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0)
-                print(features.size())
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
-                print(features.size())
         
         
         print(features.size())

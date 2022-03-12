@@ -613,9 +613,9 @@ def main(cfg: InferConfig) -> float:
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             #target = torch.nn.functional.one_hot(target, num_classes=251).to('cuda')
-            loss = criterion(prob, target)
-            loss.backward()
-            optim.step()
+            #loss = criterion(prob, target)
+            #loss.backward()
+            #optim.step()
 
             _, idx = prob.max(1)
             print(idx)

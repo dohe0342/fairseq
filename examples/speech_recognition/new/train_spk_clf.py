@@ -607,6 +607,9 @@ def main(cfg: InferConfig) -> float:
     for i in range(20):
         for sample in processor:
             prob, target = processor.train_spk_clf(sample)
+            print(prob.size())
+            print(target.size())
+            print('')
 
         processor.log_generation_time()
 

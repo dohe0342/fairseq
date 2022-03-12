@@ -148,8 +148,8 @@ class InferenceProcessor:
 
         self.progress_bar = self.build_progress_bar()
 
-        self.spk_clf = torch.nn.Linear(768, 251)
-        self.softmax = torch.nn.Softmax(dim=1)
+        self.spk_clf = torch.nn.Sequential(torch.nn.Linear(768, 251),
+                                        torch.nn.Softmax(dim=1))
 
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.spk = open('/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
@@ -602,6 +602,10 @@ def main(cfg: InferConfig) -> float:
 
     #with InferenceProcessor(cfg) as processor:
     processor = InferenceProcessor(cfg)
+    loss = torch.nn.CrossEntropyLoss()
+    optim = torch.optim.Adam(processor
+
+    
     for i in range(20):
         for sample in processor:
             logits, softmax, target = processor.train_spk_clf(sample)

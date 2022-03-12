@@ -1064,6 +1064,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             x = x.transpose(0, 1)
 
         x = self.final_dropout(x)
+        x = x.mean(0)
 
         if self.proj:
             x = self.proj(x)

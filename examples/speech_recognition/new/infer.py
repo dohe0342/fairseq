@@ -390,6 +390,7 @@ class InferenceProcessor:
             for i in range(len(conf)):
                 #print(label_dict[idx[i].item()], conf[i])
                 hypo_sentence += label_dict[idx[i].item()]
+            print(sample['id'])
             print('hypo sentence = ')
             print(hypo_sentence)
             exit()

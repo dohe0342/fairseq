@@ -569,7 +569,7 @@ def main(cfg: InferConfig) -> float:
 
             loss = criterion(prob[0], target)
             #print(loss.item())
-            loss.backward(retain_graph=True)
+            loss.backward()
             if batch_idx % 8 == 0:
                 optim[0].step()
 

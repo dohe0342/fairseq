@@ -563,8 +563,9 @@ def main(cfg: InferConfig) -> float:
             loss = criterion(prob, target)
             loss.backward()
             optim.step()
+    
     print(res*100/all)
-        '''
+    '''
         processor.log_generation_time()
 
         if cfg.decoding.results_path is not None:
@@ -592,7 +593,7 @@ def main(cfg: InferConfig) -> float:
                 )
 
         return wer
-        '''
+    '''
 
 
 @hydra.main(config_path=config_path, config_name="infer")

@@ -8,7 +8,7 @@ CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_reco
 	--config-name infer \
 	task=audio_finetuning \
 	task.data=/home/work/workspace/LibriSpeech/manifests \
-	common.user_dir=examples/data2vec \
+	common.user_dir=examples/wav2vec \
 	task.labels=ltr \
 	decoding.type=viterbi \
 	decoding.unique_wer_file=False \

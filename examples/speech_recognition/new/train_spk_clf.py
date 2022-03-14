@@ -574,7 +574,7 @@ def main(cfg: InferConfig) -> float:
                         optim[clf].step()
 
                     if batch_idx % 40 == 0:
-                        print(res[clf] / all)
+                        print(res[clf]*100 / all)
 
 @hydra.main(config_path=config_path, config_name="infer")
 def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:

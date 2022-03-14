@@ -1,7 +1,7 @@
 subset=$1
 model=$2
 CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/infer.py \
-  /workspace/LibriSpeech/manifests/$subset \
+  /workspace/LibriSpeech/manifests \
   --task audio_finetuning \
   --nbest 1 \
   --path /workspace/models/$model \

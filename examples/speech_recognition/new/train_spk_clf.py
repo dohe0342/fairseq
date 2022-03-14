@@ -459,9 +459,6 @@ class InferenceProcessor:
             model = self.models[0]
             encoder_out = model(**encoder_input)
     
-        for key in encoder_out:
-            print(key)
-        
         features = None
         target = []
         

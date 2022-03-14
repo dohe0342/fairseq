@@ -459,7 +459,7 @@ def main(cfg: InferConfig) -> float:
                         if batch_idx % 16 == 0:
                             optim[clf].step()
 
-                        if batch_idx % 40 == 0:
+                        if batch_idx % 100 == 0:
                             print(train_res[clf]*100 / all)
 
 

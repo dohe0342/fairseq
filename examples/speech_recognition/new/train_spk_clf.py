@@ -572,7 +572,7 @@ def main(cfg: InferConfig) -> float:
                     #print(loss.item())
                     loss.backward(retain_graph=True)
             optim[i].step()
-                print('')
+        print('')
         #print(res*100/all)
     return 0.
     '''

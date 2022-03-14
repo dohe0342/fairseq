@@ -463,7 +463,7 @@ class InferenceProcessor:
         
             target.append(self.spk_idx[int(self.tsv[sample['id'][i]+1].split('/')[0])])
         
-        features = features.to('cuda')
+        #features = features.to('cuda')
         prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')
         #print(type(prob))

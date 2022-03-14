@@ -464,7 +464,7 @@ class InferenceProcessor:
         target = []
         
         #features = encoder_out['encoder_out'].mean(0)
-        print(len(encoder_out['layer_out']))
+        print(len(encoder_out['layer_result']))
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
         '''

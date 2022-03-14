@@ -463,15 +463,15 @@ class InferenceProcessor:
         features = None
         target = []
         
+        features = encoder_out['encoder_out'].mean(0)
+        '''
         for i, hypo in enumerate(hypos):
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')], dim=0)
-        
-
+        '''
         #features = features.to('cuda')
-        print(features)
         print(features.size())
         prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')

@@ -459,7 +459,7 @@ def main(cfg: InferConfig) -> float:
                             optim[clf].step()
 
                         if batch_idx % 100 == 0:
-                            print(train_res[clf]*100 / all)
+                            print(train_res[clf]*100 / train_all)
                 else:
                     with torch.no_grad():
                         prob, target = processor.train_spk_clf(sample)
@@ -469,7 +469,7 @@ def main(cfg: InferConfig) -> float:
                         valid_res[clf] += torch.eq(idx, target).sum().item()
 
                         if batch_idx % 100 == 0:
-                            print(valid_res[clf]*100 / all)
+                            print(valid_res[clf]*100 / valid_all)
 
 
 

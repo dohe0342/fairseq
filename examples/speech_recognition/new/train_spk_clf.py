@@ -99,7 +99,6 @@ def reset_logging():
         )
     )
     root.addHandler(handler)
-
         
 
 class InferenceProcessor:

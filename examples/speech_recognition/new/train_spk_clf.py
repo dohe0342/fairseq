@@ -563,11 +563,11 @@ def main(cfg: InferConfig) -> float:
             #print('')
             all += j
             for k in range(11):
-                _, idx = prob[k].max(1)
+                _, idx = prob[i].max(1)
                 #print(torch.eq(idx, target).sum().item())
                 #res += torch.eq(idx, target).sum().item()
 
-                loss = criterion(prob[k], target)
+                loss = criterion(prob[i], target)
                 print(loss.item())
                 loss.backward()
                 optim[k].step()

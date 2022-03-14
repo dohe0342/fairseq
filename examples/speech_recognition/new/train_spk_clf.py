@@ -427,6 +427,8 @@ def main(cfg: InferConfig) -> float:
     clf_num = 11
     class_num = 1166
 
+    batch_count = 2992 if cfg.dataset.gen_subset=='train-100' else 14586
+
     spk_clf = [torch.nn.Sequential(torch.nn.Linear(emb_dim, class_num),
                                         torch.nn.Softmax(dim=1)).to('cuda') for i in range(clf_num)]
 

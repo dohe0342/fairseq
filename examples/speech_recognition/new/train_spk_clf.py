@@ -571,7 +571,7 @@ def main(cfg: InferConfig) -> float:
                 loss.backward(retain_graph=True)
                 optim[k].step()
             print('')
-    print(res*100/all)
+        print(res*100/all)
     '''
         processor.log_generation_time()
 

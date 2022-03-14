@@ -264,7 +264,7 @@ class InferenceProcessor:
             num_workers=self.cfg.dataset.num_workers,
             data_buffer_size=self.cfg.dataset.data_buffer_size,
             disable_iterator_cache=disable_iterator_cache,
-        ).next_epoch_itr(shuffle=False)
+        ).next_epoch_itr(shuffle=True)
 
     def build_progress_bar(
         self,

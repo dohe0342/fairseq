@@ -458,7 +458,8 @@ class InferenceProcessor:
 
             model = self.models[0]
             encoder_out = model(**encoder_input)
-    
+        
+        print(encoder_out['encoder_out'].size())
         features = None
         target = []
         

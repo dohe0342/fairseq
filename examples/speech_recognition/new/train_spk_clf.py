@@ -564,7 +564,7 @@ def main(cfg: InferConfig) -> float:
             all += j
             for k in range(11):
                 _, idx = prob[k].max(1)
-                print(torch.eq(idx, target).sum().item())
+                #print(torch.eq(idx, target).sum().item())
                 #res += torch.eq(idx, target).sum().item()
 
                 loss = criterion(prob[k], target)

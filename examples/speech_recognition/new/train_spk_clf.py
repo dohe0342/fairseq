@@ -558,12 +558,12 @@ def main(cfg: InferConfig) -> float:
             #print('')
             res += torch.eq(idx, target).sum().item()
             all += j
-            print(res)
 
             loss = criterion(prob, target)
             loss.backward()
             optim.step()
     
+    print(res)
     print(res*100/all)
     '''
         processor.log_generation_time()

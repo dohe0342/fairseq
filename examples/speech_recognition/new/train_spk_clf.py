@@ -466,7 +466,7 @@ class InferenceProcessor:
         prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')
         print(type(prob))
-        print(target)
+        #print(target)
         exit()
         
         ''' 

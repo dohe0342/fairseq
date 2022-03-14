@@ -444,8 +444,7 @@ class InferenceProcessor:
                     print(param)
                     #param = torch.nn.Parameter(torch.zeros(param.size()[0]))
                     #print(f'set {name} to 0.')
-        '''         
-        self.gen_timer.start()
+        '''
         hypos = self.task.inference_step(
             generator=self.generator,
             models=self.models,

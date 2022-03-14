@@ -570,7 +570,7 @@ def main(cfg: InferConfig) -> float:
                 loss = criterion(prob[i], target)
                 loss.backward()
                 optim[i].step()
-        print(res*100/all)
+    print(res*100/all)
     '''
         processor.log_generation_time()
 

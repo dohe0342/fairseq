@@ -1,9 +1,10 @@
 subset=$1
+model=$2
 CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/infer.py \
   /workspace/LibriSpeech/manifests/$subset \
   --task audio_finetuning \
   --nbest 1 \
-  --path /workspace/fairseq/$2 \
+  --path /workspace/models/$model \
   --gen-subset $subset \
   --results-path /workspace/fairseq/examples/wav2vec/ctc_eval \
   --w2l-decoder fairseqlm \

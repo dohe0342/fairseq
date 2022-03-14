@@ -454,7 +454,7 @@ class InferenceProcessor:
         
         features = None
         target = []
-        print(hypos.type)
+        print(hypos[0][0]['emission'].type)
         for i, hypo in enumerate(hypos):
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0)

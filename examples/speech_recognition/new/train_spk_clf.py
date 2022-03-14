@@ -465,8 +465,9 @@ class InferenceProcessor:
         features = features.to('cuda')
         prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')
-        #print(target)
-        #exit()
+        print(type(prob))
+        print(target)
+        exit()
         
         ''' 
         label_dict = {0: '',
@@ -525,7 +526,7 @@ class InferenceProcessor:
             print(hypo_sentence)
             exit()
         '''
-
+        '''
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)
         self.wps_meter.update(num_generated_tokens)
@@ -545,7 +546,7 @@ class InferenceProcessor:
             self.num_sentences += sample["nsentences"]
         else:
             self.num_sentences += sample["id"].numel()
-
+        '''
         return prob, target
 
     def log_generation_time(self) -> None:

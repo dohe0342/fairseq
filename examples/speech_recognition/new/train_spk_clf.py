@@ -594,6 +594,7 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
     # logger.info("Config:\n%s", OmegaConf.to_yaml(cfg))
     wer = float("inf")
 
+    '''
     try:
         if cfg.common.profile:
             with torch.cuda.profiler.profile():
@@ -612,8 +613,8 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
     #logger.info("Word error rate: %.4f", wer)
     #if cfg.is_ax:
     #    return wer, None
-
     #return wer
+    '''
 
 
 def cli_main() -> None:

@@ -450,11 +450,12 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
+
         encoder_input = { 
             k: v for k, v in sample["net_input"].items() if k != "prev_output_tokens"
         }
 
-        model = models[0]
+        model = self.models[0]
         encoder_out = model(**encoder_input)
         
         print(encoder_out)

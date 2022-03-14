@@ -149,7 +149,8 @@ class InferenceProcessor:
 
         self.progress_bar = self.build_progress_bar()
 
-        
+        self.spk_clf = spk_clf
+
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.spk = open('/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
         self.spk = [int(i.split('\n')[0]) for i in self.spk]

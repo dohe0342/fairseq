@@ -564,7 +564,7 @@ def main(cfg: InferConfig) -> float:
             for batch_idx, sample in enumerate(processor):
                 prob, target = processor.train_spk_clf(sample)
                 all += target.size()[0]
-                for clf in range(11):
+                for clf in range(clf_num):
                     _, idx = prob[clf].max(1)
                     res[clf] += torch.eq(idx, target).sum().item()
 

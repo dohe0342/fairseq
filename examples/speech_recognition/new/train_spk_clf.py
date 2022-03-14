@@ -573,8 +573,6 @@ def main(cfg: InferConfig) -> float:
 
                 if batch_idx % 40 == 0:
                     print(epoch, res / all)
-    return 0.
-    
 
 @hydra.main(config_path=config_path, config_name="infer")
 def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:

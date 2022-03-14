@@ -148,8 +148,9 @@ class InferenceProcessor:
 
         self.progress_bar = self.build_progress_bar()
 
-        self.spk_clf = torch.nn.Sequential(torch.nn.Linear(768, 251),
-                                        torch.nn.Softmax(dim=1))
+        self.spk_clf = [torch.nn.Sequential(torch.nn.Linear(768, 251),
+                                        torch.nn.Softmax(dim=1)) for i in range(12)]
+
         self.spk_clf.to('cuda')
 
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()

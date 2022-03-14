@@ -464,7 +464,7 @@ def main(cfg: InferConfig) -> float:
                 else:
                     with torch.no_grad():
                         prob, target = processor.train_spk_clf(sample)
-                    train_all += target.size()[0]
+                    valid_all += target.size()[0]
                     for clf in range(clf_num):
                         _, idx = prob[clf].max(1)
                         train_res[clf] += torch.eq(idx, target).sum().item()

@@ -471,6 +471,7 @@ def main(cfg: InferConfig) -> float:
 
                         if batch_idx % 100 == 0:
                             print('valid acc = ', valid_res[clf]*100 / valid_all)
+                    print('')
 
 
 

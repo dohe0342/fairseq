@@ -389,7 +389,6 @@ class Wav2Vec2Seq2SeqModel(FairseqEncoderDecoderModel):
 class Wav2VecEncoder(FairseqEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.apply_mask = cfg.apply_mask
-        print('fuck!!!!!!!!!!'*100)
 
         arg_overrides = {
             "dropout": cfg.dropout,

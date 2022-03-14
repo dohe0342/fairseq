@@ -563,13 +563,13 @@ def main(cfg: InferConfig) -> float:
             #print('')
             all += target.size()[0]
             for layer_idx in range(11):
-                _, idx = prob[layer_idx].max(1)
+                _, idx = prob[0].max(1)
                 #print(torch.eq(idx, target).sum().item(), target.size())
                 #res += torch.eq(idx, target).sum().item()
 
-                loss = criterion(prob[layer_idx], target)
+                loss = criterion(prob[0], target)
                 #print(loss.item())
-                loss.backward()
+                loss.backward(retain_graph=True)
                 if batch_idx % 8 == 0:
                     optim[layer_idx].step()
         #print(res*100/all)

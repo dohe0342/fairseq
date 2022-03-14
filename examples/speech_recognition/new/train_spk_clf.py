@@ -568,13 +568,13 @@ def main(cfg: InferConfig) -> float:
 
                     loss = criterion(prob[clf], target)
                     loss.backward()
+                    del loss
                     
                     if batch_idx % 16 == 0:
                         optim[clf].step()
 
                     if batch_idx % 40 == 0:
                         print(res[clf] / all)
-
 
 @hydra.main(config_path=config_path, config_name="infer")
 def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:

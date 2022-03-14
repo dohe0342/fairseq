@@ -1112,7 +1112,7 @@ class TransformerEncoder(nn.Module):
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
         
         #layer_results.append(dropped_layer)
-
+        print(len(layer_results))
         return x, layer_results
 
     def max_positions(self):

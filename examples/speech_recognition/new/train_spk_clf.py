@@ -459,7 +459,7 @@ class InferenceProcessor:
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')
             else:
-                features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0)], dim=0)
+                features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')], dim=0)
         
             target.append(self.spk_idx[int(self.tsv[sample['id'][i]+1].split('/')[0])])
         

@@ -469,13 +469,6 @@ def main(cfg: InferConfig) -> float:
                         _, idx = prob[clf].max(1)
                         valid_res[clf] += torch.eq(idx, target).sum().item()
 
-                        loss = criterion(prob[clf], target)
-                        loss.backward()
-                        del loss
-                        
-                        if batch_idx % 16 == 0:
-                            optim[clf].step()
-
                         if batch_idx % 100 == 0:
                             print(train_res[clf]*100 / all)
 

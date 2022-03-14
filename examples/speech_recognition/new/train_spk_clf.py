@@ -578,36 +578,7 @@ def main(cfg: InferConfig) -> float:
 
         #print(res*100/all)
     return 0.
-    '''
-        processor.log_generation_time()
-
-        if cfg.decoding.results_path is not None:
-            processor.merge_shards()
-
-        errs_t, leng_t = processor.total_errors, processor.total_length
-
-        if cfg.common.cpu:
-            logger.warning("Merging WER requires CUDA.")
-        elif processor.data_parallel_world_size > 1:
-            stats = torch.LongTensor([errs_t, leng_t]).cuda()
-            dist.all_reduce(stats, op=dist.ReduceOp.SUM)
-            errs_t, leng_t = stats[0].item(), stats[1].item()
-
-        wer = errs_t * 100.0 / leng_t
-
-        if distributed_utils.is_master(cfg.distributed_training):
-            with open(wer_file, "w") as f:
-                f.write(
-                    (
-                        f"WER: {wer}\n"
-                        f"err / num_ref_words = {errs_t} / {leng_t}\n\n"
-                        f"{yaml_str}"
-                    )
-                )
-
-        return wer
-    '''
-
+    
 
 @hydra.main(config_path=config_path, config_name="infer")
 def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:

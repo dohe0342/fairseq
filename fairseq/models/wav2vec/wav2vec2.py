@@ -682,7 +682,7 @@ class Wav2Vec2Model(BaseFairseqModel):
                 "x": x,
                 "padding_mask": padding_mask,
                 "features": unmasked_features,
-                "layer_results": layer_results[:-1],
+                "layer_results": layer_results,
                 "dropped_layer": layer_results[-1],
             }
 

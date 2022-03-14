@@ -574,7 +574,7 @@ def main(cfg: InferConfig) -> float:
                 optim[0].step()
 
             if batch_idx % 40 == 0:
-                print(res / all)
+                print(epoch, res / all)
 
         #print(res*100/all)
     return 0.

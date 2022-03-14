@@ -469,36 +469,16 @@ class InferenceProcessor:
             model = self.models[0]
             encoder_out = model(**encoder_input)
         
-        #print(encoder_out['encoder_out'].size())
         features = None
         target = []
         
-        #features = encoder_out['encoder_out'].mean(0)
         features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
-        #for key in encoder_out:
-        #    print(key)
-        #print(len(encoder_out['layer_results']))
+        
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
-        '''
-        for i, hypo in enumerate(hypos):
-            if i == 0:
-                features = hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')
-            else:
-                features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')], dim=0)
-        '''
-        #print(target)
-        #features = features.to('cuda')
-        #print(features.size())
-        #print(features.size())
-        #prob = self.spk_clf(features)
-        #print(encoder_out['layer_results'][0][0].size())
+        
         prob = [self.spk_clf[i](features[i]) for i in range(len(self.spk_clf))]
         target = torch.LongTensor(target).to('cuda')
-        #print(type(prob))
-        #print(target)
-        #print(prob.dtype)
-        #exit()
         
         return prob, target
 

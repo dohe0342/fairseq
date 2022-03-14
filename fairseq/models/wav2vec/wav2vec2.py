@@ -1078,8 +1078,8 @@ class TransformerEncoder(nn.Module):
                     x, (z, lr) = layer(
                         x, self_attn_padding_mask=padding_mask, need_weights=False, layer_num=i
                     )
-                    if i >= min_layer:
-                        layer_results.append((x, z, lr))
+                    #if i >= min_layer:
+                layer_results.append((x, z, lr))
                 #else:
                 #    dropped_layer.append(i)
                 #    if i >= min_layer:

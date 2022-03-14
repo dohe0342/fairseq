@@ -639,8 +639,8 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
             logger.error("Crashed! %s", str(e))
 
     logger.info("Word error rate: %.4f", wer)
-    if cfg.is_ax:
-        return wer, None
+    #if cfg.is_ax:
+    #    return wer, None
 
     return wer
 

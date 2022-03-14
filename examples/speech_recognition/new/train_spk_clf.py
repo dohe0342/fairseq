@@ -438,10 +438,12 @@ def main(cfg: InferConfig) -> float:
     optim = [torch.optim.Adam(spk_clf[i].parameters(), lr=0.00001) for i in range(clf_num)]
 
     for epoch in range(10):
-        output = []
-        target = []
-        res = [0 for i in range(clf_num)]
-        all = 0
+        train_res = [0 for i in range(clf_num)]
+        train_all = 0
+
+        valid_res = [0 for i in range(clf_num)]
+        valid_all = 0
+
         with InferenceProcessor(cfg, spk_clf) as processor:
             for batch_idx, sample in enumerate(processor):
                 prob, target = processor.train_spk_clf(sample)

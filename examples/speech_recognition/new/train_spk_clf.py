@@ -570,7 +570,7 @@ def main(cfg: InferConfig) -> float:
                 loss = criterion(prob[i], target)
                 print(loss.item())
                 loss.backward()
-                optim[k].step()
+                optim[i].step()
                 del loss
             print('')
         print(res*100/all)

@@ -483,7 +483,7 @@ class InferenceProcessor:
         #print(features.size())
         #print(features.size())
         #prob = self.spk_clf(features)
-        print(encoder_out['layer_results'][0][0].mean(0).size())
+        print(encoder_out['layer_results'][0][0].size())
         prob = [self.spk_clf[i](features[i]) for i in range(len(self.spk_clf))]
         target = torch.LongTensor(target).to('cuda')
         #print(type(prob))
@@ -548,7 +548,7 @@ def main(cfg: InferConfig) -> float:
     
     clf_num = 23
 
-    spk_clf = [torch.nn.Sequential(torch.nn.Linear(1024, 251),
+    spk_clf = [torch.nn.Sequential(torch.nn.Linear(768, 251),
                                         torch.nn.Softmax(dim=1)).to('cuda') for i in range(clf_num)]
 
     #with InferenceProcessor(cfg) as processor:

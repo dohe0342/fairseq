@@ -563,14 +563,14 @@ def main(cfg: InferConfig) -> float:
                 prob, target = processor.train_spk_clf(sample)
                 all += target.size()[0]
                 for clf in range(11):
-                    _, idx = prob[i].max(1)
+                    _, idx = prob[clf].max(1)
                     res += torch.eq(idx, target).sum().item()
 
-                    loss = criterion(prob[i], target)
+                    loss = criterion(prob[clf], target)
                     #print(loss.item())
                     loss.backward()
                     if batch_idx % 16 == 0:
-                        optim[i].step()
+                        optim[clf].step()
 
                     if batch_idx % 40 == 0:
                         print(epoch, res / all)

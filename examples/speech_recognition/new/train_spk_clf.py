@@ -564,13 +564,13 @@ def main(cfg: InferConfig) -> float:
                         
             for k in range(11):
                 _, idx = prob[i].max(1)
-                print(torch.eq(idx, target).sum().item())
+                #print(torch.eq(idx, target).sum().item())
                 #res += torch.eq(idx, target).sum().item()
                 #all += j
 
                 loss = criterion(prob[i], target)
                 loss.backward(retain_graph=True)
-                optim[i].step()
+                optim[11-i].step()
             print('')
     print(res*100/all)
     '''

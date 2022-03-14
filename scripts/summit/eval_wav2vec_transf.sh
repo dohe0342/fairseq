@@ -7,8 +7,8 @@ CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/in
   --gen-subset $subset \
   --results-path /workspace/fairseq/examples/wav2vec/ctc_eval \
   --w2l-decoder fairseqlm \
-  --lexicon /workspace/fairseq/examples/wav2vec/lm_model/librispeech_lexicon.lst \
-  --lm-model /workspace/fairseq/examples/wav2vec/lm_model/lm_librispeech_word_transformer.pt \
+  --lexicon /workspace/models/lm_model/librispeech_lexicon.lst \
+  --lm-model /workspace/models/lm_model/lm_librispeech_word_transformer.pt \
   --lm-weight 0.87 \
   --word-score -1 \
   --sil-weight 0 \

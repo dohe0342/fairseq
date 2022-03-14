@@ -668,4 +668,9 @@ def cli_main() -> None:
 
 
 if __name__ == "__main__":
-    cli_main()
+    container = OmegaConf.to_container(cfg, resolve=True, enum_to_str=True)
+    cfg = OmegaConf.create(container)
+    OmegaConf.set_struct(cfg, True)
+
+    #cli_main()
+    main(cfg)

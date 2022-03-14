@@ -561,14 +561,8 @@ def main(cfg: InferConfig) -> float:
         with InferenceProcessor(cfg, spk_clf) as processor:
             for batch_idx, sample in enumerate(processor):
                 prob, target = processor.train_spk_clf(sample)
-                #print(prob)
-                #print(idx)
-                #print(target)
-                #print('')
                 all += target.size()[0]
-                #for layer_idx in range(11):
                 _, idx = prob[0].max(1)
-                #print(torch.eq(idx, target).sum().item(), target.size())
                 res += torch.eq(idx, target).sum().item()
 
                 loss = criterion(prob[0], target)
@@ -579,7 +573,6 @@ def main(cfg: InferConfig) -> float:
 
                 if batch_idx % 40 == 0:
                     print(epoch, res / all)
-        #print(res*100/all)
     return 0.
     
 

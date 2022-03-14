@@ -593,7 +593,7 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
 
     # logger.info("Config:\n%s", OmegaConf.to_yaml(cfg))
     wer = float("inf")
-
+    main(cfg)
     '''
     try:
         if cfg.common.profile:

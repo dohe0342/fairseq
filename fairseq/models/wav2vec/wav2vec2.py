@@ -1080,7 +1080,6 @@ class TransformerEncoder(nn.Module):
 
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
-                        print(i)
                 #else:
                 #    dropped_layer.append(i)
                 #    if i >= min_layer:
@@ -1089,7 +1088,7 @@ class TransformerEncoder(nn.Module):
                 if i == tgt_layer:
                     r = x
                     break
-
+        len(layer_results)
         if r is not None:
             x = r
 

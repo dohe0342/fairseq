@@ -649,4 +649,5 @@ def cli_main() -> None:
 
 
 if __name__ == "__main__":
+    random_seed(777)
     cli_main()

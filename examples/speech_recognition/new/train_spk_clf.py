@@ -604,7 +604,7 @@ def main(cfg: InferConfig) -> float:
     #with InferenceProcessor(cfg) as processor:
     processor = InferenceProcessor(cfg)
     criterion = torch.nn.CrossEntropyLoss()
-    optim = torch.optim.adam(processor.spk_clf.parameters(), lr=0.000000000001)
+    optim = torch.optim.adam(processor.spk_clf.parameters(), lr=0.0000001)
     
     for i in range(20):
         output = []

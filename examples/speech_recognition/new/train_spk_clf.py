@@ -573,7 +573,7 @@ def main(cfg: InferConfig) -> float:
                         optim[clf].step()
 
                     if batch_idx % 40 == 0:
-                        print(epoch, res / all)
+                        print(epoch, res[clf] / all)
 
 
 @hydra.main(config_path=config_path, config_name="infer")

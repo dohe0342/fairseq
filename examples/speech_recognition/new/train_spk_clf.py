@@ -546,6 +546,7 @@ def main(cfg: InferConfig) -> float:
 
     logger.info(cfg.common_eval.path)
     
+    emb_dim = 768
     clf_num = 23
 
     spk_clf = [torch.nn.Sequential(torch.nn.Linear(1024, 251),

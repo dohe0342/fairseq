@@ -470,7 +470,7 @@ def main(cfg: InferConfig) -> float:
                         valid_res[clf] += torch.eq(idx, target).sum().item()
 
                         if batch_idx % 100 == 0:
-                            print(train_res[clf]*100 / all)
+                            print(valid_res[clf]*100 / all)
 
 
 

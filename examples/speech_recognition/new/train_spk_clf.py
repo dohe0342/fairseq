@@ -638,11 +638,11 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
         else:
             logger.error("Crashed! %s", str(e))
 
-    logger.info("Word error rate: %.4f", wer)
+    #logger.info("Word error rate: %.4f", wer)
     #if cfg.is_ax:
     #    return wer, None
 
-    return wer
+    #return wer
 
 
 def cli_main() -> None:
@@ -668,9 +668,4 @@ def cli_main() -> None:
 
 
 if __name__ == "__main__":
-    container = OmegaConf.to_container(cfg, resolve=True, enum_to_str=True)
-    cfg = OmegaConf.create(container)
-    OmegaConf.set_struct(cfg, True)
-
-    #cli_main()
-    main(cfg)
+    cli_main()

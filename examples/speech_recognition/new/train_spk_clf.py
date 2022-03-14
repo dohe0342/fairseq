@@ -445,22 +445,6 @@ class InferenceProcessor:
             self.num_sentences += sample["id"].numel()
 
     def train_spk_clf(self, sample: Dict[str, Any]) -> None:
-        '''
-        with torch.no_grad():
-            for name, param in self.models[0].named_parameters():
-                #if 'k_proj.bias' in name or 'q_proj.bias' in name:
-                if 'w2v_model.encoder' in name and 'bias' in name:
-                    print(param)
-                    #param = torch.nn.Parameter(torch.zeros(param.size()[0]))
-                    #print(f'set {name} to 0.')
-        '''
-        '''
-        hypos = self.task.inference_step(
-            generator=self.generator,
-            models=self.models,
-            sample=sample,
-        )
-        '''
         with torch.no_grad():
             encoder_input = { 
                 k: v for k, v in sample["net_input"].items() if k != "prev_output_tokens"

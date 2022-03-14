@@ -465,7 +465,7 @@ class InferenceProcessor:
         
         features = encoder_out['encoder_out'].mean(0)
         for id in sample['id']:
-            target.append(self.spk_idx[self.tsv[id+1].split('/')[0]])
+            target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
         '''
         for i, hypo in enumerate(hypos):
             if i == 0:

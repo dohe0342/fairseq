@@ -445,21 +445,22 @@ def main(cfg: InferConfig) -> float:
 
         with InferenceProcessor(cfg, spk_clf) as processor:
             for batch_idx, sample in enumerate(processor):
-                prob, target = processor.train_spk_clf(sample)
-                all += target.size()[0]
-                for clf in range(clf_num):
-                    _, idx = prob[clf].max(1)
-                    res[clf] += torch.eq(idx, target).sum().item()
+                if batch_idx < 0.8*batch_count:
+                    prob, target = processor.train_spk_clf(sample)
+                    train_all += target.size()[0]
+                    for clf in range(clf_num):
+                        _, idx = prob[clf].max(1)
+                        train_res[clf] += torch.eq(idx, target).sum().item()
 
-                    loss = criterion(prob[clf], target)
-                    loss.backward()
-                    del loss
-                    
-                    if batch_idx % 16 == 0:
-                        optim[clf].step()
+                        loss = criterion(prob[clf], target)
+                        loss.backward()
+                        del loss
+                        
+                        if batch_idx % 16 == 0:
+                            optim[clf].step()
 
-                    if batch_idx % 40 == 0:
-                        print(res[clf]*100 / all)
+                        if batch_idx % 40 == 0:
+                            print(train_res[clf]*100 / all)
 
 
 @hydra.main(config_path=config_path, config_name="infer")

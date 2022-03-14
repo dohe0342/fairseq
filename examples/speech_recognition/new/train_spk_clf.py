@@ -550,18 +550,18 @@ def main(cfg: InferConfig) -> float:
     criterion = torch.nn.CrossEntropyLoss()
     optim = [torch.optim.Adam(processor.spk_clf[i].parameters(), lr=0.00001) for i in range(11)]
 
-    for i in range(10):
+    for epoch in range(10):
         output = []
         target = []
         res = 0
         all = 0
-        for j, sample in enumerate(processor):
+        for batch_idx, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             #print(prob)
             #print(idx)
             #print(target)
             #print('')
-            all += j
+            all += target.size()[0]
             for k in range(11):
                 _, idx = prob[i].max(1)
                 print(torch.eq(idx, target).sum().item(), target.size())

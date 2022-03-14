@@ -1072,6 +1072,7 @@ class TransformerEncoder(nn.Module):
                     break
         else:
             for i, layer in enumerate(self.layers):
+                print(i)
                 dropout_probability = np.random.random() if self.layerdrop > 0 else 1
                 if not self.training or (dropout_probability > self.layerdrop):
                     x, (z, lr) = layer(

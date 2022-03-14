@@ -468,6 +468,7 @@ class InferenceProcessor:
         target = torch.LongTensor(target).to('cuda')
         #print(type(prob))
         #print(target)
+        print(prob.type)
         exit()
         
         return prob, target

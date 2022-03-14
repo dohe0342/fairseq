@@ -473,9 +473,9 @@ class InferenceProcessor:
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')], dim=0)
         '''
-        print(target)
+        #print(target)
         #features = features.to('cuda')
-        print(features.size())
+        #print(features.size())
         #print(features.size())
         prob = self.spk_clf(features)
         target = torch.LongTensor(target).to('cuda')
@@ -551,10 +551,10 @@ def main(cfg: InferConfig) -> float:
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             _, idx = prob.max(1)
-            #print(prob)
-            #print(idx)
-            #print(target)
-            #print('')
+            print(prob)
+            print(idx)
+            print(target)
+            print('')
 
             loss = criterion(prob, target)
             loss.backward()

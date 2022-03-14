@@ -548,7 +548,7 @@ def main(cfg: InferConfig) -> float:
         output = []
         target = []
         res = 0
-        all = 0
+        all = 
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             _, idx = prob.max(1)

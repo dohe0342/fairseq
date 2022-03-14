@@ -1089,7 +1089,7 @@ class TransformerEncoder(nn.Module):
                 if i == tgt_layer:
                     r = x
                     break
-        
+        print('len', len(layer_results)) 
         if r is not None:
             x = r
 

@@ -445,12 +445,13 @@ class InferenceProcessor:
                     #param = torch.nn.Parameter(torch.zeros(param.size()[0]))
                     #print(f'set {name} to 0.')
         '''
+        '''
         hypos = self.task.inference_step(
             generator=self.generator,
             models=self.models,
             sample=sample,
         )
-        
+        '''
         with torch.no_grad():
             encoder_input = { 
                 k: v for k, v in sample["net_input"].items() if k != "prev_output_tokens"
@@ -464,10 +465,10 @@ class InferenceProcessor:
         target = []
         
         #features = encoder_out['encoder_out'].mean(0)
-        #features = [encoder_out['layer_results'].mean(0)
+        features = [encoder_out['layer_results'][i].mean(0) for i in range(11)]
         #for key in encoder_out:
         #    print(key)
-        print(len(encoder_out['layer_results']))
+        #print(len(encoder_out['layer_results']))
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
         '''
@@ -481,7 +482,8 @@ class InferenceProcessor:
         #features = features.to('cuda')
         #print(features.size())
         #print(features.size())
-        prob = self.spk_clf(features)
+        #prob = self.spk_clf(features)
+        prob = [self.spk_clf[i](features) for i in range(11)]
         target = torch.LongTensor(target).to('cuda')
         #print(type(prob))
         #print(target)
@@ -563,10 +565,11 @@ def main(cfg: InferConfig) -> float:
             print(torch.eq(idx, target).sum().item())
             res += torch.eq(idx, target).sum().item()
             all += j
-
-            loss = criterion(prob, target)
-            loss.backward()
-            optim.step()
+            
+            for k in range(11):
+                loss = criterion(prob[i], target)
+                loss.backward()
+                optim[i].step()
     print(res*100/all)
     '''
         processor.log_generation_time()

@@ -568,7 +568,7 @@ def main(cfg: InferConfig) -> float:
                 loss = criterion(prob[0], target)
                 #print(loss.item())
                 loss.backward()
-                if batch_idx % 8 == 0:
+                if batch_idx % 16 == 0:
                     optim[0].step()
 
                 if batch_idx % 40 == 0:

@@ -559,7 +559,7 @@ def main(cfg: InferConfig) -> float:
         all = 0
         with InferenceProcessor(cfg, spk_clf) as processor:
             for batch_idx, sample in enumerate(processor):
-                prob, target = processor.train_spk_clf(spk_clf, sample)
+                prob, target = processor.train_spk_clf(sample)
                 #print(prob)
                 #print(idx)
                 #print(target)

@@ -97,7 +97,7 @@ def reset_logging():
 class InferenceProcessor:
     cfg: InferConfig
 
-    def __init__(self, cfg: InferConfig) -> None:
+    def __init__(self, cfg: InferConfig, spk_clf) -> None:
         self.cfg = cfg
         self.task = tasks.setup_task(cfg.task)
 

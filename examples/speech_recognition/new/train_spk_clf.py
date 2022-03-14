@@ -562,17 +562,16 @@ def main(cfg: InferConfig) -> float:
             #print(target)
             #print('')
             all += target.size()[0]
-            for freq in range(10):
-                for k in range(11):
-                    _, idx = prob[i].max(1)
-                    print(torch.eq(idx, target).sum().item(), target.size())
-                    #res += torch.eq(idx, target).sum().item()
+            for layer_idx in range(11):
+                _, idx = prob[layer_idx].max(1)
+                print(torch.eq(idx, target).sum().item(), target.size())
+                #res += torch.eq(idx, target).sum().item()
 
-                    loss = criterion(prob[i], target)
-                    #print(loss.item())
-                    loss.backward(retain_graph=True)
-            optim[i].step()
-        print('')
+                loss = criterion(prob[layer_idx], target)
+                #print(loss.item())
+                loss.backward(retain_graph=True)
+                if batch_idx % 8 == 0:
+                    optim[i].step()
         #print(res*100/all)
     return 0.
     '''

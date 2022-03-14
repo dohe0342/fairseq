@@ -564,7 +564,7 @@ def main(cfg: InferConfig) -> float:
             all += target.size()[0]
             for layer_idx in range(11):
                 _, idx = prob[layer_idx].max(1)
-                print(torch.eq(idx, target).sum().item(), target.size())
+                #print(torch.eq(idx, target).sum().item(), target.size())
                 #res += torch.eq(idx, target).sum().item()
 
                 loss = criterion(prob[layer_idx], target)

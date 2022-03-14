@@ -547,14 +547,18 @@ def main(cfg: InferConfig) -> float:
     for i in range(20):
         output = []
         target = []
-
+        res = 0
+        all = 0
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             _, idx = prob.max(1)
             #print(prob)
-            print(idx)
-            print(target)
-            print('')
+            #print(idx)
+            #print(target)
+            #print('')
+            res += torch.eq(idx, target).sum().items()
+            all += j
+            print(res)
 
             loss = criterion(prob, target)
             loss.backward()

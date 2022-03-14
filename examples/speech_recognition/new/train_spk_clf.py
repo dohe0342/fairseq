@@ -469,7 +469,7 @@ def main(cfg: InferConfig) -> float:
                         valid_res[clf] += torch.eq(idx, target).sum().item()
 
                         if batch_idx % 100 == 0:
-                            print(valid_res[clf]*100 / valid_all)
+                            print('valid acc = ', valid_res[clf]*100 / valid_all)
 
 
 

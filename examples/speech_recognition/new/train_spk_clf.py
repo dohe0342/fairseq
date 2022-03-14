@@ -558,7 +558,7 @@ def main(cfg: InferConfig) -> float:
     for epoch in range(10):
         output = []
         target = []
-        res = [0 for i in range(11)]
+        res = [0 for i in range(clf_num)]
         all = 0
         with InferenceProcessor(cfg, spk_clf) as processor:
             for batch_idx, sample in enumerate(processor):

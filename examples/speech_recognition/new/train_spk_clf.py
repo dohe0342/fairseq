@@ -461,6 +461,24 @@ def main(cfg: InferConfig) -> float:
 
                         if batch_idx % 100 == 0:
                             print(train_res[clf]*100 / all)
+                else:
+                    with torch.no_grad():
+                        prob, target = processor.train_spk_clf(sample)
+                    train_all += target.size()[0]
+                    for clf in range(clf_num):
+                        _, idx = prob[clf].max(1)
+                        train_res[clf] += torch.eq(idx, target).sum().item()
+
+                        loss = criterion(prob[clf], target)
+                        loss.backward()
+                        del loss
+                        
+                        if batch_idx % 16 == 0:
+                            optim[clf].step()
+
+                        if batch_idx % 100 == 0:
+                            print(train_res[clf]*100 / all)
+
 
 
 @hydra.main(config_path=config_path, config_name="infer")

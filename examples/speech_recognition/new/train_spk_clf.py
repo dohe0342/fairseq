@@ -454,7 +454,7 @@ class InferenceProcessor:
         
         features = None
         target = []
-        print(hypos[0][0]['emission'].type)
+        print(hypos[0][0]['emission'].dtype)
         for i, hypo in enumerate(hypos):
             if i == 0:
                 features = hypo[0]['emission'].mean(0).unsqueeze(0)
@@ -468,7 +468,7 @@ class InferenceProcessor:
         target = torch.LongTensor(target).to('cuda')
         #print(type(prob))
         #print(target)
-        print(prob.type)
+        print(prob.dtype)
         exit()
         
         return prob, target

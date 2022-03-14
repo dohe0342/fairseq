@@ -557,13 +557,13 @@ def main(cfg: InferConfig) -> float:
         all = 0
         for j, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
-            _, idx = prob.max(1)
             #print(prob)
             #print(idx)
             #print(target)
             #print('')
                         
             for k in range(11):
+                _, idx = prob[i].max(1)
                 print(torch.eq(idx, target).sum().item())
                 #res += torch.eq(idx, target).sum().item()
                 #all += j

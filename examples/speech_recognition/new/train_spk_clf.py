@@ -549,7 +549,6 @@ def main(cfg: InferConfig) -> float:
                                         torch.nn.Softmax(dim=1)).to('cuda') for i in range(11)]
 
     #with InferenceProcessor(cfg) as processor:
-    processor = InferenceProcessor(cfg)
     criterion = torch.nn.CrossEntropyLoss()
     optim = [torch.optim.Adam(spk_clf[i].parameters(), lr=0.00001) for i in range(11)]
 

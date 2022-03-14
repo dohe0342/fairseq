@@ -546,7 +546,6 @@ def main(cfg: InferConfig) -> float:
     logger.info(cfg.common_eval.path)
 
     #with InferenceProcessor(cfg) as processor:
-    processor = InferenceProcessor(cfg)
     criterion = torch.nn.CrossEntropyLoss()
     optim = [torch.optim.Adam(processor.spk_clf[i].parameters(), lr=0.00001) for i in range(11)]
 
@@ -555,6 +554,7 @@ def main(cfg: InferConfig) -> float:
         target = []
         res = 0
         all = 0
+        processor = InferenceProcessor(cfg)
         for batch_idx, sample in enumerate(processor):
             prob, target = processor.train_spk_clf(sample)
             #print(prob)

@@ -92,6 +92,7 @@ def reset_logging():
     )
     root.addHandler(handler)
 
+        
 
 class InferenceProcessor:
     cfg: InferConfig
@@ -148,9 +149,7 @@ class InferenceProcessor:
 
         self.progress_bar = self.build_progress_bar()
 
-        self.spk_clf = [torch.nn.Sequential(torch.nn.Linear(768, 251),
-                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(12)]
-
+        
         self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.spk = open('/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
         self.spk = [int(i.split('\n')[0]) for i in self.spk]
@@ -544,6 +543,9 @@ def main(cfg: InferConfig) -> float:
         raise ValueError("CUDA not found; set `cpu=True` to run without CUDA")
 
     logger.info(cfg.common_eval.path)
+    
+    spk_clf = [torch.nn.Sequential(torch.nn.Linear(768, 251),
+                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(12)]
 
     #with InferenceProcessor(cfg) as processor:
     processor = InferenceProcessor(cfg)

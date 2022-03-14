@@ -424,9 +424,8 @@ def main(cfg: InferConfig) -> float:
     logger.info(cfg.common_eval.path)
     
     emb_dim = 768
-    clf_num = 11
-    class_num = 1166
-
+    clf_num = 12
+    class_num = 251 if cfg.dataset.gen_subset=='train-100' else 1166
     batch_count = 2992 if cfg.dataset.gen_subset=='train-100' else 14586
 
     spk_clf = [torch.nn.Sequential(torch.nn.Linear(emb_dim, class_num),

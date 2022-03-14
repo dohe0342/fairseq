@@ -571,7 +571,7 @@ def main(cfg: InferConfig) -> float:
                 #print(loss.item())
                 loss.backward(retain_graph=True)
                 if batch_idx % 8 == 0:
-                    optim[layer_idx].step()
+                    optim[0].step()
         #print(res*100/all)
     return 0.
     '''

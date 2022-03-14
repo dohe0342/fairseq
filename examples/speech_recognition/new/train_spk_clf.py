@@ -556,7 +556,7 @@ def main(cfg: InferConfig) -> float:
             #print(idx)
             #print(target)
             #print('')
-            res += torch.eq(idx, target).sum().items()
+            res += torch.eq(idx, target).sum().item()
             all += j
             print(res)
 

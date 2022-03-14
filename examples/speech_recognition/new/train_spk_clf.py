@@ -459,7 +459,7 @@ def main(cfg: InferConfig) -> float:
                             optim[clf].step()
 
                         if batch_idx % 100 == 0:
-                            print(train_res[clf]*100 / train_all)
+                            print('train acc = ', train_res[clf]*100 / train_all)
                 else:
                     with torch.no_grad():
                         prob, target = processor.train_spk_clf(sample)

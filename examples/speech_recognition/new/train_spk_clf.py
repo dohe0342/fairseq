@@ -569,7 +569,7 @@ def main(cfg: InferConfig) -> float:
 
                 loss = criterion(prob[i], target)
                 print(loss.item())
-                loss.backward()
+                loss.backward(retain_graph=True)
                 optim[i].step()
                 del loss
             print('')

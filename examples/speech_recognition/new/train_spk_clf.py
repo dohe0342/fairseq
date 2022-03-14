@@ -574,6 +574,7 @@ def main(cfg: InferConfig) -> float:
                     optim[i].step()
                 print('')
         #print(res*100/all)
+    
     return 0
     '''
         processor.log_generation_time()

@@ -465,8 +465,7 @@ class InferenceProcessor:
         
         features = encoder_out['encoder_out'].mean(0)
         for id in sample['id']:
-            print(id)
-            target.append(self.spk_idx[self.tsv[
+            target.append(self.spk_idx[self.tsv[id+1].split('/')[0]])
         '''
         for i, hypo in enumerate(hypos):
             if i == 0:
@@ -474,6 +473,7 @@ class InferenceProcessor:
             else:
                 features = torch.cat([features, hypo[0]['emission'].mean(0).unsqueeze(0).to('cuda')], dim=0)
         '''
+        print(target)
         #features = features.to('cuda')
         print(features.size())
         #print(features.size())

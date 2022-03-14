@@ -1008,7 +1008,7 @@ class TransformerEncoder(nn.Module):
 
         if self.layer_norm_first and layer is None:
             x = self.layer_norm(x)
-
+        print('len', len(layer_results))
         return x, layer_results
 
     def extract_features(

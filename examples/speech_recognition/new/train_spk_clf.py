@@ -573,7 +573,7 @@ def main(cfg: InferConfig) -> float:
                 if batch_idx % 8 == 0:
                     optim[0].step()
 
-                if batch_idx % 40 == 0:
+                if batch_idx % 70 == 0:
                     print(epoch, res / all)
 
         #print(res*100/all)

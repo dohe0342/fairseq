@@ -568,7 +568,7 @@ def main(cfg: InferConfig) -> float:
                 #res += torch.eq(idx, target).sum().item()
 
                 loss = criterion(prob[i], target)
-                print(loss.item())
+                #print(loss.item())
                 loss.backward(retain_graph=True)
                 optim[i].step()
             print('')

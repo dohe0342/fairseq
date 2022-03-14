@@ -17,4 +17,4 @@ CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/in
   --labels ltr \
   --max-tokens 4000000 \
   --post-process letter \
-  --beam=500
+  --beam=1

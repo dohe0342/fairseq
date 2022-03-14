@@ -46,6 +46,7 @@ logger = logging.getLogger(__name__)
 
 config_path = Path(__file__).resolve().parent / "conf"
 
+
 def random_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
@@ -54,6 +55,7 @@ def random_seed(seed):
     torch.backends.cudnn.deterministic = True
     np.random.seed(seed)
     random.seed(seed)
+
 
 @dataclass
 class DecodingConfig(DecoderConfig, FlashlightDecoderConfig):

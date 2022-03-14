@@ -472,7 +472,6 @@ def main(cfg: InferConfig) -> float:
                             print('valid acc = ', valid_res[clf]*100 / valid_all)
 
 
-
 @hydra.main(config_path=config_path, config_name="infer")
 def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
     container = OmegaConf.to_container(cfg, resolve=True, enum_to_str=True)

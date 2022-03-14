@@ -545,7 +545,7 @@ def main(cfg: InferConfig) -> float:
     logger.info(cfg.common_eval.path)
     
     spk_clf = [torch.nn.Sequential(torch.nn.Linear(768, 251),
-                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(1)]
+                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(11)]
 
     #with InferenceProcessor(cfg) as processor:
     processor = InferenceProcessor(cfg)

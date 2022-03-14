@@ -567,8 +567,8 @@ def main(cfg: InferConfig) -> float:
                     res += torch.eq(idx, target).sum().item()
 
                     loss = criterion(prob[clf], target)
-                    #print(loss.item())
                     loss.backward()
+                    
                     if batch_idx % 16 == 0:
                         optim[clf].step()
 

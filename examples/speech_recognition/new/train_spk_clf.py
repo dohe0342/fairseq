@@ -450,7 +450,13 @@ class InferenceProcessor:
             models=self.models,
             sample=sample,
         )
-        
+        encoder_input = { 
+            k: v for k, v in sample["net_input"].items() if k != "prev_output_tokens"
+        }
+
+        model = models[0]
+        encoder_out = model(**encoder_input)
+
         features = None
         target = []
         #print(hypos[4][0]['emission'].size())

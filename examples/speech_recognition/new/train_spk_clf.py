@@ -631,7 +631,7 @@ def hydra_main(cfg: InferConfig) -> Union[float, Tuple[float, Optional[float]]]:
         else:
             distributed_utils.call_main(cfg, main)
 
-        wer = parse_wer(get_wer_file(cfg))
+        #wer = parse_wer(get_wer_file(cfg))
     except BaseException as e:  # pylint: disable=broad-except
         if not cfg.common.suppress_crashes:
             raise

@@ -389,7 +389,7 @@ class InferenceProcessor:
             emission_prob = h[0]["emission"]
             print(emission_prob.size())
             conf, idx = emission_prob.max(1)
-            print(idx.size())
+            print(idx)
             for i in range(len(conf)):
                 #print(label_dict[idx[i].item()], conf[i])
                 hypo_sentence += label_dict[idx[i].item()]

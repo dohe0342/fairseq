@@ -1328,7 +1328,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = residual + x
             x = self.final_layer_norm(x)
             
-            x = self.final_layer_norm(x)
+            #x = self.final_layer_norm(x)
 
             #print('attn time = ', attn_time*1000)
             #print('fc1 time = ', fc1_time*1000)

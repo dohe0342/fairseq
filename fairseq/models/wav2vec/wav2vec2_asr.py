@@ -542,7 +542,6 @@ class Wav2VecEncoder(FairseqEncoder):
 
         if self.proj:
             x = self.proj(x)
-            print(x.size())
 
         return {
             "encoder_out": x,  # T x B x C

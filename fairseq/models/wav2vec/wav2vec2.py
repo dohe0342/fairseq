@@ -1299,7 +1299,6 @@ class TransformerSentenceEncoderLayer(nn.Module):
             x = self.dropout3(x)
             x = residual + x
         else:
-            attn_time = time.time()
             x, attn = self.self_attn(
                 query=x,
                 key=x,
@@ -1307,43 +1306,29 @@ class TransformerSentenceEncoderLayer(nn.Module):
                 key_padding_mask=self_attn_padding_mask,
                 need_weights=False,
             )
-            attn_time = time.time() - attn_time
-
+            
             x = self.dropout1(x)
             x = residual + x
             
-            #ada_ln_p = random.random() < 0.01
-            #if ada_ln_p:
-            #    x = self.self_attn_ins_layer_norm(x)
-            #else:
-            #    x = self.self_attn_layer_norm(x)
-            x = self.self_attn_layer_norm(x)
+            ada_ln_p = random.random() < 0.01
+            
+            if ada_ln_p:
+                x = self.self_attn_ins_layer_norm(x)
+            else:
+                x = self.self_attn_layer_norm(x)
 
-            fc1_time = time.time()
             residual = x
             x = self.activation_fn(self.fc1(x))
-            fc1_time = time.time() - fc1_time
             x = self.dropout2(x)
 
-            fc2_time = time.time()
             x = self.fc2(x)
-            fc2_time = time.time() - fc2_time
-
             layer_result = x
 
             x = self.dropout3(x)
             x = residual + x
             x = self.final_layer_norm(x)
             
-            #ada_ln_p = random.random() < max(0.004*(6-layer_num), 0)
-            ada_ln_p = 0
-            
-            if ada_ln_p:
-                x = self.self_attn_ins_layer_norm(x)
-            else:
-                x = self.final_layer_norm(x)
-            
-            #x = self.final_layer_norm(x)
+            x = self.final_layer_norm(x)
 
             #print('attn time = ', attn_time*1000)
             #print('fc1 time = ', fc1_time*1000)
@@ -1382,8 +1367,6 @@ class LayerInstanceNorm(nn.Module):
     #        init.zeros_(self.bias)
 
     def forward(self, input):
-        #print('input size = ', input.size())
-        #return input
         mean = input.reshape(input.size()[1], -1).mean(dim=1)
         std = input.reshape(input.size()[1], -1).std(dim=1)
 
@@ -1392,15 +1375,11 @@ class LayerInstanceNorm(nn.Module):
 
         mean = mean[torch.randperm(mean.size()[0])]
         std = std[torch.randperm(std.size()[0])]
-        #print(mean.size())
-        #print(std.size())
-        #print(input.size())
-
-        input = std*F.layer_norm(input, self.normalized_shape, self.weight, self.bias, self.eps) + mean
+        
+        input = std*F.layer_norm(input, self.normalized_shape, \
+                                self.weight, self.bias, self.eps) + mean
         
         return input
-        #return F.layer_norm(
-        #    input, self.normalized_shape, self.weight, self.bias, self.eps)
 
     def extra_repr(self) -> str:
         return '{normalized_shape}, eps={eps}, ' \

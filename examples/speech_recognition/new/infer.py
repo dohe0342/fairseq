@@ -386,7 +386,7 @@ class InferenceProcessor:
         
         for h in hypos:
             #emission_prob = softmax(h[0]["emission"])
-            emiision_prob = h[0]["emission"]
+            emission_prob = h[0]["emission"]
             conf, idx = emission_prob.max(1)
             print(idx.size())
             for i in range(len(conf)):

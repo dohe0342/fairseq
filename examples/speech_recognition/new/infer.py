@@ -121,6 +121,7 @@ class InferenceProcessor:
                     for cosine in cosine_sim_sort:
                         print(cosine)
         ''' 
+        print(self.models)
 
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
@@ -130,7 +131,6 @@ class InferenceProcessor:
             task_cfg=saved_cfg.task,
         )
         self.generator = Decoder(cfg.decoding, self.tgt_dict)
-        print(self.generator)
         self.gen_timer = StopwatchMeter()
         self.wps_meter = TimeMeter()
         self.num_sentences = 0

@@ -374,7 +374,7 @@ class InferenceProcessor:
         
         target_sentence = ''
         hypo_sentence = ''
-
+        '''
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]
         
@@ -397,7 +397,7 @@ class InferenceProcessor:
             print('hypo sentence = ')
             print(hypo_sentence)
             exit()
-
+        '''
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)
         self.wps_meter.update(num_generated_tokens)

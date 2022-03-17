@@ -385,7 +385,8 @@ class InferenceProcessor:
         softmax = torch.nn.Softmax(dim=1)
         
         for h in hypos:
-            emission_prob = softmax(h[0]["emission"])
+            #emission_prob = softmax(h[0]["emission"])
+            emiision_prob = h[0]["emission"]
             conf, idx = emission_prob.max(1)
             print(idx.size())
             for i in range(len(conf)):

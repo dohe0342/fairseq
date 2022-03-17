@@ -479,7 +479,6 @@ class Wav2VecEncoder(FairseqEncoder):
             from fairseq.distributed import FullyShardedDataParallel
 
             for name, module in model.named_modules():
-                print('fuck!!!!!!!!!!', name)
                 if "encoder.layers" in name and len(name.split(".")) == 3:
                     # Only for layers, we do a special handling and load the weights one by one
                     # We dont load all weights together as that wont be memory efficient and may

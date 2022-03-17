@@ -383,12 +383,13 @@ class InferenceProcessor:
         print('\n\n')
 
         softmax = torch.nn.Softmax(dim=1)
+        
         for h in hypos:
             emission_prob = softmax(h[0]["emission"])
             conf, idx = emission_prob.max(1)
+            print(idx.size())
             for i in range(len(conf)):
                 #print(label_dict[idx[i].item()], conf[i])
-                print(idx[i])
                 hypo_sentence += label_dict[idx[i].item()]
             print(sample['id'])
             print('hypo sentence = ')

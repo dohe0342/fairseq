@@ -130,6 +130,7 @@ class InferenceProcessor:
             task_cfg=saved_cfg.task,
         )
         self.generator = Decoder(cfg.decoding, self.tgt_dict)
+        print(self.generator)
         self.gen_timer = StopwatchMeter()
         self.wps_meter = TimeMeter()
         self.num_sentences = 0

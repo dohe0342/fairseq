@@ -338,7 +338,6 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
-        ''' 
         label_dict = {0: '',
                       1: '29',
                       2: '30',
@@ -394,7 +393,6 @@ class InferenceProcessor:
             print('hypo sentence = ')
             print(hypo_sentence)
             exit()
-        '''
 
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)

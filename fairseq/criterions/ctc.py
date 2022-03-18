@@ -708,7 +708,7 @@ class SpeakerClassification(CtcCriterion):
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
         lprobs = model.get_normalized_probs(
-            net_output, log_probs=False
+            net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
         
         features = None

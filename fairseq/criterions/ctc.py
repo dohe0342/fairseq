@@ -712,12 +712,9 @@ class SpeakerClassification(CtcCriterion):
         features = None
         target = []
     
-        features = [net_output['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
-    
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
     
-        prob = [self.spk_clf[i](features[i]) for i in range(len(self.spk_clf))]
         target = torch.LongTensor(target).to('cuda')
 
         if "src_lengths" in sample["net_input"]:
@@ -741,7 +738,7 @@ class SpeakerClassification(CtcCriterion):
             target_lengths = pad_mask.sum(-1)
         
         with torch.backends.cudnn.flags(enabled=False):
-            loss = F.ctc_loss(
+            loss_ctc = F.ctc_loss(
                     lprobs,
                     targets_flat,
                     input_lengths,

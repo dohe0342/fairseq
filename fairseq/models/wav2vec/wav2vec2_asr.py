@@ -1066,7 +1066,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj_ctc(x)
-
+            
             spk_logit = self.proj_spk(x)
         
         return {

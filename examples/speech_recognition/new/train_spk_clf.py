@@ -354,7 +354,9 @@ class InferenceProcessor:
             }
 
             model = self.models[0]
-            encoder_out = model(**encoder_input)
+            #encoder_out = model(**encoder_input)
+            encoder_out = model(encoder_input['net_input']['source'])
+            print(encoder_out.size())
         
         features = None
         target = []

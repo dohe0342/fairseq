@@ -360,7 +360,7 @@ class InferenceProcessor:
             "padding_mask": sample['net_input']['padding_mask'],
             "mask": False,
             }    
-            encoder_out = model.w2v_encoder.w2v_model.extract_features(sample['net_input']['source'])
+            encoder_out = model.w2v_encoder.w2v_model.extract_features(**w2v_args)
             print(encoder_out.size())
         
         features = None

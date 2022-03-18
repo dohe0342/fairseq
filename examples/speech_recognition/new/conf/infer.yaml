@@ -16,7 +16,7 @@ common_eval:
   post_process: letter
   quiet: true
 dataset:
-  max_tokens: 3000000
+  max_tokens: 2000000
   gen_subset: test
 distributed_training:
   distributed_world_size: 1

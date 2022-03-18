@@ -698,7 +698,7 @@ class SpeakerClassification(CtcCriterion):
         super().__init__(CtcCriterionConfig, task)
         self.train_spk_id = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.valid_spk_id = open('/home/work/workspace/LibriSpeech/manifests/dev-other.tsv', 'r').readlines()
-self.tsv = open(f'/home/work/workspace/LibriSpeech/manifests/{cfg.dataset.gen_subset}.tsv', 'r').readlines()
+        self.tsv = open(f'/home/work/workspace/LibriSpeech/manifests/{cfg.dataset.gen_subset}.tsv', 'r').readlines()
         self.spk = open(f'/home/work/workspace/LibriSpeech/manifests/{cfg.dataset.gen_subset}.spk', 'r').readlines()
         self.spk = [int(i.split('\n')[0]) for i in self.spk]
         self.spk_idx = {}

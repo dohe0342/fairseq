@@ -1042,7 +1042,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         
         if targ_d is not None:
             self.proj_ctc = Linear(d, targ_d)
-            self.proj_spk = Linear(d, 251)
+            self.proj_spk = Linear(d, spk_num)
             self.proj = [self.proj_ctc, self.proj_spk]
             self.softmax = nn.Softmax(dim=1)
 

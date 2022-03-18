@@ -361,6 +361,8 @@ class InferenceProcessor:
             "mask": False,
             }    
             encoder_out = model.w2v_encoder.w2v_model.extract_features(**w2v_args)
+            for key in encoder_out:
+                print(key)
             print(encoder_out.size())
         
         features = None

@@ -726,8 +726,8 @@ class SpeakerClassification(CtcCriterion):
                 non_padding_mask = ~net_output["padding_mask"]
                 input_lengths = non_padding_mask.long().sum(-1)
             else:
-                input_lengths = lprobs_list[0].new_full(
-                    (lprobs_list[0].size(1),), lprobs_list[0].size(0), dtype=torch.long
+                input_lengths = lprobs.new_full(
+                    (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
 
         pad_mask = (sample["target"] != self.pad_idx) & (

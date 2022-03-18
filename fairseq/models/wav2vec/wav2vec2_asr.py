@@ -1053,7 +1053,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
         ft = self.freeze_finetune_updates <= self.num_updates
         with torch.no_grad() if not ft else contextlib.ExitStack():
-            res = self.w2v_model.extract_features(**w2v_args, tgt_layer=tgt_layer, branch_ctc=True)
+            res = self.w2v_model.extract_features(**w2v_args)
 
             x = res["x"]
             padding_mask = res["padding_mask"]

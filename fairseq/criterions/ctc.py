@@ -750,6 +750,7 @@ class SpeakerClassification(CtcCriterion):
                     zero_infinity=self.zero_infinity,
                 ) 
             loss_spk = criterion(net_output['spk_prob'], target)
+            loss = loss_ctc - 0.01*loss_spk
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

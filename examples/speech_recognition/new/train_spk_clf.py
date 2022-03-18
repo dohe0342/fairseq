@@ -355,7 +355,7 @@ class InferenceProcessor:
 
             model = self.models[0]
             #encoder_out = model(**encoder_input)
-            encoder_out = model(sample['net_input']['source'])
+            encoder_out = model.encoder.feature_extractor(sample['net_input']['source'])
             print(encoder_out.size())
         
         features = None

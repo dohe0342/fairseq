@@ -1075,8 +1075,6 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
                 mid2_layer_results = res["layer_results"][8][0].mean(0)
                 out_layer_results = res["layer_results"][11][0].mean(0)
 
-                print(out_layer_results.size())
-
                 spk_logits = self.proj_spk(out_layer_results)
                 spk_prob = self.softmax(spk_logits)
         

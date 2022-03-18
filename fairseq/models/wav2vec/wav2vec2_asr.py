@@ -1073,7 +1073,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
                 mid2_layer_results = res["layer_results"][8].mean(1)
                 out_layer_results = res["layer_results"][11].mean(1)
 
-            spk_logit = self.proj_spk(out_layer_resutls)
+                spk_logit = self.proj_spk(out_layer_resutls)
         
         return {
             "encoder_out": x,  # T x B x C

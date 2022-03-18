@@ -355,6 +355,11 @@ class InferenceProcessor:
 
             model = self.models[0]
             #encoder_out = model(**encoder_input)
+            w2v_args = {
+            "source": sample['net_input']['source'],
+            "padding_mask": padding_mask,
+            "mask": self.apply_mask and self.training,
+            }    
             encoder_out = model.w2v_encoder.w2v_model.extract_features(sample['net_input']['source'])
             print(encoder_out.size())
         

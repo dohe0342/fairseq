@@ -1081,7 +1081,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             "encoder_out": x,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
-            "spk_logits": spk_pob,
+            "spk_prob": spk_pob,
         }
 
 class TransformerDecoder(FairseqIncrementalDecoder):

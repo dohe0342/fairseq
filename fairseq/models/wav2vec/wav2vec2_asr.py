@@ -1066,12 +1066,14 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj_ctc(x)
+
             spk_logit = self.proj_spk(x)
         
         return {
             "encoder_out": x,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
+            "spk_logits": 
         }
 
 class TransformerDecoder(FairseqIncrementalDecoder):

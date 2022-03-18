@@ -361,7 +361,7 @@ class InferenceProcessor:
         target = []
         
         #features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
-        features = encoder_out.mean(1)
+        features = encoder_out.mean(0)
         print(features.size())
         
         for id in sample['id']:

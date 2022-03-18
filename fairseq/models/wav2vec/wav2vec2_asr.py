@@ -1070,10 +1070,10 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             x = self.proj_ctc(x)
             
             if len(res["layer_results"]) == 12:
-                in_layer_results = res["layer_results"][2].mean(1)
-                mid1_layer_results = res["layer_results"][5].mean(1)
-                mid2_layer_results = res["layer_results"][8].mean(1)
-                out_layer_results = res["layer_results"][11].mean(1)
+                in_layer_results = res["layer_results"][2][0].mean(1)
+                mid1_layer_results = res["layer_results"][5][0].mean(1)
+                mid2_layer_results = res["layer_results"][8][0].mean(1)
+                out_layer_results = res["layer_results"][11][0].mean(1)
 
                 spk_logits = self.proj_spk(out_layer_resutls)
                 spk_prob = self.softmax(spk_logits)

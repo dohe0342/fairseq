@@ -356,13 +356,12 @@ class InferenceProcessor:
             model = self.models[0]
             #encoder_out = model(**encoder_input)
             encoder_out = model.w2v_encoder.w2v_model.feature_extractor(sample['net_input']['source'])
-            encoder_out = encoder_out.mean(dim=1)
-            print(encoder_out.size())
         
         features = None
         target = []
         
-        features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
+        #features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
+        features = encoder_out.mean(1)
         
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])

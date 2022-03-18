@@ -207,7 +207,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         metadata={"help": "newly initilize transofmer weight"},
     )
     
-    add_spk_info: bool = field(
+    del_spk_info: bool = field(
         default=False,
         metadata={"help": "add spk informatin"},
     )

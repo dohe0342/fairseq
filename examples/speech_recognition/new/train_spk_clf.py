@@ -355,7 +355,7 @@ class InferenceProcessor:
 
             model = self.models[0]
             #encoder_out = model(**encoder_input)
-            encoder_out = model.w2v_encoder.feature_extractor(sample['net_input']['source'])
+            encoder_out = model.w2v_encoder.w2v_model.extract_features(sample['net_input']['source'])
             print(encoder_out.size())
         
         features = None

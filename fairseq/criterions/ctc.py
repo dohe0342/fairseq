@@ -696,8 +696,7 @@ class BranchCtcCriterionV2(CtcCriterion):
 class SpeakerClassification(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
-        self.train_spk_id = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
-        self.valid_spk_id = open('/home/work/workspace/LibriSpeech/manifests/dev-other.tsv', 'r').readlines()
+        self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
         self.spk = open(f'/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
         self.spk = [int(i.split('\n')[0]) for i in self.spk]
         self.spk_idx = {}
@@ -709,6 +708,17 @@ class SpeakerClassification(CtcCriterion):
         lprobs = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=False
         ).contiguous()  # (T, B, C) from the encoder
+features = None
+        target = []
+    
+        features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
+    
+        for id in sample['id']:
+            target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
+    
+        prob = [self.spk_clf[i](features[i]) for i in range(len(self.spk_clf))]
+        target = torch.LongTensor(target).to('cuda')
+
 
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]

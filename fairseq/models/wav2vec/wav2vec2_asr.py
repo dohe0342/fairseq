@@ -1046,7 +1046,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             self.proj = [self.proj_ctc, self.proj_spk]
             self.softmax = nn.Softmax(dim=1)
 
-    def forward(self, tgt_layer, source, padding_mask, **kwargs):
+    def forward(self, source, padding_mask, **kwargs):
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

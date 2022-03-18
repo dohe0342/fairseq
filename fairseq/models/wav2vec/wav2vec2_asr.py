@@ -244,7 +244,6 @@ class Wav2VecCtc(BaseFairseqModel):
             w2v_encoder = Wav2VecEncoderBranchCtcV2(cfg, len(task.target_dictionary))
         elif del_apk_info:
             w2v_encoder = Wav2VecEncoderSpkClf(cfg, len(task.target_dictionary), 251)
-
         else:
             w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))
 

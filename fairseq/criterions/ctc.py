@@ -703,6 +703,8 @@ class SpeakerClassification(CtcCriterion):
         for i, spk in enumerate(self.spk):
             self.spk_idx[spk] = i 
 
+        criterion = torch.nn.CrossEntropyLoss()
+
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
         lprobs = model.w2v_encoder.get_normalized_probs(
@@ -747,6 +749,7 @@ class SpeakerClassification(CtcCriterion):
                     reduction="sum",
                     zero_infinity=self.zero_infinity,
                 ) 
+            loss_spk = criterion(net_output['spk_prob'], target)
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

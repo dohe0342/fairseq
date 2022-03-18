@@ -355,11 +355,6 @@ class InferenceProcessor:
 
             model = self.models[0]
             #encoder_out = model(**encoder_input)
-            w2v_args = {
-            "source": sample['net_input']['source'],
-            "padding_mask": sample['net_input']['padding_mask'],
-            "mask": False,
-            }    
             encoder_out = model.w2v_encoder.w2v_model.feature_extractor(sample['net_input']['source'])
             for key in encoder_out:
                 print(key)

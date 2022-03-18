@@ -750,7 +750,7 @@ class SpeakerClassification(CtcCriterion):
                     zero_infinity=self.zero_infinity,
                 ) 
             if net_output['spk_prob'] != None:
-                loss_spk = criterion(net_output['spk_prob'], target)
+                loss_spk = self.criterion(net_output['spk_prob'], target)
                 loss = loss_ctc - 0.1*loss_spk
             else:
                 loss = loss_ctc

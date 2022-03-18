@@ -703,7 +703,7 @@ class SpeakerClassification(CtcCriterion):
         for i, spk in enumerate(self.spk):
             self.spk_idx[spk] = i 
 
-        criterion = torch.nn.CrossEntropyLoss()
+        self.criterion = torch.nn.CrossEntropyLoss()
 
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])

@@ -1067,6 +1067,11 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         if self.proj:
             x = self.proj_ctc(x)
             
+            in_layer_results = res["layer_results"][2]
+            mid1_layer_results = res["layer_results"][5]
+            mid2_layer_results = res["layer_results"][8]
+            out_layer_results = res["layer_results"][11]
+
             spk_logit = self.proj_spk(x)
         
         return {

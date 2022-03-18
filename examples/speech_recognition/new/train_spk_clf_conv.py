@@ -360,10 +360,8 @@ class InferenceProcessor:
         features = None
         target = []
         
-        print(encoder_out.size())
         #features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
         features = encoder_out.mean(2)
-        print(features.size())
         
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])
@@ -426,7 +424,7 @@ def main(cfg: InferConfig) -> float:
 
     logger.info(cfg.common_eval.path)
     
-    emb_dim = 768
+    emb_dim = 512
     clf_num = 12
     class_num = 251 if cfg.dataset.gen_subset=='train-100' else 1166
     batch_count = 2992 if cfg.dataset.gen_subset=='train-100' else 14586

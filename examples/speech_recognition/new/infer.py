@@ -121,8 +121,6 @@ class InferenceProcessor:
                     for cosine in cosine_sim_sort:
                         print(cosine)
         ''' 
-        print(self.models)
-
         self.saved_cfg = saved_cfg
         self.tgt_dict = self.task.target_dictionary
 

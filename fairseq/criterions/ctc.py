@@ -739,6 +739,7 @@ class SpeakerClassification(CtcCriterion):
         else:
             target_lengths = pad_mask.sum(-1)
         
+        loss_spk = None
         with torch.backends.cudnn.flags(enabled=False):
             loss_ctc = F.ctc_loss(
                     lprobs,

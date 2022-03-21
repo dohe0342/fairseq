@@ -844,6 +844,9 @@ class SpeakerClassification(CtcCriterion):
         """Aggregate logging outputs from data parallel training."""
 
         loss_sum = utils.item(sum(log.get("loss", 0) for log in logging_outputs))
+        loss_sum_ctc = utils.item(sum(log.get("loss_ctc", 0) for log in logging_outputs))
+        loss_sum_spk = utils.item(sum(log.get("loss_spk", 0) for log in logging_outputs))
+        
         ntokens = utils.item(sum(log.get("ntokens", 0) for log in logging_outputs))
         nsentences = utils.item(
             sum(log.get("nsentences", 0) for log in logging_outputs)

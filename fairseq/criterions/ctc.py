@@ -762,7 +762,7 @@ class SpeakerClassification(CtcCriterion):
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         logging_output = {
             "loss": utils.item(loss.data),  # * sample['ntokens'],
-            "loss_ctc": utils.item(loss_ctc.data)
+            "loss_ctc": utils.item(loss_ctc.data),
             "loss_spk": utils.item(loss_spk.data) if loss_spk != None else 0.,
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),

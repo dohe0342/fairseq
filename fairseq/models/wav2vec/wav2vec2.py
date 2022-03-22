@@ -678,6 +678,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         
         if 1:
             return (conv_features, x)
+
         x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
 
         if features_only:

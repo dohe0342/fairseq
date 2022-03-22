@@ -433,8 +433,10 @@ def main(cfg: InferConfig) -> float:
     class_num = 251 if cfg.dataset.gen_subset=='train-100' else 1166
     batch_count = 2992 if cfg.dataset.gen_subset=='train-100' else 14586
 
-    spk_clf = [torch.nn.Sequential(torch.nn.Linear(emb_dim, class_num),
-                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(clf_num)]
+    spk_clf = [torch.nn.Sequential(torch.nn.Linear(512, class_num),
+                                        torch.nn.Softmax(dim=1)).to('cuda') if i == 0 else \
+               torch.nn.Sequential(torch.nn.Linear(768, class_num),
+                                        torch.nn.Softmax(dim=1)) for i in range(clf_num)]
 
     #with InferenceProcessor(cfg) as processor:
     #processor = InferenceProcessor(cfg)

@@ -364,7 +364,8 @@ class InferenceProcessor:
         #print(encoder_out[1].size())
 
         #features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]
-        features = [encoder_out[0].mean(2), encoder_out[1].mean(2)]
+        features = [encoder_out[0].mean(1), encoder_out[1].mean(1)]
+        print(features[0].size())
         
         for id in sample['id']:
             target.append(self.spk_idx[int(self.tsv[id+1].split('/')[0])])

@@ -378,7 +378,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         else:
             x = features
             mask_indices = None
-
+        
         if 1:
             return (conv_features, x)
         

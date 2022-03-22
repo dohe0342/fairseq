@@ -380,7 +380,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             mask_indices = None
 
         if 1:
-            return (features, x)
+            return (conv_features, x)
         
         x, layer_results = self.encoder(
             x,

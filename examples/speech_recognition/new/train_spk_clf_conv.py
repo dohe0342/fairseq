@@ -436,7 +436,7 @@ def main(cfg: InferConfig) -> float:
     spk_clf = [torch.nn.Sequential(torch.nn.Linear(512, class_num),
                                         torch.nn.Softmax(dim=1)).to('cuda') if i == 0 else \
                torch.nn.Sequential(torch.nn.Linear(768, class_num),
-                                        torch.nn.Softmax(dim=1)) for i in range(clf_num)]
+                                        torch.nn.Softmax(dim=1)).to('cuda') for i in range(clf_num)]
 
     #with InferenceProcessor(cfg) as processor:
     #processor = InferenceProcessor(cfg)

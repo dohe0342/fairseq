@@ -634,7 +634,8 @@ class Wav2Vec2Model(BaseFairseqModel):
             unmasked_features = unmasked_features[:, :-time_steps_to_drop]
             if padding_mask is not None:
                 padding_mask = padding_mask[:, :-time_steps_to_drop]
-
+        
+        conv_features = features.clone()
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 
@@ -674,7 +675,9 @@ class Wav2Vec2Model(BaseFairseqModel):
             x = features
             y = unmasked_features
             mask_indices = None
-
+        
+        if 1:
+            return (conv_features, x)
         x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
 
         if features_only:

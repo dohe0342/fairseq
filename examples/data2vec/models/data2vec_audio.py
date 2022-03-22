@@ -357,7 +357,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         else:
             padding_mask = None
         
-        conv_features = features.copy()
+        conv_features = features.clone()
 
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

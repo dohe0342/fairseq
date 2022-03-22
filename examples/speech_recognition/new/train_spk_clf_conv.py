@@ -425,7 +425,7 @@ def main(cfg: InferConfig) -> float:
 
     logger.info(cfg.common_eval.path)
     
-    emb_dim = 512
+    emb_dim = 768
     clf_num = 1
     class_num = 251 if cfg.dataset.gen_subset=='train-100' else 1166
     batch_count = 2992 if cfg.dataset.gen_subset=='train-100' else 14586

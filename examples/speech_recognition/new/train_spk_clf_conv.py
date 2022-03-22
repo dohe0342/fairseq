@@ -354,10 +354,8 @@ class InferenceProcessor:
             }
 
             model = self.models[0]
-            #encoder_out = model(**encoder_input)
-            encoder_out = model.w2v_encoder.w2v_model.feature_extractor(sample['net_input']['source'])
-            
-            encoder_out1 = model.w2v_encoder.w2v_model.post_extract_proj(encoder_out)
+            encoder_out = model(**encoder_input)
+            #encoder_out = model.w2v_encoder.w2v_model.feature_extractor(sample['net_input']['source'])
         
         features = None
         target = []

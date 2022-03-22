@@ -356,14 +356,14 @@ class InferenceProcessor:
             model = self.models[0]
             #encoder_out = model(**encoder_input)
             encoder_out = model.w2v_encoder.w2v_model(sample['net_input']['source'])
-            pos_conv_out = model.w2v_encoder.w2v_model.encoder.pos_conv(encoder_out[-1])
+            #pos_conv_out = model.w2v_encoder.w2v_model.encoder(encoder_out[-1])
         
         features = None
         target = []
         
         #print(encoder_out[0].size())
         #print(encoder_out[1].size())
-        print(pos_conv_out.size())
+        print(encoder_out[2].size())
         exit()
 
         #features = [encoder_out['layer_results'][i][0].mean(0).to('cuda') for i in range(len(self.spk_clf))]

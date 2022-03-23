@@ -3,7 +3,7 @@ source ~/.bashrc
 model=$1
 
 echo "====================   $model // $subset   ===================="
-CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/train_spk_clf.py \
+CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/train_spk_clf_conv.py \
 	--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
 	--config-name infer \
 	task=audio_finetuning \

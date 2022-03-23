@@ -679,7 +679,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         enc_input = x.clone()
         x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
         
-        if 1:
+        if 0:
             return (conv_features, enc_input, x)
 
         if features_only:
@@ -1047,7 +1047,7 @@ class TransformerEncoder(nn.Module):
                 padding_mask, self.required_seq_len_multiple, dim=-1, value=True
             )
         x = F.dropout(x, p=self.dropout, training=self.training)
-        if 1:
+        if 0:
             return x, None
 
         # B x T x C -> T x B x C

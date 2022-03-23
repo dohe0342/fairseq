@@ -57,4 +57,4 @@ model:
   layerdrop: 0.1
   activation_dropout: 0.1
   feature_grad_mult: 0.0
-  freeze_finetune_updates: 80000
+  freeze_finetune_updates: 0

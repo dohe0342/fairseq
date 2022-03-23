@@ -25,7 +25,7 @@ dataset:
 
 distributed_training:
   ddp_backend: legacy_ddp
-  distributed_world_size: 4
+  distributed_world_size: 2
 
 criterion:
   _name: ctc

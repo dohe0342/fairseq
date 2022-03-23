@@ -389,7 +389,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             layer_wise_detach=branch_ctc
         )
         
-        if 0:
+        if 1:
             return (conv_features, enc_input, x)
 
         if features_only:

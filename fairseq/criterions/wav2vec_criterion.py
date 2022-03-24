@@ -231,7 +231,7 @@ class Wav2vecCriterion(FairseqCriterion):
 
 
 @register_criterion("wav2vec_remove_spk", dataclass=Wav2VecCriterionConfig)
-class Wav2vecCriterion(FairseqCriterion):
+class Wav2vecCriterionRemoveSpk(Wav2vecCriterion):
     def __init__(self, task, infonce=False, loss_weights=None, log_keys=None):
         super().__init__(task)
         self.infonce = infonce

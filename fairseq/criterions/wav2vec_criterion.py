@@ -228,3 +228,13 @@ class Wav2vecCriterion(FairseqCriterion):
         # XXX: Gather based reduction not implemented for xla yet.
         # So we fall to sum based reduction for xla.
         return self.xla
+
+
+@register_criterion("wav2vec_remove_spk", dataclass=Wav2VecCriterionConfig)
+class Wav2vecCriterion(FairseqCriterion):
+    def __init__(self, task, infonce=False, loss_weights=None, log_keys=None):
+        super().__init__(task)
+        self.infonce = infonce
+        self.loss_weights = loss_weights
+        self.log_keys = [] if log_keys is None else log_keys
+

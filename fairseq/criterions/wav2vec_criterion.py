@@ -237,4 +237,125 @@ class Wav2vecCriterionRemoveSpk(Wav2vecCriterion):
         self.infonce = infonce
         self.loss_weights = loss_weights
         self.log_keys = [] if log_keys is None else log_keys
+    
+    def forward(self, model, sample, reduce=True):
+        """Compute the loss for the given sample.
+
+        Returns a tuple with three elements:
+        1) the loss
+        2) the sample size, which is used as the denominator for the gradient
+        3) logging outputs to display while training
+        """
+        net_output = model(**sample["net_input"])
+        logits = model.get_logits(net_output).float()
+        target = model.get_targets(sample, net_output)
+        self.xla = is_xla_tensor(logits)
+
+        # XXX: handle weights on xla.
+        weights = None
+        if hasattr(model, "get_target_weights") and not self.infonce:
+            weights = model.get_target_weights(target, net_output)
+            if torch.is_tensor(weights):
+                weights = weights.float()
+
+        losses = []
+
+        reduction = "none" if ((not reduce) or self.xla) else "sum"
+        if self.infonce:
+            loss = F.cross_entropy(logits, target, reduction=reduction)
+        else:
+            loss = F.binary_cross_entropy_with_logits(
+                logits, target.float(), weights, reduction=reduction
+            )
+
+        if self.xla:
+            # tpu-comment: since dynamic shapes lead to recompilations on xla,
+            # we don't shrink tensors using mask_indices.
+            # Instead, we use mask indices to adjust loss.
+            mi = (
+                sample["net_input"]["mask_indices"]
+                .transpose(0, 1)  # logits are transposed in `model.get_logits`
+                .reshape(logits.size(0))
+            )
+            loss = (loss * mi).sum() if reduce else (loss * mi)
+
+        if "sample_size" in sample:
+            sample_size = sample["sample_size"]
+        elif "mask_indices" in sample["net_input"]:
+            sample_size = sample["net_input"]["mask_indices"].sum()
+        else:
+            sample_size = target.numel() if self.infonce else target.long().sum().item()
+        losses.append(loss.detach().clone())
+
+        if self.loss_weights is not None:
+            assert hasattr(model, "get_extra_losses")
+            extra_losses = model.get_extra_losses(net_output)
+            if torch.is_tensor(extra_losses):
+                extra_losses = [extra_losses]
+            if len(self.loss_weights) == 1 and len(extra_losses) != 1:
+                self.loss_weights = [self.loss_weights[0]] * len(extra_losses)
+            assert len(extra_losses) == len(
+                self.loss_weights
+            ), f"{len(extra_losses)}, {len(self.loss_weights)}"
+            for p, coef in zip(extra_losses, self.loss_weights):
+                if coef != 0 and p is not None:
+                    p = coef * p.float() * sample_size
+                    loss += p
+                    losses.append(p)
+
+        logging_output = {
+            "loss": loss.item() if (reduce and not self.xla) else loss.detach(),
+            "ntokens": sample_size,
+            "nsentences": sample["id"].numel(),
+            "sample_size": sample_size,
+        }
+
+        for lk in self.log_keys:
+            # Only store "logits" and "target" for computing MAP and MAUC
+            # during validation
+            if lk == "logits":
+                if not self.training:
+                    logging_output["logits"] = logits.cpu().numpy()
+            elif lk == "target":
+                if not self.training:
+                    # If the targets have been mixed with the predictions of
+                    # teacher models, find the original targets
+                    if hasattr(model, "get_original_targets"):
+                        original_target = model.get_original_targets(sample, net_output)
+                    else:
+                        original_target = target
+                    logging_output["target"] = original_target.cpu().numpy()
+            elif lk in net_output:
+                value = net_output[lk]
+                if not is_xla_tensor(value):
+                    value = float(value)
+                logging_output[lk] = value
+
+        if len(losses) > 1:
+            for i, l in enumerate(losses):
+                logging_output[f"loss_{i}"] = l.item() if not self.xla else l.detach()
+
+        if self.infonce:
+            with torch.no_grad():
+                if logits.numel() == 0:
+                    corr = 0
+                    count = 0
+                else:
+                    assert logits.dim() > 1, logits.shape
+                    max = logits.argmax(-1) == 0
+                    min = logits.argmin(-1) == 0
+                    if is_xla_tensor(logits):
+                        max, min = max * mi, min * mi
+                        both = max & min
+                        corr = max.long().sum() - both.long().sum()
+                        count = mi.sum()
+                    else:
+                        both = max & min
+                        corr = max.long().sum().item() - both.long().sum().item()
+                        count = float(max.numel())
+
+                logging_output["correct"] = corr
+                logging_output["count"] = count
+
+        return loss, sample_size, logging_output
 

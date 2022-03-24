@@ -4,7 +4,7 @@ fairseq-hydra-train \
     --config-name base_100h_whale \
 	common.user_dir=/home/work/workspace/fairseq/examples/data2vec \
 	checkpoint.best_checkpoint_metric=wer \
-	checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/2022-03-21/d2v_mid1_spkclf_reverse_1.0 \
+	checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/2022-03-21/d2v_mid1_spkclf_reverse_1.0/checkpoints \
 	dataset.valid_subset=dev-other \
 	criterion._name=spk_clf \
     task.data=/home/work/workspace/LibriSpeech/manifests \

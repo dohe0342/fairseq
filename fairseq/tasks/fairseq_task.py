@@ -559,8 +559,9 @@ class FairseqTask(object):
                     loss, sample_size, logging_output = criterion(model, sample)
             if ignore_grad:
                 #loss *= 0
-                loss[0] *= 0
-                loss[1] *= 0
+                #loss[0] *= 0
+                #loss[1] *= 0
+                loss = loss[0]*0
             with torch.autograd.profiler.record_function("backward"):
                 if loss[1] == None:
                     loss = loss[0]

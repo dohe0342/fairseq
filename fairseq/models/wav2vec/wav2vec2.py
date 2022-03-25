@@ -1088,8 +1088,8 @@ class TransformerEncoder(nn.Module):
                     if i >= min_layer:
                         layer_results.append((x, z, lr))
                         #print(i, len(layer_results))
-                #else:
-                #    dropped_layer.append(i)
+                else:
+                    dropped_layer.append(i)
                 #    if i >= min_layer:
                 #        layer_results.append(0)
 
@@ -1118,7 +1118,7 @@ class TransformerEncoder(nn.Module):
                     layer_results[i] = undo_pad(layer_result[0], layer_result[1], layer_result[2])
         
         #layer_results.append(dropped_layer)
-        return x, layer_results
+        return x, layer_results, dropped_layer
 
     def max_positions(self):
         """Maximum output length supported by the encoder."""

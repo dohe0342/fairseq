@@ -1068,7 +1068,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj_ctc(x)
-            
+            print(x["dropped_layer"]) 
             if len(res["layer_results"]) == 12:
                 in_layer_results = res["layer_results"][2][0].mean(0)
                 mid1_layer_results = res["layer_results"][5][0].mean(0)

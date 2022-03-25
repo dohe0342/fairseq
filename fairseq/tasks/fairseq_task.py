@@ -561,7 +561,8 @@ class FairseqTask(object):
                 #loss *= 0
                 #loss[0] *= 0
                 #loss[1] *= 0
-                loss = loss[0]*0
+                loss[0] = loss[0]*0
+                loss[1] = None
             with torch.autograd.profiler.record_function("backward"):
                 if loss[1] == None:
                     loss = loss[0]

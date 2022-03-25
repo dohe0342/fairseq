@@ -677,7 +677,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             mask_indices = None
         
         enc_input = x.clone()
-        x, layer_results = self.encoder(x, padding_mask=padding_mask, layer=layer)
+        x, layer_results, dropped_layer = self.encoder(x, padding_mask=padding_mask, layer=layer)
         
         if 0:
             return (conv_features, enc_input, x)

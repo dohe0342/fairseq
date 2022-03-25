@@ -766,6 +766,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             "x": x,
             "padding_mask": padding_mask,
             "features_pen": features_pen,
+            "dropped_layer": dropped_layer,
         }
 
         if prob_ppl is not None:

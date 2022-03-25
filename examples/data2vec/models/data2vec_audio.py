@@ -381,7 +381,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         enc_input = x.clone()
 
-        x, layer_results = self.encoder(
+        x, layer_results, dropped_layer = self.encoder(
             x,
             padding_mask=padding_mask,
             layer=layer,
@@ -397,7 +397,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 "x": x,
                 "padding_mask": padding_mask,
                 "layer_results": layer_results,
-                #"dropped_layer": layer_results[-1],
+                "dropped_layer": dropped_layer,
             }
 
         result = {

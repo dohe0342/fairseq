@@ -563,8 +563,9 @@ class FairseqTask(object):
                 loss[1] *= 0
             with torch.autograd.profiler.record_function("backward"):
                 lr = float(optimizer.get_lr())
-                print(lr)
-                loss = loss[0] - lr*(1e+6)*loss[1]
+                lambda_ = lr*(1e+6)
+                print(lambda_)
+                loss = loss[0] - lambda_*loss[1]
                 optimizer.backward(loss)
 
             return loss, sample_size, logging_output

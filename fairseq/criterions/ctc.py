@@ -838,7 +838,7 @@ class SpeakerClassification(CtcCriterion):
                 logging_output["c_total"] = c_len
         
         if 1:
-            return (loss_ctc, loss_spk), sample_size, logging_output
+            return [loss_ctc, loss_spk], sample_size, logging_output
 
         return loss, sample_size, logging_output
 

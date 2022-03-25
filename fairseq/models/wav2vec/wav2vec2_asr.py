@@ -1077,7 +1077,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             
             if not (5 in res["dropped_layer"]):
                 #in_layer_results = res["layer_results"][2][0].mean(0)
-                mid1_layer_results = res["layer_results"][5][0].mean(0)
+                mid1_layer_results = res["layer_results"][5-count][0].mean(0)
                 #mid2_layer_results = res["layer_results"][8][0].mean(0)
                 #out_layer_results = res["layer_results"][11][0].mean(0)
 

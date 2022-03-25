@@ -859,10 +859,10 @@ class SpeakerClassification(CtcCriterion):
             "loss", loss_sum / sample_size / math.log(2), sample_size, round=3
         )
         metrics.log_scalar(
-            "loss_ctc", loss_sum / sample_size / math.log(2), sample_size, round=3
+            "loss_ctc", loss_sum_ctc / sample_size / math.log(2), sample_size, round=3
         )
         metrics.log_scalar(
-            "loss_spk", loss_sum / sample_size / math.log(2), sample_size, round=3
+            "loss_spk", loss_sum_spk / sample_size / math.log(2), sample_size, round=3
         )
 
         metrics.log_scalar("ntokens", ntokens)

@@ -8,7 +8,7 @@ common:
 checkpoint:
   no_epoch_checkpoints: true
   best_checkpoint_metric: wer
-    #save_dir: /home/work/workspace/fairseq/scripts/whale/outputs/2022-03-25/d2v_mid1_spkclf_reverse_schedule/checkpoints
+  #save_dir: /home/work/workspace/fairseq/scripts/whale/outputs/2022-03-25/d2v_mid1_spkclf_reverse_schedule/checkpoints
 
 task:
   _name: audio_finetuning

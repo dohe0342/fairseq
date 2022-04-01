@@ -181,23 +181,21 @@ class Viewmaker2(torch.nn.Module):
         self.act = ACTIVATIONS[activation]()
 
         # Initial convolution layers (+ 1 for noise filter)
-        '''
-        self.conv1 = ConvLayer(self.num_channels + 1, 32, kernel_size=9, stride=1)
-        self.in1 = torch.nn.InstanceNorm2d(32, affine=True)
-        self.conv2 = ConvLayer(32, 64, kernel_size=3, stride=2)
-        self.in2 = torch.nn.InstanceNorm2d(64, affine=True)
-        self.conv3 = ConvLayer(64, 128, kernel_size=3, stride=2)
+        self.conv1 = ConvLayer2(512 + 50, 512, kernel_size=2, stride=1)
+        self.in1 = torch.nn.InstanceNorm2d(512, affine=True)
+        self.conv2 = ConvLayer2(512, 512, kernel_size=2, stride=1)
+        self.in2 = torch.nn.InstanceNorm2d(512, affine=True)
+        self.conv3 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         self.in3 = torch.nn.InstanceNorm2d(128, affine=True)
-        '''
         
-        #self.conv1 = nn.Conv1d(512+100, 512, kernel_size=2, stride=1)
-        self.conv1 = ConvLayer2(512+100, 512, kernel_size=2, stride=1)
+        '''
+        self.conv1 = nn.Conv1d(512+100, 512, kernel_size=2, stride=1)
         self.in1 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv2 = nn.Conv1d(512, 512, kernel_size=2, stride=1)
+        self.conv1 = ConvLayer2(512+100, 512, kernel_size=2, stride=1)
         self.in2 = torch.nn.InstanceNorm1d(512, affine=True)
         self.conv3 = nn.Conv1d(512, 512, kernel_size=2, stride=1)
         self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
-
+        '''
         
         # Residual layers have +N for added random channels
         self.res1 = ResidualBlock2(512 + 1)

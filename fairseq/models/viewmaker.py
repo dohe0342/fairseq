@@ -315,8 +315,6 @@ class ConvLayer(torch.nn.Module):
     def forward(self, x):
         #out = self.reflection_pad(x)
         out = x
-        out = x
-        out = x
         out = self.conv2d(out)
         return out
 

@@ -269,7 +269,7 @@ class Viewmaker2(torch.nn.Module):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''
         distortion_budget = self.distortion_budget
         delta = torch.tanh(y_pixels) # Project to [-1, 1]
-        avg_magnitude = delta.abs().mean([1,2,3], keepdim=True)
+        avg_magnitude = delta.abs().mean([1,2], keepdim=True)
         max_magnitude = distortion_budget
         delta = delta * max_magnitude / (avg_magnitude + eps)
         return delta

@@ -354,6 +354,10 @@ class ResidualBlock2(torch.nn.Module):
         self.act = ACTIVATIONS[activation]()
         '''
         self.conv1 = nn.Conv1d(channels, channels, kernel_size=2)
+        self.in1 = nn.InstanceNorm1d(channels, affine=True)
+        self.conv2 = nn.Conv1d(channels, channels, kernel_size=2)
+        self.in2 = nn.InstanceNorm1d(channels, affine=True)
+        self.act = ACTIVATIONS[activation]()
 
     def forward(self, x):
         residual = x

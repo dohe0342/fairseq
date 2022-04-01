@@ -256,8 +256,8 @@ class Viewmaker2(torch.nn.Module):
         
         for i, res in enumerate([self.res1, self.res2, self.res3, self.res4, self.res5]):
             if i < num_res_blocks:
-                print(y.size())
                 y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
+                print(y.size())
 
         #y = self.act(self.in4(self.deconv1(y)))
         #y = self.act(self.in5(self.deconv2(y)))

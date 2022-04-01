@@ -421,4 +421,4 @@ if __name__ == '__main__':
     viewmaker = Viewmaker()
     #print(viewmaker)
     #print('')
-    summary(Viewmaker2(), torch.zeros((1,512,300)))
+    summary(Viewmaker2(), torch.zeros((1,512,600)))

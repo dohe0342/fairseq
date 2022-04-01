@@ -247,6 +247,8 @@ class Viewmaker2(torch.nn.Module):
         print(y.size())
         y = self.act(self.in3(self.conv3(y, pad=True)))
         print(y.size())
+        y = self.act(self.in3(self.conv3(y, pad=True)))
+        print(y.size())
 
         # Features that could be useful for other auxilary layers / losses.
         # [batch_size, 128]

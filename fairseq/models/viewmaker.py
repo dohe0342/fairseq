@@ -134,7 +134,7 @@ class Viewmaker(torch.nn.Module):
 
         y_pixels, features = self.basic_net(y, self.num_res_blocks, bound_multiplier=1)
         delta = self.get_delta(y_pixels)
-        if self.frequency_domain:
+        if self.frequency_domain and 0:
             # Compute inverse DCT from frequency domain to time domain.
             delta = dct.idct_2d(delta)
         if self.downsample_to:

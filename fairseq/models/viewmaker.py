@@ -387,7 +387,7 @@ class ResidualBlock2(torch.nn.Module):
 
     def forward(self, x):
         residual = x
-        out = self.act(self.in1(self.conv1(x)))
+        out = self.act(self.in1(self.conv1(self.reflection_pad(x))))
         out = self.in2(self.conv2(out))
         out = out + residual
         return out

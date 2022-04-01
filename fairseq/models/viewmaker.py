@@ -115,6 +115,7 @@ class Viewmaker(torch.nn.Module):
         distortion_budget = self.distortion_budget
         delta = torch.tanh(y_pixels) # Project to [-1, 1]
         avg_magnitude = delta.abs().mean([1,2,3], keepdim=True)
+        print(avg_magnitude.size())
         max_magnitude = distortion_budget
         delta = delta * max_magnitude / (avg_magnitude + eps)
         return delta
@@ -142,7 +143,6 @@ class Viewmaker(torch.nn.Module):
             # Upsample.
             x = x_orig
             delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
-        print(delta.size())
         # Additive perturbation
         result = x + delta
         if self.clamp:

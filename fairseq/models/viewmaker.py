@@ -231,6 +231,7 @@ class Viewmaker2(torch.nn.Module):
         shp = (batch_size, num, filter_size, filter_size)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
+        print(noise.size())
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):

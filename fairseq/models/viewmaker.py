@@ -346,11 +346,14 @@ class ResidualBlock2(torch.nn.Module):
 
     def __init__(self, channels, activation='relu'):
         super(ResidualBlock2, self).__init__()
+        '''
         self.conv1 = ConvLayer(channels, channels, kernel_size=3, stride=1)
         self.in1 = torch.nn.InstanceNorm2d(channels, affine=True)
         self.conv2 = ConvLayer(channels, channels, kernel_size=3, stride=1)
         self.in2 = torch.nn.InstanceNorm2d(channels, affine=True)
         self.act = ACTIVATIONS[activation]()
+        '''
+        self.conv1 = nn.Conv1d(channels, channels, kernel_size=2)
 
     def forward(self, x):
         residual = x

@@ -195,12 +195,14 @@ class Viewmaker2(torch.nn.Module):
         self.res4 = ResidualBlock(128 + 4)
         self.res5 = ResidualBlock(128 + 5)
         
+        '''
         # Upsampling Layers
         self.deconv1 = UpsampleConvLayer(128 + self.num_res_blocks, 64, kernel_size=3, stride=1, upsample=2)
         self.in4 = torch.nn.InstanceNorm2d(64, affine=True)
         self.deconv2 = UpsampleConvLayer(64, 32, kernel_size=3, stride=1, upsample=2)
         self.in5 = torch.nn.InstanceNorm2d(32, affine=True)
         self.deconv3 = ConvLayer(32, self.num_channels, kernel_size=9, stride=1)
+        '''
 
     @staticmethod
     def zero_init(m):

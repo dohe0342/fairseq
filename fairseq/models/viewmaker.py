@@ -195,7 +195,7 @@ class Viewmaker2(torch.nn.Module):
         self.conv2 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
         self.in2 = torch.nn.InstanceNorm1d(512, affine=True)
         self.conv3 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
-        self.in3 = torch.nn.InstanceNorm2d(512, affine=True)
+        self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
 
         
         # Residual layers have +N for added random channels

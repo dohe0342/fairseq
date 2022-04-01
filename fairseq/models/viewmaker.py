@@ -240,9 +240,9 @@ class Viewmaker2(torch.nn.Module):
             if i < num_res_blocks:
                 y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
 
-        y = self.act(self.in4(self.deconv1(y)))
-        y = self.act(self.in5(self.deconv2(y)))
-        y = self.deconv3(y)
+        #y = self.act(self.in4(self.deconv1(y)))
+        #y = self.act(self.in5(self.deconv2(y)))
+        #y = self.deconv3(y)
 
         return y, features
     

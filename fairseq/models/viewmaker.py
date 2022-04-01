@@ -240,7 +240,9 @@ class Viewmaker2(torch.nn.Module):
         y = self.add_noise_channel(y, bound_multiplier=bound_multiplier)
         print(y.size())
         y = self.act(self.in1(self.conv1(y)))
+        print(y.size())
         y = self.act(self.in2(self.conv2(y)))
+        print(y.size())
         y = self.act(self.in3(self.conv3(y)))
         print(y.size())
 

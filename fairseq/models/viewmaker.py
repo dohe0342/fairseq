@@ -228,10 +228,9 @@ class Viewmaker2(torch.nn.Module):
         # bound_multiplier is a scalar or a 1D tensor of length batch_size
         batch_size = x.size(0)
         filter_size = x.size(-1)
-        shp = (batch_size, num, filter_size, filter_size)
+        shp = (batch_size, num, filter_size)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
-        print(noise.size())
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):

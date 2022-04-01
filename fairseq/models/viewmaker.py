@@ -382,6 +382,7 @@ class ResidualBlock2(torch.nn.Module):
         self.in1 = nn.InstanceNorm1d(channels, affine=True)
         self.conv2 = nn.Conv1d(channels, channels, kernel_size=2)
         self.in2 = nn.InstanceNorm1d(channels, affine=True)
+        self.reflection_pad = torch.nn.ReflectionPad1d(1)
         self.act = ACTIVATIONS[activation]()
 
     def forward(self, x):

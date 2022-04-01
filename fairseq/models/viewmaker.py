@@ -298,7 +298,7 @@ class Viewmaker2(torch.nn.Module):
             x = x_orig
             delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
         
-        print(delta.size())
+        print('delta size = ', delta.size())
         '''
         # Additive perturbation
         result = x + delta

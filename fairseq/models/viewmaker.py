@@ -199,11 +199,11 @@ class Viewmaker2(torch.nn.Module):
 
         
         # Residual layers have +N for added random channels
-        self.res1 = ResidualBlock(512 + 1)
-        self.res2 = ResidualBlock(512 + 2)
-        self.res3 = ResidualBlock(512 + 3)
-        self.res4 = ResidualBlock(512 + 4)
-        self.res5 = ResidualBlock(512 + 5)
+        self.res1 = ResidualBlock2(512 + 1)
+        self.res2 = ResidualBlock2(512 + 2)
+        self.res3 = ResidualBlock2(512 + 3)
+        self.res4 = ResidualBlock2(512 + 4)
+        self.res5 = ResidualBlock2(512 + 5)
         
         '''
         # Upsampling Layers

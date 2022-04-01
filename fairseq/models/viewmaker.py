@@ -190,11 +190,11 @@ class Viewmaker2(torch.nn.Module):
         self.in3 = torch.nn.InstanceNorm2d(128, affine=True)
         '''
         
-        self.conv1 = nn.Conv1d(self.num_channels + 1, 32, kernel_size=9, stride=1)
+        self.conv1 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
         self.in1 = torch.nn.InstanceNorm2d(32, affine=True)
-        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, stride=2)
+        self.conv2 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
         self.in2 = torch.nn.InstanceNorm2d(64, affine=True)
-        self.conv3 = nn.Conv1d(64, 128, kernel_size=3, stride=2)
+        self.conv3 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
         self.in3 = torch.nn.InstanceNorm2d(128, affine=True)
 
         

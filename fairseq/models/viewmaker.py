@@ -8,7 +8,7 @@ https://github.com/pytorch/examples/blob/0c1654d6913f77f09c0505fb284d977d89c17c1
 import torch
 import torch.nn as nn
 from torch.nn import functional as init
-import torch_summary
+from torchsummaryX import summary
 #import torch_dct as dct
 
 ACTIVATIONS = {
@@ -217,3 +217,5 @@ class UpsampleConvLayer(torch.nn.Module):
 if __name__ == '__main__':
     viewmaker = Viewmaker()
     print(viewmaker)
+    print('')
+    summary(Viewmaker(), torch.zeros((1,3,32,32)))

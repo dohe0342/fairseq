@@ -183,7 +183,7 @@ class Viewmaker2(torch.nn.Module):
         # Initial convolution layers (+ 1 for noise filter)
         self.conv1 = ConvLayer2(512 + 50, 512, kernel_size=2, stride=1)
         self.in1 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv2 = ConvLayer2(512, 512, kernel_size=2, stride=1)
+        self.conv2 = ConvLayer2(512, 512, kernel_size=, stride=1)
         self.in2 = torch.nn.InstanceNorm1d(512, affine=True)
         self.conv3 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
@@ -313,7 +313,10 @@ class ConvLayer(torch.nn.Module):
             in_channels, out_channels, kernel_size, stride)
 
     def forward(self, x):
-        out = self.reflection_pad(x)
+        #out = self.reflection_pad(x)
+        out = x
+        out = x
+        out = x
         out = self.conv2d(out)
         return out
 

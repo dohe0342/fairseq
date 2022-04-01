@@ -240,9 +240,9 @@ class Viewmaker2(torch.nn.Module):
         print(y.size())
         y = self.act(self.in1(self.conv1(y)))
         print(y.size())
-        y = self.act(self.in2(self.conv2(y)))
+        y = self.act(self.in2(self.conv2(y, pad=True)))
         print(y.size())
-        y = self.act(self.in3(self.conv3(y)))
+        y = self.act(self.in3(self.conv3(y, pad=True)))
         print(y.size())
 
         # Features that could be useful for other auxilary layers / losses.

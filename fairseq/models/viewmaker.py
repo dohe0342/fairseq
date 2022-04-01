@@ -211,3 +211,8 @@ class UpsampleConvLayer(torch.nn.Module):
         out = self.reflection_pad(x_in)
         out = self.conv2d(out)
         return out
+
+
+if __name__ == '__main__':
+    viewmaker = Viewmaker()
+    print(viewmaker)

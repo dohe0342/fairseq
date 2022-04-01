@@ -190,7 +190,7 @@ class Viewmaker2(torch.nn.Module):
         self.in3 = torch.nn.InstanceNorm2d(128, affine=True)
         '''
         
-        self.conv1 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
+        self.conv1 = nn.Conv1d(512+1, 512, kernel_size=2, stride=2)
         self.in1 = torch.nn.InstanceNorm2d(32, affine=True)
         self.conv2 = nn.Conv1d(512, 512, kernel_size=2, stride=2)
         self.in2 = torch.nn.InstanceNorm2d(64, affine=True)
@@ -199,11 +199,11 @@ class Viewmaker2(torch.nn.Module):
 
         
         # Residual layers have +N for added random channels
-        self.res1 = ResidualBlock(128 + 1)
-        self.res2 = ResidualBlock(128 + 2)
-        self.res3 = ResidualBlock(128 + 3)
-        self.res4 = ResidualBlock(128 + 4)
-        self.res5 = ResidualBlock(128 + 5)
+        self.res1 = ResidualBlock(512 + 1)
+        self.res2 = ResidualBlock(512 + 2)
+        self.res3 = ResidualBlock(512 + 3)
+        self.res4 = ResidualBlock(512 + 4)
+        self.res5 = ResidualBlock(512 + 5)
         
         '''
         # Upsampling Layers

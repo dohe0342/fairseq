@@ -321,14 +321,15 @@ class ConvLayer(torch.nn.Module):
 class ConvLayer2(torch.nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1):
         super(ConvLayer2, self).__init__()
-        reflection_padding = kernel_size // 2
+        #reflection_padding = kernel_size // 2
+        reflection_padding = 1
         self.reflection_pad = torch.nn.ReflectionPad1d(reflection_padding)
         self.conv1d = torch.nn.Conv1d(
             in_channels, out_channels, kernel_size, stride)
 
     def forward(self, x):
-        #out = self.reflection_pad(x)
-        out = x
+        out = self.reflection_pad(x)
+        #out = x
         out = self.conv1d(out)
         return out
 

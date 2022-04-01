@@ -320,7 +320,7 @@ class ConvLayer(torch.nn.Module):
         return out
 
 
-class ConvLaye2(torch.nn.Module):
+class ConvLayer2(torch.nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1):
         super(ConvLayer, self).__init__()
         reflection_padding = kernel_size // 2

@@ -278,10 +278,14 @@ class Viewmaker2(torch.nn.Module):
             # Upsample.
             x = x_orig
             delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
+
+        '''
         # Additive perturbation
         result = x + delta
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
+        '''
+        result = delta
 
         return result
 

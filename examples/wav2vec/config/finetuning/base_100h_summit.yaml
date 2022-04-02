@@ -18,7 +18,7 @@ task:
 
 dataset:
   num_workers: 6
-  max_tokens: 2200000
+  max_tokens: 1900000
   skip_invalid_size_inputs_valid_test: true
   train_subset: train-100
   valid_subset: dev-other

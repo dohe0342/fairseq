@@ -288,12 +288,20 @@ class Trainer(object):
         return self._lr_scheduler
 
     def _build_optimizer(self, pcgrad=False):
+        '''
         params = list(
             filter(
                 lambda p: p.requires_grad,
                 chain(self.model.parameters(), self.criterion.parameters()),
             )
         )
+        '''
+        params = [] 
+        for n, p in self.model.named_parameters():
+            if name not in n and p.requires_grad:
+                params.append(p)
+            else:
+                print(n)
 
         if self.is_fsdp and self.cfg.common.fp16:
             # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,

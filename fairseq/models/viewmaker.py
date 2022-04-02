@@ -335,7 +335,6 @@ class ResidualBlock(torch.nn.Module):
         self.conv2 = ConvLayer(channels, channels, kernel_size=3, stride=1)
         self.in2 = torch.nn.InstanceNorm2d(channels, affine=True)
         self.act = ACTIVATIONS[activation]()
-        print(self.act)
 
     def forward(self, x):
         residual = x
@@ -359,6 +358,7 @@ class ResidualBlock2(torch.nn.Module):
         self.in2 = nn.InstanceNorm1d(channels, affine=True)
         self.reflection_pad = torch.nn.ReflectionPad1d(1)
         self.act = ACTIVATIONS[activation]()
+        print(self.act)
 
     def forward(self, x):
         residual = x

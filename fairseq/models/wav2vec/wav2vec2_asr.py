@@ -216,6 +216,10 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "add spk informatin"},
     )
+    viewmaker: bool = field(
+        default=False,
+        metadata={"help": "add spk informatin"},
+    )
 
 
 @dataclass

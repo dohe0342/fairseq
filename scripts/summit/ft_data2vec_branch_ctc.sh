@@ -9,7 +9,7 @@ fairseq-hydra-train \
 	criterion._name=spk_clf \
     task.data=/workspace/LibriSpeech/manifests \
     model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
-	+model.del_spk_info=true \
+	+model.viewmaker=true \
 	#+model.branch_ctc_v2=true \
 	#+model.overrides=uses_branch:true \
 	#task.overrides=uses_branch:true \

@@ -284,7 +284,6 @@ class Trainer(object):
     @property
     def lr_scheduler(self):
         if self._lr_scheduler is None:
-            print('fuck'*100)
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)  # this will initialize self._lr_scheduler
         return self._lr_scheduler
 

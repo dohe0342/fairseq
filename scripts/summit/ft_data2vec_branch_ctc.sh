@@ -6,7 +6,7 @@ fairseq-hydra-train \
 	checkpoint.best_checkpoint_metric=wer \
 	checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/2022-03-30/07-39-06/checkpoints \
 	dataset.valid_subset=dev-other \
-	criterion._name=spk_clf \
+	criterion._name=ctc \
     task.data=/workspace/LibriSpeech/manifests \
     model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
 	+model.viewmaker=true \

@@ -287,7 +287,7 @@ class Trainer(object):
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)  # this will initialize self._lr_scheduler
         return self._lr_scheduler
 
-    def _build_optimizer(self, pcgrad=False, name='w2v'):
+    def _build_optimizer(self, pcgrad=False, name='zzzzzzz'):
         params = list(
             filter(
                 lambda p: p.requires_grad,

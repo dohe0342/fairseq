@@ -1244,7 +1244,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
 
 
 class Wav2VecEncoderViewMaker(Wav2VecEncoder):
-    def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None, spk_num=None):
+    def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
         self.apply_mask = cfg.apply_mask
 
         arg_overrides = {

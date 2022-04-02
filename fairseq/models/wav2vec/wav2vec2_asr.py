@@ -1096,6 +1096,7 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
             "spk_prob": spk_prob,
         }
 
+
 @register_model('viewmaker', dataclass=Wav2VecConfig)
 class Viewmaker2(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''

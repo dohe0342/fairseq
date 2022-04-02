@@ -133,6 +133,7 @@ class Trainer(object):
 
         self._dummy_batch = None  # indicates we don't have a dummy batch at first
         self._lr_scheduler = None
+        self._lr_scheduler2 = None
         self._num_updates = 0
         self._num_xla_compiles = 0  # for TPUs
         self._optim_history = None
@@ -378,11 +379,19 @@ class Trainer(object):
 
             # We should initialize the learning rate scheduler immediately after
             # building the optimizer, so that the initial learning rate is set.
-            self._lr_scheduler = lr_scheduler.build_lr_scheduler(
-                self.cfg.lr_scheduler,
-                self.optimizer()[i],
-            )
-            self._lr_scheduler[i].step_update(0)
+            if i == 0:
+                self._lr_scheduler = lr_scheduler.build_lr_scheduler(
+                    self.cfg.lr_scheduler,
+                    self.optimizer()[i],
+                )
+                self._lr_scheduler.step_update(0)
+            else:
+                self._lr_scheduler2 = lr_scheduler.build_lr_scheduler(
+                    self.cfg.lr_scheduler,
+                    self.optimizer()[i],
+                )
+                self._lr_scheduler2.step_update(0)
+
 
         self._optimizer2 = self._optimizer[1]
         self._optimizer = self._optimizer[0]

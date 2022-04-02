@@ -1323,7 +1323,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         targ_d = None
         self.proj = None
-        self.proj_ctc = None
 
         if output_size is not None:
             targ_d = output_size
@@ -1331,9 +1330,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             targ_d = cfg.decoder_embed_dim
         
         if targ_d is not None:
-            self.proj_ctc = Linear(d, targ_d)
-            self.proj = [self.proj_ctc, self.proj_spk]
-            self.softmax = nn.Softmax(dim=1)
+            self.proj = Linear(d, targ_d)
 
     def forward(self, source, padding_mask, **kwargs):
         w2v_args = {
@@ -1356,7 +1353,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         spk_prob = None
 
         if self.proj:
-            x = self.proj_ctc(x)
+            x = self.proj(x)
                     
         return {
             "encoder_out": x,  # T x B x C

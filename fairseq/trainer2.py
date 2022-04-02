@@ -343,7 +343,7 @@ class Trainer(object):
                     logger.info(
                         "NOTE: your device may support faster training with --fp16 or --amp"
                     )
-                self._optimizer = optim.build_optimizer(self.cfg.optimizer, params)
+                self._optimizer.append(optim.build_optimizer(self.cfg.optimizer, params))
 
             if self.is_fsdp:
                 assert (

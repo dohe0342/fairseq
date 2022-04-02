@@ -696,8 +696,8 @@ class BranchCtcCriterionV2(CtcCriterion):
 class SpeakerClassification(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(CtcCriterionConfig, task)
-        self.tsv = open('/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
-        self.spk = open(f'/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
+        self.tsv = open('/home/work/workspace/LibriSpeech/manifests/train-100.tsv', 'r').readlines()
+        self.spk = open(f'/home/work/workspace/LibriSpeech/manifests/train-100.spk', 'r').readlines()
         self.spk = [int(i.split('\n')[0]) for i in self.spk]
         self.spk_idx = {}
         for i, spk in enumerate(self.spk):

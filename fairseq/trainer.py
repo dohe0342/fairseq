@@ -288,12 +288,14 @@ class Trainer(object):
         return self._lr_scheduler
 
     def _build_optimizer(self, pcgrad=False, name='viewmaker'):
+        '''
         params = list(
             filter(
                 lambda p: p.requires_grad,
                 chain(self.model.parameters(), self.criterion.parameters()),
             )
         )
+        '''
         
         #print(list(filter(lambda p: p.requires_grad, self.model.parameters())))
         params = []

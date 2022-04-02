@@ -295,7 +295,7 @@ class Trainer(object):
             )
         )
 
-        print(lambda p, self.model.parameters())
+        print(self.model.parameters())
         print('')
         print(self.criterion.parameters())
 

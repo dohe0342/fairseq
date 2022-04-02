@@ -94,10 +94,10 @@ def main(cfg: FairseqConfig) -> None:
     else:
         model = task.build_model(cfg.model)
     criterion = task.build_criterion(cfg.criterion)
-    logger.info(model)
-    logger.info("task: {}".format(task.__class__.__name__))
-    logger.info("model: {}".format(model.__class__.__name__))
-    logger.info("criterion: {}".format(criterion.__class__.__name__))
+    #logger.info(model)
+    #logger.info("task: {}".format(task.__class__.__name__))
+    #logger.info("model: {}".format(model.__class__.__name__))
+    #logger.info("criterion: {}".format(criterion.__class__.__name__))
     logger.info(
         "num. shared model params: {:,} (num. trained: {:,})".format(
             sum(

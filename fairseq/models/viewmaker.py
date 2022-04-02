@@ -14,6 +14,7 @@ from torchsummaryX import summary
 ACTIVATIONS = {
     'relu': torch.nn.ReLU,
     'leaky_relu': torch.nn.LeakyReLU,
+    'gelu': torch.nn.GELU,
 }
 
 class Viewmaker(torch.nn.Module):

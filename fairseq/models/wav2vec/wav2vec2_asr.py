@@ -1324,7 +1324,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         targ_d = None
         self.proj = None
         self.proj_ctc = None
-        self.proj_spk = None
 
         if output_size is not None:
             targ_d = output_size
@@ -1333,7 +1332,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         
         if targ_d is not None:
             self.proj_ctc = Linear(d, targ_d)
-            self.proj_spk = Linear(d, spk_num)
             self.proj = [self.proj_ctc, self.proj_spk]
             self.softmax = nn.Softmax(dim=1)
 
@@ -1359,27 +1357,11 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj_ctc(x)
-            #print(res["dropped_layer"]) 
-            #if len(res["layer_results"]) == 12:
-            count = 0
-            for drop in res["dropped_layer"]:
-                if drop < 6:
-                    count += 1
-            
-            if not (5 in res["dropped_layer"]):
-                #in_layer_results = res["layer_results"][2][0].mean(0)
-                mid1_layer_results = res["layer_results"][5-count][0].mean(0)
-                #mid2_layer_results = res["layer_results"][8][0].mean(0)
-                #out_layer_results = res["layer_results"][11][0].mean(0)
-
-                spk_logits = self.proj_spk(mid1_layer_results)
-                spk_prob = self.softmax(spk_logits)
-        
+                    
         return {
             "encoder_out": x,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
-            "spk_prob": spk_prob,
         }
 
 class ViewMaker(BaseFairseqModel):

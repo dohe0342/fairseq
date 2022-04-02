@@ -294,6 +294,8 @@ class Trainer(object):
                 chain(self.model.parameters(), self.criterion.parameters()),
             )
         )
+
+        print('fuck!!!!!!!!')
         print(chain(self.model.parameters(), self.criterion.parameters()))
 
         if self.is_fsdp and self.cfg.common.fp16:

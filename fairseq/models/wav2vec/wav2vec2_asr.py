@@ -34,6 +34,11 @@ from fairseq.tasks import FairseqTask
 
 logger = logging.getLogger(__name__)
 
+ACTIVATIONS = { 
+    'relu': torch.nn.ReLU,
+    'leaky_relu': torch.nn.LeakyReLU,
+    'gelu': torch.nn.GELU,
+}
 
 @dataclass
 class Wav2Vec2AsrConfig(FairseqDataclass):

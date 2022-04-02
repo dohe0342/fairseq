@@ -350,7 +350,7 @@ class ResidualBlock2(torch.nn.Module):
     recommended architecture: http://torch.ch/blog/2016/02/04/resnets.html
     """
 
-    def __init__(self, channels, activation='relu'):
+    def __init__(self, channels, activation='gelu'):
         super(ResidualBlock2, self).__init__()
         self.conv1 = nn.Conv1d(channels, channels, kernel_size=2)
         self.in1 = nn.InstanceNorm1d(channels, affine=True)
@@ -358,7 +358,6 @@ class ResidualBlock2(torch.nn.Module):
         self.in2 = nn.InstanceNorm1d(channels, affine=True)
         self.reflection_pad = torch.nn.ReflectionPad1d(1)
         self.act = ACTIVATIONS[activation]()
-        print(self.act)
 
     def forward(self, x):
         residual = x

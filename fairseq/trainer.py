@@ -294,7 +294,7 @@ class Trainer(object):
                 chain(self.model.parameters(), self.criterion.parameters()),
             )
         )
-        print(list(filter(lambda named, p: p.requires_grad, self.model.named_parameters())))
+        print(list(filter(lambda name, p: p.requires_grad, self.model.named_parameters())))
 
         if self.is_fsdp and self.cfg.common.fp16:
             # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,

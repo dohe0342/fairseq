@@ -295,7 +295,7 @@ class Trainer(object):
             )
         )
 
-        for name, p in self.criterion.named_parameters():
+        for name, p in self.model.named_parameters():
             print(name)
 
         if self.is_fsdp and self.cfg.common.fp16:

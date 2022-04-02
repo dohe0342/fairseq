@@ -310,7 +310,7 @@ class Trainer(object):
         
         self._optimizer = []
 
-        for params in params_all:
+        for i, params in enumerate(params_all):
             if self.is_fsdp and self.cfg.common.fp16:
                 # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,
                 # mostly for the grad scaling. But if we don't have the
@@ -349,7 +349,7 @@ class Trainer(object):
                 assert (
                     not self.cfg.optimization.use_bmuf
                 ), "--ddp-backend=fully_sharded is not compatible with BMUF"
-                assert self._optimizer.supports_flat_params, (
+                assert self._optimizer[i].supports_flat_params, (
                     "--ddp-backend=fully_sharded is only compatible with pointwise "
                     "optimizers (e.g., Adam, AdamW, Adadelta, Adamax, SGD, etc.). "
                     "However, the sharding will result in slightly different results when "
@@ -357,10 +357,10 @@ class Trainer(object):
                 )
 
             if self.cfg.optimization.use_bmuf:
-                self._optimizer = optim.FairseqBMUF(
+                self._optimizer.append(optim.FairseqBMUF(
                     self.cfg.bmuf,
                     self._optimizer,
-                )
+                ))
 
             if self.cfg.distributed_training.zero_sharding == "os":
                 if (
@@ -373,7 +373,7 @@ class Trainer(object):
                         "Please use --fp16-no-flatten-grads"
                     )
                 else:
-                    optim.shard_(self._optimizer, self.data_parallel_process_group)
+                    optim.shard_(self._optimizer[i], self.data_parallel_process_group)
 
             # We should initialize the learning rate scheduler immediately after
             # building the optimizer, so that the initial learning rate is set.

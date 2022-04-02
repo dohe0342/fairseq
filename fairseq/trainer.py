@@ -287,7 +287,7 @@ class Trainer(object):
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)  # this will initialize self._lr_scheduler
         return self._lr_scheduler
 
-    def _build_optimizer(self, pcgrad=False):
+    def _build_optimizer(self, pcgrad=False, name='w2v'):
         params = list(
             filter(
                 lambda p: p.requires_grad,
@@ -295,7 +295,11 @@ class Trainer(object):
             )
         )
         
-        print(list(filter(lambda p: p.requires_grad, self.model.parameters())))
+        #print(list(filter(lambda p: p.requires_grad, self.model.parameters())))
+        params = []
+        for n, p in self.model.named_parameters():
+            if name not in n and p.requires_grad:
+                params.append(p)
 
         if self.is_fsdp and self.cfg.common.fp16:
             # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,

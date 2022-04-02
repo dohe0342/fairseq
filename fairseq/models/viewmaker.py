@@ -188,7 +188,7 @@ class Viewmaker2(torch.nn.Module):
         self.conv3 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
         self.conv4 = ConvLayer2(512, 512, kernel_size=2, stride=1)
-        self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
+        self.in4 = torch.nn.InstanceNorm1d(512, affine=True)
 
         
         '''
@@ -206,6 +206,10 @@ class Viewmaker2(torch.nn.Module):
         self.res3 = ResidualBlock2(512 + 3)
         self.res4 = ResidualBlock2(512 + 4)
         self.res5 = ResidualBlock2(512 + 5)
+
+        self.conv5 = ConvLayer2(512+self.num_res_blocks, 512, kernel_size=2, stride=1)
+        self.ins5 = torch.nn.InstanceNorm1d(512, affine=True)
+        self.conv6 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         
         '''
         # Upsampling Layers
@@ -247,7 +251,7 @@ class Viewmaker2(torch.nn.Module):
         print(y.size())
         y = self.act(self.in3(self.conv3(y)))
         print(y.size())
-        y = self.act(self.in3(self.conv4(y, pad=True)))
+        y = self.act(self.in4(self.conv4(y, pad=True)))
         print(y.size())
 
         # Features that could be useful for other auxilary layers / losses.
@@ -258,7 +262,9 @@ class Viewmaker2(torch.nn.Module):
             if i < num_res_blocks:
                 y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
                 print(y.size())
-
+        
+        y = self.act(self.ins5(self.conv5(y, pad=True)))
+        y = self.conv6(y)
         #y = self.act(self.in4(self.deconv1(y)))
         #y = self.act(self.in5(self.deconv2(y)))
         #y = self.deconv3(y)
@@ -422,3 +428,4 @@ if __name__ == '__main__':
     #print(viewmaker)
     #print('')
     summary(Viewmaker2(), torch.zeros((1,512,600)))
+    #summary(Viewmaker(), torch.zeros(1, 3, 32, 32))

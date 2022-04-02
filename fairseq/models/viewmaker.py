@@ -179,6 +179,7 @@ class Viewmaker2(torch.nn.Module):
         self.frequency_domain = frequency_domain
         self.downsample_to = downsample_to 
         self.distortion_budget = distortion_budget
+        self.num_noise = num_noise
         self.act = ACTIVATIONS[activation]()
 
         # Initial convolution layers (+ 1 for noise filter)

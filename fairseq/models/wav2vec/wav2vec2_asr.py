@@ -1315,7 +1315,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
-        self.viewmaker = ViewMaker()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates
@@ -1360,6 +1359,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
         }
+
 
 class ViewMaker(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''

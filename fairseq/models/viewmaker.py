@@ -153,7 +153,7 @@ class Viewmaker(torch.nn.Module):
 
 class Viewmaker2(torch.nn.Module):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
-    def __init__(self, num_channels=3, distortion_budget=0.05, activation='relu',  
+    def __init__(self, num_channels=512, distortion_budget=0.05, activation='relu',  
                 clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=3):
         '''Initialize the Viewmaker network.
 
@@ -182,25 +182,25 @@ class Viewmaker2(torch.nn.Module):
         self.act = ACTIVATIONS[activation]()
 
         # Initial convolution layers (+ 1 for noise filter)
-        self.conv1 = ConvLayer2(512 + 50, 512, kernel_size=2, stride=1)
-        self.in1 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv2 = ConvLayer2(512, 512, kernel_size=2, stride=1)
-        self.in2 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv3 = ConvLayer2(512, 512, kernel_size=2, stride=1)
-        self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv4 = ConvLayer2(512, 512, kernel_size=2, stride=1)
-        self.in4 = torch.nn.InstanceNorm1d(512, affine=True)
+        self.conv1 = ConvLayer2(num_channels + 50, num_channels, kernel_size=2, stride=1)
+        self.in1 = torch.nn.InstanceNorm1d(num_channels, affine=True)
+        self.conv2 = ConvLayer2(num_channels, num_channels, kernel_size=2, stride=1)
+        self.in2 = torch.nn.InstanceNorm1d(num_channels, affine=True)
+        self.conv3 = ConvLayer2(num_channels, num_channels, kernel_size=2, stride=1)
+        self.in3 = torch.nn.InstanceNorm1d(num_channels, affine=True)
+        self.conv4 = ConvLayer2(num_channels, num_channels, kernel_size=2, stride=1)
+        self.in4 = torch.nn.InstanceNorm1d(num_channels, affine=True)
 
         # Residual layers have +N for added random channels
-        self.res1 = ResidualBlock2(512 + 1)
-        self.res2 = ResidualBlock2(512 + 2)
-        self.res3 = ResidualBlock2(512 + 3)
-        self.res4 = ResidualBlock2(512 + 4)
-        self.res5 = ResidualBlock2(512 + 5)
+        self.res1 = ResidualBlock2(num_channels + 1)
+        self.res2 = ResidualBlock2(num_channels + 2)
+        self.res3 = ResidualBlock2(num_channels + 3)
+        self.res4 = ResidualBlock2(num_channels + 4)
+        self.res5 = ResidualBlock2(num_channels + 5)
 
-        self.conv5 = ConvLayer2(512+self.num_res_blocks, 512, kernel_size=2, stride=1)
-        self.ins5 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv6 = ConvLayer2(512, 512, kernel_size=2, stride=1)
+        self.conv5 = ConvLayer2(nun_channels+self.num_res_blocks, num_channels, kernel_size=2, stride=1)
+        self.ins5 = torch.nn.InstanceNorm1d(num_channels, affine=True)
+        self.conv6 = ConvLayer2(num_channels, num_channels, kernel_size=2, stride=1)
         
     @staticmethod
     def zero_init(m):

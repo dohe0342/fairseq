@@ -375,7 +375,7 @@ class Trainer(object):
         )
         self._lr_scheduler.step_update(0)
 
-    def _build_optimizer(self, pcgrad=False):
+    def _get_optimizer(self, pcgrad=False):
         '''
         params = list(
             filter(

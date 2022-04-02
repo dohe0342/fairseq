@@ -282,6 +282,11 @@ class Trainer(object):
         if self._optimizer is None:
             self._build_optimizer(pcgrad=self.cfg.model.branch_ctc_v3)
         return self._optimizer
+    
+    @property
+    def optimizer2(self):
+        return self._optimizer2
+
 
     @property
     def lr_scheduler(self):
@@ -377,24 +382,24 @@ class Trainer(object):
                 else:
                     optim.shard_(self._optimizer[i], self.data_parallel_process_group)
 
-            # We should initialize the learning rate scheduler immediately after
-            # building the optimizer, so that the initial learning rate is set.
-            if i == 0:
-                self._lr_scheduler = lr_scheduler.build_lr_scheduler(
-                    self.cfg.lr_scheduler,
-                    self.optimizer()[i],
-                )
-                self._lr_scheduler.step_update(0)
-            else:
-                self._lr_scheduler2 = lr_scheduler.build_lr_scheduler(
-                    self.cfg.lr_scheduler,
-                    self.optimizer()[i],
-                )
-                self._lr_scheduler2.step_update(0)
-
-
         self._optimizer2 = self._optimizer[1]
         self._optimizer = self._optimizer[0]
+        
+        # We should initialize the learning rate scheduler immediately after
+        # building the optimizer, so that the initial learning rate is set.
+        self._lr_scheduler = lr_scheduler.build_lr_scheduler(
+                self.cfg.lr_scheduler,
+                self.optimizer,
+            )
+        self._lr_scheduler.step_update(0)
+        
+        self._lr_scheduler2 = lr_scheduler.build_lr_scheduler(
+                self.cfg.lr_scheduler,
+                self.optimizer,
+            )
+        self._lr_scheduler.step_update(0)
+
+
 
     @property
     def is_fsdp(self):

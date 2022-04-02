@@ -202,6 +202,7 @@ class Viewmaker(torch.nn.Module):
         return result
 
 
+@register_model('viewmaker', dataclass=Wav2VecConfig)
 class Viewmaker2(torch.nn.Module):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',  

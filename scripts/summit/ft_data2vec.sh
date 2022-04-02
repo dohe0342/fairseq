@@ -5,4 +5,3 @@ fairseq-hydra-train \
 	common.user_dir=examples/data2vec \
     task.data=/workspace/LibriSpeech/manifests \
     model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
-	+task.uses_branch=False

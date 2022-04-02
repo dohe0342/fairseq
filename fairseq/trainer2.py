@@ -399,8 +399,6 @@ class Trainer(object):
             )
         self._lr_scheduler2.step_update(0)
 
-
-
     @property
     def is_fsdp(self):
         return self.cfg.distributed_training.ddp_backend == "fully_sharded"
@@ -1244,6 +1242,9 @@ class Trainer(object):
 
     def zero_grad(self):
         self.optimizer.zero_grad()
+    
+    def zero_grad2(self):
+        self.optimizer2.zero_grad()
 
     def lr_step_begin_epoch(self, epoch):
         """Adjust the learning rate at the beginning of the epoch."""

@@ -137,6 +137,7 @@ class Trainer(object):
         self._num_xla_compiles = 0  # for TPUs
         self._optim_history = None
         self._optimizer = None
+        self._optimizer2 = None
         self._warn_once = set()
         self._wrapped_criterion = None
         self._wrapped_model = None

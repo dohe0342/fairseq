@@ -296,9 +296,9 @@ class Trainer(object):
             )
         )
         '''
-        params = [] 
+        params_w2v = [] 
         for n, p in self.model.named_parameters():
-            if name not in n and p.requires_grad:
+            if 'viewmaker' not in n and p.requires_grad:
                 params.append(p)
             else:
                 print(n)

@@ -228,7 +228,7 @@ class Viewmaker2(torch.nn.Module):
         if num_res_blocks not in list(range(6)):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
 
-        y = self.add_noise_channel(y, num=50, bound_multiplier=bound_multiplier)
+        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.act(self.in1(self.conv1(y)))
         y = self.act(self.in2(self.conv2(y, pad=True)))
         y = self.act(self.in3(self.conv3(y)))

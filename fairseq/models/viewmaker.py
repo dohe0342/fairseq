@@ -240,9 +240,6 @@ class Viewmaker2(torch.nn.Module):
         
         y = self.act(self.ins5(self.conv5(y, pad=True)))
         y = self.conv6(y)
-        #y = self.act(self.in4(self.deconv1(y)))
-        #y = self.act(self.in5(self.deconv2(y)))
-        #y = self.deconv3(y)
 
         return y, features
     

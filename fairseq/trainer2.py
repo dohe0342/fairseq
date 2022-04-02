@@ -397,7 +397,7 @@ class Trainer(object):
                 self.cfg.lr_scheduler,
                 self.optimizer2,
             )
-        self._lr_scheduler.step_update(0)
+        self._lr_scheduler2.step_update(0)
 
 
 

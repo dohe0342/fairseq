@@ -829,6 +829,7 @@ class Trainer(object):
                 else:
                     return contextlib.ExitStack()  # dummy contextmanager
 
+            print(self.optimizer)
             try:
                 with maybe_no_sync():
                     # forward and backward

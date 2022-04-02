@@ -244,15 +244,10 @@ class Viewmaker2(torch.nn.Module):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
 
         y = self.add_noise_channel(y, num=50, bound_multiplier=bound_multiplier)
-        print(y.size())
         y = self.act(self.in1(self.conv1(y)))
-        print(y.size())
         y = self.act(self.in2(self.conv2(y, pad=True)))
-        print(y.size())
         y = self.act(self.in3(self.conv3(y)))
-        print(y.size())
         y = self.act(self.in4(self.conv4(y, pad=True)))
-        print(y.size())
 
         # Features that could be useful for other auxilary layers / losses.
         # [batch_size, 128]
@@ -261,7 +256,6 @@ class Viewmaker2(torch.nn.Module):
         for i, res in enumerate([self.res1, self.res2, self.res3, self.res4, self.res5]):
             if i < num_res_blocks:
                 y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
-                print(y.size())
         
         y = self.act(self.ins5(self.conv5(y, pad=True)))
         y = self.conv6(y)
@@ -425,7 +419,4 @@ class UpsampleConvLayer(torch.nn.Module):
 
 if __name__ == '__main__':
     viewmaker = Viewmaker()
-    #print(viewmaker)
-    #print('')
     summary(Viewmaker2(), torch.zeros((1,512,600)))
-    #summary(Viewmaker(), torch.zeros(1, 3, 32, 32))

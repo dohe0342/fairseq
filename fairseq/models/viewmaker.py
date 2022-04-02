@@ -335,6 +335,7 @@ class ResidualBlock(torch.nn.Module):
         self.conv2 = ConvLayer(channels, channels, kernel_size=3, stride=1)
         self.in2 = torch.nn.InstanceNorm2d(channels, affine=True)
         self.act = ACTIVATIONS[activation]()
+        print(self.act)
 
     def forward(self, x):
         residual = x

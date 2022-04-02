@@ -1308,6 +1308,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
+        self.viewmaker = ViewMaker()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates
@@ -1374,7 +1375,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "spk_prob": spk_prob,
         }
 
-class Viewmaker(BaseFairseqModel):
+class ViewMaker(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',
                 clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=30):

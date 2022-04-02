@@ -301,7 +301,7 @@ class Trainer(object):
             if name not in n and p.requires_grad:
                 params.append(p)
             else:
-                print(name)
+                print(n)
 
         if self.is_fsdp and self.cfg.common.fp16:
             # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,

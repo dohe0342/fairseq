@@ -378,10 +378,10 @@ class Trainer(object):
 
             # We should initialize the learning rate scheduler immediately after
             # building the optimizer, so that the initial learning rate is set.
-            self._lr_scheduler.append(lr_scheduler.build_lr_scheduler(
+            self._lr_scheduler = lr_scheduler.build_lr_scheduler(
                 self.cfg.lr_scheduler,
                 self.optimizer()[i],
-            ))
+            )
             self._lr_scheduler[i].step_update(0)
 
         self._optimizer2 = self._optimizer[1]

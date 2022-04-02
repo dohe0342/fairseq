@@ -1097,7 +1097,145 @@ class Wav2VecEncoderSpkClf(Wav2VecEncoder):
         }
 
 
-@register_model('viewmaker', dataclass=Wav2Vec2CtcConfig)
+class Wav2VecEncoderSpkClf(Wav2VecEncoder):
+    def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None, spk_num=None):
+        self.apply_mask = cfg.apply_mask
+
+        arg_overrides = {
+            "dropout": cfg.dropout,
+            "activation_dropout": cfg.activation_dropout,
+            "dropout_input": cfg.dropout_input,
+            "attention_dropout": cfg.attention_dropout,
+            "mask_length": cfg.mask_length,
+            "mask_prob": cfg.mask_prob,
+            "require_same_masks": getattr(cfg, "require_same_masks", True),
+            "pct_holes": getattr(cfg, "mask_dropout", 0),
+            "mask_selection": cfg.mask_selection,
+            "mask_other": cfg.mask_other,
+            "no_mask_overlap": cfg.no_mask_overlap,
+            "mask_channel_length": cfg.mask_channel_length,
+            "mask_channel_prob": cfg.mask_channel_prob,
+            "mask_channel_before": cfg.mask_channel_before,
+            "mask_channel_selection": cfg.mask_channel_selection,
+            "mask_channel_other": cfg.mask_channel_other,
+            "no_mask_channel_overlap": cfg.no_mask_channel_overlap,
+            "encoder_layerdrop": cfg.layerdrop,
+            "feature_grad_mult": cfg.feature_grad_mult,
+            "checkpoint_activations": cfg.checkpoint_activations,
+            "offload_activations": cfg.offload_activations,
+            "min_params_to_wrap": cfg.min_params_to_wrap,
+            "branch_ctc_v1": cfg.branch_ctc_v1,
+        }
+
+        if cfg.w2v_args is None:
+            state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
+            w2v_args = state.get("cfg", None)
+            if w2v_args is None:
+                w2v_args = convert_namespace_to_omegaconf(state["args"])
+            w2v_args.criterion = None
+            w2v_args.lr_scheduler = None
+            cfg.w2v_args = w2v_args
+
+            logger.info(w2v_args)
+
+        else:
+            state = None
+            w2v_args = cfg.w2v_args
+            if isinstance(w2v_args, Namespace):
+                cfg.w2v_args = w2v_args = convert_namespace_to_omegaconf(w2v_args)
+        
+        model_normalized = w2v_args.task.get(
+            "normalize", w2v_args.model.get("normalize", False)
+        )
+        assert cfg.normalize == model_normalized, (
+            "Fine-tuning works best when data normalization is the same. "
+            "Please check that --normalize is set or unset for both pre-training and here"
+        )
+
+        if hasattr(cfg, "checkpoint_activations") and cfg.checkpoint_activations:
+            with open_dict(w2v_args):
+                w2v_args.model.checkpoint_activations = cfg.checkpoint_activations
+
+        w2v_args.task.data = cfg.data
+        task = tasks.setup_task(w2v_args.task)
+        model = task.build_model(w2v_args.model, from_checkpoint=True)
+
+        model.remove_pretraining_modules()
+
+        if state is not None and not cfg.no_pretrained_weights:
+            self.load_model_weights(state, model, cfg)
+
+        FairseqEncoder.__init__(self, task.source_dictionary)
+        d = w2v_args.model.encoder_embed_dim
+
+        self.w2v_model = model
+
+        self.final_dropout = nn.Dropout(cfg.final_dropout)
+        self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.num_updates = 0
+
+        targ_d = None
+        self.proj = None
+        self.proj_ctc = None
+        self.proj_spk = None
+
+        if output_size is not None:
+            targ_d = output_size
+        elif getattr(cfg, "decoder_embed_dim", d) != d:
+            targ_d = cfg.decoder_embed_dim
+        
+        if targ_d is not None:
+            self.proj_ctc = Linear(d, targ_d)
+            self.proj_spk = Linear(d, spk_num)
+            self.proj = [self.proj_ctc, self.proj_spk]
+            self.softmax = nn.Softmax(dim=1)
+
+    def forward(self, source, padding_mask, **kwargs):
+        w2v_args = {
+            "source": source,
+            "padding_mask": padding_mask,
+            "mask": self.apply_mask and self.training,
+        }
+
+        ft = self.freeze_finetune_updates <= self.num_updates
+        with torch.no_grad() if not ft else contextlib.ExitStack():
+            res = self.w2v_model.extract_features(**w2v_args)
+
+            x = res["x"]
+            padding_mask = res["padding_mask"]
+
+            # B x T x C -> T x B x C
+            x = x.transpose(0, 1)
+
+        x = self.final_dropout(x)
+        spk_prob = None
+
+        if self.proj:
+            x = self.proj_ctc(x)
+            #print(res["dropped_layer"]) 
+            #if len(res["layer_results"]) == 12:
+            count = 0
+            for drop in res["dropped_layer"]:
+                if drop < 6:
+                    count += 1
+            
+            if not (5 in res["dropped_layer"]):
+                #in_layer_results = res["layer_results"][2][0].mean(0)
+                mid1_layer_results = res["layer_results"][5-count][0].mean(0)
+                #mid2_layer_results = res["layer_results"][8][0].mean(0)
+                #out_layer_results = res["layer_results"][11][0].mean(0)
+
+                spk_logits = self.proj_spk(mid1_layer_results)
+                spk_prob = self.softmax(spk_logits)
+        
+        return {
+            "encoder_out": x,  # T x B x C
+            "padding_mask": padding_mask,  # B x T,
+            "layer_results": res["layer_results"],
+            "spk_prob": spk_prob,
+        }
+
+
 class Viewmaker(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',

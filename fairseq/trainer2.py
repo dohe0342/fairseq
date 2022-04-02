@@ -395,7 +395,7 @@ class Trainer(object):
         
         self._lr_scheduler2 = lr_scheduler.build_lr_scheduler(
                 self.cfg.lr_scheduler,
-                self.optimizer,
+                self.optimizer2,
             )
         self._lr_scheduler.step_update(0)
 

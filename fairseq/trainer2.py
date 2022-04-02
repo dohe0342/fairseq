@@ -318,9 +318,9 @@ class Trainer(object):
                 # regular --fp16 and can allow the use of optimizers that would
                 # otherwise be unsupported by MemoryEfficientFP16Optimizer.
                 allow_unsupported = not self.cfg.common.memory_efficient_fp16
-                self._optimizer = optim.MemoryEfficientFP16Optimizer.build_optimizer(
+                self._optimizer.append(optim.MemoryEfficientFP16Optimizer.build_optimizer(
                     self.cfg, params, allow_unsupported=allow_unsupported
-                )
+                ))
             elif self.cfg.common.fp16 or self.cfg.common.bf16 or self.cfg.common.amp:
                 if self.cuda and torch.cuda.get_device_capability(0)[0] < 7:
                     logger.info(
@@ -331,13 +331,13 @@ class Trainer(object):
                     self.cfg.common.memory_efficient_fp16
                     or self.cfg.common.memory_efficient_bf16
                 ):
-                    self._optimizer = optim.MemoryEfficientFP16Optimizer.build_optimizer(
+                    self._optimizer.append(optim.MemoryEfficientFP16Optimizer.build_optimizer(
                         self.cfg, params
-                    )
+                    ))
                 elif self.cfg.common.amp:
-                    self._optimizer = optim.AMPOptimizer.build_optimizer(self.cfg, params)
+                    self._optimizer.append(optim.AMPOptimizer.build_optimizer(self.cfg, params))
                 else:
-                    self._optimizer = optim.FP16Optimizer.build_optimizer(self.cfg, params)
+                    self._optimizer.append(optim.FP16Optimizer.build_optimizer(self.cfg, params))
             else:
                 if self.cuda and torch.cuda.get_device_capability(0)[0] >= 7:
                     logger.info(

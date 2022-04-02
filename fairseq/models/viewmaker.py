@@ -17,57 +17,6 @@ ACTIVATIONS = {
     'gelu': torch.nn.GELU,
 }
 
-@dataclass
-class Wav2Vec2Config(FairseqDataclass):
-    extractor_mode: EXTRACTOR_MODE_CHOICES = field(
-        default="default",
-        metadata={
-            "help": "mode for feature extractor. default has a single group norm with d "
-            "groups in the first conv block, whereas layer_norm has layer norms in "
-            "every block (meant to use with normalize=True)"
-        },   
-    )    
-    encoder_layers: int = field(
-        default=12, metadata={"help": "num encoder layers in the transformer"}
-    )    
-    encoder_embed_dim: int = field(
-        default=768, metadata={"help": "encoder embedding dimension"}
-    )    
-    encoder_ffn_embed_dim: int = field(
-        default=3072, metadata={"help": "encoder embedding dimension for FFN"}
-    )    
-    encoder_attention_heads: int = field(
-        default=12, metadata={"help": "num encoder attention heads"}
-    )    
-    activation_fn: ChoiceEnum(utils.get_available_activation_fns()) = field(
-        default="gelu", metadata={"help": "activation function to use"}
-    )    
-    layer_type: LAYER_TYPE_CHOICES = field(
-        default="transformer", metadata={"help": "layer type in encoder"}
-    )    
-    # dropouts
-    dropout: float = field(
-        default=0.1, metadata={"help": "dropout probability for the transformer"}
-    )    
-    attention_dropout: float = field(
-        default=0.1, metadata={"help": "dropout probability for attention weights"}
-    )    
-    activation_dropout: float = field(
-        default=0.0, metadata={"help": "dropout probability after activation in FFN"}
-    )    
-    encoder_layerdrop: float = field(
-        default=0.0, metadata={"help": "probability of dropping a tarnsformer layer"}
-    )    
-    dropout_input: float = field(
-        default=0.0,
-        metadata={"help": "dropout to apply to the input (after feat extr)"},
-    )    
-    dropout_features: float = field(
-        default=0.0,
-        metadata={"help": "dropout to apply to the features (after feat extr)"},
-    )
-
-
 class Viewmaker(torch.nn.Module):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=3, distortion_budget=0.05, activation='relu',  

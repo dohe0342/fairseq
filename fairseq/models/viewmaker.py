@@ -190,16 +190,6 @@ class Viewmaker2(torch.nn.Module):
         self.conv4 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         self.in4 = torch.nn.InstanceNorm1d(512, affine=True)
 
-        
-        '''
-        self.conv1 = nn.Conv1d(512+100, 512, kernel_size=2, stride=1)
-        self.in1 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv1 = ConvLayer2(512+100, 512, kernel_size=2, stride=1)
-        self.in2 = torch.nn.InstanceNorm1d(512, affine=True)
-        self.conv3 = nn.Conv1d(512, 512, kernel_size=2, stride=1)
-        self.in3 = torch.nn.InstanceNorm1d(512, affine=True)
-        '''
-        
         # Residual layers have +N for added random channels
         self.res1 = ResidualBlock2(512 + 1)
         self.res2 = ResidualBlock2(512 + 2)
@@ -211,15 +201,6 @@ class Viewmaker2(torch.nn.Module):
         self.ins5 = torch.nn.InstanceNorm1d(512, affine=True)
         self.conv6 = ConvLayer2(512, 512, kernel_size=2, stride=1)
         
-        '''
-        # Upsampling Layers
-        self.deconv1 = UpsampleConvLayer(128 + self.num_res_blocks, 64, kernel_size=3, stride=1, upsample=2)
-        self.in4 = torch.nn.InstanceNorm2d(64, affine=True)
-        self.deconv2 = UpsampleConvLayer(64, 32, kernel_size=3, stride=1, upsample=2)
-        self.in5 = torch.nn.InstanceNorm2d(32, affine=True)
-        self.deconv3 = ConvLayer(32, self.num_channels, kernel_size=9, stride=1)
-        '''
-
     @staticmethod
     def zero_init(m):
         if isinstance(m, (nn.Linear, nn.Conv2d)):

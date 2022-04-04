@@ -320,6 +320,8 @@ class Data2VecAudioModel(BaseFairseqModel):
         tgt_layer=None,
         branch_ctc=False
     ):
+        viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
+        
         features = source
 
         if self.feature_grad_mult > 0:
@@ -521,7 +523,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         if self.ema is not None:
             result["ema_decay"] = self.ema.get_decay() * 1000
 
-        viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
         
         return result
 

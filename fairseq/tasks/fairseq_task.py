@@ -557,12 +557,17 @@ class FairseqTask(object):
             with torch.autograd.profiler.record_function("forward"):
                 with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
                     loss, sample_size, logging_output = criterion(model, sample)
-            if ignore_grad:
-                loss[0] *= 0
-                loss[1] *= 0
-            with torch.autograd.profiler.record_function("backward"):
-                optimizer[0].backward(loss, retain_graph=True)
-                optimizer[1].backward(-loss)
+
+            if len(optimizerr) == 1:
+                if ignore_grad:
+                    loss[0] *= 0
+                    loss[1] *= 0
+                with torch.autograd.profiler.record_function("backward"):
+                    optimizer[0].backward(loss, retain_graph=True)
+                    optimizer[1].backward(-loss)
+            else:
+
+
 
             '''
             model.train()

@@ -318,7 +318,8 @@ class Data2VecAudioModel(BaseFairseqModel):
         mask_channel_indices=None,
         padding_count=None,
         tgt_layer=None,
-        branch_ctc=False
+        branch_ctc=False,
+        **kwargs,
     ):
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
         print(viewmaker)

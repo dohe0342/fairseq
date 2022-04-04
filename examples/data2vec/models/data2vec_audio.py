@@ -321,6 +321,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         branch_ctc=False
     ):
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
+        print(viewmaker)
         
         features = source
 

@@ -371,7 +371,7 @@ class Data2VecAudioModel(BaseFairseqModel):
 
         features = self.dropout_input(features)
         
-        if viewmaker is not None
+        if viewmaker is not None:
             features_newview = viewmaker(features)
 
         if mask:

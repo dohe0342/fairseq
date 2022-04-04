@@ -321,6 +321,7 @@ class Trainer(object):
         self._optimizer = []
 
         for i, params in enumerate(params_all):
+            print(params)
             if self.is_fsdp and self.cfg.common.fp16:
                 # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,
                 # mostly for the grad scaling. But if we don't have the

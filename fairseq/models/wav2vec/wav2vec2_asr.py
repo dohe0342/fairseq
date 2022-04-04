@@ -1435,6 +1435,7 @@ class ViewMaker(BaseFairseqModel):
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
         if x.dtype == 'torch.float16':
+            print('fuck'*100)
             noise.type(torch.cuda.float16)
         return torch.cat((x, noise), dim=1)
 

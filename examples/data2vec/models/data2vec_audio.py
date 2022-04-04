@@ -361,6 +361,10 @@ class Data2VecAudioModel(BaseFairseqModel):
             padding_mask = None
         
         conv_features = features.clone()
+        
+        print(features.size())
+        if viewmaker is not None:
+            features_newview = viewmaker(features)
 
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
@@ -371,10 +375,6 @@ class Data2VecAudioModel(BaseFairseqModel):
 
         features = self.dropout_input(features)
         
-        print(features.size())
-        if viewmaker is not None:
-            features_newview = viewmaker(features)
-
         if mask:
             x, mask_indices = self.apply_mask(
                 features,

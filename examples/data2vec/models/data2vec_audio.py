@@ -367,6 +367,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview = viewmaker(features_newview)
             features_newview = features_newview.transpose(1,2)
         
+        print(features_newview[0][0].unsqueeze().size())
         print(torch.mm(features_newview[0][0].unsqueeze(), features[0][0].unsqueeze().T))
             
         if self.post_extract_proj is not None:

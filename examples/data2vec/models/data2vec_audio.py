@@ -322,7 +322,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         **kwargs,
     ):
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
-        print(viewmaker)
         
         features = source
 
@@ -371,6 +370,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             pre_encoder_features = features.clone()
 
         features = self.dropout_input(features)
+        features = viewmaker(features)
 
         if mask:
             x, mask_indices = self.apply_mask(

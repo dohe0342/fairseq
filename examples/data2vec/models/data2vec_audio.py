@@ -529,7 +529,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         if self.ema is not None:
             result["ema_decay"] = self.ema.get_decay() * 1000
 
-        
         return result
 
     @staticmethod

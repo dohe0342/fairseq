@@ -543,7 +543,6 @@ class Data2VecAudioModel(BaseFairseqModel):
     def extract_features(
         self, source, padding_mask, mask=False, layer=None, tgt_layer=None, **kwargs,
     ):
-        print(kwargs)
         res = self.forward(
             source,
             padding_mask,
@@ -551,6 +550,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_only=True,
             layer=layer,
             tgt_layer=tgt_layer,
+            **kwargs,
         )
         return res
 

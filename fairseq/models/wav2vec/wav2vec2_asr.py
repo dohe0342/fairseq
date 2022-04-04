@@ -1437,6 +1437,7 @@ class ViewMaker(BaseFairseqModel):
         print(x.dtype)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
         print(x.dtype)
+        print(noise.dtype)
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):

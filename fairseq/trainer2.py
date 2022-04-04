@@ -317,7 +317,9 @@ class Trainer(object):
                 params_viewmaker.append(p)
 
         params_all = [params_w2v, params_viewmaker]
+        print('*'*20)
         print(len(params_all))
+        print('*'*20)
         
         self._optimizer = []
 

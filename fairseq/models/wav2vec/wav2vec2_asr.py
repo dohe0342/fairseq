@@ -1438,6 +1438,7 @@ class ViewMaker(BaseFairseqModel):
         #    print('fuck'*100)
         #noise.type(torch.cuda.float16)
         noise.half()
+        print(noise.dtype)
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):

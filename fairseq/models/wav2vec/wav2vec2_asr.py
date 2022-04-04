@@ -1439,7 +1439,8 @@ class ViewMaker(BaseFairseqModel):
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
         if num_res_blocks not in list(range(6)):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
-
+        
+        print(y.dtype)
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         print(y.dtype)
         y = self.act(self.in1(self.conv1(y)))

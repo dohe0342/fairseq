@@ -549,7 +549,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             mask=mask,
             features_only=True,
             layer=layer,
-            tgt_layer=tgt_layer,,
+            tgt_layer=tgt_layer,
         )
         return res
 

@@ -365,6 +365,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         if viewmaker is not None:
             print(features.dtype)
             features_newview = features.transpose(1,2)
+            print(features_newview.dtype)
             features_newview = viewmaker(features_newview)
             print(features_newview.size())
 

@@ -1437,7 +1437,7 @@ class ViewMaker(BaseFairseqModel):
         #if x.dtype == 'torch.cuda.float16':
         #    print('fuck'*100)
         #noise.type(torch.cuda.float16)
-        noise.half()
+        noise = noise.half()
         print(noise.dtype)
         return torch.cat((x, noise), dim=1)
 

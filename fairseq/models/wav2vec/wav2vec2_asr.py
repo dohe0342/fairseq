@@ -1360,6 +1360,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "encoder_out": x,  # T x B x C
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
+            "loss": res["loss"],
         }
 
 

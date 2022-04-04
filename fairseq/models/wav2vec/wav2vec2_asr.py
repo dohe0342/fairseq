@@ -1441,7 +1441,7 @@ class ViewMaker(BaseFairseqModel):
         noise = noise.half()
         return torch.cat((x, noise), dim=1)
 
-    def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
+    def basic_net(self, y, num_res_blocks=3, bound_multiplier=1):
         if num_res_blocks not in list(range(6)):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
         

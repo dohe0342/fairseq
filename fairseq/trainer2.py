@@ -317,13 +317,14 @@ class Trainer(object):
                 params_viewmaker.append(p)
 
         params_all = [params_w2v, params_viewmaker]
-        print('*'*20)
-        print(len(params_all))
-        print('*'*20)
-        
+                
         self._optimizer = []
 
         for i, params in enumerate(params_all):
+            print('*'*20)
+            print(len(params))
+            print('*'*20)
+
             if self.is_fsdp and self.cfg.common.fp16:
                 # FullyShardedDataParallel always uses MemoryEfficientFP16 wrapper,
                 # mostly for the grad scaling. But if we don't have the

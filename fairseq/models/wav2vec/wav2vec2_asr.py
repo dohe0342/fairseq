@@ -1511,6 +1511,7 @@ class ViewMaker(BaseFairseqModel):
                 sim = torch.mm(r.T, x_)
                 sim_sum = sim.diag(0).sum()
                 sim_avg = sim_sum / sim_sum.size()[0]
+                print(sim_avg)
                 #print(torch.square(result[i]-x[i]).sum())
                 #print(torch.mm(r.T, x_).size())
                 #print(torch.mm(result[i].T, x[i])[100][100])

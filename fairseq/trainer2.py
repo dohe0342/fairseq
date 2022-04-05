@@ -893,6 +893,7 @@ class Trainer(object):
                     )
                     ooms += 1
                     self.zero_grad()
+                    self.zero_grad2()
                     if self.cuda:
                         torch.cuda.empty_cache()
                     if self.cfg.distributed_training.distributed_world_size == 1:
@@ -1030,6 +1031,7 @@ class Trainer(object):
             # re-run the forward and backward pass with hooks attached to print
             # out where it fails
             self.zero_grad()
+            self.zero_grad2()
             with NanDetector(self.get_model()):
                 for _, sample in enumerate(samples):
                     sample, _ = self._prepare_sample(sample)

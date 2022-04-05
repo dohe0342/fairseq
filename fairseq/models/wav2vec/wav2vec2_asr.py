@@ -34,11 +34,6 @@ from fairseq.tasks import FairseqTask
 
 logger = logging.getLogger(__name__)
 
-ACTIVATIONS = { 
-    'relu': torch.nn.ReLU,
-    'leaky_relu': torch.nn.LeakyReLU,
-    'gelu': torch.nn.GELU,
-}
 
 @dataclass
 class Wav2Vec2AsrConfig(FairseqDataclass):
@@ -1362,6 +1357,13 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "layer_results": res["layer_results"],
             "loss": res["loss"],
         }
+
+
+ACTIVATIONS = { 
+    'relu': torch.nn.ReLU,
+    'leaky_relu': torch.nn.LeakyReLU,
+    'gelu': torch.nn.GELU,
+}
 
 
 class ViewMaker(BaseFairseqModel):

@@ -1513,8 +1513,8 @@ class ViewMaker(BaseFairseqModel):
                 print(sim_avg)
         '''
 
-        if self.clamp:
-            result = torch.clamp(result, 0, 1.0)
+        #if self.clamp:
+        #    result = torch.clamp(result, 0, 1.0)
 
         result = delta
 

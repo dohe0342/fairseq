@@ -1506,10 +1506,6 @@ class ViewMaker(BaseFairseqModel):
             for j in range(i):
                 print(torch.sqare(result[i]-x[i]).sum())
 
-        for batch in result:
-            for sample in batch:
-                
-
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
 

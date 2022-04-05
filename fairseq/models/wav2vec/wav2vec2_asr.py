@@ -1506,6 +1506,8 @@ class ViewMaker(BaseFairseqModel):
             for j in range(i):
                 #print(torch.square(result[i]-x[i]).sum())
                 #print(torch.mm(result[i].T, x[i]).size())
+                r = result[i]/torch.norm(result[i])
+                x = x[i]/torch.norm(x[i])
                 print(torch.mm(result[i].T, x[i])[100][100])
                 #print(result[i].size())
 

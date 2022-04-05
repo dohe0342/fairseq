@@ -1508,7 +1508,8 @@ class ViewMaker(BaseFairseqModel):
                 #print(torch.mm(result[i].T, x[i]).size())
                 r = result[i]/torch.norm(result[i])
                 x = x[i]/torch.norm(x[i])
-                print(torch.mm(result[i].T, x[i])[100][100])
+                print(torch.mm(r.T, x)[100][100])
+                #print(torch.mm(result[i].T, x[i])[100][100])
                 #print(result[i].size())
 
         if self.clamp:

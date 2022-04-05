@@ -1516,7 +1516,7 @@ class ViewMaker(BaseFairseqModel):
         #if self.clamp:
         #    result = torch.clamp(result, 0, 1.0)
 
-        result = delta
+        #result = delta
 
         return result
 

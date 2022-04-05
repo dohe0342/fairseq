@@ -1369,7 +1369,7 @@ ACTIVATIONS = {
 class ViewMaker(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.01, activation='relu',
-                clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=500):
+                clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=5):
         '''Initialize the Viewmaker network.
 
         Args:
@@ -1502,21 +1502,16 @@ class ViewMaker(BaseFairseqModel):
         # Additive perturbation
         result = x + delta
         
+        '''
         for i in range(result.size()[0]):
             for j in range(i):
-                #print(torch.mm(result[i].T, x[i]).size())
                 r = result[i]/torch.norm(result[i], dim=0)
                 x_ = x[i]/torch.norm(x[i], dim=0)
-                #print(torch.mm(r.T, x_)[100][100])
                 sim = torch.mm(r.T, x_)
                 sim_sum = sim.diag(0).sum()
-                #print(sim_sum)
                 sim_avg = sim_sum / sim.size()[0]
                 print(sim_avg)
-                #print(torch.square(result[i]-x[i]).sum())
-                #print(torch.mm(r.T, x_).size())
-                #print(torch.mm(result[i].T, x[i])[100][100])
-                #print(result[i].size())
+        '''
 
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)

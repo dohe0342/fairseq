@@ -1501,10 +1501,12 @@ class ViewMaker(BaseFairseqModel):
 
         # Additive perturbation
         result = x + delta
-
+        
+        '''
         for i in range(result.size()[0]):
             for j in range(i):
                 print(torch.square(result[i]-x[i]).sum())
+        '''
 
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)

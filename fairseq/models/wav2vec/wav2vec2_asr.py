@@ -1505,7 +1505,8 @@ class ViewMaker(BaseFairseqModel):
         for i in range(result.size()[0]):
             for j in range(i):
                 #print(torch.square(result[i]-x[i]).sum())
-                print(torch.mm(result[i].T, x[i]).size())
+                #print(torch.mm(result[i].T, x[i]).size())
+                print(torch.mm(result[i].T, x[i])[100][100])
                 #print(result[i].size())
 
         if self.clamp:

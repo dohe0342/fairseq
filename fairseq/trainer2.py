@@ -1052,6 +1052,7 @@ class Trainer(object):
             )
             grad_norm = torch.tensor(0.0).cuda()
             self.zero_grad()
+            self.zero_grad2()
         except RuntimeError as e:
             if "out of memory" in str(e):
                 self._log_oom(e)

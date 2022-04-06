@@ -440,9 +440,11 @@ class FCLayer(torch.nn.Module):
         super(FCLayer, self).__init__()
         self.linear = torch.nn.Linear(
             in_channels, out_channels, kernel_size, stride)
+        self.ins = torch.nn.InstanceNorm1d(out_channels, affine=True)
+        self.act = ACTIVATIONS[activation]()
 
     def forward(self, x):
-        out = self.linear(out)
+        out = self.act(self.ins(self.linear(x)))
         return out
 
 

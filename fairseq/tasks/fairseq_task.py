@@ -574,6 +574,7 @@ class FairseqTask(object):
                     else:
                         optimizer[0].backward(loss[0], retain_graph=True)
                         optimizer[1].backward(-0.001*loss[0] + loss[1])
+                    print(loss[1])
 
             '''
             model.train()

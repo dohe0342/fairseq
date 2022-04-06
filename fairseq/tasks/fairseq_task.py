@@ -572,7 +572,7 @@ class FairseqTask(object):
                     if loss[1].data > 10:
                         print('viewmaker ruin representation')
                         optimizer[1].backward(loss[1])
-                    else:
+                    elif loss[1].data != 0.:
                         print(loss[1])
                         optimizer[1].backward(-0.001*loss[0] + loss[1])
 

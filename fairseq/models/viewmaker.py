@@ -438,7 +438,7 @@ class Viewmaker3(torch.nn.Module):
 class FCLayer(torch.nn.Module):
     def __init__(self, in_channels, out_channels):
         super(FCLayer, self).__init__()
-        self.conv2d = torch.nn.linear(
+        self.conv2d = torch.nn.Linear(
             in_channels, out_channels, kernel_size, stride)
 
     def forward(self, x):

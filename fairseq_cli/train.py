@@ -315,11 +315,11 @@ def train(
                 # the end-of-epoch stats will still be preserved
                 metrics.reset_meters("train_inner")
         end_of_epoch = not itr.has_next()
-        valid_losses, should_stop = validate_and_save(
-            cfg, trainer, task, epoch_itr, valid_subsets, end_of_epoch
-        )
-        #valid_losses = 10000.
-        #should_stop = False
+        #valid_losses, should_stop = validate_and_save(
+        #    cfg, trainer, task, epoch_itr, valid_subsets, end_of_epoch
+        #)
+        valid_losses = [10000.]
+        should_stop = False
 
         if should_stop:
             break

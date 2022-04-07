@@ -575,5 +575,4 @@ class UpsampleConvLayer(torch.nn.Module):
 
 
 if __name__ == '__main__':
-    viewmaker = Viewmaker()
-    summary(Viewmaker3(), torch.zeros((5, 200,512)))
+    summary(Viewmaker3().to('cuda'), torch.zeros((5, 200,512).to('cuda')))

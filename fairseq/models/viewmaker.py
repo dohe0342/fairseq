@@ -458,11 +458,16 @@ class FCLayer(torch.nn.Module):
         in_channels = int(in_channels)
         out_channels = int(out_channels)
 
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+
         self.linear = torch.nn.Linear(in_channels, out_channels)
         self.ins = torch.nn.InstanceNorm1d(out_channels, affine=True)
         self.act = ACTIVATIONS[activation]()
 
     def forward(self, x):
+        out = self.linear(x)
+        out = out.view(-1, self.out_channels)
         out = self.act(self.ins(self.linear(x)))
         return out
 

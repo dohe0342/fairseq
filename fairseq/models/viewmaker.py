@@ -471,6 +471,7 @@ class FCLayer(torch.nn.Module):
         out = self.ins(out)
         out = self.act(out)
         out = out.transpose(1,2)
+        print('out size = ', out.size())
 
         return out
 

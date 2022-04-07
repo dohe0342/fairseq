@@ -462,7 +462,7 @@ class Viewmaker3(torch.nn.Module):
         return delta
 
     def forward(self, x):
-        result = self.basic_net(x, bound_multiplier=1)
+        out = self.basic_net(x, bound_multiplier=1)
         delta = self.get_delta(out)
         
         # Additive perturbation

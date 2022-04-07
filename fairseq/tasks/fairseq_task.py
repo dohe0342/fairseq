@@ -572,7 +572,7 @@ class FairseqTask(object):
                     if loss[1].data > 15.:
                         optimizer[1].backward(loss[1])
                     elif loss[1].data != 0. and loss[1].data <= 15.:
-                        #print('start view maker')
+                        print('start view maker')
                         optimizer[1].backward(-0.001*loss[0] + loss[1])
                         #optimizer[1].backward(loss[1])
 

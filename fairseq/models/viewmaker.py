@@ -366,16 +366,16 @@ class Viewmaker3(torch.nn.Module):
         self.var = FCLayer(self.num_channels/4, self.num_channels/16)               ## 128 -> 32
         
         self.dec1 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
-        self.dec2 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
-        self.dec3 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
+        self.dec2 = FCLayer(self.num_channels/4, self.num_channels/4)              ## 32 -> 128
+        self.dec3 = FCLayer(self.num_channels/4, self.num_channels/4)              ## 32 -> 128
         
         self.dec4 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
-        self.dec5 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
-        self.dec6 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
+        self.dec5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 128 -> 256 
+        self.dec6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 128 -> 256 
         
         self.dec7 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
-        self.dec8 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
-        self.dec9 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
+        self.dec8 = FCLayer(self.num_channels, self.num_channels)                 ## 256 -> 512
+        self.dec9 = FCLayer(self.num_channels, self.num_channels)                 ## 256 -> 512
 
     @staticmethod
     def zero_init(m):

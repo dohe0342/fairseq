@@ -1596,6 +1596,7 @@ class ViewMaker2(BaseFairseqModel):
         shp = (batch_size, filter_size, num)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
+        noise = noise.half()
         return torch.cat((x, noise), dim=2)
 
     def encoder(self, y):

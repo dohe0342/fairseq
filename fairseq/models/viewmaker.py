@@ -405,12 +405,7 @@ class Viewmaker3(torch.nn.Module):
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
         return torch.cat((x, noise), dim=1)
 
-    def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
-        if num_res_blocks not in list(range(6)):
-            raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
-
-        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
-        
+    def encoder(self, y):
         y_residual1 = self.enc1(y)
         y = self.enc2(y_residual)
         y = self.enc3(y)
@@ -425,8 +420,19 @@ class Viewmaker3(torch.nn.Module):
         y = self.enc8(y_residua3)
         y = self.enc9(y)
         y = y + y_residual3
+        return y
 
+    def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
+        if num_res_blocks not in list(range(6)):
+            raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
+
+        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
+        y = self.encoder(y)
         mu, logvar = self.mean(y), self.var(y)
+        z = self.reparametrize(mu, logvar)
+
+        self.
+        
 
 
 

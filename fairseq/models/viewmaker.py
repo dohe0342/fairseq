@@ -462,15 +462,8 @@ class Viewmaker3(torch.nn.Module):
         return delta
 
     def forward(self, x):
-        out = self.basic_net(x, bound_multiplier=1)
+        result = self.basic_net(x, bound_multiplier=1)
         delta = self.get_delta(out)
-        if self.frequency_domain and 0:
-            # Compute inverse DCT from frequency domain to time domain.
-            delta = dct.idct_2d(delta)
-        if self.downsample_to:
-            # Upsample.
-            x = x_orig
-            delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
         
         # Additive perturbation
         result = x + delta

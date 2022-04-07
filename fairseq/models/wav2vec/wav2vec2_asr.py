@@ -1652,6 +1652,7 @@ class ViewMaker2(BaseFairseqModel):
         return delta
 
     def forward(self, x):
+        x = x.transpose(1,2)
         out = self.basic_net(x, bound_multiplier=1)
         delta = self.get_delta(out)
         

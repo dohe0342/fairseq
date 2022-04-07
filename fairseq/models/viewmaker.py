@@ -421,6 +421,23 @@ class Viewmaker3(torch.nn.Module):
         y = self.enc9(y)
         y = y + y_residual3
         return y
+    
+    def decoder(self, y):
+        y_residual1 = self.enc1(y)
+        y = self.enc2(y_residual)
+        y = self.enc3(y)
+        y = y + y_residual1
+        
+        y_residual2 = self.enc4(y)
+        y = self.enc5(y_residua2)
+        y = self.enc6(y)
+        y = y + y_residual2
+
+        y_residual3 = self.enc7(y)
+        y = self.enc8(y_residua3)
+        y = self.enc9(y)
+        y = y + y_residual3
+        return y
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
         if num_res_blocks not in list(range(6)):
@@ -428,10 +445,10 @@ class Viewmaker3(torch.nn.Module):
 
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.encoder(y)
+        
         mu, logvar = self.mean(y), self.var(y)
         z = self.reparametrize(mu, logvar)
-
-        self.
+        
         
 
 

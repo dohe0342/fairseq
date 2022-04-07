@@ -327,6 +327,7 @@ class Viewmaker3(torch.nn.Module):
         self.act = ACTIVATIONS[activation]()
 
         # Initial convolution layers (+ 1 for noise filter)
+        '''
         self.conv1 = ConvLayer2(self.num_channels + self.num_noise, \
                 self.num_channels, kernel_size=2, stride=1)
         self.in1 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
@@ -348,7 +349,19 @@ class Viewmaker3(torch.nn.Module):
                 self.num_channels, kernel_size=2, stride=1)
         self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         self.conv6 = ConvLayer2(self.num_channels, self.num_channels, kernel_size=2, stride=1)
+        '''
+        self.fc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels)
+        self.fc2 = FCLayer(self.num_channels, self.num_channels)
+        self.fc3 = FCLayer(self.num_channels, self.num_channels)
         
+        self.fc4 = FCLayer(self.num_channels/4., self.num_channels/4.)
+        self.fc5 = FCLayer(self.num_channels/4., self.num_channels/4.)
+        self.fc6 = FCLayer(self.num_channels/4., self.num_channels/4.)
+        
+        self.fc7 = FCLayer(self.num_channels/16, self.num_channels/16)
+        self.fc8 = FCLayer(self.num_channels/16, self.num_channels/16)
+        self.fc9 = FCLayer(self.num_channels/16, self.num_channels/16)
+
     @staticmethod
     def zero_init(m):
         if isinstance(m, (nn.Linear, nn.Conv2d)):

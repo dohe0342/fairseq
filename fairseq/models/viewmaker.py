@@ -467,9 +467,13 @@ class FCLayer(torch.nn.Module):
 
     def forward(self, x):
         out = self.linear(x)
+
+        (b, t, d) = out.size()
+        print(b, t, d)
         out = out.view(-1, self.out_channels)
         out = self.ins(out)
         out = self.act(out)
+
         return out
 
 

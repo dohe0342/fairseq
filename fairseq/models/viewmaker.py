@@ -350,17 +350,20 @@ class Viewmaker3(torch.nn.Module):
         self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         self.conv6 = ConvLayer2(self.num_channels, self.num_channels, kernel_size=2, stride=1)
         '''
-        self.fc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels)
-        self.fc2 = FCLayer(self.num_channels, self.num_channels)
-        self.fc3 = FCLayer(self.num_channels, self.num_channels)
+        self.enc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels) # 512 + noise -> 512
+        self.enc2 = FCLayer(self.num_channels, self.num_channels) # 512 -> 512
+        self.enc3 = FCLayer(self.num_channels, self.num_channels) # 512 -> 512
         
-        self.fc4 = FCLayer(self.num_channels/4., self.num_channels/4.)
-        self.fc5 = FCLayer(self.num_channels/4., self.num_channels/4.)
-        self.fc6 = FCLayer(self.num_channels/4., self.num_channels/4.)
+        self.enc4 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
+        self.enc5 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
+        self.enc6 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
         
-        self.fc7 = FCLayer(self.num_channels/16, self.num_channels/16)
-        self.fc8 = FCLayer(self.num_channels/16, self.num_channels/16)
-        self.fc9 = FCLayer(self.num_channels/16, self.num_channels/16)
+        self.mean = FCLayer(self.num_channels/4, self.num_channels/16)
+        self.var = FCLayer(self.num_channels/4, self.num_channels/16)
+        
+        self.enc7 = FCLayer(self.num_channels/16, self.num_channels/16)
+        self.enc8 = FCLayer(self.num_channels/16, self.num_channels/16)
+        self.enc9 = FCLayer(self.num_channels/16, self.num_channels/16)
 
     @staticmethod
     def zero_init(m):

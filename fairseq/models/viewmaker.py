@@ -417,6 +417,7 @@ class Viewmaker3(torch.nn.Module):
         return z
 
     def basic_net(self, y, bound_multiplier=1):
+        print(y.size())
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         print(y.size())
         y = y.view(-1, 512)

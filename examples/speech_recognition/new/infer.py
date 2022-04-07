@@ -227,7 +227,7 @@ class InferenceProcessor:
             task=self.task,
             suffix=self.cfg.checkpoint.checkpoint_suffix,
             strict=(self.cfg.checkpoint.checkpoint_shard_count == 1),
-            #strict=False,
+            strict=False,
             num_shards=self.cfg.checkpoint.checkpoint_shard_count,
         )
         for model in models:

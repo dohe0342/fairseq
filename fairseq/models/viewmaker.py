@@ -381,7 +381,6 @@ class Viewmaker3(torch.nn.Module):
         shp = (batch_size, filter_size, num)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
-        print('noise shape = ', noise.size())
         return torch.cat((x, noise), dim=2)
 
     def encoder(self, y):
@@ -419,9 +418,7 @@ class Viewmaker3(torch.nn.Module):
         return z
 
     def basic_net(self, y, bound_multiplier=1):
-        print(y.size())
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
-        print(y.size())
         y = self.encoder(y)
         
         mu, logvar = self.mean(y), self.var(y)

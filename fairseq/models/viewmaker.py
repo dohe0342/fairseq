@@ -467,7 +467,7 @@ class Viewmaker3(torch.nn.Module):
         
         # Additive perturbation
         result = x + delta
-        if self.clamp:
+        if self.clamp and 0:
             result = torch.clamp(result, 0, 1.0)
         
         result = delta

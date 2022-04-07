@@ -364,16 +364,6 @@ class Viewmaker3(torch.nn.Module):
         eps = Variable(eps)
         return eps.mul(std).add_(mu)
 
-    @staticmethod
-    def zero_init(m):
-        if isinstance(m, (nn.Linear, nn.Conv2d)):
-            # actual 0 has symmetry problems
-            init.normal_(m.weight.data, mean=0, std=1e-4)
-            # init.constant_(m.weight.data, 0)
-            init.constant_(m.bias.data, 0)
-        elif isinstance(m, nn.BatchNorm1d):
-            pass
-
     def add_noise_channel(self, x, num=1, bound_multiplier=1):
         # bound_multiplier is a scalar or a 1D tensor of length batch_size
         batch_size = x.size(0)

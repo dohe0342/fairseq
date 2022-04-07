@@ -463,7 +463,7 @@ class Viewmaker3(torch.nn.Module):
 
     def forward(self, x):
         out = self.basic_net(y, bound_multiplier=1)
-        delta = self.get_delta(y_pixels)
+        delta = self.get_delta(out)
         if self.frequency_domain and 0:
             # Compute inverse DCT from frequency domain to time domain.
             delta = dct.idct_2d(delta)

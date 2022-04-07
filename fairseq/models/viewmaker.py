@@ -470,6 +470,7 @@ class FCLayer(torch.nn.Module):
 
         (b, t, d) = out.size()
         out = out.view(-1, self.out_channels)
+        print(out.size())
         out = self.ins(out)
         out = self.act(out)
         out = out.view(b, t, -1)

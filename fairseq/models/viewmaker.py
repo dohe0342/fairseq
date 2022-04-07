@@ -350,25 +350,33 @@ class Viewmaker3(torch.nn.Module):
         self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         self.conv6 = ConvLayer2(self.num_channels, self.num_channels, kernel_size=2, stride=1)
         '''
-        self.enc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels) # 512 + noise -> 512
-        self.enc2 = FCLayer(self.num_channels, self.num_channels) # 512 -> 512
-        self.enc3 = FCLayer(self.num_channels, self.num_channels) # 512 -> 512
+        self.enc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels)    ## 512 + noise -> 512
+        self.enc2 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc3 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc4 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
-        self.enc5 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
-        self.enc6 = FCLayer(self.num_channels/4, self.num_channels/4) # 128 -> 128
+        self.enc4 = FCLayer(self.num_channels, self.num_channels/2)                 ## 512 -> 256
+        self.enc5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
+        self.enc6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
         
-        self.mean = FCLayer(self.num_channels/4, self.num_channels/16)# 128 -> 32
-        self.var = FCLayer(self.num_channels/4, self.num_channels/16) # 128 -> 32
+        self.enc7 = FCLayer(self.num_channels/2, self.num_channels/4)               ## 256 -> 128
+        self.enc8 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+        self.enc9 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+
+        self.mean = FCLayer(self.num_channels/4, self.num_channels/16)              ## 128 -> 32
+        self.var = FCLayer(self.num_channels/4, self.num_channels/16)               ## 128 -> 32
         
-        self.dec1 = FCLayer(self.num_channels/16, self.num_channels/4)
-        self.dec2 = FCLayer(self.num_channels/16, self.num_channels/4)
-        self.dec3 = FCLayer(self.num_channels/16, self.num_channels/4)
+        self.dec1 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
+        self.dec2 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
+        self.dec3 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
         
-        self.dec4 = FCLayer(self.num_channels/4, self.num_channels)
-        self.dec5 = FCLayer(self.num_channels/4, self.num_channels)
-        self.dec6 = FCLayer(self.num_channels/4, self.num_channels)
+        self.dec4 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
+        self.dec5 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
+        self.dec6 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
         
+        self.dec4 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
+        self.dec5 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
+        self.dec6 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
+
     @staticmethod
     def zero_init(m):
         if isinstance(m, (nn.Linear, nn.Conv2d)):

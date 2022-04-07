@@ -1661,6 +1661,7 @@ class ViewMaker2(BaseFairseqModel):
         if self.clamp and 0:
             result = torch.clamp(result, 0, 1.0)
         
+        result = result.transpose(1,2)
         return result
 
 # ---

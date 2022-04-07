@@ -317,11 +317,11 @@ class Viewmaker3(torch.nn.Module):
         super().__init__()
         
         self.num_channels = num_channels
-        self.num_res_blocks = num_res_blocks
+        #self.num_res_blocks = num_res_blocks
         self.activation = activation
-        self.clamp = clamp
-        self.frequency_domain = frequency_domain
-        self.downsample_to = downsample_to 
+        #self.clamp = clamp
+        #self.frequency_domain = frequency_domain
+        #self.downsample_to = downsample_to 
         self.distortion_budget = distortion_budget
         self.num_noise = num_noise
         self.act = ACTIVATIONS[activation]()

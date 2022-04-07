@@ -385,7 +385,7 @@ class Viewmaker3(torch.nn.Module):
 
     def encoder(self, y):
         y_residual1 = self.enc1(y)
-        y = self.enc2(y_residual)
+        y = self.enc2(y_residual1)
         y = self.enc3(y)
         y = y + y_residual1
         

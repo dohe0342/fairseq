@@ -381,6 +381,7 @@ class Viewmaker3(torch.nn.Module):
         shp = (batch_size, num, filter_size)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
+        print('noise shape = ', noise.size())
         return torch.cat((x, noise), dim=2)
 
     def encoder(self, y):

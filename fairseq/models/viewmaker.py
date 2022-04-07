@@ -439,7 +439,7 @@ class Viewmaker3(torch.nn.Module):
         z = z + z_residual3
         return z
 
-    def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
+    def basic_net(self, y, bound_multiplier=1):
         if num_res_blocks not in list(range(6)):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
 
@@ -450,27 +450,6 @@ class Viewmaker3(torch.nn.Module):
         z = self.reparametrize(mu, logvar)
         out = self.decoder(z)
         
-        
-
-
-
-        '''
-        y = self.act(self.in1(self.conv1(y)))
-        y = self.act(self.in2(self.conv2(y, pad=True)))
-        y = self.act(self.in3(self.conv3(y)))
-        y = self.act(self.in4(self.conv4(y, pad=True)))
-        '''
-        # Features that could be useful for other auxilary layers / losses.
-        # [batch_size, 128]
-        features = y.clone().mean([-1, -2])
-        
-        for i, res in enumerate([self.res1, self.res2, self.res3, self.res4, self.res5]):
-            if i < num_res_blocks:
-                y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
-        
-        y = self.act(self.ins5(self.conv5(y, pad=True)))
-        y = self.conv6(y)
-
         return y, features
     
     def get_delta(self, y_pixels, eps=1e-4):

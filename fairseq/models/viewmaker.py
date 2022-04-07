@@ -376,7 +376,7 @@ class Viewmaker3(torch.nn.Module):
     def add_noise_channel(self, x, num=1, bound_multiplier=1):
         # bound_multiplier is a scalar or a 1D tensor of length batch_size
         batch_size = x.size(0)
-        filter_size = x.size(2)
+        filter_size = x.size(1)
         shp = (batch_size, filter_size, num)
         bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
         noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)

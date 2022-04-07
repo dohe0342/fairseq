@@ -369,7 +369,15 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         loss = None
         loss = torch.sqrt(torch.square(features_newview - features).sum())/(features.size()[0])
+        '''
+        BCE = reconstruction_function(recon_x, x)  # mse loss
+        # loss = 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
+        KLD_element = mu.pow(2).add_(logvar.exp()).mul_(-1).add_(1).add_(logvar)
+        KLD = torch.sum(KLD_element).mul_(-0.5)
+        # KL divergence
+        return BCE + KLD
         #print(loss)
+        '''
         if loss.data < 10.:
             features = features_newview
         #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))

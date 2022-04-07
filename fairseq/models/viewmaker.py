@@ -462,20 +462,7 @@ class Viewmaker3(torch.nn.Module):
         return delta
 
     def forward(self, x):
-        if self.downsample_to:
-            # Downsample.
-            x_orig = x
-            x = torch.nn.functional.interpolate(
-                x, size=(self.downsample_to, self.downsample_to), mode='bilinear')
-        y = x
-        
-        if self.frequency_domain and 0:
-            # Input to viewmaker is in frequency domain, outputs frequency domain perturbation.
-            # Uses the Discrete Cosine Transform.
-            # shape still [batch_size, C, W, H]
-            y = dct.dct_2d(y)
-
-        y_pixels, features = self.basic_net(y, self.num_res_blocks, bound_multiplier=1)
+        out = self.basic_net(y, self.num_res_blocks, bound_multiplier=1)
         delta = self.get_delta(y_pixels)
         if self.frequency_domain and 0:
             # Compute inverse DCT from frequency domain to time domain.

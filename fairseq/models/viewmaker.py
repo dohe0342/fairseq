@@ -376,6 +376,15 @@ class Viewmaker3(torch.nn.Module):
         self.dec7 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
         self.dec8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.dec9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+    
+    def reparametrize(self, mu, logvar):
+        std = logvar.mul(0.5).exp_()
+        if torch.cuda.is_available():
+            eps = torch.cuda.FloatTensor(std.size()).normal_().half()
+        else:
+            eps = torch.FloatTensor(std.size()).normal_()
+        eps = Variable(eps)
+        return eps.mul(std).add_(mu)
 
     @staticmethod
     def zero_init(m):
@@ -411,6 +420,14 @@ class Viewmaker3(torch.nn.Module):
         y = self.enc5(y_residua2)
         y = self.enc6(y)
         y = y + y_residual2
+
+        y_residual3 = self.enc7(y)
+        y = self.enc8(y_residua3)
+        y = self.enc9(y)
+        y = y + y_residual3
+
+        mu, logvar = self.mean(y), self.var(y)
+
 
 
         '''

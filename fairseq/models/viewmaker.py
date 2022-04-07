@@ -390,7 +390,7 @@ class Viewmaker3(torch.nn.Module):
         y = y + y_residual1
         
         y_residual2 = self.enc4(y)
-        y = self.enc5(y_residua2)
+        y = self.enc5(y_residual2)
         y = self.enc6(y)
         y = y + y_residual2
 

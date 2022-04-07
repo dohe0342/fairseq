@@ -450,7 +450,7 @@ class Viewmaker3(torch.nn.Module):
         z = self.reparametrize(mu, logvar)
         out = self.decoder(z)
         
-        return y, features
+        return out
     
     def get_delta(self, y_pixels, eps=1e-4):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''

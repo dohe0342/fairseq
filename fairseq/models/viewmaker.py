@@ -568,4 +568,4 @@ class UpsampleConvLayer(torch.nn.Module):
 
 if __name__ == '__main__':
     viewmaker = Viewmaker()
-    summary(Viewmaker2(), torch.zeros((5,512,200)))
+    summary(Viewmaker3(), torch.zeros((5,512,200)))

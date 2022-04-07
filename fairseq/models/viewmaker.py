@@ -427,7 +427,6 @@ class Viewmaker3(torch.nn.Module):
         z = self.reparametrize(mu, logvar)
         
         out = self.decoder(z)
-        
         return out
     
     def get_delta(self, y_pixels, eps=1e-4):
@@ -445,12 +444,10 @@ class Viewmaker3(torch.nn.Module):
         
         # Additive perturbation
         result = x + delta
-        
         if self.clamp and 0:
             result = torch.clamp(result, 0, 1.0)
         
         result = delta
-
         return result
 
 # ---

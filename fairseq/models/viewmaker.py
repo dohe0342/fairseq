@@ -469,10 +469,10 @@ class FCLayer(torch.nn.Module):
         out = self.linear(x)
 
         (b, t, d) = out.size()
-        print(b, t, d)
         out = out.view(-1, self.out_channels)
         out = self.ins(out)
         out = self.act(out)
+        out = out.view(b, t, -1)
 
         return out
 

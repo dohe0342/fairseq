@@ -448,6 +448,7 @@ class Viewmaker3(torch.nn.Module):
         
         mu, logvar = self.mean(y), self.var(y)
         z = self.reparametrize(mu, logvar)
+        out = self.decoder(z)
         
         
 

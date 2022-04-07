@@ -468,9 +468,9 @@ class FCLayer(torch.nn.Module):
     def forward(self, x):
         out = self.linear(x)
         out = out.transpose(1,2)
-        print('out size = ', out.size())
         out = self.ins(out)
         out = self.act(out)
+        out = out.transpose(1,2)
 
         return out
 

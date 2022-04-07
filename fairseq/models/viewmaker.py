@@ -422,22 +422,22 @@ class Viewmaker3(torch.nn.Module):
         y = y + y_residual3
         return y
     
-    def decoder(self, y):
-        y_residual1 = self.enc1(y)
-        y = self.enc2(y_residual)
-        y = self.enc3(y)
-        y = y + y_residual1
+    def decoder(self, z):
+        z_residual1 = self.dec1(z)
+        z = self.dec2(z_residual)
+        z = self.dec3(z)
+        z = z + z_residual1
         
-        y_residual2 = self.enc4(y)
-        y = self.enc5(y_residua2)
-        y = self.enc6(y)
-        y = y + y_residual2
+        z_residual2 = self.dec4(z)
+        z = self.dec5(z_residua2)
+        z = self.dec6(z)
+        z = z + z_residual2
 
-        y_residual3 = self.enc7(y)
-        y = self.enc8(y_residua3)
-        y = self.enc9(y)
-        y = y + y_residual3
-        return y
+        z_residual3 = self.dec7(z)
+        z = self.dec8(z_residua3)
+        z = self.dec9(z)
+        z = z + z_residual3
+        return z
 
     def basic_net(self, y, num_res_blocks=5, bound_multiplier=1):
         if num_res_blocks not in list(range(6)):

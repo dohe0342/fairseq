@@ -455,8 +455,7 @@ class Viewmaker3(torch.nn.Module):
 class FCLayer(torch.nn.Module):
     def __init__(self, in_channels, out_channels, activation='gelu'):
         super(FCLayer, self).__init__()
-        self.linear = torch.nn.Linear(
-            in_channels, out_channels, kernel_size, stride)
+        self.linear = torch.nn.Linear(in_channels, out_channels)
         self.ins = torch.nn.InstanceNorm1d(out_channels, affine=True)
         self.act = ACTIVATIONS[activation]()
 

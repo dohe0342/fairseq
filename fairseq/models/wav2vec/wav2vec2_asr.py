@@ -1656,7 +1656,7 @@ class ViewMaker2(BaseFairseqModel):
     def forward(self, x):
         x = x.transpose(1,2)
         out = self.basic_net(x, bound_multiplier=1)
-        delta = self.get_delta(out)
+        delta = self.get_delta(out.clone())
         
         # Additive perturbation
         result = x + delta

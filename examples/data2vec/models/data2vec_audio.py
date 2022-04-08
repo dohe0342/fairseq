@@ -388,6 +388,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 features = features_newview
             #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
             
+        print(features.size())
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 
@@ -395,7 +396,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         if self.cfg.ema_transformer_only:
             pre_encoder_features = features.clone()
         
-        print(features.size())
         features = self.dropout_input(features)
         
         if mask:

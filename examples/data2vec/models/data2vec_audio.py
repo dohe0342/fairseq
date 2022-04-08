@@ -394,7 +394,8 @@ class Data2VecAudioModel(BaseFairseqModel):
         pre_encoder_features = None
         if self.cfg.ema_transformer_only:
             pre_encoder_features = features.clone()
-
+        
+        print(features.size())
         features = self.dropout_input(features)
         
         if mask:

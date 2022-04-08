@@ -9,7 +9,7 @@ do
 		--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \
 		task=audio_finetuning \
-		task.data=/home/work/workspace/LibriSpeech/manifests \
+		task.data=/workspace/LibriSpeech/manifests \
 		common.user_dir=examples/data2vec \
 		task.labels=ltr \
 		decoding.type=viterbi \

@@ -365,7 +365,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         loss = None
         if viewmaker is not None:
             features_newview = conv_features.transpose(1,2)
-            features_newview = viewmaker(features_newview)
+            recon_features, features_newview = viewmaker(features_newview)
             features_newview = features_newview.transpose(1,2)
             criterion = nn.MSELoss()
             loss = 100*criterion(features_newview.view(-1,512), features.detach().view(-1, 512))

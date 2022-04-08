@@ -222,7 +222,7 @@ class CtcCriterion(FairseqCriterion):
                 logging_output["c_errors"] = c_err
                 logging_output["c_total"] = c_len
 
-        return [loss, net_output["loss"], net_output["conv"]], sample_size, logging_output
+        return [loss, net_output["loss"]], sample_size, logging_output
 
     @staticmethod
     def reduce_metrics(logging_outputs) -> None:

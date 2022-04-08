@@ -368,6 +368,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview = viewmaker(features_newview)
             features_newview = features_newview.transpose(1,2)
             criterion = nn.MSELoss()
+            print(features_newview.size())
             loss = criterion(features_newview, features.detach())
 
         #loss = torch.sqrt(torch.square(features_newview - features.detach()).sum())/(features.size()[0])

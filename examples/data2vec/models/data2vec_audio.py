@@ -427,6 +427,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 "layer_results": layer_results,
                 "dropped_layer": dropped_layer,
                 "loss": loss,
+                "conv": conv_features,
             }
 
         result = {

@@ -1491,15 +1491,8 @@ class ViewMaker(BaseFairseqModel):
             y = dct.dct_2d(y)
 
         y_pixels, features = self.basic_net(y, self.num_res_blocks, bound_multiplier=1)
-        delta = self.get_delta(y_pixels)
-        if self.frequency_domain and 0:
-            # Compute inverse DCT from frequency domain to time domain.
-            delta = dct.idct_2d(delta)
-        if self.downsample_to:
-            # Upsample.
-            x = x_orig
-            delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
-
+        delta = self.get_delta(y_pixels.clone())
+        
         # Additive perturbation
         result = x + delta
         
@@ -1519,7 +1512,7 @@ class ViewMaker(BaseFairseqModel):
 
         #result = delta
 
-        return result
+        return y_pixels, result
 
 
 class ViewMaker2(BaseFairseqModel):

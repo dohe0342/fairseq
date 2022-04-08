@@ -1311,7 +1311,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
-        self.viewmaker = ViewMaker2()
+        self.viewmaker = ViewMaker()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates

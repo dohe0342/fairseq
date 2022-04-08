@@ -362,13 +362,15 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         conv_features = features.clone()
         
+        loss = None
         if viewmaker is not None:
             features_newview = conv_features.transpose(1,2)
             features_newview = viewmaker(features_newview)
             features_newview = features_newview.transpose(1,2)
-        
-        loss = None
-        loss = torch.sqrt(torch.square(features_newview - features.detach()).sum())/(features.size()[0])
+            criterion = nn.MSELoss()
+            loss = criterion(features_newview, features.detach())
+
+        #loss = torch.sqrt(torch.square(features_newview - features.detach()).sum())/(features.size()[0])
         '''
         BCE = reconstruction_function(recon_x, x)  # mse loss
         # loss = 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)

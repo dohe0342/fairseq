@@ -381,7 +381,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         # KL divergence
         return BCE + KLD
         '''
-        print(loss)
         if loss.data < 10. and self.training:
             #print(self.training, loss.data)
             features = features_newview

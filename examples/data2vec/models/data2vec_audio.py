@@ -379,7 +379,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         '''
         #print(loss)
         if loss.data < 10. and self.training:
-            print(self.training, loss.data)
+            #print(self.training, loss.data)
             features = features_newview
         #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
             

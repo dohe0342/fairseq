@@ -878,10 +878,11 @@ class Trainer(object):
                         **extra_kwargs,
                     )
                     del loss
-
+                
                 logging_outputs.append(logging_output)
                 sample_size += sample_size_i
-
+                
+                print(loss['conv'].size())
                 # emptying the CUDA cache after the first step can
                 # reduce the chance of OOM
                 if self.cuda and self.get_num_updates() == 0:

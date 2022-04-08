@@ -381,10 +381,12 @@ class Data2VecAudioModel(BaseFairseqModel):
         # KL divergence
         return BCE + KLD
         '''
-        if loss.data < 10. and self.training:
-            #print(self.training, loss.data)
-            features = features_newview
-        #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
+
+        if loss is not None:
+            if loss.data < 10. and self.training:
+                #print(self.training, loss.data)
+                features = features_newview
+            #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
             
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

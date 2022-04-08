@@ -387,8 +387,6 @@ class Data2VecAudioModel(BaseFairseqModel):
                 #print(self.training, loss.data)
                 features = features_newview
             #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
-            
-        print(features.size())
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 

@@ -586,7 +586,7 @@ if __name__ == '__main__':
             optim.step()
             
             sim_avg = 0
-            for num in range(input.size()[0]):
+            for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()
                 output_norm = output[num] / output[num].norm()
                 sim = torch.abs(torch.mm(input_norm.unsqueeze(0), output_norm.unsqueeze(0).T)[0][0])

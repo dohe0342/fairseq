@@ -1631,7 +1631,7 @@ class ViewMaker2(BaseFairseqModel):
         
         # Additive perturbation
         result = x + delta
-        if self.clamp and 0:
+        if self.clamp:
             result = torch.clamp(result, 0, 1.0)
         
         result = result.transpose(1,2)

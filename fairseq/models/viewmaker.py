@@ -11,6 +11,7 @@ from torch.nn import functional as init
 from torchsummaryX import summary
 from torch.autograd import Variable
 import glob
+import numpy as np
 #import torch_dct as dct
 
 ACTIVATIONS = {

@@ -290,7 +290,7 @@ class Viewmaker2(torch.nn.Module):
         
         # Additive perturbation
         result = x + delta
-        result = y_pixels
+        #result = y_pixels
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
         

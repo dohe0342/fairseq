@@ -156,8 +156,8 @@ class Viewmaker(torch.nn.Module):
 
 class Viewmaker2(torch.nn.Module):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
-    def __init__(self, num_channels=512, distortion_budget=0.5, activation='gelu',  
-                clamp=False, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=0):
+    def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',  
+                clamp=False, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=5):
         '''Initialize the Viewmaker network.
 
         Args:
@@ -582,4 +582,5 @@ if __name__ == '__main__':
             loss = criterion(output.reshape(-1, 512), input.reshape(-1, 512))
             loss.backward()
             optim.step()
+            
             print(loss.data)

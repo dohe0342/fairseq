@@ -10,6 +10,7 @@ import torch.nn as nn
 from torch.nn import functional as init
 from torchsummaryX import summary
 from torch.autograd import Variable
+import glob
 #import torch_dct as dct
 
 ACTIVATIONS = {
@@ -566,3 +567,8 @@ class UpsampleConvLayer(torch.nn.Module):
 
 if __name__ == '__main__':
     summary(Viewmaker2().to('cuda'), torch.zeros((5, 200,512)).to('cuda'))
+
+    input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
+    for input in input_list:
+        input = np.load(input)
+        print(input.shape)

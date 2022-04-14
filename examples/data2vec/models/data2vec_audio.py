@@ -369,7 +369,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             
             #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
             conv_feat_np = conv_features.cpu().numpy()
-            filename = np.random.randint(1, 100000).tostring
+            filename = str(np.random.randint(1, 100000)).fill(5)
             np.save(f'./conv_feat/', conv_feat_np)
             zero = torch.zeros(features.size()).to('cuda').half()
             loss = 100*criterion(delta, zero)

@@ -368,7 +368,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview, delta = viewmaker(conv_features)
             
             #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
-            zero = torch.zeros(features.size()).to('cuda')
+            zero = torch.zeros(features.size()).to('cuda').half()
             loss = criterion(features_newview, zero)
             print(loss)
 

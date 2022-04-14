@@ -1493,8 +1493,6 @@ class ViewMaker1(BaseFairseqModel):
         # Additive perturbation
         result = x + delta
 
-        delta = delta.transpose(1,2)
-        
         return result, delta
 
 
@@ -1636,6 +1634,7 @@ class ViewMaker2(BaseFairseqModel):
             result = torch.clamp(result, 0, 1.0)
         
         result = result.transpose(1,2)
+        
         return result, delta
 
 # ---

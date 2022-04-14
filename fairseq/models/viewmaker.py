@@ -578,7 +578,9 @@ if __name__ == '__main__':
             input = torch.tensor(input).to('cuda').type(torch.cuda.FloatTensor)
             input = input.transpose(1,2)
             output = viewmaker(input)
-
+            
+            input = input.reshape(-1, 512)
+            output = output.reshape(-1, 512)
             loss = criterion(output.reshape(-1, 512), input.reshape(-1, 512))
             loss.backward()
             optim.step()

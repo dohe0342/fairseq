@@ -588,8 +588,8 @@ if __name__ == '__main__':
             sim_avg = 0
 
             output = output.detach()
-            input /= input.norm(dim=0)
-            output /= output.norm(dim=0)
+            input /= input.norm(dim=1)
+            output /= output.norm(dim=1)
             
             sim = torch.mm(input, output.T)
             sim = sim.diagonal(0)

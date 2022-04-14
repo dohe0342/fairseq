@@ -28,7 +28,7 @@ from fairseq.modules import (
     LayerNorm,
 )
 from fairseq.utils import index_put
-
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -368,6 +368,9 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview, delta = viewmaker(conv_features)
             
             #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
+            conv_feat_np = conv_features.cpu().numpy()
+            filename = np.random.randint(1, 100000).tostring
+            np.save(f'./conv_feat/', conv_feat_np)
             zero = torch.zeros(features.size()).to('cuda').half()
             loss = 100*criterion(delta, zero)
             #print(torch.cuda.current_device(), loss.data)

@@ -578,7 +578,7 @@ if __name__ == '__main__':
             input = input.transpose(1,2)
             output = viewmaker(input)
 
-            loss = 100*criterion(output, input)
+            loss = criterion(output, input)
             loss.backward()
             optim.step()
             print(loss.data)

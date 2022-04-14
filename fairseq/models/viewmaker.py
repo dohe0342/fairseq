@@ -579,7 +579,7 @@ if __name__ == '__main__':
             input = input.transpose(1,2)
             output = viewmaker(input)
 
-            loss = criterion(output, input)
+            loss = criterion(output.view(-1, 512), input.view(-1, 512))
             loss.backward()
             optim.step()
             print(loss.data)

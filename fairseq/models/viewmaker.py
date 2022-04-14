@@ -586,6 +586,8 @@ if __name__ == '__main__':
             optim.step()
             
             sim_avg = 0
+
+            output = output.detach()
             input /= input.norm(dim=0)
             output /= output.norm(dim=0)
             

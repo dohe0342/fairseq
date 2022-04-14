@@ -590,7 +590,10 @@ if __name__ == '__main__':
             output /= output.norm(dim=0)
             
             sim = torch.mm(input, output.T)
-            print(sim.size())
+            sim = sim.diagonal(0)
+            sim = sim.sum() / sim.size()[0]
+            print(sim)
+            
             '''
             for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()

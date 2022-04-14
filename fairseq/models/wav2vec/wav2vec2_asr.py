@@ -1494,6 +1494,9 @@ class ViewMaker1(BaseFairseqModel):
         # Additive perturbation
         result = x + delta
 
+        delta = delta.transpose(1,2)
+        result = result.transpose(1,2)
+
         return result, delta
 
 

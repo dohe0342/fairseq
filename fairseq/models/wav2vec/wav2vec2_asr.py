@@ -1493,22 +1493,6 @@ class ViewMaker(BaseFairseqModel):
         # Additive perturbation
         result = x + delta
         
-        '''
-        for i in range(result.size()[0]):
-            for j in range(i):
-                r = result[i]/torch.norm(result[i], dim=0)
-                x_ = x[i]/torch.norm(x[i], dim=0)
-                sim = torch.mm(r.T, x_)
-                sim_sum = sim.diag(0).sum()
-                sim_avg = sim_sum / sim.size()[0]
-                print(sim_avg)
-        '''
-
-        #if self.clamp:
-        #    result = torch.clamp(result, 0, 1.0)
-
-        #result = delta
-
         return y_pixels, result
 
 

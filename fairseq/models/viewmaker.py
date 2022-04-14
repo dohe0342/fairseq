@@ -576,6 +576,7 @@ if __name__ == '__main__':
             input = np.load(input)
             input = torch.tensor(input).to('cuda')
             input = input.transpose(1,2)
+            print('input size = ', input.size())
             output = viewmaker(input)
 
             loss = criterion(output, input)

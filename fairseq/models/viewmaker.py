@@ -293,8 +293,6 @@ class Viewmaker2(torch.nn.Module):
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
         
-        result = delta
-
         return result
 
 
@@ -570,6 +568,7 @@ if __name__ == '__main__':
     #summary(Viewmaker2().to('cuda'), torch.zeros((5,512,200)).to('cuda'))
     viewmaker = Viewmaker2().to('cuda')
     optim = torch.optim.Adam(viewmaker.parameters(), lr=0.01)
+    criterion = torch.
 
     input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     for input in input_list:

@@ -576,7 +576,7 @@ if __name__ == '__main__':
         for input in input_list:
             input = np.load(input)
             input = torch.tensor(input).to('cuda').type(torch.cuda.FloatTensor)
-            input = input.transpose(1,2)
+            #input = input.transpose(1,2)
             output = viewmaker(input)
             
             input = input.reshape(-1, 512)

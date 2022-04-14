@@ -574,7 +574,7 @@ if __name__ == '__main__':
     for i in range(1, 10):
         for input in input_list:
             input = np.load(input)
-            input = torch.tensor(input).to('cuda').dtype(torch.cuda.float)
+            input = torch.tensor(input).to('cuda').dtype(torch.float)
             input = input.transpose(1,2)
             print('input size = ', input.size())
             output = viewmaker(input)

@@ -367,10 +367,6 @@ class Data2VecAudioModel(BaseFairseqModel):
             criterion = nn.MSELoss()
             features_newview, delta = viewmaker(conv_features)
             
-            print('conv size = ', conv_features.size())
-            print('newview size = ', features_newview.size())
-            print('delta size = ', delta.size())
-            
             loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
 
         '''

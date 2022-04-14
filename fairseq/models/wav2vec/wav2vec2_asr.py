@@ -1493,7 +1493,7 @@ class ViewMaker(BaseFairseqModel):
         # Additive perturbation
         result = x + delta
         
-        return y_pixels, result
+        return result, delta
 
 
 class ViewMaker2(BaseFairseqModel):

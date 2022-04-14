@@ -568,7 +568,7 @@ class UpsampleConvLayer(torch.nn.Module):
 
 if __name__ == '__main__':
     #summary(Viewmaker2().to('cuda'), torch.zeros((5,512,200)).to('cuda'))
-    viewmaker = Viewmaker2()
+    viewmaker = Viewmaker2().to('cuda')
 
     input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     for input in input_list:

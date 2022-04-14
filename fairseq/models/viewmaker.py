@@ -581,7 +581,7 @@ if __name__ == '__main__':
             
             input = input.reshape(-1, 512)
             output = output.reshape(-1, 512)
-            loss = criterion(output.reshape(-1, 512), input.reshape(-1, 512))
+            loss = criterion(output, input)
             loss.backward()
             optim.step()
             

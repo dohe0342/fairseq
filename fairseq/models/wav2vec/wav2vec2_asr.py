@@ -1488,10 +1488,12 @@ class ViewMaker1(BaseFairseqModel):
             y = dct.dct_2d(y)
 
         y_pixels, features = self.basic_net(y, self.num_res_blocks, bound_multiplier=1)
-        delta = self.get_delta(y_pixels.clone()).transpose(1,2)
+        delta = self.get_delta(y_pixels.clone())
         
         # Additive perturbation
         result = x + delta
+
+        delta = delta.transpose(1,2)
         
         return result, delta
 

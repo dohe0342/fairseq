@@ -232,15 +232,15 @@ class Viewmaker2(torch.nn.Module):
             raise ValueError(f'num_res_blocks must be in {list(range(6))}, got {num_res_blocks}.')
 
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
-        print(y.size())
+        #print(y.size())
         y = self.act(self.in1(self.conv1(y)))
-        print(y.size())
+        #print(y.size())
         y = self.act(self.in2(self.conv2(y, pad=True)))
-        print(y.size())
+        #print(y.size())
         y = self.act(self.in3(self.conv3(y)))
-        print(y.size())
+        #print(y.size())
         y = self.act(self.in4(self.conv4(y, pad=True)))
-        print(y.size())
+        #print(y.size())
 
         # Features that could be useful for other auxilary layers / losses.
         # [batch_size, 128]

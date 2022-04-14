@@ -596,6 +596,7 @@ if __name__ == '__main__':
             sim = torch.abs(torch.mm(input.T, output))
             sim = sim.diagonal(0)
             #sim = sim.sum() / sim.size()[0]
+            sim_avg = sim.sum() / sim.size()[0]
             
             '''
             for num in range(int(input.size()[0]/3)):

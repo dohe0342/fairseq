@@ -588,6 +588,9 @@ if __name__ == '__main__':
             sim_avg = 0
             input /= input.norm(dim=0)
             output /= output.norm(dim=0)
+            
+            sim = torch.mm(input, output.T)
+            '''
             for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()
                 output_norm = output[num] / output[num].norm()
@@ -595,3 +598,5 @@ if __name__ == '__main__':
                 sim_avg += float(sim)
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
+            '''
+            print(loss.data)

@@ -595,7 +595,7 @@ if __name__ == '__main__':
 
             sim = torch.abs(torch.mm(input.T, output))
             sim = sim.diagonal(0)
-            sim = sim.sum() / sim.size()[0]
+            #sim = sim.sum() / sim.size()[0]
             
             '''
             for num in range(int(input.size()[0]/3)):
@@ -606,4 +606,4 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            print(sim.data, loss.data)
+            print(sim.max(), sim.min(), loss.data)

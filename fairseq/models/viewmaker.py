@@ -588,7 +588,6 @@ if __name__ == '__main__':
             for num in range(input.size()[0]):
                 input_norm = input[num] / input[num].norm()
                 output_norm = output[num] / output[num].norm()
-                print(input_norm.size())
-                sim = torch.mm(input_norm, output_norm)
+                sim = torch.mm(input_norm.unsqueeze(0), output_norm.unsqueeze(0).T)
                 print(sim)
             print(loss.data)

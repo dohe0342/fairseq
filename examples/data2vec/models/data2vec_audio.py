@@ -367,7 +367,9 @@ class Data2VecAudioModel(BaseFairseqModel):
             criterion = nn.MSELoss()
             features_newview, delta = viewmaker(conv_features)
             
-            loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
+            #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
+            zero = torch.zeros(features.size()).to('cuda')
+            loss = criterion(features_newview, zero)
 
         '''
         BCE = reconstruction_function(recon_x, x)  # mse loss

@@ -591,7 +591,7 @@ if __name__ == '__main__':
             input /= input.norm(dim=0)
             output /= output.norm(dim=0)
             
-            sim = torch.mm(input.T, input)
+            sim = torch.mm(input.T, output)
             sim = sim.diagonal(0)
             sim = sim.sum() / sim.size()[0]
             

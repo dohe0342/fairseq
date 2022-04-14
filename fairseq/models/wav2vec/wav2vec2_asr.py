@@ -1499,7 +1499,7 @@ class ViewMaker(BaseFairseqModel):
 class ViewMaker2(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',  
-                clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=3, num_noise=30):
+                clamp=True, num_noise=5):
         '''Initialize the Viewmaker network.
 
         Args:
@@ -1518,11 +1518,8 @@ class ViewMaker2(BaseFairseqModel):
         super().__init__()
         
         self.num_channels = num_channels
-        #self.num_res_blocks = num_res_blocks
         self.activation = activation
         self.clamp = clamp
-        #self.frequency_domain = frequency_domain
-        #self.downsample_to = downsample_to 
         self.distortion_budget = distortion_budget
         self.num_noise = num_noise
         self.act = ACTIVATIONS[activation]()

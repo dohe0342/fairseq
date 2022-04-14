@@ -585,9 +585,9 @@ if __name__ == '__main__':
             loss.backward()
             optim.step()
             
+            sim_avg = 0
             for num in range(input.size()[0]):
                 input_norm = input[num] / input[num].norm()
                 output_norm = output[num] / output[num].norm()
-                sim = torch.abs(torch.mm(input_norm.unsqueeze(0), output_norm.unsqueeze(0).T))
-                print(sim)
+                sim = torch.abs(torch.mm(input_norm.unsqueeze(0), output_norm.unsqueeze(0).T).[0][0])
             print(loss.data)

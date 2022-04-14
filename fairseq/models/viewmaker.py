@@ -607,3 +607,4 @@ if __name__ == '__main__':
             print(sim_avg,loss.data)
             '''
             print(float(sim.max().data), float(sim.min().data), float(loss.data))
+        print('')

@@ -592,7 +592,6 @@ if __name__ == '__main__':
             sim = torch.mm(input, output.T)
             sim = sim.diagonal(0)
             sim = sim.sum() / sim.size()[0]
-            print(sim)
             
             '''
             for num in range(int(input.size()[0]/3)):

@@ -606,4 +606,4 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            print(sim.max().data, sim.min().data, loss.data)
+            print(float(sim.max().data), float(sim.min().data), float(loss.data))

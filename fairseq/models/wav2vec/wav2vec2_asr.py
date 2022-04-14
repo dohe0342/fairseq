@@ -1628,7 +1628,6 @@ class ViewMaker2(BaseFairseqModel):
         return delta
 
     def forward(self, x):
-        x = x.transpose(1,2)
         out = self.basic_net(x, bound_multiplier=1)
         delta = self.get_delta(out)
         
@@ -1636,8 +1635,6 @@ class ViewMaker2(BaseFairseqModel):
         result = x + delta
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
-        
-        result = result.transpose(1,2)
         
         return result, delta
 

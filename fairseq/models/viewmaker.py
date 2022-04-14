@@ -586,6 +586,8 @@ if __name__ == '__main__':
             optim.step()
             
             sim_avg = 0
+            input /= input.norm(dim=0)
+            output /= output.norm(dim=0)
             for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()
                 output_norm = output[num] / output[num].norm()

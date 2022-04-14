@@ -574,4 +574,9 @@ if __name__ == '__main__':
     for input in input_list:
         input = np.load(input)
         input = torch.tensor(input).to('cuda')
-        print(input.size())
+        output = viewmaker(input)
+
+        loss = criterion(output, input)
+        loss.backward()
+        optim.step()
+        print(loss.data)

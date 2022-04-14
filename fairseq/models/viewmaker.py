@@ -572,7 +572,7 @@ if __name__ == '__main__':
     criterion = torch.nn.MSELoss()
 
     input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
-    for i in range(1, 10):
+    for i in range(1, 100):
         for input in input_list:
             input = np.load(input)
             input = torch.tensor(input).to('cuda').type(torch.cuda.FloatTensor)

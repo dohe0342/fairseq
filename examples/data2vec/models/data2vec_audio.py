@@ -387,6 +387,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         if loss is not None:
             if loss.data < 10. and self.training:
                 features = features_newview
+        
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 

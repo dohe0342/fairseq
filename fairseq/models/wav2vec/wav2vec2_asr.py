@@ -1465,7 +1465,7 @@ class ViewMaker1(BaseFairseqModel):
 
         for i, res in enumerate([self.res1, self.res2, self.res3, self.res4, self.res5]):
             if i < num_res_blocks:
-                if not self.num_nosie:
+                if not self.num_noise:
                     y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
                 else:
                     y = res(y)

@@ -1488,10 +1488,11 @@ class ViewMaker1(BaseFairseqModel):
     
     def get_delta2(self, y_pixels, padding_mask, eps=1e-4):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''
-        padding_mask_ = padding_mask.long().unsqueeze(2)
-        y_pixels = y_pixels.transpose(1,2)
-        y_pixels *= padding_mask_
-        y_pixels = y_pixels.transpose(1,2)
+        if padding_mask is not None:
+            padding_mask_ = padding_mask.long().unsqueeze(2)
+            y_pixels = y_pixels.transpose(1,2)
+            y_pixels *= padding_mask_
+            y_pixels = y_pixels.transpose(1,2)
         
         distortion_budget = self.distortion_budget
         delta = torch.tanh(y_pixels) # Project to [-1, 1]

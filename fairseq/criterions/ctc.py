@@ -140,16 +140,24 @@ class CtcCriterion(FairseqCriterion):
 
         with torch.backends.cudnn.flags(enabled=False):
             loss = 0
-            for i in range(2):
-                loss += F.ctc_loss(
-                    lprobs,
-                    targets_flat,
-                    input_lengths,
-                    target_lengths,
-                    blank=self.blank_idx,
-                    reduction="sum",
-                    zero_infinity=self.zero_infinity,
-                )
+            loss += F.ctc_loss(
+                lprobs,
+                targets_flat,
+                input_lengths,
+                target_lengths,
+                blank=self.blank_idx,
+                reduction="sum",
+                zero_infinity=self.zero_infinity,
+            )
+            loss += F.ctc_loss(
+                lprobs,
+                targets_flat,
+                input_lengths,
+                target_lengths,
+                blank=self.blank_idx,
+                reduction="sum",
+                zero_infinity=self.zero_infinity,
+            )
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

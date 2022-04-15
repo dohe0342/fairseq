@@ -367,7 +367,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
             if self.training:
-                features = torch.stack([features, features_newview], dim=0)
+                features = torch.cat([features, features_newview])
                 print('feat size = ', features.size())
         
         if self.post_extract_proj is not None:

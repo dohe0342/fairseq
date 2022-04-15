@@ -344,6 +344,9 @@ class Data2VecAudioModel(BaseFairseqModel):
             # apply conv formula to get real output_lengths
             output_lengths = self._get_feat_extract_output_lengths(input_lengths)
 
+            print(input_lenghts)
+            print(output_lengths)
+
             padding_mask = torch.zeros(
                 features.shape[:2], dtype=features.dtype, device=features.device
             )

@@ -113,7 +113,7 @@ class CtcCriterion(FairseqCriterion):
         ).contiguous()  # (T, B, C) from the encoder
 
         if 1:
-            lprobs2 = lprobs[:,int(lprobs.size()[0]/2):,:]
+            lprobs2 = lprobs.copy()[:,int(lprobs.size()[0]/2):,:]
             lprobs = lprobs[:,:int(lprobs.size()[0]/2),:]
             print(lprobs.size())
             print(lprobs2.size())

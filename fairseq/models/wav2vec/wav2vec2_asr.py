@@ -1490,7 +1490,7 @@ class ViewMaker1(BaseFairseqModel):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''
         print('y size = ', y_pixels.size())
         print('padding mask size = ', padding_mask.size())
-        padding_mask_ = padding_mask.long().unsqueeze(2)
+        padding_mask_ = padding_mask.long()
         print(padding_mask_.size())
         y_pixels *= padding_mask_
         print(y_pixels.size())

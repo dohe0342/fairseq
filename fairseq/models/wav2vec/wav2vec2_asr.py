@@ -1417,7 +1417,6 @@ class ViewMaker1(BaseFairseqModel):
         self.res4 = ResidualBlock2(self.num_channels + 4)
         self.res5 = ResidualBlock2(self.num_channels + 5)
         '''
-        
         self.res1 = ResidualBlock2(self.num_channels)
         self.res2 = ResidualBlock2(self.num_channels)
         self.res3 = ResidualBlock2(self.num_channels)

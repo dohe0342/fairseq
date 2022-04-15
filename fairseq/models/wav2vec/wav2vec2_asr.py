@@ -1427,7 +1427,6 @@ class ViewMaker1(BaseFairseqModel):
             self.conv5 = ConvLayer2(self.num_channels, \
                 self.num_channels, kernel_size=2, stride=1)
 
-
         self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         self.conv6 = ConvLayer2(self.num_channels, self.num_channels, kernel_size=2, stride=1)
 
@@ -1467,7 +1466,6 @@ class ViewMaker1(BaseFairseqModel):
         features = y.clone().mean([-1, -2])
 
         for i, res in enumerate([self.res1, self.res2, self.res3, self.res4, self.res5]):
-            print(y.size())
             if i < num_res_blocks:
                 if not self.num_noise:
                     y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))

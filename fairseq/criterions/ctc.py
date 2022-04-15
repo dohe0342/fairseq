@@ -150,7 +150,7 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
             loss += F.ctc_loss(
-                lprobs,
+                lprobs2,
                 targets_flat,
                 input_lengths,
                 target_lengths,

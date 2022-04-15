@@ -1469,7 +1469,6 @@ class ViewMaker1(BaseFairseqModel):
                 if not self.num_noise:
                     y = res(self.add_noise_channel(y, bound_multiplier=bound_multiplier))
                 else:
-                    print(y.size())
                     y = res(y)
 
         y = self.act(self.ins5(self.conv5(y, pad=True)))

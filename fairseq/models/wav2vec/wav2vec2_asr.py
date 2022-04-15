@@ -1370,7 +1370,7 @@ ACTIVATIONS = {
 class ViewMaker1(BaseFairseqModel):
     '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
     def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu',
-                clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=5, num_noise=0):
+                clamp=True, frequency_domain=False, downsample_to=False, num_res_blocks=5, num_noise=1):
         '''Initialize the Viewmaker network.
 
         Args:
@@ -1452,7 +1452,7 @@ class ViewMaker1(BaseFairseqModel):
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=3, bound_multiplier=1):
-        #y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
+        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.act(self.in1(self.conv1(y)))
         y = self.act(self.in2(self.conv2(y, pad=True)))
         y = self.act(self.in3(self.conv3(y)))

@@ -1410,18 +1410,18 @@ class ViewMaker1(BaseFairseqModel):
         self.in4 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
 
         # Residual layers have +N for added random channels
-        '''
-        self.res1 = ResidualBlock2(self.num_channels + 1)
-        self.res2 = ResidualBlock2(self.num_channels + 2)
-        self.res3 = ResidualBlock2(self.num_channels + 3)
-        self.res4 = ResidualBlock2(self.num_channels + 4)
-        self.res5 = ResidualBlock2(self.num_channels + 5)
-        '''
-        self.res1 = ResidualBlock2(self.num_channels)
-        self.res2 = ResidualBlock2(self.num_channels)
-        self.res3 = ResidualBlock2(self.num_channels)
-        self.res4 = ResidualBlock2(self.num_channels)
-        self.res5 = ResidualBlock2(self.num_channels)
+        if not self.num_noise:
+            self.res1 = ResidualBlock2(self.num_channels + 1)
+            self.res2 = ResidualBlock2(self.num_channels + 2)
+            self.res3 = ResidualBlock2(self.num_channels + 3)
+            self.res4 = ResidualBlock2(self.num_channels + 4)
+            self.res5 = ResidualBlock2(self.num_channels + 5)
+        else:
+            self.res1 = ResidualBlock2(self.num_channels)
+            self.res2 = ResidualBlock2(self.num_channels)
+            self.res3 = ResidualBlock2(self.num_channels)
+            self.res4 = ResidualBlock2(self.num_channels)
+            self.res5 = ResidualBlock2(self.num_channels)
 
         self.conv5 = ConvLayer2(self.num_channels+self.num_res_blocks, \
                 self.num_channels, kernel_size=2, stride=1)

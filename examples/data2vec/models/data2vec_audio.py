@@ -344,7 +344,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             # apply conv formula to get real output_lengths
             output_lengths = self._get_feat_extract_output_lengths(input_lengths)
 
-            print(input_lenghts)
+            print(input_lengths)
             print(output_lengths)
             exit()
 

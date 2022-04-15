@@ -117,6 +117,7 @@ class CtcCriterion(FairseqCriterion):
             lprobs = lprobs[:int(lprobs.size()[0]/2)]
             print(lprobs.size())
             print(lprobs2.size())
+
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
         else:

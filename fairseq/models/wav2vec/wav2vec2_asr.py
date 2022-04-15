@@ -1452,7 +1452,7 @@ class ViewMaker1(BaseFairseqModel):
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=3, bound_multiplier=1):
-        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
+        #y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.act(self.in1(self.conv1(y)))
         y = self.act(self.in2(self.conv2(y, pad=True)))
         y = self.act(self.in3(self.conv3(y)))
@@ -1493,7 +1493,7 @@ class ViewMaker1(BaseFairseqModel):
         return delta
 
     def forward(self, x, padding_mask):
-        #x = x.transpose(1,2)
+        x = x.transpose(1,2)
         if self.downsample_to:
             # Downsample.
             x_orig = x

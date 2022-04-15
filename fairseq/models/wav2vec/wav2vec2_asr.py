@@ -1492,6 +1492,7 @@ class ViewMaker1(BaseFairseqModel):
         print('padding mask size = ', padding_mask.size())
         padding_mask_ = padding_mask.long().unsqueeze(2)
         print(padding_mask_.size())
+        y_pixels *= padding_mask_
 
         exit()
         distortion_budget = self.distortion_budget

@@ -368,7 +368,8 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview, delta = viewmaker(conv_features, padding_mask)
             if self.training:
                 features = torch.cat([features, features_newview], dim=0)
-                padding_mask = torch.cat([padding_mask, padding_mask], dim=0)
+                if padding_mask is not None:
+                    padding_mask = torch.cat([padding_mask, padding_mask], dim=0)
         
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

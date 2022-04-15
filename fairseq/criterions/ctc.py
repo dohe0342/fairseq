@@ -113,7 +113,10 @@ class CtcCriterion(FairseqCriterion):
         ).contiguous()  # (T, B, C) from the encoder
 
         if 1:
-            lprobs2 = lprobs[
+            lprobs2 = lprobs[lprobs.size()[0]/2:]
+            lprobs = lprobs[:lprobs.size()[0]/2]
+            print(lprobs.size())
+            print(lprobs2.size())
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
         else:

@@ -340,7 +340,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         orig_padding_mask = padding_mask
 
         if padding_mask is not None and padding_mask.any():
-            input_lengths = (1 - padding_mask.long()).sum(-1)
+            input_lengths = (1 - padding_mask.long()).sum(-1) ## padding mask inverse(not masked = 1) and sum
             print(padding_mask.long())
             print(input_lengths)
             exit()

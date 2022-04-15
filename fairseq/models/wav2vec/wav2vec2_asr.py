@@ -1495,7 +1495,8 @@ class ViewMaker1(BaseFairseqModel):
         print(padding_mask_.size())
         y_pixels *= padding_mask_
         print(y_pixels.size())
-
+        y_pixels = y_pixels.transpose(1,2)
+        print(y_pixels.size())
         exit()
         distortion_budget = self.distortion_budget
         delta = torch.tanh(y_pixels) # Project to [-1, 1]

@@ -138,7 +138,7 @@ class CtcCriterion(FairseqCriterion):
                 loss += F.ctc_loss(
                     lprobs[i:i+1],
                     targets_flat,
-                    int(input_lengths/2),
+                    input_lengths,
                     target_lengths,
                     blank=self.blank_idx,
                     reduction="sum",

@@ -1491,7 +1491,7 @@ class ViewMaker1(BaseFairseqModel):
         print('y size = ', y_pixels.size())
         print('padding mask size = ', padding_mask.size())
         padding_mask_ = padding_mask.long().unsqueeze(2)
-        y_pixels = y_pixel.transpose(1,2)
+        y_pixels = y_pixels.transpose(1,2)
         print(padding_mask_.size())
         y_pixels *= padding_mask_
         print(y_pixels.size())

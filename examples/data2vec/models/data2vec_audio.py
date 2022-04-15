@@ -346,6 +346,7 @@ class Data2VecAudioModel(BaseFairseqModel):
 
             print(input_lenghts)
             print(output_lengths)
+            exit()
 
             padding_mask = torch.zeros(
                 features.shape[:2], dtype=features.dtype, device=features.device

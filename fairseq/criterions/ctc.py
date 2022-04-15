@@ -112,6 +112,8 @@ class CtcCriterion(FairseqCriterion):
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
 
+        if 1:
+            lprobs2 = lprobs[
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
         else:
@@ -122,7 +124,7 @@ class CtcCriterion(FairseqCriterion):
                 input_lengths = lprobs.new_full(
                     (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
-        print(input_lengths.size())
+        
         pad_mask = (sample["target"] != self.pad_idx) & (
             sample["target"] != self.eos_idx
         )

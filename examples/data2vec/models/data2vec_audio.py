@@ -367,23 +367,6 @@ class Data2VecAudioModel(BaseFairseqModel):
             criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
             
-            #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
-            #conv_feat_np = conv_features.detach().cpu().numpy()
-            #filename = str(np.random.randint(1, 100000)).zfill(5)
-            #np.save(f'/home/work/workspace/fairseq/scripts/whale/conv_feat/{filename}.npy', conv_feat_np)
-            zero = torch.zeros(features.size()).to('cuda').half()
-            loss = 100*criterion(delta, zero)
-            #print(torch.cuda.current_device(), loss.data)
-
-        '''
-        BCE = reconstruction_function(recon_x, x)  # mse loss
-        # loss = 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
-        KLD_element = mu.pow(2).add_(logvar.exp()).mul_(-1).add_(1).add_(logvar)
-        KLD = torch.sum(KLD_element).mul_(-0.5)
-        # KL divergence
-        return BCE + KLD
-        '''
-
         if loss is not None:
             if loss.data < 10. and self.training:
                 features = features_newview

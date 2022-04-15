@@ -1493,7 +1493,7 @@ class ViewMaker1(BaseFairseqModel):
         return delta
 
     def forward(self, x, padding_mask):
-        x = x.transpose(1,2)
+        #x = x.transpose(1,2)
         if self.downsample_to:
             # Downsample.
             x_orig = x

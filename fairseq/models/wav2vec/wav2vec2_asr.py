@@ -1489,7 +1489,7 @@ class ViewMaker1(BaseFairseqModel):
         delta = delta * max_magnitude / (avg_magnitude + eps)
         return delta
 
-    def forward(self, x):
+    def forward(self, x, padding_mask):
         x = x.transpose(1,2)
         if self.downsample_to:
             # Downsample.

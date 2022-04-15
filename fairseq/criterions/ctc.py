@@ -120,6 +120,7 @@ class CtcCriterion(FairseqCriterion):
 
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
+            print(input_lenghts)
         else:
             if net_output["padding_mask"] is not None:
                 non_padding_mask = ~net_output["padding_mask"]

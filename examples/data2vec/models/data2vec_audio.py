@@ -344,10 +344,6 @@ class Data2VecAudioModel(BaseFairseqModel):
             # apply conv formula to get real output_lengths
             output_lengths = self._get_feat_extract_output_lengths(input_lengths)
 
-            #print(input_lengths)
-            #print(output_lengths)
-            #exit()
-
             padding_mask = torch.zeros(
                 features.shape[:2], dtype=features.dtype, device=features.device
             )
@@ -369,7 +365,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         loss = None
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')
-            print(conv_features.size())
             features_newview, delta = viewmaker(conv_features, padding_mask)
             
             #loss = 100*criterion(features_newview.reshape(-1,512), conv_features.reshape(-1, 512).detach())
@@ -391,9 +386,7 @@ class Data2VecAudioModel(BaseFairseqModel):
 
         if loss is not None:
             if loss.data < 10. and self.training:
-                #print(self.training, loss.data)
                 features = features_newview
-            #print(torch.mm(features_newview[0][30].unsqueeze(dim=0), features[0][30].unsqueeze(dim=0).T))
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 

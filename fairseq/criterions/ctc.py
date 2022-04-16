@@ -127,7 +127,8 @@ class CtcCriterion(FairseqCriterion):
                     (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
         if 1:
-            input_lengths = input_lengths[:int(input_lengths.size()/2)]
+            input_lengths = input_lengths[:int(input_lengths.size()[0]/2)]
+
         pad_mask = (sample["target"] != self.pad_idx) & (
             sample["target"] != self.eos_idx
         )

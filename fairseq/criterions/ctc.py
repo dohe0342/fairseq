@@ -140,6 +140,10 @@ class CtcCriterion(FairseqCriterion):
 
         with torch.backends.cudnn.flags(enabled=False):
             loss = 0
+            print('lprobs size = ', lprobs.size())
+            print('target flat size = ', targets_flat.size())
+            print('input lengths size = ', input_lenghts.size())
+            print('black size = ', black_idx.size())
             loss += F.ctc_loss(
                 lprobs,
                 targets_flat,

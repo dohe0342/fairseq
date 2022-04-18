@@ -599,8 +599,8 @@ if __name__ == '__main__':
             #sim = sim.sum() / sim.size()[0]
             sim_avg = sim.sum() / sim.size()[0]
             
-            sim_max20 = sim[-20:].sum() / 20.
-            sim_min20 = sim[:20].sum() / 20.
+            sim_max20 = sim[-10:].sum() / 10.
+            sim_min20 = sim[:10].sum() / 10.
 
             '''
             for num in range(int(input.size()[0]/3)):

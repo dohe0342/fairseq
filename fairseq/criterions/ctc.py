@@ -137,9 +137,9 @@ class CtcCriterion(FairseqCriterion):
 
         with torch.backends.cudnn.flags(enabled=False):
             loss = 0
-            print('lprobs size = ', torch.cuda.current_device, lprobs.size())
-            print('target flat size = ', torch.cuda.current_device, targets_flat.size())
-            print('input lengths size = ', torch.cuda.current_device, input_lengths.size())
+            print('lprobs size = ', torch.cuda.current_device(), lprobs.size())
+            print('target flat size = ', torch.cuda.current_device(), targets_flat.size())
+            print('input lengths size = ', torch.cuda.current_device(), input_lengths.size())
             loss += F.ctc_loss(
                 lprobs,
                 targets_flat,

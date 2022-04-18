@@ -872,7 +872,7 @@ class Trainer(object):
                         sample=sample,
                         model=self.model,
                         criterion=self.criterion,
-                        optimizer=[self.optimizer, self.optimizer2],
+                        optimizer=[self.optimizer, self.optimizer2] if i % 100 == 0: else self.optimizer,
                         update_num=self.get_num_updates(),
                         ignore_grad=is_dummy_batch,
                         **extra_kwargs,

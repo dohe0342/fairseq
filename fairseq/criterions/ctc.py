@@ -143,7 +143,7 @@ class CtcCriterion(FairseqCriterion):
             print('lprobs size = ', lprobs.size())
             print('target flat size = ', targets_flat.size())
             print('input lengths size = ', input_lengths.size())
-            print('black size = ', black_idx.size())
+            print('blanck size = ', blanck_idx.size())
             loss += F.ctc_loss(
                 lprobs,
                 targets_flat,

@@ -127,6 +127,7 @@ class CtcCriterion(FairseqCriterion):
                     (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
         if 1:
+            print(input_lengths.size())
             input_lengths = input_lengths[:int(input_lengths.size()[0]/2)]
             print(input_lengths.size())
 

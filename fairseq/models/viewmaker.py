@@ -599,6 +599,9 @@ if __name__ == '__main__':
             #sim = sim.sum() / sim.size()[0]
             sim_avg = sim.sum() / sim.size()[0]
             
+            sim_max20 = sim[-20:].sum() / 20.
+            sim_min20 = sim[:20].sum() / 20.
+
             '''
             for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()
@@ -608,5 +611,6 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            print(float(sim_avg.data), float(sim.max().data), float(sim.min().data), float(loss.data))
+            #print(float(sim_avg.data), float(sim.max().data), float(sim.min().data), float(loss.data))
+            print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
         print('')

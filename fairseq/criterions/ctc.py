@@ -163,6 +163,7 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
+            print(loss.data)
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

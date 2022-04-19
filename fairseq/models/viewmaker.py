@@ -613,5 +613,5 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            print(name, input.size(), float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
+            print(name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
         print('')

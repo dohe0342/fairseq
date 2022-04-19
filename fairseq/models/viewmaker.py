@@ -575,6 +575,7 @@ if __name__ == '__main__':
     
     for i in range(1, 2):
         for input in input_list:
+            name = input.split('/')[-1]
             input = np.load(input)
             input = torch.tensor(input).to('cuda').type(torch.cuda.FloatTensor)
             input = input.transpose(1,2)
@@ -611,6 +612,5 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            name = input.split('/')[-1]
-            print(name, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
+            print(name, input.size(), float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
         print('')

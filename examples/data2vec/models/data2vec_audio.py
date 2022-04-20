@@ -415,6 +415,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             return (conv_features, enc_input, x)
 
         if features_only:
+            if x_new is not None
             return {
                 "x": x,
                 "padding_mask": padding_mask,

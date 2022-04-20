@@ -1329,6 +1329,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             self.proj = Linear(d, targ_d)
 
         self.blank_mode= "add"
+        self.blank_weight = 0.
     
     def get_logits(self, logits, normalize=False):
         if self.blank_weight != 0:

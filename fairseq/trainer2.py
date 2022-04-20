@@ -839,7 +839,6 @@ class Trainer(object):
         # forward and backward pass
         logging_outputs, sample_size, ooms = [], 0, 0
         for i, sample in enumerate(samples):  # delayed update loop
-            print(i)
             sample, is_dummy_batch = self._prepare_sample(sample)
             #for key in sample:
             #    for k in sample['net_input']:

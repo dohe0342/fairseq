@@ -1329,7 +1329,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             self.proj = Linear(d, targ_d)
     
     def get_logits(self, logits, normalize=False):
-        logits = net_output["encoder_out"]
         if self.blank_weight != 0:
             if self.blank_mode == "add":
                 logits[..., 0] += self.blank_weight
@@ -1354,7 +1353,8 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
     def get_normalized_probs(self, net_output, log_probs):
         """Get normalized probabilities (or log probs) from a net's output."""
 
-        logits = self.get_logits(net_output)
+        logits = self.get_logits(net_output["encoder_out"])
+        logits_new = self.get_logits(net_output["encoder_out_new"])
 
         if log_probs:
             return utils.log_softmax(logits.float(), dim=-1)

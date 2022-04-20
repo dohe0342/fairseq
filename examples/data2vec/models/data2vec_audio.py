@@ -362,13 +362,14 @@ class Data2VecAudioModel(BaseFairseqModel):
         conv_features = features.clone()
         
         loss = None
+        features_newview = None
         if viewmaker is not None:
             #criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
-            features = [features, features_newview]
         
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
+            features_newview = self.post_extract_proj(features_newview)
 
         pre_encoder_features = None
         if self.cfg.ema_transformer_only:

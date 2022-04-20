@@ -364,7 +364,7 @@ class CtcCriterion(FairseqCriterion):
 
     def forward(self, model, sample, reduce=True):
         net_output = model(**sample["net_input"])
-        lprobs = model.get_normalized_probs(
+        lprobs = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
 

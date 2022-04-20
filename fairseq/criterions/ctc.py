@@ -366,10 +366,10 @@ class CtcCriterion(FairseqCriterion):
         net_output = model(**sample["net_input"])
         lprobs = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True
-        ).contiguous()  # (T, B, C) from the encoder
+        )#.contiguous()  # (T, B, C) from the encoder
 
-        lprobs2 = lprobs[1]
-        lprobs = lprobs[0]
+        lprobs2 = lprobs[1].contiguous()
+        lprobs = lprobs[0].contiguous()
 
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]

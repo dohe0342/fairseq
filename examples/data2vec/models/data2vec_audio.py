@@ -369,14 +369,17 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
-            features_newview = self.post_extract_proj(features_newview)
-
+            if features_newview is not None:
+                features_newview = self.post_extract_proj(features_newview)
+        
         pre_encoder_features = None
         if self.cfg.ema_transformer_only:
             pre_encoder_features = features.clone()
-        
+
         features = self.dropout_input(features)
-        
+        if features_newview is not None:
+            features_newview = self.dropout_input(features_newview)
+
         if mask:
             x, mask_indices = self.apply_mask(
                 features,

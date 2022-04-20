@@ -334,7 +334,6 @@ class Data2VecAudioModel(BaseFairseqModel):
                 features = self.feature_extractor(features)
 
         features = features.transpose(1, 2)
-
         features = self.layer_norm(features)
 
         orig_padding_mask = padding_mask

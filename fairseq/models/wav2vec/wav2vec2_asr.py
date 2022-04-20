@@ -1341,6 +1341,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             res = self.w2v_model.extract_features(**w2v_args)
 
             x = res["x"]
+            x_new = res["x_new"]
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C

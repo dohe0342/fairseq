@@ -1354,6 +1354,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         if self.proj:
             x = self.proj(x)
+            x_new = self.proj(x_new)
                     
         return {
             "encoder_out": x,  # T x B x C

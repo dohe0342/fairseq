@@ -1327,6 +1327,39 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         
         if targ_d is not None:
             self.proj = Linear(d, targ_d)
+    
+    def get_logits(self, logits, normalize=False):
+        logits = net_output["encoder_out"]
+        if self.blank_weight != 0:
+            if self.blank_mode == "add":
+                logits[..., 0] += self.blank_weight
+            elif self.blank_mode == "set":
+                logits[..., 0] = self.blank_weight
+            else:
+                raise Exception(f"invalid blank mode {self.blank_mode}")
+
+        if net_output["padding_mask"] is not None and net_output["padding_mask"].any():
+            number_of_classes = logits.size(-1)
+            masking_tensor = torch.ones(
+                number_of_classes, device=logits.device
+            ) * float("-inf")
+            masking_tensor[0] = 0
+            logits[net_output["padding_mask"].T] = masking_tensor.type_as(logits)
+
+        if normalize:
+            logits = utils.log_softmax(logits.float(), dim=-1)
+
+        return logits
+
+    def get_normalized_probs(self, net_output, log_probs):
+        """Get normalized probabilities (or log probs) from a net's output."""
+
+        logits = self.get_logits(net_output)
+
+        if log_probs:
+            return utils.log_softmax(logits.float(), dim=-1)
+        else:
+            return utils.softmax(logits.float(), dim=-1)
 
     def forward(self, source, padding_mask, **kwargs):
         w2v_args = {

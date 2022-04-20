@@ -363,6 +363,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         loss = None
         features_newview = None
+        x_new = None
         if viewmaker is not None:
             #criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)

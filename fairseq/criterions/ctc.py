@@ -409,7 +409,6 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-            '''
             loss += F.ctc_loss(
                 lprobs2,
                 targets_flat,
@@ -419,7 +418,6 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-            '''
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

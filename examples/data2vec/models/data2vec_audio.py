@@ -415,23 +415,14 @@ class Data2VecAudioModel(BaseFairseqModel):
             return (conv_features, enc_input, x)
 
         if features_only:
-            if features_newview is not None:
-                return {
-                    "x": [x, x_new],
-                    "padding_mask": padding_mask,
-                    "layer_results": layer_results,
-                    "dropped_layer": dropped_layer,
-                    "loss": loss,
-                }
-
-            else:
-                return {
-                    "x": x,
-                    "padding_mask": padding_mask,
-                    "layer_results": layer_results,
-                    "dropped_layer": dropped_layer,
-                    "loss": loss,
-                }
+            return {
+                "x": x,
+                "x_new": x_new,
+                "padding_mask": padding_mask,
+                "layer_results": layer_results,
+                "dropped_layer": dropped_layer,
+                "loss": loss,
+            }
 
         result = {
             "losses": {},

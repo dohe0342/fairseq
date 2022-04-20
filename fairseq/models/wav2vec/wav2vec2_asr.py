@@ -1346,6 +1346,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
             # B x T x C -> T x B x C
             x = x.transpose(0, 1)
+            x_new = x_new.transpose(0,1)
 
         x = self.final_dropout(x)
         spk_prob = None

@@ -573,7 +573,7 @@ if __name__ == '__main__':
 
     input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     
-    for i in range(1, 101):
+    for i in range(1, 2):
         sim_list = []
         for input in input_list:
             name = input.split('/')[-1]
@@ -605,8 +605,18 @@ if __name__ == '__main__':
             sim_max20 = sim[-10:].sum() / 10.
             sim_min20 = sim[:10].sum() / 10.
 
+            '''
+            for num in range(int(input.size()[0]/3)):
+                input_norm = input[num] / input[num].norm()
+                output_norm = output[num] / output[num].norm()
+                sim = torch.abs(torch.mm(input_norm.unsqueeze(0), output_norm.unsqueeze(0).T)[0][0])
+                sim_avg += float(sim)
+            sim_avg /= (input.size()[0]/3)
+            print(sim_avg,loss.data)
+            '''
+            print(name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
             sim_list.append([name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data)])
         sim_list = sorted(sim_list, key=lambda x:x[4])
-        #for sim in sim_list:
-        #    print(sim)
+        for sim in sim_list:
+            print(sim)
         print('')

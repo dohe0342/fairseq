@@ -596,7 +596,7 @@ if __name__ == '__main__':
 
             sim = torch.mm(input.T, output)
             sim = sim.diagonal(0)
-            sim = torch.sort(sim)[0]
+            #sim = torch.sort(sim)[0]
             #sim = sim.sum() / sim.size()[0]
             sim_avg = sim.sum() / sim.size()[0]
             

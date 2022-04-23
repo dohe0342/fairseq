@@ -576,6 +576,7 @@ if __name__ == '__main__':
     for i in range(1, 100):
         sim_list = []
         for input in input_list:
+            optim.zero_grad()
             name = input.split('/')[-1]
             input = np.load(input)
             seq_len = input.shape[1]

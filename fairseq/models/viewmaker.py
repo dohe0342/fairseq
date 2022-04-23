@@ -573,7 +573,6 @@ if __name__ == '__main__':
 
     input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     
-    print('here!!!!!!'*100)
     for i in range(1, 3):
         sim_list = []
         for input in input_list:

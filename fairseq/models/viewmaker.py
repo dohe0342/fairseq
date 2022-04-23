@@ -586,10 +586,7 @@ if __name__ == '__main__':
             
             input = input.reshape(-1, 512)
             output = output.reshape(-1, 512)
-            loss = criterion(output, input)
-            loss.backward()
-            optim.step()
-            
+                        
             sim_avg = 0
 
             output = output.detach()
@@ -605,6 +602,10 @@ if __name__ == '__main__':
             
             sim_max20 = sim[-10:].sum() / 10.
             sim_min20 = sim[:10].sum() / 10.
+            
+            loss = criterion(output, input) + sim_avg
+            loss.backward()
+            optim.step()
 
             '''
             for num in range(int(input.size()[0]/3)):

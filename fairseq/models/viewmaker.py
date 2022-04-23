@@ -589,7 +589,7 @@ if __name__ == '__main__':
                         
             sim_avg = 0
 
-            output = output.detach()
+            #output = output.detach()
             input, output = input.T, output.T
             input /= input.norm(dim=0)
             output /= output.norm(dim=0)

@@ -607,7 +607,6 @@ if __name__ == '__main__':
             sim_max20 = sim[-10:].sum() / 10.
             sim_min20 = sim[:10].sum() / 10.
             
-            
             '''
             for num in range(int(input.size()[0]/3)):
                 input_norm = input[num] / input[num].norm()

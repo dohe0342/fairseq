@@ -614,7 +614,8 @@ if __name__ == '__main__':
             sim_avg /= (input.size()[0]/3)
             print(sim_avg,loss.data)
             '''
-            print(name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
+            #print(name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
+            print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
             sim_list.append([name, seq_len, float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data)])
         sim_list = sorted(sim_list, key=lambda x:x[4])
         #for sim in sim_list:

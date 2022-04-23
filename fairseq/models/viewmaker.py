@@ -599,6 +599,7 @@ if __name__ == '__main__':
             #sim = torch.sort(sim)[0]
             #sim = sim.sum() / sim.size()[0]
             sim_avg = sim.sum() / sim.size()[0]
+            print(sim_avg)
             
             sim_max20 = sim[-10:].sum() / 10.
             sim_min20 = sim[:10].sum() / 10.

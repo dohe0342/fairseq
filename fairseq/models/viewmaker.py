@@ -289,8 +289,8 @@ class Viewmaker2(torch.nn.Module):
             delta = torch.nn.functional.interpolate(delta, size=x_orig.shape[-2:], mode='bilinear')
         
         # Additive perturbation
-        result = x + delta
-        #result = y_pixels
+        #result = x + delta
+        result = y_pixels
         if self.clamp:
             result = torch.clamp(result, 0, 1.0)
         

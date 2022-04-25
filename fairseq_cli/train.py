@@ -299,7 +299,6 @@ def train(
     num_updates = trainer.get_num_updates()
     logger.info("Start iterating over samples")
 
-    #print(epoch_itr.epoch)
     for i, samples in enumerate(progress):
         with metrics.aggregate("train_inner"), torch.autograd.profiler.record_function(
             "train_step-%d" % i

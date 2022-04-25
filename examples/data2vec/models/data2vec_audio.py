@@ -378,6 +378,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             #sim = sim.sum() / sim.size()[0]
             sim_avg = sim.sum() / sim.size()[0]
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+            print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
         
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

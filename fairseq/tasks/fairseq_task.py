@@ -560,9 +560,9 @@ class FairseqTask(object):
 
             if len(optimizer) == 1:
                 if ignore_grad:
-                    loss[0] *= 0
+                    loss[1] *= 0
                 with torch.autograd.profiler.record_function("backward"):
-                    optimizer[0].backward(loss[0])
+                    optimizer[1].backward(loss[0])
             else:
                 if ignore_grad:
                     loss[0] *= 0

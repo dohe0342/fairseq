@@ -1019,6 +1019,20 @@ class Trainer(object):
                         return self.train_step(
                             samples, raise_oom
                         )  # recursion to feed in same batch
+                
+                self.task.optimizer_step(
+                    self.optimizer2, model=self.model, update_num=self.get_num_updates()
+                )
+                if self.cfg.common.amp and overflow:
+                    if self._amp_retries == self.cfg.common.amp_batch_retries:
+                        logger.info("AMP: skipping this batch.")
+                        self._amp_retries = 0
+                    else:
+                        self._amp_retries += 1
+                        return self.train_step(
+                            samples, raise_oom
+                        )  # recursion to feed in same batch
+
 
         except FloatingPointError:
 

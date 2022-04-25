@@ -1495,7 +1495,7 @@ class ViewMaker1(BaseFairseqModel):
         return torch.cat((x, noise), dim=1)
 
     def basic_net(self, y, num_res_blocks=3, bound_multiplier=1):
-        if not self.num_noise:
+        if self.num_noise:
             y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.act(self.in1(self.conv1(y)))
         y = self.act(self.in2(self.conv2(y, pad=True)))

@@ -1033,9 +1033,7 @@ class Trainer(object):
                             samples, raise_oom
                         )  # recursion to feed in same batch
 
-
         except FloatingPointError:
-
             self.consolidate_optimizer()
             self.save_checkpoint(
                 os.path.join(self.cfg.checkpoint.save_dir, "crash.pt"), {}

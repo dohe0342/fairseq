@@ -372,7 +372,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             input, output = features.reshape(-1, 512).T, features_newview.reshape(-1, 512).T
             input /= input.norm(dim=0)
             output /= output.norm(dim=0)
-
+            
             sim = torch.mm(input.T, output)
             sim = sim.diagonal(0)
             sim = torch.sort(sim)[0]

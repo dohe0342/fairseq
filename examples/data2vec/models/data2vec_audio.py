@@ -367,6 +367,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
+            loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
             
             '''
             input, output = features.reshape(-1, 512).T, features_newview.reshape(-1, 512).T
@@ -380,7 +381,6 @@ class Data2VecAudioModel(BaseFairseqModel):
             sim_avg = sim.sum() / sim.size()[0]
             sim_max20 = sim[-10:].sum() / 10.
             sim_min20 = sim[:10].sum() / 10.
-            loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
             print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
             '''
 

@@ -810,7 +810,7 @@ class Trainer(object):
         self._dummy_batch = batch
 
     @metrics.aggregate("train")
-    def train_step(self, samples, raise_oom=False):
+    def train_step(self, samples, epoch, raise_oom=False):
         """Do forward, backward and parameter update."""
         self._set_seed()
         self.model.train()

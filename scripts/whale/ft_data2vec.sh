@@ -7,7 +7,7 @@ fairseq-hydra-train \
 	task.normalize=true \
     model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \
 	criterion._name=viewmaker \
-    model.w2v_path=/home/work/workspace/fairseq/scripts/whale/multirun/2022-04-25/06-11-46/0/checkpoints/checkpoint_last.pt\
+    model.w2v_path=/home/work/workspace/fairseq/scripts/whale/multirun/2022-04-25/06-11-46/checkpoints/checkpoint_last.pt\
 	+model.viewmaker=true \
 	#model.apply_mask=false \
     #model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \

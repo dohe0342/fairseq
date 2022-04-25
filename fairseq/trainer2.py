@@ -399,12 +399,6 @@ class Trainer(object):
             )
         self._lr_scheduler.step_update(0)
         
-        self._lr_scheduler2 = lr_scheduler.build_lr_scheduler(
-                self.cfg.lr_scheduler,
-                self.optimizer2,
-            )
-        self._lr_scheduler2.step_update(0)
-
     @property
     def is_fsdp(self):
         return self.cfg.distributed_training.ddp_backend == "fully_sharded"

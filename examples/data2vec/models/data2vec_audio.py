@@ -433,7 +433,7 @@ class Data2VecAudioModel(BaseFairseqModel):
 
         if features_only:
             return {
-                "x": x_new,
+                "x": x,
                 "x_new": x_new,
                 "padding_mask": padding_mask,
                 "layer_results": layer_results,

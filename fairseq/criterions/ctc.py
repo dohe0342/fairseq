@@ -507,7 +507,7 @@ class CtcCriterion(FairseqCriterion):
         """Aggregate logging outputs from data parallel training."""
 
         loss_sum = utils.item(sum(log.get("loss", 0) for log in logging_outputs))
-        loss_sum = utils.item(sum(log.get("loss mse", 0) for log in logging_outputs))
+        loss_mse_sum = utils.item(sum(log.get("loss mse", 0) for log in logging_outputs))
         ntokens = utils.item(sum(log.get("ntokens", 0) for log in logging_outputs))
         nsentences = utils.item(
             sum(log.get("nsentences", 0) for log in logging_outputs)

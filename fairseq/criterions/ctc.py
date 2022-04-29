@@ -519,6 +519,10 @@ class CtcCriterion(FairseqCriterion):
         metrics.log_scalar(
             "loss", loss_sum / sample_size / math.log(2), sample_size, round=3
         )
+        metrics.log_scalar(
+            "loss mse", loss_mse_sum / sample_size / math.log(2), sample_size, round=3
+        )
+
         metrics.log_scalar("ntokens", ntokens)
         metrics.log_scalar("nsentences", nsentences)
         if sample_size != ntokens:

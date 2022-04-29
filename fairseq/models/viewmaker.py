@@ -571,7 +571,7 @@ if __name__ == '__main__':
     optim = torch.optim.Adam(viewmaker.parameters(), lr=0.001)
     criterion = torch.nn.MSELoss()
 
-    input_list = glob.glob('/home/work/workspace/fairseq/scripts/whale/conv_feat/*.npy')
+    input_list = glob.glob('/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     
     for i in range(1, 200):
         sim_list = []

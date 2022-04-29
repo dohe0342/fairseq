@@ -574,7 +574,6 @@ if __name__ == '__main__':
     input_list = glob.glob('/workspace/fairseq/scripts/whale/conv_feat/*.npy')
     
     for i in range(1, 200):
-        sim_list = []
         for input in input_list:
             optim.zero_grad()
             name = input.split('/')[-1]

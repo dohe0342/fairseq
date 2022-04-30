@@ -867,7 +867,7 @@ class Trainer(object):
                         sample=sample,
                         model=self.model,
                         criterion=self.criterion,
-                        optimizer=[self.optimizer, self.optimizer2] if epoch >= 10 else [self.optimizer2],
+                        optimizer=[self.optimizer, self.optimizer2] if epoch >= 5 else [self.optimizer2],
                         #optimizer=[self.optimizer2],
                         update_num=self.get_num_updates(),
                         ignore_grad=is_dummy_batch,

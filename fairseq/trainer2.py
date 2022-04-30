@@ -1055,7 +1055,7 @@ class Trainer(object):
                         sample,
                         self.model,
                         self.criterion,
-                        [self.optimizer, self.optimizer2] if epoch >= 5 else [self.optimizer2],
+                        [self.optimizer, self.optimizer2] if epoch >= 0 else [self.optimizer2],
                         self.get_num_updates(),
                         ignore_grad=False,
                         **extra_kwargs,

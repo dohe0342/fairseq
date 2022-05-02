@@ -500,7 +500,9 @@ class CtcCriterion(FairseqCriterion):
                 logging_output["w_total"] = w_len
                 logging_output["c_errors"] = c_err
                 logging_output["c_total"] = c_len
+        
         print('loss length = ', len(loss))
+        
         return [loss, net_output["loss"]], sample_size, logging_output
 
     @staticmethod

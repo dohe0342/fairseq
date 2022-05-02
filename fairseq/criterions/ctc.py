@@ -526,7 +526,7 @@ class CtcCriterion(FairseqCriterion):
             "loss viewmaker", loss_viewmaker_ctc_sum / sample_size / math.log(2), sample_size, round=3
         )
         metrics.log_scalar(
-            "loss mse", loss_mse_sum / sample_size / math.log(2), sample_size, round=3
+            "loss mse", loss_mse_sum / sample_size / math.log(2), sample_size, round=5
         )
 
         metrics.log_scalar("ntokens", ntokens)

@@ -509,7 +509,7 @@ class CtcCriterion(FairseqCriterion):
 
         #"loss viewmaker ctc": utils.item(loss[1].data),  # * sample['ntokens'],
         loss_sum = utils.item(sum(log.get("loss", 0) for log in logging_outputs))
-        loss_viewmaker_ctc_sum = utils.item(sum(log.get("loss", 0) for log in logging_outputs))
+        loss_viewmaker_ctc_sum = utils.item(sum(log.get("loss viewmaker ctc", 0) for log in logging_outputs))
         loss_mse_sum = utils.item(sum(log.get("loss mse", 0) for log in logging_outputs))
         ntokens = utils.item(sum(log.get("ntokens", 0) for log in logging_outputs))
         nsentences = utils.item(

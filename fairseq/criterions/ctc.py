@@ -395,12 +395,12 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
 
         with torch.backends.cudnn.flags(enabled=False):
-            loss = 0
+            loss = []
             if 0:
                 print('lprobs size = ', torch.cuda.current_device(), lprobs.size())
                 print('target flat size = ', torch.cuda.current_device(), targets_flat.size())
                 print('input lengths size = ', torch.cuda.current_device(), input_lengths.size())
-            loss += F.ctc_loss(
+            loss.append(F.ctc_loss(
                 lprobs,
                 targets_flat,
                 input_lengths,
@@ -408,9 +408,9 @@ class CtcCriterion(FairseqCriterion):
                 blank=self.blank_idx,
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
-            )
+            ))
             
-            loss += F.ctc_loss(
+            loss.append(F.ctc_loss(
                 lprobs2,
                 targets_flat,
                 input_lengths,
@@ -418,7 +418,7 @@ class CtcCriterion(FairseqCriterion):
                 blank=self.blank_idx,
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
-            )
+            ))
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
@@ -426,7 +426,8 @@ class CtcCriterion(FairseqCriterion):
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
         logging_output = {
-            "loss": utils.item(loss.data),  # * sample['ntokens'],
+            "loss": utils.item(loss[0].data),  # * sample['ntokens'],
+            "loss viewmaker ctc": utils.item(loss[0].data),  # * sample['ntokens'],
             "loss mse": utils.item(net_output["loss"].data),
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),

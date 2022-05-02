@@ -571,7 +571,7 @@ class FairseqTask(object):
                     if len(loss) == 2:
                         loss[1] *= 0
                 with torch.autograd.profiler.record_function("backward"):
-                    if float(loss[1].data) > 0.0005:
+                    if float(loss[1].data) > 0.0007:
                         optimizer[0].backward(loss[0][0], retain_graph=True)
                         optimizer[1].backward(loss[1])
                     else:

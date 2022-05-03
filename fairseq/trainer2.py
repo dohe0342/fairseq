@@ -983,7 +983,7 @@ class Trainer(object):
                     else 1
                 )
                 self.optimizer.multiply_grads(numer / (sample_size or 1.0))
-                if 1:
+                if 0:
                     self.optimizer2.multiply_grads(numer / (sample_size or 1.0))
                 # Note: (sample_size or 1.0) handles the case of a zero gradient, in a
                 # way that avoids CPU/device transfers in case sample_size is a GPU or

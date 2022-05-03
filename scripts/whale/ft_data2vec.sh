@@ -2,8 +2,8 @@ git pull
 
 exp_name=$1
 
-for i in {0..9}; do
-	if [ i -eq 0 ]; then
+for i in {0..9} ; do
+	if [ i -eq 0 ] ; then
 	mkdir /home/work/workspace/fairseq/scripts/whale/outputs/$1
 	cp /home/work/workspace/fairseq/scripts/whale/outputs/pretrained_viewmaker.pt /home/work/workspace/fairseq/scripts/whale/outputs/$1/checkpoint_last.pt
 	fi

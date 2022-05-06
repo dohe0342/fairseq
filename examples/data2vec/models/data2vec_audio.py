@@ -416,6 +416,9 @@ class Data2VecAudioModel(BaseFairseqModel):
         else:
             x = features
             mask_indices = None
+
+            if features_newview is not None:
+                x_new = features_newview
         
         enc_input = x.clone()
 

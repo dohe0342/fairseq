@@ -389,7 +389,7 @@ class CtcCriterion(FairseqCriterion):
             sample["target"] != self.eos_idx
         )
         
-        print('pad mask = ', pad_mask)
+        print('pad mask = ', pad_mask.size())
         
         targets_flat = sample["target"].masked_select(pad_mask)
         if "target_lengths" in sample:

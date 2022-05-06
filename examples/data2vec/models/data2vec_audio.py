@@ -407,7 +407,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             
             if features_newview is not None:
                 x_new, _ = self.apply_mask(
-                    features_new,
+                    features_newview,
                     padding_mask,
                     mask_indices=mask_indices,
                     mask_channel_indices=mask_channel_indices,

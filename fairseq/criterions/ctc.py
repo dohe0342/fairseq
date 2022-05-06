@@ -384,12 +384,10 @@ class CtcCriterion(FairseqCriterion):
 
         if lprobs.size()[1] != input_lengths.size()[0]:
             input_lengths = input_lengths[:int(input_lengths.size()[0]/2)]
-
+        
         pad_mask = (sample["target"] != self.pad_idx) & (
             sample["target"] != self.eos_idx
         )
-        
-        print('pad mask = ', pad_mask.size())
         
         targets_flat = sample["target"].masked_select(pad_mask)
         if "target_lengths" in sample:

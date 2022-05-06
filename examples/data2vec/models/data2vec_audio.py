@@ -428,7 +428,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         )
         
         if features_newview is not None:
-            x_new = features_newview
             x_new, _, _ = self.encoder(
                 x_new,
                 padding_mask=padding_mask,

@@ -558,11 +558,6 @@ class FairseqTask(object):
                 with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
                     loss, sample_size, logging_output = criterion(model, sample)
                     
-                    #loss[0][0] /= sample_size
-                    #loss[0][1] /= sample_size
-                    #print(loss[0][1])
-                    #print(loss[0][1])
-
             if len(optimizer) == 1:
                 if ignore_grad:
                     loss[1] *= 0
@@ -584,6 +579,9 @@ class FairseqTask(object):
                         optimizer[0].backward(loss[0][0]+loss[0][1], retain_graph=True)
                         optimizer[1].backward(-0.0001*(loss[0][0]+loss[0][1])+loss[1])
                     '''
+                    loss[0][0] /= sample_size
+                    loss[0][1] /= sample_size
+
                     optimizer[0].backward(loss[0][0]+loss[0][1], retain_graph=True)
                     optimizer[1].backward(-0.000001*(loss[0][0]+loss[0][1])+loss[1])
 

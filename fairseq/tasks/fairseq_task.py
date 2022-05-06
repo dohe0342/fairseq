@@ -560,8 +560,8 @@ class FairseqTask(object):
                     
                     loss[0][0] /= sample_size
                     loss[0][1] /= sample_size
-                    print(loss[0][1])
-                    print(loss[0][1])
+                    #print(loss[0][1])
+                    #print(loss[0][1])
 
             if len(optimizer) == 1:
                 if ignore_grad:

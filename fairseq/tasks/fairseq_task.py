@@ -558,8 +558,8 @@ class FairseqTask(object):
                 with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
                     loss, sample_size, logging_output = criterion(model, sample)
                     
-                    loss[0][0] /= sample_size
-                    loss[0][1] /= sample_size
+                    #loss[0][0] /= sample_size
+                    #loss[0][1] /= sample_size
                     #print(loss[0][1])
                     #print(loss[0][1])
 

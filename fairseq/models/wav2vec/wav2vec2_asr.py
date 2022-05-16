@@ -1317,11 +1317,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
-        
-        self.viewmaker = []
-        for i in range(cfg.viewmaker_num):
-            self.viewmaker.append(ViewMaker1())
-            #self.viewmaker1 = ViewMaker1()
+        self.viewmaker = ViewMaker1()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates
@@ -1410,6 +1406,167 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "loss": res["loss"],
         }
 
+
+class Wav2VecEncoderMultipleViewMaker(Wav2VecEncoder):
+    def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):
+        self.apply_mask = cfg.apply_mask
+
+        arg_overrides = {
+            "dropout": cfg.dropout,
+            "activation_dropout": cfg.activation_dropout,
+            "dropout_input": cfg.dropout_input,
+            "attention_dropout": cfg.attention_dropout,
+            "mask_length": cfg.mask_length,
+            "mask_prob": cfg.mask_prob,
+            "require_same_masks": getattr(cfg, "require_same_masks", True),
+            "pct_holes": getattr(cfg, "mask_dropout", 0),
+            "mask_selection": cfg.mask_selection,
+            "mask_other": cfg.mask_other,
+            "no_mask_overlap": cfg.no_mask_overlap,
+            "mask_channel_length": cfg.mask_channel_length,
+            "mask_channel_prob": cfg.mask_channel_prob,
+            "mask_channel_before": cfg.mask_channel_before,
+            "mask_channel_selection": cfg.mask_channel_selection,
+            "mask_channel_other": cfg.mask_channel_other,
+            "no_mask_channel_overlap": cfg.no_mask_channel_overlap,
+            "encoder_layerdrop": cfg.layerdrop,
+            "feature_grad_mult": cfg.feature_grad_mult,
+            "checkpoint_activations": cfg.checkpoint_activations,
+            "offload_activations": cfg.offload_activations,
+            "min_params_to_wrap": cfg.min_params_to_wrap,
+            "branch_ctc_v1": cfg.branch_ctc_v1,
+        }
+
+        if cfg.w2v_args is None:
+            state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
+            w2v_args = state.get("cfg", None)
+            if w2v_args is None:
+                w2v_args = convert_namespace_to_omegaconf(state["args"])
+            w2v_args.criterion = None
+            w2v_args.lr_scheduler = None
+            cfg.w2v_args = w2v_args
+
+            logger.info(w2v_args)
+
+        else:
+            state = None
+            w2v_args = cfg.w2v_args
+            if isinstance(w2v_args, Namespace):
+                cfg.w2v_args = w2v_args = convert_namespace_to_omegaconf(w2v_args)
+        
+        model_normalized = w2v_args.task.get(
+            "normalize", w2v_args.model.get("normalize", False)
+        )
+        assert cfg.normalize == model_normalized, (
+            "Fine-tuning works best when data normalization is the same. "
+            "Please check that --normalize is set or unset for both pre-training and here"
+        )
+
+        if hasattr(cfg, "checkpoint_activations") and cfg.checkpoint_activations:
+            with open_dict(w2v_args):
+                w2v_args.model.checkpoint_activations = cfg.checkpoint_activations
+
+        w2v_args.task.data = cfg.data
+        task = tasks.setup_task(w2v_args.task)
+        model = task.build_model(w2v_args.model, from_checkpoint=True)
+
+        model.remove_pretraining_modules()
+
+        if state is not None and not cfg.no_pretrained_weights:
+            self.load_model_weights(state, model, cfg)
+
+        FairseqEncoder.__init__(self, task.source_dictionary)
+        d = w2v_args.model.encoder_embed_dim
+
+        self.w2v_model = model
+        self.viewmaker = ViewMaker1()
+
+        self.final_dropout = nn.Dropout(cfg.final_dropout)
+        self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.num_updates = 0
+
+        targ_d = None
+        self.proj = None
+
+        if output_size is not None:
+            targ_d = output_size
+        elif getattr(cfg, "decoder_embed_dim", d) != d:
+            targ_d = cfg.decoder_embed_dim
+        
+        if targ_d is not None:
+            self.proj = Linear(d, targ_d)
+
+        self.blank_mode= "add"
+        self.blank_weight = 0.
+    
+    def get_logits(self, net_output, logits, normalize=False):
+        if self.blank_weight != 0:
+            if self.blank_mode == "add":
+                logits[..., 0] += self.blank_weight
+            elif self.blank_mode == "set":
+                logits[..., 0] = self.blank_weight
+            else:
+                raise Exception(f"invalid blank mode {self.blank_mode}")
+
+        if net_output["padding_mask"] is not None and net_output["padding_mask"].any():
+            number_of_classes = logits.size(-1)
+            masking_tensor = torch.ones(
+                number_of_classes, device=logits.device
+            ) * float("-inf")
+            masking_tensor[0] = 0
+            logits[net_output["padding_mask"].T] = masking_tensor.type_as(logits)
+
+        if normalize:
+            logits = utils.log_softmax(logits.float(), dim=-1)
+
+        return logits
+
+    def get_normalized_probs(self, net_output, log_probs):
+        """Get normalized probabilities (or log probs) from a net's output."""
+
+        logits = self.get_logits(net_output, net_output["encoder_out"])
+        logits_new = self.get_logits(net_output, net_output["encoder_out_new"])
+
+        if log_probs:
+            return [utils.log_softmax(logits.float(), dim=-1), utils.log_softmax(logits_new.float(), dim=-1)]
+        else:
+            return [utils.softmax(logits.float(), dim=-1), utils.softmax(logits_new.float(), dim=-1)]
+
+    def forward(self, source, padding_mask, **kwargs):
+        w2v_args = {
+            "source": source,
+            "padding_mask": padding_mask,
+            "mask": self.apply_mask and self.training,
+            "viewmaker": self.viewmaker,
+        }
+
+        ft = self.freeze_finetune_updates <= self.num_updates
+        with torch.no_grad() if not ft else contextlib.ExitStack():
+            res = self.w2v_model.extract_features(**w2v_args)
+
+            x = res["x"]
+            x_new = res["x_new"]
+            padding_mask = res["padding_mask"]
+
+            # B x T x C -> T x B x C
+            x = x.transpose(0, 1)
+            x_new = x_new.transpose(0, 1)
+
+        x = self.final_dropout(x)
+        x_new = self.final_dropout(x_new)
+        spk_prob = None
+
+        if self.proj:
+            x = self.proj(x)
+            x_new = self.proj(x_new)
+                    
+        return {
+            "encoder_out": x,  # T x B x C
+            "encoder_out_new": x_new,   # T x B x C 
+            "padding_mask": padding_mask,  # B x T,
+            "layer_results": res["layer_results"],
+            "loss": res["loss"],
+        }
 
 ACTIVATIONS = { 
     'relu': torch.nn.ReLU,

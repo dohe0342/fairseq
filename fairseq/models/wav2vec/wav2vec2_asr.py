@@ -1483,7 +1483,7 @@ class Wav2VecEncoderMultipleViewMaker(Wav2VecEncoder):
         self.viewmaker = []
         for i in range(cfg.viewmaker_num):
             self.viewmaker.append(ViewMaker1())
-        self.viewmaker = ViewMaker1()
+        #self.viewmaker = ViewMaker1()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates

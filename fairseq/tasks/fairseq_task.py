@@ -611,7 +611,6 @@ class FairseqTask(object):
                     ##optimizer[1].backward(loss[1]) ## try17, try18:noreduce
                     optimizer[1].backward(-0.00005*(loss[0][1])+loss[1]) ## try19
 
-
             '''
             model.train()
             model.set_num_updates(update_num)

@@ -963,7 +963,7 @@ class Trainer(object):
                 if utils.has_parameters(self.criterion):
                     self.optimizer.all_reduce_grads(self.criterion)
                     
-                if 0:
+                if 1:
                     self.optimizer2.all_reduce_grads(self.model)
                     if utils.has_parameters(self.criterion):
                         self.optimizer2.all_reduce_grads(self.criterion)

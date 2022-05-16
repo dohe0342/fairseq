@@ -1479,6 +1479,10 @@ class Wav2VecEncoderMultipleViewMaker(Wav2VecEncoder):
         d = w2v_args.model.encoder_embed_dim
 
         self.w2v_model = model
+        
+        self.viewmaker = []
+        for i in range(cfg.viewmaker_num):
+            self.viewmaker.append(ViewMaker1())
         self.viewmaker = ViewMaker1()
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)

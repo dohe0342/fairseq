@@ -611,7 +611,7 @@ class FairseqTask(object):
                     ##optimizer[1].backward(loss[1]) ## try17, try18:noreduce
                     lambda_ = -0.00003*(1+torch.cos(torch.tensor(update_num)/200.))
                     print(update_num, lambda_)
-                    optimizer[1].backward(-0.00003*(1+torch.cos(torch.tensor(update_num)/500.))*(loss[0][1])+loss[1]) ## try19
+                    optimizer[1].backward(lambda_**(loss[0][1])+loss[1]) ## try19
 
             '''
             model.train()

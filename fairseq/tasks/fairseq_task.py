@@ -8,6 +8,7 @@ import os
 import warnings
 from argparse import Namespace
 from typing import Any, Callable, Dict, List
+import math
 
 import torch
 from fairseq import metrics, search, tokenizer, utils

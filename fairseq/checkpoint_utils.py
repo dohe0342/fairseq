@@ -33,7 +33,6 @@ logger = logging.getLogger(__name__)
 
 
 def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
-    print(val_loss)
     from fairseq import meters
 
     # only one worker should attempt to create the required dir
@@ -106,7 +105,7 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
     #] = not cfg.no_last_checkpoints
     
     checkpoint_conds[
-        "checkpoint_last_{}.pt".format(str(epoch).zfill(3))
+        "checkpoint_last_{}_{}.pt".format(str(epoch).zfill(3), val_loss[0])
     ] = not cfg.no_last_checkpoints
 
     extra_state = {"train_iterator": epoch_itr.state_dict(), "val_loss": val_loss}

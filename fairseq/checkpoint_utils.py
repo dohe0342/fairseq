@@ -158,6 +158,7 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
                 PathManager.rm(old_chk)
 
     if cfg.keep_last_epochs > 0:
+        print(cfg.keep_last_epochs)
         # remove old epoch checkpoints; checkpoints are sorted in descending order
         checkpoints = checkpoint_paths(
             cfg.save_dir, pattern=r"checkpoint(\d+){}\.pt".format(suffix)

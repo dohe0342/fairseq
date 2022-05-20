@@ -105,7 +105,7 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
     #] = not cfg.no_last_checkpoints
     
     checkpoint_conds[
-        "checkpoint_last_{}_{}.pt".format(str(epoch).zfill(3), str(val_loss[0]))
+        "checkpoint_last_{}_{}.pt".format(str(epoch).zfill(3), str(val_loss))
     ] = not cfg.no_last_checkpoints
 
     extra_state = {"train_iterator": epoch_itr.state_dict(), "val_loss": val_loss}

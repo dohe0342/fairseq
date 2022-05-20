@@ -100,8 +100,12 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
                 cfg.best_checkpoint_metric, val_loss, rand_sfx, suffix
             )
         ] = worst_best is None or is_better(val_loss, worst_best)
+    #checkpoint_conds[
+    #    "checkpoint_last{}.pt".format(suffix)
+    #] = not cfg.no_last_checkpoints
+    
     checkpoint_conds[
-        "checkpoint_last{}.pt".format(suffix)
+        "checkpoint_last_{}.pt".format(str(epoch).zfill(3))
     ] = not cfg.no_last_checkpoints
 
     extra_state = {"train_iterator": epoch_itr.state_dict(), "val_loss": val_loss}
@@ -112,8 +116,6 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
         os.path.join(cfg.save_dir, fn) for fn, cond in checkpoint_conds.items() if cond
     ]
     if len(checkpoints) > 0 and trainer.should_save_checkpoint_on_current_rank:
-        for checkpoint in checkpoints:
-            print(checkpoint)
         trainer.save_checkpoint(checkpoints[0], extra_state)
         for cp in checkpoints[1:]:
             if cfg.write_checkpoints_asynchronously:

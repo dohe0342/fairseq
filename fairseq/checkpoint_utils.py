@@ -112,7 +112,8 @@ def save_checkpoint(cfg: CheckpointConfig, trainer, epoch_itr, val_loss):
         os.path.join(cfg.save_dir, fn) for fn, cond in checkpoint_conds.items() if cond
     ]
     if len(checkpoints) > 0 and trainer.should_save_checkpoint_on_current_rank:
-        print(len(checkpoints))
+        for checkpoint in checkpoints:
+            print(checkpoint)
         trainer.save_checkpoint(checkpoints[0], extra_state)
         for cp in checkpoints[1:]:
             if cfg.write_checkpoints_asynchronously:

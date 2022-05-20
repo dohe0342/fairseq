@@ -612,8 +612,9 @@ class FairseqTask(object):
                     ##optimizer[1].backward(loss[1]) ## try17, try18:noreduce
                     #lambda_ = -0.00003*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 20
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 21
-                    lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num%200*math.pi)/200.)) ## try 22
-                    #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 23
+                    #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num%200*math.pi)/200.)) ## try 22
+                    lambda_ = -0.00001*(update_num/24000.)*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 23
+                    print(lambda_)
                     optimizer[1].backward(lambda_*(loss[0][1])+loss[1])
 
             '''

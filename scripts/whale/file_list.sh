@@ -5,3 +5,5 @@ for file in /home/work/workspace/exp/viewmaker_try24_lambda_cosine_annealing_pro
 do
     arrPics=("${Pics[@]}" "$file")
 done
+
+echo $arrPics

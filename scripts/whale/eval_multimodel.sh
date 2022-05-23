@@ -17,7 +17,7 @@ do
 		decoding.type=viterbi \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=$path/$model1:/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model/$model2 \
+		common_eval.path=$path/$model1\\/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model/$model2 \
 		distributed_training.distributed_world_size=1
 	echo ""
 	echo ""

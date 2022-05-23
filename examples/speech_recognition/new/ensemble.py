@@ -101,7 +101,9 @@ class InferenceProcessor:
         self.task = tasks.setup_task(cfg.task)
 
         models, saved_cfg = self.load_model_ensemble()
-        self.models = models
+        self.models1 = models
+        
+        self.cfg.common_eval.path = "/home/work/workspace/exp/viewmaker_try23_lambda_cosine_annealing_progressive_linear_growing/model/checkpoint_last_153_9.404.pt"
         '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():

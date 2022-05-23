@@ -101,7 +101,7 @@ class InferenceProcessor:
         self.task = tasks.setup_task(cfg.task)
 
         models, saved_cfg = self.load_model_ensemble()
-        self.models1 = models
+        self.models = models
         
         '''
         with torch.no_grad():
@@ -243,6 +243,13 @@ class InferenceProcessor:
         )
 
         models = [model1, model2]
+        
+        with torch.no_grad():
+            for name, param in self.models[0].named_parameters():
+                if 'k_proj.bias' in name or 'q_proj.bias' in name:
+                    param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
+                    print(f'set {name} to 0.')
+
         for model in models:
             self.optimize_model(model)
         return models, saved_cfg

@@ -63,7 +63,6 @@ class BaseDecoder:
             emissions = model.get_logits(encoder_out)
         else:
             emissions = model.get_normalized_probs(encoder_out, log_probs=True)
-        '''
 
         return emissions.transpose(0, 1).float().cpu().contiguous()
 

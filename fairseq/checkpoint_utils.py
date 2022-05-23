@@ -400,7 +400,6 @@ def load_model_ensemble_and_task(
     num_shards=1,
     state=None,
 ):
-    print('filename!!!!!!', filenames)
     assert state is None or len(filenames) == 1
 
     from fairseq import tasks

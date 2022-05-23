@@ -103,7 +103,6 @@ class InferenceProcessor:
         models, saved_cfg = self.load_model_ensemble()
         self.models1 = models
         
-        self.cfg.common_eval.path = "/home/work/workspace/exp/viewmaker_try23_lambda_cosine_annealing_progressive_linear_growing/model/checkpoint_last_153_9.404.pt"
         '''
         with torch.no_grad():
             for name, param in self.models[0].named_parameters():
@@ -223,7 +222,7 @@ class InferenceProcessor:
 
     def load_model_ensemble(self) -> Tuple[List[FairseqModel], FairseqDataclass]:
         arg_overrides = ast.literal_eval(self.cfg.common_eval.model_overrides)
-        models, saved_cfg = checkpoint_utils.load_model_ensemble(
+        model1, saved_cfg = checkpoint_utils.load_model_ensemble(
             utils.split_paths(self.cfg.common_eval.path, separator="\\"),
             arg_overrides=arg_overrides,
             task=self.task,
@@ -232,6 +231,18 @@ class InferenceProcessor:
             strict=False,
             num_shards=self.cfg.checkpoint.checkpoint_shard_count,
         )
+        self.cfg.common_eval.path = "/home/work/workspace/exp/viewmaker_try23_lambda_cosine_annealing_progressive_linear_growing/model/checkpoint_last_153_9.404.pt"
+        model2, saved_cfg = checkpoint_utils.load_model_ensemble(
+            utils.split_paths(self.cfg.common_eval.path, separator="\\"),
+            arg_overrides=arg_overrides,
+            task=self.task,
+            suffix=self.cfg.checkpoint.checkpoint_suffix,
+            #strict=(self.cfg.checkpoint.checkpoint_shard_count == 1),
+            strict=False,
+            num_shards=self.cfg.checkpoint.checkpoint_shard_count,
+        )
+
+        models = [model1, model2]
         for model in models:
             self.optimize_model(model)
         return models, saved_cfg

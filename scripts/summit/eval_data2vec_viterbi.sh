@@ -2,7 +2,7 @@ git pull
 source ~/.bashrc
 model=$1
 
-for subset in "dev-other" "test-clean" "test-other"
+for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
 	echo "====================   $model // $subset   ===================="
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \

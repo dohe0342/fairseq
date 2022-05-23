@@ -230,6 +230,18 @@ class InferenceProcessor:
             strict=False,
             num_shards=self.cfg.checkpoint.checkpoint_shard_count,
         )
+        with torch.no_grad():
+            for name1, param1 in models[0].named_parameters():
+                for name2, param2 in models[1].named_parameters():
+                    if name1 == name2:
+                        param1.data = (param1.data+param2.data)/2.
+                    '''
+                    if 'k_proj.bias' in name or 'q_proj.bias' in name:
+                    #if 'w2v_model.encoder' in name and 'bias' in name:
+                        param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
+                        print(f'set {name} to 0.')
+                    '''
+        
         for model in models:
             self.optimize_model(model)
         return models, saved_cfg

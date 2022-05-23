@@ -1913,11 +1913,11 @@ class ViewMaker3(BaseFairseqModel):
         self.enc2 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc3 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc4 = FCLayer(self.num_channels+self.num_noise, self.num_channels)    ## 512 + noise -> 512
+        self.enc4 = FCLayer(self.num_channels, self.num_channels)    ## 512 + noise -> 512
         self.enc5 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc6 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc7 = FCLayer(self.num_channels+self.num_noise, self.num_channels)    ## 512 + noise -> 512
+        self.enc7 = FCLayer(self.num_channels, self.num_channels)    ## 512 + noise -> 512
         self.enc8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
 

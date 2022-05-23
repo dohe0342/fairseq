@@ -42,53 +42,24 @@ class BaseDecoder:
         models: List[FairseqModel],
         encoder_input: Dict[str, Any],
     ) -> torch.FloatTensor:
-        model = models[0]
+        #model = models[0]
+        for model in models:
+            encoder_out = model(**encoder_input)
+            
+            if hasattr(model, "get_logits"):
+                emissions = model.get_logits(encoder_out)
+            else:
+                emissions = model.get_normalized_probs(encoder_out, log_probs=True)
+        
+        '''
         encoder_out = model(**encoder_input)
-        '''
-        encoder_input['tgt_layer']=10
-        encoder_out1 = model(**encoder_input)
-        encoder_input['tgt_layer']=11
-        encoder_out2 = model(**encoder_input)
-        encoder_input['tgt_layer']=12
-        encoder_out3 = model(**encoder_input)
         
-        encoder_out = encoder_out1
-        
-        encoder_out['encoder_out'] = (encoder_out1['encoder_out'] + \
-                                      encoder_out2['encoder_out'] + \
-                                      encoder_out3['encoder_out']) / 3.
-        
-        encoder_out['encoder_out'] = encoder_out1['encoder_out'].mul( \
-                                        encoder_out2['encoder_out'].mul( \
-                                            encoder_out3['encoder_out']
-                                        )
-                                    )
-        #print(encoder_out1['encoder_out'].size())
-        #print(encoder_out2['encoder_out'].size())
-        #print(encoder_out3['encoder_out'].size())
-        '''
-        #encoder_out['encoder_out'] = encoder_out['encoder_out'][-6]
-        '''
-        encoder_out['encoder_out'] = (encoder_out['encoder_out'][-1] + \
-                                      encoder_out['encoder_out'][-2] + \
-                                      encoder_out['encoder_out'][-3] + \
-                                      encoder_out['encoder_out'][-4] + \
-                                      encoder_out['encoder_out'][-5] + \
-                                      encoder_out['encoder_out'][-6]) / 6.
-        '''
-        '''
-        encoder_out['encoder_out'] = encoder_out['encoder_out'][-1].mul( \
-                                     encoder_out['encoder_out'][-2].mul( \
-                                     encoder_out['encoder_out'][-3].mul( \
-                                     encoder_out['encoder_out'][-4].mul( \
-                                     encoder_out['encoder_out'][-5].mul( \
-                                     encoder_out['encoder_out'][-6]
-                                     )))))
-        '''
         if hasattr(model, "get_logits"):
             emissions = model.get_logits(encoder_out)
         else:
             emissions = model.get_normalized_probs(encoder_out, log_probs=True)
+        '''
+
         return emissions.transpose(0, 1).float().cpu().contiguous()
 
     def get_tokens(self, idxs: torch.IntTensor) -> torch.LongTensor:

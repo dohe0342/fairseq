@@ -60,6 +60,7 @@ class FileContentsAction(argparse.Action):
 
 def split_paths(paths: str, separator=os.pathsep) -> List[str]:
     print('seperator!!!!', separator)
+    print(paths.split(separator))
     return (
         paths.split(separator) if "://" not in paths else paths.split(MANIFOLD_PATH_SEP)
     )

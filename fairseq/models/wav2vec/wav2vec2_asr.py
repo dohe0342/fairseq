@@ -1960,12 +1960,6 @@ class ViewMaker3(BaseFairseqModel):
 
     def forward(self, x):
         out = self.basic_net(x, bound_multiplier=1)
-        delta = self.get_delta(out)
-        
-        # Additive perturbation
-        result = x + delta
-        if self.clamp:
-            result = torch.clamp(result, 0, 1.0)
         
         return result, delta
 

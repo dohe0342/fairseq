@@ -362,7 +362,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         conv_features = features.clone()
         
         print(features.size())
-        features[0,:,2] = 0.
+        features[0,:,3] = 0.
     
         loss = None
         features_newview = None

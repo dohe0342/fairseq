@@ -1921,15 +1921,6 @@ class ViewMaker3(BaseFairseqModel):
         self.enc8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
 
-    def reparametrize(self, mu, logvar):
-        std = logvar.mul(0.5).exp_()
-        if torch.cuda.is_available():
-            eps = torch.cuda.FloatTensor(std.size()).normal_().half()
-        else:
-            eps = torch.FloatTensor(std.size()).normal_()
-        eps = Variable(eps)
-        return eps.mul(std).add_(mu)
-
     def add_noise_channel(self, x, num=1, bound_multiplier=1):
         # bound_multiplier is a scalar or a 1D tensor of length batch_size
         batch_size = x.size(0)
@@ -1941,39 +1932,17 @@ class ViewMaker3(BaseFairseqModel):
         return torch.cat((x, noise), dim=2)
 
     def encoder(self, y):
-        y_residual1 = self.enc1(y)
-        y = self.enc2(y_residual1)
+        y = self.enc1(y)
+        y = self.enc2(y)
         y = self.enc3(y)
-        y = y + y_residual1
-        
-        y_residual2 = self.enc4(y)
-        y = self.enc5(y_residual2)
+        y = self.enc4(y)
+        y = self.enc5(y)
         y = self.enc6(y)
-        y = y + y_residual2
-
-        y_residual3 = self.enc7(y)
-        y = self.enc8(y_residual3)
+        y = self.enc7(y)
+        y = self.enc8(y)
         y = self.enc9(y)
-        y = y + y_residual3
         return y
     
-    def decoder(self, z):
-        z_residual1 = self.dec1(z)
-        z = self.dec2(z_residual1)
-        z = self.dec3(z)
-        z = z + z_residual1
-        
-        z_residual2 = self.dec4(z)
-        z = self.dec5(z_residual2)
-        z = self.dec6(z)
-        z = z + z_residual2
-
-        z_residual3 = self.dec7(z)
-        z = self.dec8(z_residual3)
-        z = self.dec9(z)
-        z = z + z_residual3
-        return z
-
     def basic_net(self, y, bound_multiplier=1):
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.encoder(y)

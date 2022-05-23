@@ -1,5 +1,6 @@
 git pull
 source ~/.bashrc
+path=/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model
 model=$1
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"
@@ -15,8 +16,8 @@ do
 		decoding.type=viterbi \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=/home/work/workspace/exp/viewmaker_try23_lambda_cosine_annealing_progressive_linear_growing/model/$model \
-		#common_eval.path=/home/work/workspace/models/data2vec_model/$model \
+		#common_eval.path=/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model/$model \
+		common_eval.path=/home/work/workspace/models/data2vec_model/$model \
 		distributed_training.distributed_world_size=1
 	echo ""
 	echo ""

@@ -363,6 +363,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         print(features.size())
         features[0,:,3] = 0.
+        print(features[0,:,3].size())
         print(features[0,:,3])
     
         loss = None

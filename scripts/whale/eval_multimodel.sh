@@ -1,6 +1,7 @@
 git pull
 source ~/.bashrc
-path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
+#path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
+path="/home/work/workspace/exp/viewmaker_try24_labmda_cosine_annealing_progressive_exp_growing/model"
 #path="/home/work/workspace/exp/viewmaker_try21_labmda_cosine_annealing/model"
 model1=$1
 model2=$2

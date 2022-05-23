@@ -1880,6 +1880,145 @@ class ViewMaker2(BaseFairseqModel):
         
         return result, delta
 
+
+class ViewMaker3(BaseFairseqModel):
+    '''Viewmaker network that stochastically maps a multichannel 2D input to an output of the same size.'''
+    def __init__(self, num_channels=512, distortion_budget=0.05, activation='gelu', clamp=False, num_noise=5):
+        '''Initialize the Viewmaker network.
+
+        Args:
+            num_channels: Number of channels in the input (e.g. 1 for speech, 3 for images)
+                Input will have shape [batch_size, num_channels, height, width]
+            distortion_budget: Distortion budget of the viewmaker (epsilon, in the paper).
+                Controls how strong the perturbations can be.
+            activation: The activation function used in the network ('relu' and 'leaky_relu' currently supported)
+            clamp: Whether to clamp the outputs to [0, 1] (useful to ensure output is, e.g., a valid image)
+            frequency_domain: Whether to apply perturbation (and distortion budget) in the frequency domain.
+                This is useful for shifting the inductive bias of the viewmaker towards more global / textural views.
+            downsample_to: Downsamples the image, applies viewmaker, then upsamples. Possibly useful for 
+                higher-resolution inputs, but not evaluaed in the paper.
+            num_res_blocks: Number of residual blocks to use in the network.
+        '''
+        super().__init__()
+        
+        self.num_channels = num_channels
+        self.activation = activation
+        self.clamp = clamp
+        self.distortion_budget = distortion_budget
+        self.num_noise = num_noise
+        self.act = ACTIVATIONS[activation]()
+
+        # Initial convolution layers (+ 1 for noise filter)
+        self.enc1 = FCLayer(self.num_channels+self.num_noise, self.num_channels)    ## 512 + noise -> 512
+        self.enc2 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc3 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        
+        self.enc4 = FCLayer(self.num_channels, self.num_channels/2)                 ## 512 -> 256
+        self.enc5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
+        self.enc6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
+        
+        self.enc7 = FCLayer(self.num_channels/2, self.num_channels/4)               ## 256 -> 128
+        self.enc8 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+        self.enc9 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+
+        self.mean = FCLayer(self.num_channels/4, self.num_channels/16)              ## 128 -> 32
+        self.var = FCLayer(self.num_channels/4, self.num_channels/16)               ## 128 -> 32
+        
+        self.dec1 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
+        self.dec2 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+        self.dec3 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+        
+        self.dec4 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
+        self.dec5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256 
+        self.dec6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256 
+        
+        self.dec7 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
+        self.dec8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.dec9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+    
+    def reparametrize(self, mu, logvar):
+        std = logvar.mul(0.5).exp_()
+        if torch.cuda.is_available():
+            eps = torch.cuda.FloatTensor(std.size()).normal_().half()
+        else:
+            eps = torch.FloatTensor(std.size()).normal_()
+        eps = Variable(eps)
+        return eps.mul(std).add_(mu)
+
+    def add_noise_channel(self, x, num=1, bound_multiplier=1):
+        # bound_multiplier is a scalar or a 1D tensor of length batch_size
+        batch_size = x.size(0)
+        filter_size = x.size(1)
+        shp = (batch_size, filter_size, num)
+        bound_multiplier = torch.tensor(bound_multiplier, device=x.device)
+        noise = torch.rand(shp, device=x.device) * bound_multiplier.view(-1, 1, 1)
+        noise = noise.half()
+        return torch.cat((x, noise), dim=2)
+
+    def encoder(self, y):
+        y_residual1 = self.enc1(y)
+        y = self.enc2(y_residual1)
+        y = self.enc3(y)
+        y = y + y_residual1
+        
+        y_residual2 = self.enc4(y)
+        y = self.enc5(y_residual2)
+        y = self.enc6(y)
+        y = y + y_residual2
+
+        y_residual3 = self.enc7(y)
+        y = self.enc8(y_residual3)
+        y = self.enc9(y)
+        y = y + y_residual3
+        return y
+    
+    def decoder(self, z):
+        z_residual1 = self.dec1(z)
+        z = self.dec2(z_residual1)
+        z = self.dec3(z)
+        z = z + z_residual1
+        
+        z_residual2 = self.dec4(z)
+        z = self.dec5(z_residual2)
+        z = self.dec6(z)
+        z = z + z_residual2
+
+        z_residual3 = self.dec7(z)
+        z = self.dec8(z_residual3)
+        z = self.dec9(z)
+        z = z + z_residual3
+        return z
+
+    def basic_net(self, y, bound_multiplier=1):
+        y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
+        y = self.encoder(y)
+        
+        mu, logvar = self.mean(y), self.var(y)
+        z = self.reparametrize(mu, logvar)
+        
+        out = self.decoder(z)
+        return out
+    
+    def get_delta(self, y_pixels, eps=1e-4):
+        '''Constrains the input perturbation by projecting it onto an L1 sphere'''
+        distortion_budget = self.distortion_budget
+        delta = torch.tanh(y_pixels) # Project to [-1, 1]
+        avg_magnitude = delta.abs().mean([1,2], keepdim=True)
+        max_magnitude = distortion_budget
+        delta = delta * max_magnitude / (avg_magnitude + eps)
+        return delta
+
+    def forward(self, x):
+        out = self.basic_net(x, bound_multiplier=1)
+        delta = self.get_delta(out)
+        
+        # Additive perturbation
+        result = x + delta
+        if self.clamp:
+            result = torch.clamp(result, 0, 1.0)
+        
+        return result, delta
+
 # ---
 
 class FCLayer(torch.nn.Module):

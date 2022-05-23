@@ -231,25 +231,7 @@ class InferenceProcessor:
             strict=False,
             num_shards=self.cfg.checkpoint.checkpoint_shard_count,
         )
-        self.cfg.common_eval.path = "/home/work/workspace/exp/viewmaker_try23_lambda_cosine_annealing_progressive_linear_growing/model/checkpoint_last_153_9.404.pt"
-        model2, saved_cfg = checkpoint_utils.load_model_ensemble(
-            utils.split_paths(self.cfg.common_eval.path, separator="\\"),
-            arg_overrides=arg_overrides,
-            task=self.task,
-            suffix=self.cfg.checkpoint.checkpoint_suffix,
-            #strict=(self.cfg.checkpoint.checkpoint_shard_count == 1),
-            strict=False,
-            num_shards=self.cfg.checkpoint.checkpoint_shard_count,
-        )
-
-        models = [model1, model2]
         
-        with torch.no_grad():
-            for name, param in self.models[0].named_parameters():
-                if 'k_proj.bias' in name or 'q_proj.bias' in name:
-                    param.data = torch.nn.Parameter(torch.zeros(param.size()[0]).to('cuda'))
-                    print(f'set {name} to 0.')
-
         for model in models:
             self.optimize_model(model)
         return models, saved_cfg

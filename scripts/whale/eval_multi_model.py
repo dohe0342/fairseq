@@ -1,7 +1,7 @@
 import glob
 import os
 
-model_list = sorted(glob.glob('/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model/*.pt'))[2:]
+model_list = sorted(glob.glob('/home/work/workspace/exp/viewmaker_try24_labmda_cosine_annealing_progressive_exp_growing/model/*.pt'))[2:]
 
 wer_list = []
 for enum, model in enumerate(model_list):

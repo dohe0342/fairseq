@@ -1,7 +1,7 @@
 git pull
 source ~/.bashrc
 #path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
-path="/home/work/workspace/exp/viewmaker_try21_lambda_cosine_annealing/model"
+path="/home/work/workspace/exp/viewmaker_try21_labmda_cosine_annealing/model"
 model1=$1
 model2=$2
 

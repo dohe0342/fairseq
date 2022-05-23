@@ -235,6 +235,7 @@ class InferenceProcessor:
                 for name2, param2 in models[1].named_parameters():
                     if name1 == name2:
                         param1.data = (param1.data+param2.data)/2.
+                        print(f'set {name1} to ensemble param')
                         break
 
                     '''

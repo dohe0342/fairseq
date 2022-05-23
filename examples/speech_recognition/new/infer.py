@@ -235,6 +235,8 @@ class InferenceProcessor:
                 for name2, param2 in models[1].named_parameters():
                     if name1 == name2:
                         param1.data = (param1.data+param2.data)/2.
+                        break
+
                     '''
                     if 'k_proj.bias' in name or 'q_proj.bias' in name:
                     #if 'w2v_model.encoder' in name and 'bias' in name:

@@ -3,7 +3,7 @@ source ~/.bashrc
 path=/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model
 model=$1
 
-for subset in "train-960" #"dev-clean" "dev-other" "test-clean" "test-other"
+for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
 	echo "====================   $model // $subset   ===================="
 	CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \

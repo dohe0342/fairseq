@@ -94,6 +94,10 @@ class Data2VecAudioConfig(Wav2Vec2Config):
         default=False,
         metadata={"help": "stop training if prediction var falls below this"},
     )
+    ch_prune_idx: str = field(
+        default=0,
+        metadata={"help": "stop training if prediction var falls below this"},
+    )
 
 
 def get_annealed_rate(start, end, curr_step, total_steps):

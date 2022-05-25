@@ -371,6 +371,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         #features[:,:,90:300] = 0.
         #features[:,:,500:] = 0.
         print(self.cfg.ch_prune_idx)
+        exit()
         if self.cfg.ch_prune_idx != -1:
             num = int(self.cfg.ch_prune_idx)
             features[:,:,num*50:(num+1)*50] = 0.

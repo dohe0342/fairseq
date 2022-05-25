@@ -797,8 +797,8 @@ class Wav2VecEncoderBranchCtcV2(Wav2VecEncoder):
 
         w2v_args.task.data = cfg.data
         task = tasks.setup_task(w2v_args.task)
-        print('fuck!!', w2v_args.model)
         model = task.build_model(w2v_args.model, from_checkpoint=True)
+        print(model)
 
         model.remove_pretraining_modules()
 

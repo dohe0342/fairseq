@@ -95,7 +95,7 @@ class Data2VecAudioConfig(Wav2Vec2Config):
         metadata={"help": "stop training if prediction var falls below this"},
     )
     ch_prune_idx: str = field(
-        default=0,
+        default=None,
         metadata={"help": "stop training if prediction var falls below this"},
     )
 

@@ -1281,7 +1281,6 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             #"ch_prune_idx": cfg.ch_prune_idx,
         }
         
-        print('fuck!!!!!', cfg.w2v_args.model)
         if cfg.w2v_args is None:
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)
@@ -1313,6 +1312,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         w2v_args.task.data = cfg.data
         task = tasks.setup_task(w2v_args.task)
+        print('fuck!!!!!', cfg.w2v_args.model)
         model = task.build_model(w2v_args.model, from_checkpoint=True)
 
         model.remove_pretraining_modules()

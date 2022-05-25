@@ -1312,7 +1312,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         w2v_args.task.data = cfg.data
         task = tasks.setup_task(w2v_args.task)
-        print('fuck!!!!!', cfg.w2v_args.model)
+        #print('fuck!!!!!', cfg.w2v_args.model[')
         model = task.build_model(w2v_args.model, from_checkpoint=True)
 
         model.remove_pretraining_modules()

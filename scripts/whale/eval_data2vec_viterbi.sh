@@ -20,7 +20,7 @@ do
 			dataset.gen_subset=$subset \
 			common_eval.path=/home/work/workspace/models/data2vec_model/$model \
 			distributed_training.distributed_world_size=1 \
-			+model.ch_prune_idx=2
+			+model.w2v_arg.sch_prune_idx=2
 		echo ""
 		echo ""
 	done

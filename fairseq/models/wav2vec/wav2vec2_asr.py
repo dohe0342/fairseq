@@ -1273,6 +1273,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
             "branch_ctc_v1": cfg.branch_ctc_v1,
+            "ch_prune_idx": cfg.ch_prune_idx,
         }
 
         if cfg.w2v_args is None:

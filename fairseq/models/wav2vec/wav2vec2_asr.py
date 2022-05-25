@@ -224,7 +224,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
     
     ch_prune_idx: int = field(
-        default=1,
+        default=-1,
         metadata={"help": "number of viewmaker"},
     )
 

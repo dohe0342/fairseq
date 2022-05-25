@@ -1281,7 +1281,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             #"ch_prune_idx": cfg.ch_prune_idx,
         }
         
-        print(cfg.w2v_args.ch_prune_idx)
+        print('fuck!!!!!', cfg.w2v_args.ch_prune_idx)
         if cfg.w2v_args is None:
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)

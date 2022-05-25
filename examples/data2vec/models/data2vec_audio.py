@@ -94,8 +94,8 @@ class Data2VecAudioConfig(Wav2Vec2Config):
         default=False,
         metadata={"help": "stop training if prediction var falls below this"},
     )
-    ch_prune_idx: str = field(
-        default=None,
+    ch_prune_idx: int = field(
+        default=-1,
         metadata={"help": "stop training if prediction var falls below this"},
     )
 
@@ -370,8 +370,9 @@ class Data2VecAudioModel(BaseFairseqModel):
         #features[:,:,:70] = 0.
         #features[:,:,90:300] = 0.
         #features[:,:,500:] = 0.
-        num=1
-        features[:,:,num*50:(num+1)*50] = 0.
+        if self.cfg.ch_prune_idx is not None:
+            num=1
+            features[:,:,num*50:(num+1)*50] = 0.
     
         loss = None
         features_newview = None

@@ -292,11 +292,6 @@ class Wav2Vec2Config(FairseqDataclass):
     )
     fp16: bool = field(default=False, metadata={"help": "If fp16 is being used"})
     
-    ch_prune_idx: int = field(
-        default=-1,
-        metadata={"help": "stop training if prediction var falls below this"},
-    )
-
 
 @register_model("wav2vec2", dataclass=Wav2Vec2Config)
 class Wav2Vec2Model(BaseFairseqModel):

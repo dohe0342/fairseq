@@ -3,13 +3,18 @@ source ~/.bashrc
 #path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
 path="/home/work/workspace/exp/viewmaker_try24_labmda_cosine_annealing_progressive_exp_growing/model"
 #path="/home/work/workspace/exp/viewmaker_try21_labmda_cosine_annealing/model"
-model1=$1
-model2=$2
+model1=$2
+model2=$3
+model3=$4
+model4=$5
+model5=$6
+model6=$7
+model7=$8
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
 	echo "====================   $model // $subset   ===================="
-	CUDA_VISIBLE_DEVICES=$3 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
+	CUDA_VISIBLE_DEVICES=$1 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \
 		task=audio_finetuning \

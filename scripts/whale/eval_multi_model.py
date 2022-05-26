@@ -18,7 +18,7 @@ for enum, model in enumerate(model_list):
 
 for wer in wer_list:
     wer = sorted(wer, key=lambda x:x[1])
-    print(wer[0])
+    print(wer[0], wer[1], wer[2], wer[3])
 #wer_list = sorted(wer_list, key=lambda x:x[1])
 
 #for wer in wer_list:

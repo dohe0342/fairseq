@@ -56,13 +56,13 @@ class BaseDecoder:
                 encoder_out_all.append(model(**encoder_input))
 
             encoder_out = encoder_out_all[0]
-            encoder_out['encoder_out'] = (encoder_out_all[0]['encoder_out'] + encoder_out_all[1]['encoder_out'])/2.
+            encoder_out['encoder_out'] = sum([encoder_out_all[i]['encoder_out'] for i in range(1,len(models))])/float(len(models))
+            #encoder_out['encoder_out'] = (encoder_out_all[0]['encoder_out'] + encoder_out_all[1]['encoder_out'])/2.
             if hasattr(model, "get_logits"):
                 emissions = models[0].get_logits(encoder_out)
             else:
                 emissions = models[0].get_normalized_probs(encoder_out, log_probs=True)
 
-        
         return emissions.transpose(0, 1).float().cpu().contiguous()
 
     def get_tokens(self, idxs: torch.IntTensor) -> torch.LongTensor:

@@ -433,7 +433,7 @@ class Wav2VecEncoder(FairseqEncoder):
             "min_params_to_wrap": cfg.min_params_to_wrap,
         }
         
-        print('1111111', w2v_args.model)
+        print('1111111', cfg.w2v_args.model)
         if cfg.w2v_args is None:
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)

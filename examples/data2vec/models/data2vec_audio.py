@@ -111,6 +111,7 @@ class Data2VecAudioModel(BaseFairseqModel):
     def __init__(self, cfg: Data2VecAudioConfig):
         super().__init__()
         self.cfg = cfg
+        print(self.cfg)
 
         feature_enc_layers = eval(cfg.conv_feature_layers)
         self.extractor_embed = feature_enc_layers[-1][0]

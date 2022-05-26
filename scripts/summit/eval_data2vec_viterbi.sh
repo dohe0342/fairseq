@@ -17,7 +17,7 @@ do
 		common.user_dir=examples/data2vec \
 		task.labels=ltr \
 		decoding.type=viterbi \
-		decoding.unique_wer_file=False \
+		decoding.unique_wer_file=true \
 		dataset.gen_subset=$subset \
 		common_eval.quiet=false \
 		common_eval.path=/workspace/models/data2vec_model/$model \

@@ -1,15 +1,9 @@
 git pull
 source ~/.bashrc
 #path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
-path="/home/work/workspace/exp/viewmaker_try24_labmda_cosine_annealing_progressive_exp_growing/model"
+path="/home/work/workspace/exp/viewmaker_try26_labmda_cosine_annealing_slow/model"
 #path="/home/work/workspace/exp/viewmaker_try21_labmda_cosine_annealing/model"
-model1=$2
-model2=$3
-model3=$4
-model4=$5
-model5=$6
-model6=$7
-model7=$8
+model7=$1
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do

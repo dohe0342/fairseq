@@ -16,7 +16,7 @@ for enum, model in enumerate(model_list):
     #print(wer)
     #os.system(f"./eval_multimodel.sh {model} 0")
 
-print(wer)
+print(wer_list)
 #wer_list = sorted(wer_list, key=lambda x:x[1])
 
 #for wer in wer_list:

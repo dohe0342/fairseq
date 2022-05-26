@@ -12,7 +12,7 @@ for enum, model in enumerate(model_list):
     if (enum-10)%20 == 0:
         wer_list.append([(enum, float(wer))])
     else:
-        wer_list[-1].append((enum, float(wer))
+        wer_list[-1].append((enum, float(wer)))
     #print(wer)
     #os.system(f"./eval_multimodel.sh {model} 0")
 

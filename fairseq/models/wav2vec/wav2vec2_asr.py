@@ -431,6 +431,7 @@ class Wav2VecEncoder(FairseqEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
+            "ch_prune_idx": cfg.ch_prune_idx,
         }
 
         if cfg.w2v_args is None:
@@ -461,11 +462,10 @@ class Wav2VecEncoder(FairseqEncoder):
         if hasattr(cfg, "checkpoint_activations") and cfg.checkpoint_activations:
             with open_dict(w2v_args):
                 w2v_args.model.checkpoint_activations = cfg.checkpoint_activations
-        
+               
         w2v_args.task.data = cfg.data
         task = tasks.setup_task(w2v_args.task)
         model = task.build_model(w2v_args.model, from_checkpoint=True)
-        print(model)
 
         model.remove_pretraining_modules()
 

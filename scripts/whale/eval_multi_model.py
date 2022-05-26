@@ -2,7 +2,7 @@ import glob
 import os
 
 model_list = sorted(glob.glob('/home/work/workspace/exp/viewmaker_try25_labmda_cosine_annealing_slow/model/*.pt'))[2:]
-
+print(model_list)
 wer_list = []
 for enum, model in enumerate(model_list):
     if enum < 10:

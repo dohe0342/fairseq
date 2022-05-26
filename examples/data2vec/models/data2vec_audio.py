@@ -367,18 +367,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         conv_features = features.clone()
         
-        #features[:,:,:440] = 0.
-        #features[:,:,70:] = 0.
-        #features[:,:,150:] = 0.
-        #features[:,:,250:] = 0.
-        #features[:,:,400:] = 0.
-        #features[:,:,:70] = 0.
-        #features[:,:,90:300] = 0.
-        #features[:,:,500:] = 0.
-        #features[:,:,40:480] = 0.
-        features[:,:,40:470] = 0.
-        #print(self.cfg.ch_prune_idx)
-        #exit()
         '''
         if self.cfg.ch_prune_idx != -1:
             num = int(self.cfg.ch_prune_idx)

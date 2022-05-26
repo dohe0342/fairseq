@@ -10,7 +10,7 @@ for enum, model in enumerate(model_list):
     wer = model.split('_')[-1].replace('.pt','')
     
     if (enum-10)%20 == 0:
-        wer_list.append([(enum, float(wer))])
+        wer_list.append([(enum+1, float(wer))])
     else:
         wer_list[-1].append((enum+1, float(wer)))
     #print(wer)

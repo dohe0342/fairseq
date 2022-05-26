@@ -13,11 +13,10 @@ for enum, model in enumerate(model_list):
         wer_list.append([(enum, float(wer))])
     else:
         wer_list[-1].append((enum, float(wer)))
-    print(wer_list)
     #print(wer)
     #os.system(f"./eval_multimodel.sh {model} 0")
 
-print(wer_list)
+print(len(wer_list))
 #wer_list = sorted(wer_list, key=lambda x:x[1])
 
 #for wer in wer_list:

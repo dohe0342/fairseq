@@ -431,7 +431,6 @@ class Wav2VecEncoder(FairseqEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
-            "ch_prune_idx": cfg.ch_prune_idx,
         }
 
         if cfg.w2v_args is None:

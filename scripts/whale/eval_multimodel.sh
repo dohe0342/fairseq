@@ -18,7 +18,7 @@ do
 		decoding.type=viterbi \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=$model
+		common_eval.path=$model \
 		distributed_training.distributed_world_size=1
 	echo ""
 	echo ""

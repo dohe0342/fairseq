@@ -3,7 +3,7 @@ source ~/.bashrc
 #path="/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model"
 path="/home/work/workspace/exp/viewmaker_try26_labmda_cosine_annealing_slow/model"
 #path="/home/work/workspace/exp/viewmaker_try21_labmda_cosine_annealing/model"
-model=$1
+model=$2
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
@@ -18,7 +18,7 @@ do
 		decoding.type=viterbi \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=$path/$model1\\$path/$model2 \
+		common_eval.path=$model
 		distributed_training.distributed_world_size=1
 	echo ""
 	echo ""

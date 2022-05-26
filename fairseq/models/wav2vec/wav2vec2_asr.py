@@ -445,8 +445,8 @@ class Wav2VecEncoder(FairseqEncoder):
 
             logger.info(w2v_args)
 
-        print('2222222', w2v_args.model)
         else:
+            print('2222222', w2v_args.model)
             state = None
             w2v_args = cfg.w2v_args
             if isinstance(w2v_args, Namespace):

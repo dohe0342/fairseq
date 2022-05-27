@@ -1156,9 +1156,13 @@ class Trainer(object):
             extra_kwargs["ema_model"] = self.ema.get_model()
 
         #extra_kwargs["uses_branch"] = False
-        extra_kwargs["uses_branch_v1"] = self.cfg.model.branch_ctc_v1        
-        extra_kwargs["uses_branch_v2"] = self.cfg.model.branch_ctc_v2
-        extra_kwargs["uses_branch_v3"] = self.cfg.model.branch_ctc_v3
+        #extra_kwargs["uses_branch_v1"] = self.cfg.model.branch_ctc_v1        
+        #extra_kwargs["uses_branch_v2"] = self.cfg.model.branch_ctc_v2
+        #extra_kwargs["uses_branch_v3"] = self.cfg.model.branch_ctc_v3
+        
+        extra_kwargs["uses_branch_v1"] = False  
+        extra_kwargs["uses_branch_v2"] = False
+        extra_kwargs["uses_branch_v3"] = False
 
         with torch.no_grad():
             self.model.eval()

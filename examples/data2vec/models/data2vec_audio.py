@@ -383,7 +383,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         '''
         #features[:,:,110:] = 0.
         features[:,38:,:] = 0.
-        features[:,38:,400:500] = 0.
+        features[:,38:,500:] = 0.
         #features[:,:,:100] = 0.
 
         loss = None

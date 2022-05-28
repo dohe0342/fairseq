@@ -6,7 +6,7 @@ model=$1
 #for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "train-960" #"dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "train-100" "train-360" "train-500" ##"dev-clean" "dev-other" "test-clean" "test-other"
-for subset in "it_was"
+for subset in "it_was2"
 do
 	echo "====================   $model // $subset   ===================="
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \

@@ -476,29 +476,22 @@ class Viewmaker4(torch.nn.Module):
         self.enc2 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc3 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc4 = FCLayer(self.num_channels, self.num_channels/2)                 ## 512 -> 256
-        self.enc5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
-        self.enc6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256
+        self.enc4 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc5 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc6 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc7 = FCLayer(self.num_channels/2, self.num_channels/4)               ## 256 -> 128
-        self.enc8 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
-        self.enc9 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
+        self.enc7 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc8 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc9 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        
+        self.enc10 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc11 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc12 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        
+        self.enc13 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc14 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc15 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
 
-        self.mean = FCLayer(self.num_channels/4, self.num_channels/16)              ## 128 -> 32
-        self.var = FCLayer(self.num_channels/4, self.num_channels/16)               ## 128 -> 32
-        
-        self.dec1 = FCLayer(self.num_channels/16, self.num_channels/4)              ## 32 -> 128
-        self.dec2 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
-        self.dec3 = FCLayer(self.num_channels/4, self.num_channels/4)               ## 128 -> 128
-        
-        self.dec4 = FCLayer(self.num_channels/4, self.num_channels/2)               ## 128 -> 256 
-        self.dec5 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256 
-        self.dec6 = FCLayer(self.num_channels/2, self.num_channels/2)               ## 256 -> 256 
-        
-        self.dec7 = FCLayer(self.num_channels/2, self.num_channels)                 ## 256 -> 512
-        self.dec8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.dec9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-    
     def reparametrize(self, mu, logvar):
         std = logvar.mul(0.5).exp_()
         if torch.cuda.is_available():

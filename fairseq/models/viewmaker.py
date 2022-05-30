@@ -555,6 +555,15 @@ class Viewmaker4(torch.nn.Module):
         out = self.decoder(z)
         '''
         y = self.enc1(y)
+        y = self.enc2(y)
+        y = self.enc3(y)
+        y = self.enc4(y)
+        y = self.enc5(y)
+        y = self.enc6(y)
+        y = self.enc7(y)
+        y = self.enc8(y)
+        y = self.enc9(y)
+        #y = self.enc1(y)
         return out
     
     def get_delta(self, y_pixels, eps=1e-4):

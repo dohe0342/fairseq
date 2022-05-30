@@ -545,6 +545,7 @@ class Viewmaker4(torch.nn.Module):
         return z
 
     def basic_net(self, y, bound_multiplier=1):
+        '''
         y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.encoder(y)
         
@@ -552,6 +553,8 @@ class Viewmaker4(torch.nn.Module):
         z = self.reparametrize(mu, logvar)
         
         out = self.decoder(z)
+        '''
+        y = self.enc1(y)
         return out
     
     def get_delta(self, y_pixels, eps=1e-4):

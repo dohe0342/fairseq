@@ -476,21 +476,21 @@ class Viewmaker4(torch.nn.Module):
         self.enc2 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc3 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc4 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc5 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc6 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc4 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc5 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc6 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc7 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc8 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc9 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc7 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc8 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc9 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc10 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc11 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc12 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc10 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc11 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc12 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         
-        self.enc13 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc14 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
-        self.enc15 = fclayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc13 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc14 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc15 = FClayer(self.num_channels, self.num_channels)                   ## 512 -> 512
 
     def reparametrize(self, mu, logvar):
         std = logvar.mul(0.5).exp_()

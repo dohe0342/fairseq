@@ -1926,6 +1926,10 @@ class ViewMaker3(BaseFairseqModel):
         self.enc7 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc8 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
         self.enc9 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        
+        self.enc10 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc11 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
+        self.enc12 = FCLayer(self.num_channels, self.num_channels)                   ## 512 -> 512
 
     def add_noise_channel(self, x, num=1, bound_multiplier=1):
         # bound_multiplier is a scalar or a 1D tensor of length batch_size

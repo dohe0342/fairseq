@@ -1951,6 +1951,9 @@ class ViewMaker3(BaseFairseqModel):
         y = self.enc7(y)
         y = self.enc8(y)
         y = self.enc9(y)
+        y = self.enc10(y)
+        y = self.enc11(y)
+        y = self.enc12(y)
         return y
     
     def basic_net(self, y, bound_multiplier=1):

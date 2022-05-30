@@ -564,7 +564,7 @@ class Viewmaker4(torch.nn.Module):
         y = self.enc8(y)
         y = self.enc9(y)
         #y = self.enc1(y)
-        return out
+        return y
     
     def get_delta(self, y_pixels, eps=1e-4):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''

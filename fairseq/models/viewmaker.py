@@ -563,6 +563,9 @@ class Viewmaker4(torch.nn.Module):
         y = self.enc7(y)
         y = self.enc8(y)
         y = self.enc9(y)
+        y = self.enc10(y)
+        y = self.enc11(y)
+        y = self.enc12(y)
         #y = self.enc1(y)
         return y
     

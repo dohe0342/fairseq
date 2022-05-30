@@ -566,7 +566,8 @@ class UpsampleConvLayer(torch.nn.Module):
 
 
 if __name__ == '__main__':
-    summary(Viewmaker3().to('cuda'), torch.zeros((5,200,512)).to('cuda'))
+    summary(Viewmaker2().to('cuda'), torch.zeros((1,512,1)).to('cuda'))
+    summary(Viewmaker3().to('cuda'), torch.zeros((1,1,512)).to('cuda'))
     '''
     viewmaker = Viewmaker2().to('cuda')
     optim = torch.optim.Adam(viewmaker.parameters(), lr=0.001)

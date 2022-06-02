@@ -2072,7 +2072,7 @@ class ViewMaker4(BaseFairseqModel):
         self.in15 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv16 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels/4)
+                kernel_size=2, stride=1, groups=self.group_size)
         self.in16 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
 
         # Residual layers have +N for added random channels

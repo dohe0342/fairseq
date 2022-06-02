@@ -2121,7 +2121,7 @@ class ViewMaker4(BaseFairseqModel):
             y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
         y = self.act(self.in1(self.conv1(y, pad=True)))
         y = self.act(self.in2(self.conv2(y, pad=True)))
-        y = self.act(self.in3(self.conv3(y)))
+        y = self.act(self.in3(self.conv3(y, pad=True)))
         y = self.act(self.in4(self.conv4(y, pad=True)))
 
         # Features that could be useful for other auxilary layers / losses.

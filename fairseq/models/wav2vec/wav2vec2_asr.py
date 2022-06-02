@@ -2013,15 +2013,22 @@ class ViewMaker4(BaseFairseqModel):
         self.conv1 = ConvLayer2(self.num_channels + self.num_noise, \
                 self.num_channels, kernel_size=2, stride=1, groups=self.num_channels+self.num_noise)
         self.in1 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
+        
         self.conv2 = ConvLayer2(self.num_channels, self.num_channels, \
                 kernel_size=2, stride=1, groups=self.num_channels)
         self.in2 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
+        
         self.conv3 = ConvLayer2(self.num_channels, self.num_channels, \
                 kernel_size=2, stride=1, groups=self.num_channels)
         self.in3 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
+        
         self.conv4 = ConvLayer2(self.num_channels, self.num_channels, \
                 kernel_size=2, stride=1, groups=self.num_channels)
         self.in4 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
+        
+        self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
+        self.conv6 = ConvLayer2(self.num_channels, self.num_channels, \
+                kernel_size=2, stride=1, groups=self.num_channels)
 
         # Residual layers have +N for added random channels
         if not self.num_noise:
@@ -2040,10 +2047,6 @@ class ViewMaker4(BaseFairseqModel):
             self.res5 = ResidualBlock2(self.num_channels)
             self.conv5 = ConvLayer2(self.num_channels, \
                 self.num_channels, kernel_size=2, stride=1)
-
-        self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
-        self.conv6 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
 
     @staticmethod
     def zero_init(m):

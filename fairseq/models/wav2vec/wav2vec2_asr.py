@@ -2139,7 +2139,7 @@ class ViewMaker4(BaseFairseqModel):
         y = self.act(self.in6(self.conv6(y, pad=True)))
         
         y = self.act(self.in7(self.conv7(y)))
-        y = self.act(self.in8(self.conv8(y)))
+        y = self.act(self.in8(self.conv8(y, pad=True)))
         
         '''
         y = self.act(self.in9(self.conv9(y)))

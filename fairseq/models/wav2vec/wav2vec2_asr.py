@@ -2011,7 +2011,7 @@ class ViewMaker4(BaseFairseqModel):
 
         # Initial convolution layers (+ 1 for noise filter)
         self.conv1 = ConvLayer2(self.num_channels + self.num_noise, \
-                self.num_channels, kernel_size=2, stride=1, groups=self.num_channels+self.num_noise/4)
+                self.num_channels, kernel_size=2, stride=1, groups=(self.num_channels+self.num_noise)/4)
         self.in1 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv2 = ConvLayer2(self.num_channels, self.num_channels, \

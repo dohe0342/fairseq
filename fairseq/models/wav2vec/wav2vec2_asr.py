@@ -2170,7 +2170,7 @@ class FCLayer(torch.nn.Module):
 
 
 class ConvLayer2(torch.nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride=1):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1, groups=1):
         super(ConvLayer2, self).__init__()
         reflection_padding = kernel_size // 2
         self.reflection_pad = torch.nn.ReflectionPad1d(reflection_padding)

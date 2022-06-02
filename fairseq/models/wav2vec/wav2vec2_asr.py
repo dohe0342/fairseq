@@ -2119,10 +2119,10 @@ class ViewMaker4(BaseFairseqModel):
     def basic_net(self, y, num_res_blocks=3, bound_multiplier=1):
         if self.num_noise:
             y = self.add_noise_channel(y, num=self.num_noise, bound_multiplier=bound_multiplier)
-        y = self.act(self.in1(self.conv1(y, pad=True)))
-        y = self.act(self.in2(self.conv2(y)))
-        y = self.act(self.in3(self.conv3(y, pad=True)))
-        y = self.act(self.in4(self.conv4(y)))
+        y = self.act(self.in1(self.conv1(y)))
+        y = self.act(self.in2(self.conv2(y, pad=True)))
+        y = self.act(self.in3(self.conv3(y)))
+        y = self.act(self.in4(self.conv4(y, pad=True)))
 
         # Features that could be useful for other auxilary layers / losses.
         # [batch_size, 128]
@@ -2139,7 +2139,7 @@ class ViewMaker4(BaseFairseqModel):
         y = self.act(self.in6(self.conv6(y, pad=True)))
         
         y = self.act(self.in7(self.conv7(y)))
-        y = self.act(self.in8(self.conv8(y, pad=True)))
+        y = self.act(self.in8(self.conv8(y)))
         
         '''
         y = self.act(self.in9(self.conv9(y)))

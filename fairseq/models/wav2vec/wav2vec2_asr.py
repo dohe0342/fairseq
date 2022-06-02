@@ -2137,6 +2137,12 @@ class ViewMaker4(BaseFairseqModel):
         y = self.act(self.in5(self.conv5(y)))
         y = self.act(self.in6(self.conv6(y, pad=True)))
         
+        y = self.act(self.in7(self.conv7(y)))
+        y = self.act(self.in8(self.conv8(y, pad=True)))
+        
+        y = self.act(self.in9(self.conv9(y)))
+        y = self.act(self.in10(self.conv10(y, pad=True)))
+
         return y, features
 
     def get_delta(self, y_pixels, eps=1e-4):

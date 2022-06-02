@@ -2008,6 +2008,7 @@ class ViewMaker4(BaseFairseqModel):
         self.distortion_budget = distortion_budget
         self.num_noise = num_noise
         self.act = ACTIVATIONS[activation]()
+        group_size = int(self.num_channels/4)
 
         # Initial convolution layers (+ 1 for noise filter)
         self.conv1 = ConvLayer2(self.num_channels + self.num_noise, \

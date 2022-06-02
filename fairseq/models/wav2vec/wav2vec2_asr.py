@@ -2153,7 +2153,7 @@ class ViewMaker4(BaseFairseqModel):
         
         y = self.act(self.in15(self.conv15(y)))
         '''
-        y = self.conv16(y, pad=True)
+        y = self.conv16(y)
 
         return y, features
 

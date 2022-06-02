@@ -2060,7 +2060,7 @@ class ViewMaker4(BaseFairseqModel):
         self.in12 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv13 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.group_size)
         self.in13 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv14 = ConvLayer2(self.num_channels, self.num_channels, \

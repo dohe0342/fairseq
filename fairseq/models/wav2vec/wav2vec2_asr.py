@@ -2011,51 +2011,51 @@ class ViewMaker4(BaseFairseqModel):
 
         # Initial convolution layers (+ 1 for noise filter)
         self.conv1 = ConvLayer2(self.num_channels + self.num_noise, \
-                self.num_channels, kernel_size=2, stride=1, groups=self.num_channels+self.num_noise)
+                self.num_channels, kernel_size=2, stride=1, groups=self.num_channels+self.num_noise/4)
         self.in1 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv2 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in2 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv3 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in3 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv4 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in4 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv5 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv6 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in6 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv7 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in7 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv8 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in8 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv9 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in9 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv10 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in10 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv11 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in11 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv12 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in12 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv13 = ConvLayer2(self.num_channels, self.num_channels, \
@@ -2071,7 +2071,7 @@ class ViewMaker4(BaseFairseqModel):
         self.in15 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
         
         self.conv16 = ConvLayer2(self.num_channels, self.num_channels, \
-                kernel_size=2, stride=1, groups=self.num_channels)
+                kernel_size=2, stride=1, groups=self.num_channels/4)
         self.in16 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
 
         # Residual layers have +N for added random channels

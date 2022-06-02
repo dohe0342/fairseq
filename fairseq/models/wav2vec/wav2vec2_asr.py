@@ -2150,9 +2150,9 @@ class ViewMaker4(BaseFairseqModel):
         
         y = self.act(self.in13(self.conv13(y)))
         y = self.act(self.in14(self.conv14(y, pad=True)))
-        
-        y = self.act(self.in15(self.conv15(y)))
         '''
+
+        y = self.act(self.in15(self.conv15(y)))
         y = self.conv16(y)
         print(y.size())
 

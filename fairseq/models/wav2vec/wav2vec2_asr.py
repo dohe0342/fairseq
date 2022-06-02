@@ -2042,7 +2042,8 @@ class ViewMaker4(BaseFairseqModel):
                 self.num_channels, kernel_size=2, stride=1)
 
         self.ins5 = torch.nn.InstanceNorm1d(self.num_channels, affine=True)
-        self.conv6 = ConvLayer2(self.num_channels, self.num_channels, kernel_size=2, stride=1)
+        self.conv6 = ConvLayer2(self.num_channels, self.num_channels, \
+                kernel_size=2, stride=1, groups=self.num_channels)
 
     @staticmethod
     def zero_init(m):

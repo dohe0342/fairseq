@@ -12,7 +12,8 @@ do
 	first=$i
 	last=$($($i+1)*5)
 	
-	echo $first $last
+	echo $first
+	echo $last
 
 	#subset="test-clean_
 	echo "====================   $model // $subset   ===================="

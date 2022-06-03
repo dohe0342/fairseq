@@ -13,7 +13,7 @@ do
 	
 	$num1 = 1
 	$num2 = 5
-	last=$($($i+$num1)*$num2)
+	last=$($($i + $num1) * $num2)
 	echo $first $last
 
 	#subset="test-clean_

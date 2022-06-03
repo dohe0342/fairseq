@@ -9,13 +9,10 @@ model=$1
 #for subset in "it_was2"
 for i in {0..19}
 do
-	first=$i
+	let first=$i*5
 	let last=($i+1)*5
 	
-	echo $first
-	echo $last
-
-	#subset="test-clean_
+	subset=test-clean_"$first"to"$last"
 	echo "====================   $model // $subset   ===================="
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /workspace/fairseq/examples/speech_recognition/new/conf \

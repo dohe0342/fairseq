@@ -10,7 +10,10 @@ model=$1
 for i in {0..19}
 do
 	first=$i
-	last=$($($i+1)*5)
+	
+	$num1 = 1
+	$num2 = 5
+	last=$($($i+$num1)*$num2)
 	echo $first $last
 
 	#subset="test-clean_

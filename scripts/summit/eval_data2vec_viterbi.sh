@@ -10,7 +10,7 @@ model=$1
 for i in {0..19}
 do
 	first=$i
-	last=expr($i+1)
+	let last=$($($i+1)*5)
 	
 	echo $first
 	echo $last

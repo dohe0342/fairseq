@@ -11,8 +11,8 @@ for i in {0..19}
 do
 	first=$i
 	
-	$num1 = 1
-	$num2 = 5
+	$num1=1
+	$num2=5
 	last=$($($i + $num1) * $num2)
 	echo $first $last
 

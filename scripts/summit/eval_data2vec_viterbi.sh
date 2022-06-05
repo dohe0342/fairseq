@@ -9,7 +9,7 @@ model=$1
 #for subset in "it_was2"
 for model in "wav2vec_big_100h.pt" "wav2vec_big_960.pt" "wav2vec_vox_100h_new.pt" "wav2vec_vox_960h_new.pt"
 do
-	for i in {0..19}
+	for i in {0..17}
 	do
 		let first=$i*5
 		let last=($i+1)*5

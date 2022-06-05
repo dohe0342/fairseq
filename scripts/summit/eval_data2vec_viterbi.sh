@@ -7,7 +7,7 @@ model=$1
 #for subset in "train-960" #"dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "train-100" "train-360" "train-500" ##"dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "it_was2"
-for model in "wav2vec_big_100h.pt" "wav2vec_big_960.pt" "wav2vec_vox_100h_new.pt" "wav2vec_vox_960h_new.pt"
+for model in "wav2vec_big_100h.pt" "wav2vec_big_960.pt" #"wav2vec_vox_100h_new.pt" "wav2vec_vox_960h_new.pt"
 do
 	for i in {0..17}
 	do

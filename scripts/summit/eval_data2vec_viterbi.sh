@@ -12,7 +12,7 @@ do
 	let first=$i*5
 	let last=($i+1)*5
 	
-	subset=test-clean_"$first"to"$last"
+	subset=test-other_"$first"to"$last"
 	echo "====================   $model // $subset   ===================="
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /workspace/fairseq/examples/speech_recognition/new/conf \

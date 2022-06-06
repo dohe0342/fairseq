@@ -1875,7 +1875,7 @@ class ViewMaker2(BaseFairseqModel):
         delta = delta * max_magnitude / (avg_magnitude + eps)
         return delta
 
-    def forward(self, x, padding_mask):
+    def forward(self, x, padding_mask=None):
         out = self.basic_net(x, bound_multiplier=1)
         delta = self.get_delta(out)
         

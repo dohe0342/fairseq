@@ -12,7 +12,9 @@ for line in infer_log:
     if 'REF' in line:
         ref_list.append(line[49:].replace('\n', ''))
 
-for hypo, ref in zip(hypo_list, ref_list):
-    print(hypo)
-    print(ref)
-    print('')
+#for hypo, ref in zip(hypo_list, ref_list):
+#    print(hypo)
+#    print(ref)
+#    print('')
+print(len(hypo_list))
+print(len(ref_list))

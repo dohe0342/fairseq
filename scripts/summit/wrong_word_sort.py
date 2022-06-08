@@ -8,7 +8,7 @@ ref_list = []
 
 for line in infer_log:
     if 'HYPO' in line:
-        hypo_list.append(line[44:].replace('\n', ''))
+        hypo_list.append(line[50:].replace('\n', ''))
     if 'REF' in line:
         ref_list.append(line[49:].replace('\n', ''))
 

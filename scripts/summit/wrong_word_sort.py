@@ -32,7 +32,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
         try: wrong_dict[(r, h)] += 1
-        except: wrong_dict[(r, h)] = 0
+        except: wrong_dict[(r, h)] = 1
     '''
     if len(hypo) != len(ref):
         d = editDistance(hypo, ref)

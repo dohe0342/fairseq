@@ -19,11 +19,8 @@ aligned_list = []
 wrong_dict = {}
 
 for hypo, ref in zip(hypo_list, ref_list):
-    print(hypo)
-    print(ref)
-    exit()
-    hypo = hypo.split(' ')
-    ref = ref.split(' ')
+    hypo = hypo.split()
+    ref = ref.split()
     
     d = editDistance(hypo, ref)
     aligned = getStepList(hypo, ref, d)

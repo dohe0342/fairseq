@@ -200,6 +200,6 @@ if __name__ == '__main__':
     with open(filename2, 'r', encoding="utf8") as hyp:
         h = hyp.read().split()
     '''
-    hypo = "wadiz it".split()
-    ref = "what is it".split()
+    h = "wadiz it".split()
+    r = "what is it".split()
     wer(r, h)

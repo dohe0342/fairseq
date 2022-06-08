@@ -29,7 +29,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     #except: count += 1
     alignedPrint(aligned, hypo, ref)
 
-    print('\n\n')
+    print('\n')
 
     
     '''

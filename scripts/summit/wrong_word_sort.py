@@ -30,11 +30,8 @@ for hypo, ref in zip(hypo_list, ref_list):
     #print(ref)
     #exit()
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
-    print('\n')
-    print(ref_s, hypo_s)
-    print('\n')
-    exit()
-
+    if len(ref_s) != len(hypo_s):
+        print('fuck!!!!!!!!!!!!!!!!!!')
     
     '''
     if len(hypo) != len(ref):

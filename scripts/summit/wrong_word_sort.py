@@ -22,9 +22,9 @@ for hypo, ref in zip(hypo_list, ref_list):
     #print(ref)
     #print('')
     if len(hypo) != len(ref):
-        #print(hypo)
-        #print(ref)
-        #print('')
+        print(hypo)
+        print(ref)
+        print('')
         count += 1
     else:
         for h, r in zip(hypo, ref):

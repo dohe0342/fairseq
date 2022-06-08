@@ -19,6 +19,9 @@ aligned_list = []
 wrong_dict = {}
 
 for hypo, ref in zip(hypo_list, ref_list):
+    print(hypo)
+    print(ref)
+    exit()
     hypo = hypo.split(' ')
     ref = ref.split(' ')
     

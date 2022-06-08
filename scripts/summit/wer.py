@@ -200,8 +200,8 @@ if __name__ == '__main__':
     with open(filename2, 'r', encoding="utf8") as hyp:
         h = hyp.read().split()
     '''
-    h = "wadiz it".split()
-    r = "what is it".split()
-    print(h)
-    print(r)
+    #h = "wadiz it".split()
+    #r = "what is it".split()
+    h = 'WIL YOUO FOR GIVE ME NOW'.split()
+    r = 'WILL YOU WORGIVE ME NOW'.split()
     wer(r, h)

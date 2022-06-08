@@ -32,6 +32,6 @@ for hypo, ref in zip(hypo_list, ref_list):
                 try: wrong_dict[(h, r)] += 1
                 except: wrong_dict[(h, r)] = 0
 
-wrong_dict = sorted(wrong_dict.items(), key=labmda x:x[1], reverse=False)
+wrong_dict = sorted(wrong_dict.items(), key=lambda x:x[1], reverse=False)
 for pair, count in wrong_dict:
     print(pair, count)

@@ -23,7 +23,8 @@ for hypo, ref in zip(hypo_list, ref_list):
     
     d = editDistance(hypo, ref)
     aligned_list.append(getStepList(hypo, ref, d))
-    print(len(getStepList(hypo, ref, d)), len(hypo))
+    if len(getStepList(hypo, ref, d)) != len(hypo):
+        print(hypo)
     
     '''
     if len(hypo) != len(ref):

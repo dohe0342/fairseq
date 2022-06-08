@@ -1,5 +1,6 @@
 import os
 import glob
+from wer import getStepList
 
 infer_log = open('./None/test-clean/infer.log', 'r').readlines()
 
@@ -14,6 +15,7 @@ for line in infer_log:
 
 
 count = 0
+aligned_list = []
 wrong_dict = {}
 for hypo, ref in zip(hypo_list, ref_list):
     hypo = hypo.split(' ')
@@ -22,10 +24,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     #print(ref)
     #print('')
     if len(hypo) != len(ref):
-        print(hypo)
-        print(ref)
-        print('')
-        count += 1
+        aligned_list.append(getStepList(hypo, ref))
     else:
         for h, r in zip(hypo, ref):
             if h != r:

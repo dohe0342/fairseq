@@ -202,4 +202,6 @@ if __name__ == '__main__':
     '''
     h = "wadiz it".split()
     r = "what is it".split()
+    print(h)
+    print(r)
     wer(r, h)

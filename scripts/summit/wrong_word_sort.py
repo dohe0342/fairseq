@@ -12,17 +12,26 @@ for line in infer_log:
     if 'REF:' in line:
         ref_list.append(line[49:].replace('\n', ''))
 
+
 count = 0
+wrong_dict = {}
 for hypo, ref in zip(hypo_list, ref_list):
+    hypo = hypo.split(' ')
+    ref = ref.split(' ')
     #print(hypo)
     #print(ref)
     #print('')
     if len(hypo.split(' ')) != len(ref.split(' ')):
-        print(hypo)
-        print(ref)
-        print('')
+        #print(hypo)
+        #print(ref)
+        #print('')
         count += 1
+    else:
+        for h, r in zip(hypo, ref):
+            if h != r:
+                try: wrong_dict[(h, r)] += 1
+                except: wrong_dict[(h, r)] = 0
 
-print(count)
-#print(len(hypo_list))
-#print(len(ref_list))
+wrong_dict = sorted(wrong_dict.items(), key=x:x[1], reverse=False)
+for pair, count in wrong_dict:
+    print(pair, count)

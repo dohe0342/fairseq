@@ -17,13 +17,16 @@ for line in infer_log:
 count = 0
 aligned_list = []
 wrong_dict = {}
+
 for hypo, ref in zip(hypo_list, ref_list):
     hypo = hypo.split(' ')
     ref = ref.split(' ')
     
     d = editDistance(hypo, ref)
-    aligned_list.append(getStepList(hypo, ref, d))
-    if len(getStepList(hypo, ref, d)) != len(hypo):
+    aligned = getStepList(hypo, ref, d)
+    aligned_list.append(aligned)
+    
+    if len(aligned) != len(hypo):
         print(hypo)
     
     '''

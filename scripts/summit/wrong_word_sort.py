@@ -27,6 +27,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     aligned_list.append(aligned)
     print(ref)
     print(hypo)
+    exit()
     #alignedPrint(aligned, ref, hypo)
     #print('\n\n')
 

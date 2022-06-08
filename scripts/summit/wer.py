@@ -63,7 +63,7 @@ def getStepList(r, h, d):
             y = y
     return list[::-1]
 
-def alignedPrint(list, r, h, result):
+def alignedPrint(list, r, h)#, result):
     '''
     This funcition is to print the result of comparing reference and hypothesis sentences in an aligned way.
     

@@ -29,8 +29,11 @@ for hypo, ref in zip(hypo_list, ref_list):
     #except: count+=1 #print(' '.join(hypo), '\n\n', ' '.join(ref))
     #print(ref)
     #exit()
-    alignedPrint(aligned, ref, hypo)
+    ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     print('\n')
+    print(ref_s, hypo_s)
+    print('\n')
+    exit()
 
     
     '''

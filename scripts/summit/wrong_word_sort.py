@@ -13,3 +13,4 @@ for line in infer_log:
         ref_list.append(line[44:].replace('\n', ''))
 
 print(hypo_list)
+print(ref_list)

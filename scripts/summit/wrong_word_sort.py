@@ -25,9 +25,9 @@ for hypo, ref in zip(hypo_list, ref_list):
     d = editDistance(hypo, ref)
     aligned = getStepList(hypo, ref, d)
     aligned_list.append(aligned)
-    #try: alignedPrint(aligned, ref, hypo)
-    #except: count += 1
-    alignedPrint(aligned, hypo, ref)
+    try: alignedPrint(aligned, ref, hypo)
+    except: print(hypo, ref)
+    #alignedPrint(aligned, hypo, ref)
 
     print('\n')
 

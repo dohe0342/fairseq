@@ -12,6 +12,7 @@ for line in infer_log:
     if 'REF:' in line:
         ref_list.append(line[49:].replace('\n', ''))
 
+count = 0
 for hypo, ref in zip(hypo_list, ref_list):
     #print(hypo)
     #print(ref)
@@ -20,5 +21,8 @@ for hypo, ref in zip(hypo_list, ref_list):
         print(hypo)
         print(ref)
         print('')
+        count += 1
+
+print(count)
 #print(len(hypo_list))
 #print(len(ref_list))

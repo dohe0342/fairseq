@@ -42,7 +42,6 @@ for hypo, ref in zip(hypo_list, ref_list):
                 try: wrong_dict[(h, r)] += 1
                 except: wrong_dict[(h, r)] = 0
     '''
-print(count)
 #print(aligned_list)
 exit()
 wrong_dict = sorted(wrong_dict.items(), key=lambda x:x[1], reverse=False)

@@ -12,4 +12,4 @@ for line in infer_log:
     if 'REF' in line:
         ref_list.append(line)
 
-print(line)
+print(hypo_list)

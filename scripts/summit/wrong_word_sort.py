@@ -20,9 +20,11 @@ wrong_dict = {}
 for hypo, ref in zip(hypo_list, ref_list):
     hypo = hypo.split(' ')
     ref = ref.split(' ')
-    #print(hypo)
-    #print(ref)
-    #print('')
+    
+    d = editDistance(hypo, ref)
+    aligned_list.append(getStepList(hypo, ref, d))
+    
+    '''
     if len(hypo) != len(ref):
         d = editDistance(hypo, ref)
         aligned_list.append(getStepList(hypo, ref, d))
@@ -31,6 +33,7 @@ for hypo, ref in zip(hypo_list, ref_list):
             if h != r:
                 try: wrong_dict[(h, r)] += 1
                 except: wrong_dict[(h, r)] = 0
+    '''
 
 print(aligned_list)
 exit()

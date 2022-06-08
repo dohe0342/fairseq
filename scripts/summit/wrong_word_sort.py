@@ -14,3 +14,4 @@ for line in infer_log:
 
 for hypo, ref in zip(hypo_list, ref_list):
     print(hypo, ref)
+    print('')

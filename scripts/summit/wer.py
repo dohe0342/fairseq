@@ -76,7 +76,7 @@ def alignedPrint(list, r, h):#, result):
     ref_list = []
     hypo_list = []
 
-    print("REF:", end=" ")
+    #print("REF:", end=" ")
     for i in range(len(list)):
         if list[i] == "i":
             count = 0
@@ -84,7 +84,7 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "d":
                     count += 1
             index = i - count
-            print(" "*(len(h[index])), end=" ")
+            #print(" "*(len(h[index])), end=" ")
         elif list[i] == "s":
             count1 = 0
             for j in range(i):
@@ -96,10 +96,12 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "d":
                     count2 += 1
             index2 = i - count2
+            '''
             if len(r[index1]) < len(h[index2]):
                 print(r[index1] + " " * (len(h[index2])-len(r[index1])), end=" ")
             else:
-                print(r[index1], end=" "),
+                print(r[index1], end=" ")
+            '''
             ref_list.append(r[index1])
         else:
             count = 0
@@ -107,8 +109,8 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "i":
                     count += 1
             index = i - count
-            print(r[index], end=" "),
-    print("\nHYP:", end=" ")
+            #print(r[index], end=" ")
+    #print("\nHYP:", end=" ")
     for i in range(len(list)):
         if list[i] == "d":
             count = 0
@@ -116,7 +118,7 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "i":
                     count += 1
             index = i - count
-            print(" " * (len(r[index])), end=" ")
+            #print(" " * (len(r[index])), end=" ")
         elif list[i] == "s":
             count1 = 0
             for j in range(i):
@@ -128,10 +130,12 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "d":
                     count2 += 1
             index2 = i - count2
+            '''
             if len(r[index1]) > len(h[index2]):
                 print(h[index2] + " " * (len(r[index1])-len(h[index2])), end=" ")
             else:
                 print(h[index2], end=" ")
+            '''
             hypo_list.append(h[index2])
         else:
             count = 0
@@ -139,8 +143,8 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "d":
                     count += 1
             index = i - count
-            print(h[index], end=" ")
-    print("\nEVA:", end=" ")
+            #print(h[index], end=" ")
+    #print("\nEVA:", end=" ")
     for i in range(len(list)):
         if list[i] == "d":
             count = 0
@@ -148,14 +152,14 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "i":
                     count += 1
             index = i - count
-            print("D" + " " * (len(r[index])-1), end=" ")
+            #print("D" + " " * (len(r[index])-1), end=" ")
         elif list[i] == "i":
             count = 0
             for j in range(i):
                 if list[j] == "d":
                     count += 1
             index = i - count
-            print("I" + " " * (len(h[index])-1), end=" ")
+            #print("I" + " " * (len(h[index])-1), end=" ")
         elif list[i] == "s":
             count1 = 0
             for j in range(i):
@@ -167,17 +171,19 @@ def alignedPrint(list, r, h):#, result):
                 if list[j] == "d":
                     count2 += 1
             index2 = i - count2
+            '''
             if len(r[index1]) > len(h[index2]):
                 print("S" + " " * (len(r[index1])-1), end=" ")
             else:
                 print("S" + " " * (len(h[index2])-1), end=" ")
+            '''
         else:
             count = 0
             for j in range(i):
                 if list[j] == "i":
                     count += 1
             index = i - count
-            print(" " * (len(r[index])), end=" ")
+            #print(" " * (len(r[index])), end=" ")
 
     return ref_list, hypo_list
     #print("\nWER: " + result)

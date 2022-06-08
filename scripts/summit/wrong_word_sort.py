@@ -1,8 +1,9 @@
 import os
 import glob
+import sys
 from wer import editDistance, getStepList, alignedPrint
 
-infer_log = open('./None/wav2vec_vox_10m/test-clean/infer.log', 'r').readlines()
+infer_log = open(f'./None/{sys.argv[1]}/test-clean/infer.log', 'r').readlines()
 
 hypo_list = []
 ref_list = []

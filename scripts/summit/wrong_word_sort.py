@@ -14,4 +14,4 @@ for line in infer_log:
 
 print(hypo_list)
 print('\n\n\n')
-print(ref_list)
+#print(ref_list)

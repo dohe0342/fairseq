@@ -25,7 +25,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     d = editDistance(hypo, ref)
     aligned = getStepList(hypo, ref, d)
     aligned_list.append(aligned)
-    alignedPrint(aligned, ref, hypo)
+    alignedPrint(aligned, hypo, ref)
 
 
     

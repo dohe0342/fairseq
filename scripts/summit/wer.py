@@ -178,6 +178,8 @@ def alignedPrint(list, r, h):#, result):
                     count += 1
             index = i - count
             print(" " * (len(r[index])), end=" ")
+
+    return ref_list, hypo_list
     #print("\nWER: " + result)
 
 def wer(r, h):

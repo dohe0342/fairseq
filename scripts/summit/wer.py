@@ -173,7 +173,7 @@ def alignedPrint(list, r, h, result):
                     count += 1
             index = i - count
             print(" " * (len(r[index])), end=" ")
-    print("\nWER: " + result)
+    #print("\nWER: " + result)
 
 def wer(r, h):
     """

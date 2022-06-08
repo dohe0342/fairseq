@@ -185,6 +185,7 @@ def wer(r, h):
 
     # find out the manipulation steps
     list = getStepList(r, h, d)
+    print(list)
 
     # print the result in aligned way
     result = float(d[len(r)][len(h)]) / len(r) * 100

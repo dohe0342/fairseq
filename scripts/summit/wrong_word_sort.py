@@ -1,6 +1,6 @@
 import os
 import glob
-from wer import getStepList
+from wer import editDistance, getStepList
 
 infer_log = open('./None/test-clean/infer.log', 'r').readlines()
 
@@ -24,6 +24,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     #print(ref)
     #print('')
     if len(hypo) != len(ref):
+        d = editDistance(hypo, ref)
         aligned_list.append(getStepList(hypo, ref))
     else:
         for h, r in zip(hypo, ref):

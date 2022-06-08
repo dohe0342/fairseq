@@ -1,6 +1,6 @@
 git pull
 source ~/.bashrc
-model_=$1
+model=$1
 
 #for subset in "test" "test2" #"dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "dev-clean" "dev-other" "test-clean" "test-other"

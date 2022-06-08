@@ -192,10 +192,14 @@ def wer(r, h):
     alignedPrint(list, r, h, result)
 
 if __name__ == '__main__':
+    '''
     filename1 = sys.argv[1]
     filename2 = sys.argv[2]
     with open(filename1, 'r', encoding="utf8") as ref:
         r = ref.read().split()
     with open(filename2, 'r', encoding="utf8") as hyp:
         h = hyp.read().split()
-    wer(r, h)   
+    '''
+    hypo = "wadiz it".split()
+    ref = "what is it".split()
+    wer(r, h)

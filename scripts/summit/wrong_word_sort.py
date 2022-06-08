@@ -26,7 +26,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     aligned = getStepList(hypo, ref, d)
     aligned_list.append(aligned)
     try: alignedPrint(aligned, ref, hypo)
-    except: print(' '.join(hypo), '\n\n;, ' '.join(ref))
+    except: print(' '.join(hypo), '\n\n', ' '.join(ref))
     #alignedPrint(aligned, hypo, ref)
 
     print('\n')

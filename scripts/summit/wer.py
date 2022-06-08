@@ -132,6 +132,7 @@ def alignedPrint(list, r, h):#, result):
                 print(h[index2] + " " * (len(r[index1])-len(h[index2])), end=" ")
             else:
                 print(h[index2], end=" ")
+            hypo_list.append(h[index2])
         else:
             count = 0
             for j in range(i):

@@ -46,4 +46,4 @@ for hypo, ref in zip(hypo_list, ref_list):
 #print(aligned_list)
 wrong_dict = sorted(wrong_dict.items(), key=lambda x:x[1], reverse=True)
 for pair, count in wrong_dict:
-    print(pair, count)
+    print(pair[0], pair[1], count)

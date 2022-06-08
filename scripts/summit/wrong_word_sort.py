@@ -44,7 +44,6 @@ for hypo, ref in zip(hypo_list, ref_list):
                 except: wrong_dict[(h, r)] = 0
     '''
 #print(aligned_list)
-exit()
 wrong_dict = sorted(wrong_dict.items(), key=lambda x:x[1], reverse=False)
 for pair, count in wrong_dict:
     print(pair, count)

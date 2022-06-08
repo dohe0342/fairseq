@@ -203,5 +203,5 @@ if __name__ == '__main__':
     #h = "wadiz it".split()
     #r = "what is it".split()
     h = 'WIL YOUO FOR GIVE ME NOW'.split()
-    r = 'WILL YOU WORGIVE ME NOW'.split()
+    r = 'WILL YOU FORGIVE ME NOW'.split()
     wer(r, h)

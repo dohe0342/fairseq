@@ -23,7 +23,7 @@ for hypo, ref in zip(hypo_list, ref_list):
     ref = ref.split()
     
     d = editDistance(ref, hypo)
-    aligned = getStepList(hypo, ref, d)
+    aligned = getStepList(ref, hypo, d)
     aligned_list.append(aligned)
     #try: alignedPrint(aligned, ref, hypo)
     #except: count+=1 #print(' '.join(hypo), '\n\n', ' '.join(ref))

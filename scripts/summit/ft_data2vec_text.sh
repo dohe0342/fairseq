@@ -1,3 +1,4 @@
+git pull
 fairseq-hydra-train \
 	--config-dir /workspace/fairseq/examples/roberta/config/finetuning \
 	--config-name rte \

@@ -817,6 +817,7 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
             src_tokens,
             return_all_hiddens=return_all_hiddens,
             token_embeddings=kwargs.get("token_embeddings", None),
+            viewmaker=viewmaker
         )
         # T x B x C -> B x T x C
         features = encoder_out["encoder_out"][0].transpose(0, 1)

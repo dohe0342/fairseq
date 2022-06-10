@@ -222,6 +222,7 @@ class TransformerEncoderBase(FairseqEncoder):
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
         if viewmaker is not None:
+            print('x size = ', x.size())
             x_newview = x_newview.transpose(0, 1)
             x = torch.cat((x, x_newview), 1)
 

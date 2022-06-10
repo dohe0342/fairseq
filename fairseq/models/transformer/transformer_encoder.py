@@ -212,7 +212,8 @@ class TransformerEncoderBase(FairseqEncoder):
         # account for padding while computing the representation
         if has_pads:
             x = x * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x))
-
+        
+        loss = None
         if viewmaker is not None:
             criterion = torch.nn.MSELoss(reduction='mean')
             x_newview, delta = viewmaker(x, None)

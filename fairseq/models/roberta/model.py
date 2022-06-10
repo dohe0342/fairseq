@@ -805,6 +805,10 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
         if not features_only:
             x = self.output_layer(x, masked_tokens=masked_tokens)
             #x_newview = self.output_layer(x_newview, masked_tokens=maksed_tokens)
+        
+        b, _, _ = x.size()
+        x_newview = x[int(b/2):,:,:]
+        x = x[:int(b/2),:,:]
 
         return (x, x_newview), (extra, loss)
 

@@ -1242,19 +1242,19 @@ class Trainer(object):
 
         # gather logging outputs from all replicas
         if self.data_parallel_world_size > 1:
-            if extra_kwargs["uses_branch_v1"]: 
-                for i in range(len(logging_outputs)):
-                    [logging_outputs[i]], (sample_size,) = self._aggregate_logging_outputs(
-                            [logging_outputs[i]],
-                            sample_size,
-                            ignore=is_dummy_batch,
-                        )
-            else:
-                logging_outputs, (sample_size,) = self._aggregate_logging_outputs(
-                    logging_outputs,
-                    sample_size,
-                    ignore=is_dummy_batch,
-                )
+            #if extra_kwargs["uses_branch_v1"]: 
+            #    for i in range(len(logging_outputs)):
+            #        [logging_outputs[i]], (sample_size,) = self._aggregate_logging_outputs(
+            #                [logging_outputs[i]],
+            #                sample_size,
+            #                ignore=is_dummy_batch,
+            #            )
+            #else:
+            logging_outputs, (sample_size,) = self._aggregate_logging_outputs(
+                logging_outputs,
+                sample_size,
+                ignore=is_dummy_batch,
+            )
 
         # log validation stats
         if self.tpu:

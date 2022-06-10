@@ -221,8 +221,8 @@ class TransformerEncoderBase(FairseqEncoder):
             x_ori = x.clone().reshape(-1, 768).detach()
 
             batch = x_ori.size()[0]
-            print(encoder_padding_mask)
-            loss = criterion(x_newview.reshape(-1, 768), x_ori)
+            for b in range(batch):
+                loss += criterion(x_newview.reshape(-1, 768), x_ori)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)

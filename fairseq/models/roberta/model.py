@@ -794,7 +794,7 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
                   is a list of hidden states. Note that the hidden
                   states have shape `(src_len, batch, vocab)`.
         """
-        x, extra = self.extract_features(
+        x, extra, loss = self.extract_features(
             src_tokens, return_all_hiddens=return_all_hiddens, viewmaker=self.viewmaker
         )
         

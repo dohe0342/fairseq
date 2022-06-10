@@ -611,7 +611,7 @@ class FairseqTask(object):
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 25:viewmaker-large
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## try25 try 26 try 27
                     #optimizer[1].backward(lambda_*(loss[0][1])+loss[1])
-                    #optimizer[1].backward(loss[1])
+                    optimizer[1].backward(loss[1])
             '''
             model.train()
             model.set_num_updates(update_num)

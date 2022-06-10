@@ -655,6 +655,8 @@ class RobertaEncoderViewMaker(FairseqEncoder):
             ),
         )
 
+        self.viewmaker = ViewMaker1()
+
     def build_embedding(self, vocab_size, embedding_dim, padding_idx):
         return nn.Embedding(vocab_size, embedding_dim, padding_idx)
 
@@ -690,7 +692,6 @@ class RobertaEncoderViewMaker(FairseqEncoder):
                   is a list of hidden states. Note that the hidden
                   states have shape `(src_len, batch, vocab)`.
         """
-        print(src_tokens[0])
         x, extra = self.extract_features(
             src_tokens, return_all_hiddens=return_all_hiddens
         )

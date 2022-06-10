@@ -822,7 +822,7 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
         features = encoder_out["encoder_out"][0].transpose(0, 1)
         inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
         
-        return features, {"inner_states": inner_states}
+        return features, {"inner_states": inner_states}, encoder_out["loss"]
 
     def output_layer(self, features, masked_tokens=None, **unused):
         return self.lm_head(features, masked_tokens)

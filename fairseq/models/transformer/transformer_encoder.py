@@ -205,7 +205,6 @@ class TransformerEncoderBase(FairseqEncoder):
         """
         # compute padding mask
         encoder_padding_mask = src_tokens.eq(self.padding_idx)
-        print('pad mask = ', encoder_padding_mask.size())
         has_pads = src_tokens.device.type == "xla" or encoder_padding_mask.any()
 
         x, encoder_embedding = self.forward_embedding(src_tokens, token_embeddings)
@@ -228,6 +227,7 @@ class TransformerEncoderBase(FairseqEncoder):
             #print('new x size = ', x_newview.size())
             x = torch.cat((x, x_newview), 1)
             #print('new new x size = ', x.size())
+            encoder_padding_mask = torch.cat((encoder_padding_mask, encoder_padding_mask), 0)
 
         encoder_states = []
         fc_results = []

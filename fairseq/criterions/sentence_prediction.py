@@ -200,7 +200,9 @@ class SentencePredictionCriterion(FairseqCriterion):
 
         logging_output.update(
             {
-                "loss": loss.data,
+                "loss": loss[0].data,
+                "loss viewmaker": loss[1].data,
+                "loss mse": extra[1].data,
                 "ntokens": sample["ntokens"],
                 "nsentences": sample_size,
                 "sample_size": sample_size,

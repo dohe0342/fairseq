@@ -108,7 +108,6 @@ class Data2VecTextModel(FairseqEncoderModel):
         classification_head_name=None,
         **kwargs,
     ):
-        print(src_tokens.size())
         if classification_head_name is not None:
             features_only = True
         res = self.encoder(

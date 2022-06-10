@@ -16,6 +16,7 @@ dirToWatchList = [
             "./fairseq/models/", 
             "./fairseq/models/wav2vec/",
             "./fairseq/models/roberta/",
+            "./fairseq/models/transformer/", 
             "./examples/wav2vec/",
             "./examples/wav2vec/config/",
             "./examples/wav2vec/config/finetuning/",

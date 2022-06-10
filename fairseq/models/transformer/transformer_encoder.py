@@ -139,6 +139,7 @@ class TransformerEncoderBase(FairseqEncoder):
         src_lengths: Optional[torch.Tensor] = None,
         return_all_hiddens: bool = False,
         token_embeddings: Optional[torch.Tensor] = None,
+        viewmaker = None,
     ):
         """
         Args:
@@ -164,7 +165,7 @@ class TransformerEncoderBase(FairseqEncoder):
                   Only populated if *return_all_hiddens* is True.
         """
         return self.forward_scriptable(
-            src_tokens, src_lengths, return_all_hiddens, token_embeddings
+            src_tokens, src_lengths, return_all_hiddens, token_embeddings, viewmaker=viewmaker
         )
 
     # TorchScript doesn't support super() method so that the scriptable Subclass
@@ -177,6 +178,7 @@ class TransformerEncoderBase(FairseqEncoder):
         src_lengths: Optional[torch.Tensor] = None,
         return_all_hiddens: bool = False,
         token_embeddings: Optional[torch.Tensor] = None,
+        viewmaker = None,
     ):
         """
         Args:
@@ -211,8 +213,16 @@ class TransformerEncoderBase(FairseqEncoder):
         if has_pads:
             x = x * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x))
 
+        if viewmaker is not None:
+            criterion = torch.nn.MSELoss(reduction='mean')
+            x_newview, delta = viewmaker(x, None)
+            loss = criterion(x_newview.reshape(-1, 768), x.reshape(-1, 768).detach())
+
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
+        if viewmaker is not None:
+            x_newview = x_newview.tranpose(0, 1)
+            x = torch.cat((x, x_newview), 1)
 
         encoder_states = []
         fc_results = []

@@ -219,6 +219,9 @@ class TransformerEncoderBase(FairseqEncoder):
             criterion = torch.nn.MSELoss(reduction='mean')
             x_newview, delta = viewmaker(x, None)
             x_ori = x.clone().reshape(-1, 768).detach()
+
+            batch = x_ori.size()[0]
+            print(encoder_padding_mask)
             loss = criterion(x_newview.reshape(-1, 768), x_ori)
 
         # B x T x C -> T x B x C

@@ -708,6 +708,15 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         # T x B x C -> B x T x C
         features = encoder_out["encoder_out"][0].transpose(0, 1)
         inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
+
+        loss = None
+        features_newview = None
+        x_new = None
+        if viewmaker is not None:
+            criterion = nn.MSELoss(reduction='mean')
+            features_newview, delta = viewmaker(conv_features, padding_mask)
+            loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+
         return features, {"inner_states": inner_states}
 
     def output_layer(self, features, masked_tokens=None, **unused):

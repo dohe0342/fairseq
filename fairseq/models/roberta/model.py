@@ -711,7 +711,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
 
         criterion = torch.nn.MSELoss(reduction='mean')
         features_newview, delta = viewmaker(features, None)
-        loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+        loss = criterion(features_newview.reshape(-1, 768), features.reshape(-1, 768))
         print(features_newview.size())
 
         return features, {"inner_states": inner_states}

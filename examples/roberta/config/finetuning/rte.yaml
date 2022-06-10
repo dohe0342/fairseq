@@ -51,7 +51,7 @@ optimization:
   clip_norm: 0.0
   lr: [2e-05]
   max_update: 2036
-  max_epoch: 0
+  max_epoch: 10
 
 model:
   _name: roberta

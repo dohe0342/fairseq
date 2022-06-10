@@ -674,7 +674,6 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         masked_tokens=None,
         **unused,
     ):
-        print(src_tokens.size())
         """
         Args:
             src_tokens (LongTensor): input tokens of shape `(batch, src_len)`

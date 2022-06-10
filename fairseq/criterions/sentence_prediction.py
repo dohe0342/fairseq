@@ -168,7 +168,7 @@ class SentencePredictionCriterion(FairseqCriterion):
         )
         
         loss = []
-        for logits in logits_all:
+        for logits in logits_all[::-1]:
             targets = model.get_targets(sample, [logits]).view(-1)
             sample_size = targets.numel()
 

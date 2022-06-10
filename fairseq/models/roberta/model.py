@@ -256,8 +256,9 @@ class RobertaModel(FairseqEncoderModel):
         x, extra = self.encoder(src_tokens, features_only, return_all_hiddens, **kwargs)
 
         if classification_head_name is not None:
-            x = self.classification_heads[classification_head_name](x)
-        return x, extra
+            x = self.classification_heads[classification_head_name](x[0])
+            x_newview = self.classification_heads[classification_head_name](x[1])
+        return (x, x_newview), extra
 
     def _get_adaptive_head_loss(self):
         norm_loss = 0

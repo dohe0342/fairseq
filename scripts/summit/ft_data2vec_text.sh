@@ -7,7 +7,7 @@ fairseq-hydra-train \
 	criterion._name=sentence_prediction_viewmaker \
 	optimization.max_update=100000 \
 	optimization.max_epoch=100 \
-	dataset.batch_size=16
+	dataset.batch_size=32
 	#+model.branch_ctc_v1=false \
 	#+model.branch_ctc_v2=false \
 	#+model.branch_ctc_v3=false 

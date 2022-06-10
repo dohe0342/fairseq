@@ -218,6 +218,8 @@ class SentencePredictionCriterion(FairseqCriterion):
     def reduce_metrics(logging_outputs) -> None:
         """Aggregate logging outputs from data parallel training."""
         loss_sum = sum(log.get("loss", 0) for log in logging_outputs)
+        loss_viewmaker_sum = sum(log.get("loss viewmaker", 0) for log in logging_outputs)
+        loss_mse_sum = sum(log.get("loss mse", 0) for log in logging_outputs)
         ntokens = sum(log.get("ntokens", 0) for log in logging_outputs)
         nsentences = sum(log.get("nsentences", 0) for log in logging_outputs)
         sample_size = sum(log.get("sample_size", 0) for log in logging_outputs)

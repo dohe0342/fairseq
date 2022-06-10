@@ -795,7 +795,7 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
                   states have shape `(src_len, batch, vocab)`.
         """
         x, extra = self.extract_features(
-            src_tokens, return_all_hiddens=return_all_hiddens
+            src_tokens, return_all_hiddens=return_all_hiddens, viewmaker=self.viewmaker
         )
         
         #criterion = torch.nn.MSELoss(reduction='mean')

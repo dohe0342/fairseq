@@ -690,6 +690,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
                   is a list of hidden states. Note that the hidden
                   states have shape `(src_len, batch, vocab)`.
         """
+        print(src_tokens[0])
         x, extra = self.extract_features(
             src_tokens, return_all_hiddens=return_all_hiddens
         )
@@ -705,7 +706,6 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         )
         # T x B x C -> B x T x C
         features = encoder_out["encoder_out"][0].transpose(0, 1)
-        print(features.size())
         inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
         return features, {"inner_states": inner_states}
 

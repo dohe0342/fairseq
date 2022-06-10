@@ -161,7 +161,7 @@ class SentencePredictionCriterion(FairseqCriterion):
             and self.classification_head_name in model.classification_heads
         ), "model must provide sentence classification head for --criterion=sentence_prediction"
 
-        logits, _ = model(
+        logits, extra = model(
             **sample["net_input"],
             features_only=True,
             classification_head_name=self.classification_head_name,

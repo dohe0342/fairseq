@@ -249,6 +249,7 @@ class RobertaModel(FairseqEncoderModel):
         classification_head_name=None,
         **kwargs,
     ):
+        print('here!!')
         if classification_head_name is not None:
             features_only = True
 

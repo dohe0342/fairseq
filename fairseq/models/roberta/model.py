@@ -695,6 +695,12 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         x, extra = self.extract_features(
             src_tokens, return_all_hiddens=return_all_hiddens
         )
+        
+        criterion = torch.nn.MSELoss(reduction='mean')
+        x_newview, delta = self.viewmaker(x, None)
+        loss = criterion(x_newview.reshape(-1, 768), x.reshape(-1, 768))
+        
+
         if not features_only:
             x = self.output_layer(x, masked_tokens=masked_tokens)
         return x, extra
@@ -708,12 +714,8 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         # T x B x C -> B x T x C
         features = encoder_out["encoder_out"][0].transpose(0, 1)
         inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
-
-        criterion = torch.nn.MSELoss(reduction='mean')
-        features_newview, delta = self.viewmaker(features, None)
-        loss = criterion(features_newview.reshape(-1, 768), features.reshape(-1, 768))
-
-        return features, ({"inner_states": inner_states}, loss)
+        
+        return features, {"inner_states": inner_states}
 
     def output_layer(self, features, masked_tokens=None, **unused):
         return self.lm_head(features, masked_tokens)

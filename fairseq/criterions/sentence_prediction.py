@@ -229,6 +229,15 @@ class SentencePredictionCriterion(FairseqCriterion):
         metrics.log_scalar(
             "loss", loss_sum / sample_size / math.log(2), sample_size, round=3
         )
+
+        metrics.log_scalar(
+            "loss viewmaker", loss_viewmaker_sum / sample_size / math.log(2), sample_size, round=3
+        )
+        
+        metrics.log_scalar(
+            "loss mse", loss_mse_sum / sample_size / math.log(2), sample_size, round=3
+        )
+
         if mha_reg_loss_sum:
             metrics.log_scalar(
                 "mha_reg_loss",

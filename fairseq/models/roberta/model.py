@@ -712,9 +712,8 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         criterion = torch.nn.MSELoss(reduction='mean')
         features_newview, delta = self.viewmaker(features, None)
         loss = criterion(features_newview.reshape(-1, 768), features.reshape(-1, 768))
-        print(features_newview.size())
 
-        return features, {"inner_states": inner_states}
+        return features, ({"inner_states": inner_states}, loss)
 
     def output_layer(self, features, masked_tokens=None, **unused):
         return self.lm_head(features, masked_tokens)

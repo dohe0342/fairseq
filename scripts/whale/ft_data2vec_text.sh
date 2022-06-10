@@ -2,8 +2,8 @@ git pull
 fairseq-hydra-train \
     --config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
     --config-name sst_2 \
-    task.data=/home/work//workspace/fairseq/examples/roberta/SST-2-bin \
-    checkpoint.restore_file=/workspace/models/data2vec_model/nlp_base.pt \
+    task.data=/home/work/workspace/fairseq/examples/roberta/SST-2-bin \
+    checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt \
     criterion._name=sentence_prediction_viewmaker 
     #optimization.max_update=6108 \
     #optimization.max_epoch=30 \

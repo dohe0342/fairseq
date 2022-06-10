@@ -1,7 +1,7 @@
 git pull
 fairseq-hydra-train \
     --config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
-    --config-name RTE \
+    --config-name rte \
     task.data=/home/work/workspace/fairseq/examples/roberta/RTE-bin \
     checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt \
     criterion._name=sentence_prediction_viewmaker 

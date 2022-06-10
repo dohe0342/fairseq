@@ -674,6 +674,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         masked_tokens=None,
         **unused,
     ):
+        print(src_tokens.size())
         """
         Args:
             src_tokens (LongTensor): input tokens of shape `(batch, src_len)`
@@ -698,7 +699,6 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         return x, extra
 
     def extract_features(self, src_tokens, return_all_hiddens=False, **kwargs):
-        print(src_tokens.size())
         encoder_out = self.sentence_encoder(
             src_tokens,
             return_all_hiddens=return_all_hiddens,

@@ -235,7 +235,7 @@ class RobertaModel(FairseqEncoderModel):
                 args.tokens_per_sample = task.max_positions()
             args.max_positions = args.tokens_per_sample
 
-        encoder = RobertaEncoder(args, task.source_dictionary)
+        encoder = RobertaEncoderViewMaker(args, task.source_dictionary)
 
         if OmegaConf.is_config(args):
             OmegaConf.set_struct(args, True)
@@ -674,6 +674,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         masked_tokens=None,
         **unused,
     ):
+        print(src_tokens.size())
         """
         Args:
             src_tokens (LongTensor): input tokens of shape `(batch, src_len)`

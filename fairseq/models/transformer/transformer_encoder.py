@@ -268,6 +268,7 @@ class TransformerEncoderBase(FairseqEncoder):
             "fc_results": fc_results,  # List[T x B x C]
             "src_tokens": [],
             "src_lengths": [src_lengths],
+            "loss": loss,
         }
 
     @torch.jit.export

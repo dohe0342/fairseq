@@ -205,7 +205,7 @@ class TransformerEncoderBase(FairseqEncoder):
         """
         # compute padding mask
         encoder_padding_mask = src_tokens.eq(self.padding_idx)
-        print('pad mask = ', encdoer_padding_mask.size())
+        print('pad mask = ', encoder_padding_mask.size())
         has_pads = src_tokens.device.type == "xla" or encoder_padding_mask.any()
 
         x, encoder_embedding = self.forward_embedding(src_tokens, token_embeddings)

@@ -624,7 +624,7 @@ class RobertaEncoder(FairseqEncoder):
         return self.args.max_positions
 
 
-class RobertaEncoder(FairseqEncoder):
+class RobertaEncoderViewMaker(FairseqEncoder):
     """RoBERTa encoder."""
 
     def __init__(self, args, dictionary):

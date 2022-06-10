@@ -184,6 +184,7 @@ class SentencePredictionCriterion(FairseqCriterion):
             loss.append(task_loss)
         # mha & ffn regularization update
         logits = logits_all[0]
+
         if (
             hasattr(model.args, "mha_reg_scale_factor")
             and model.args.mha_reg_scale_factor != 0.0

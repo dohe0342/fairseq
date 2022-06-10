@@ -224,6 +224,7 @@ class TransformerEncoderBase(FairseqEncoder):
         if viewmaker is not None:
             print('x size = ', x.size())
             x_newview = x_newview.transpose(0, 1)
+            print('new x size = ', x_newview.size())
             x = torch.cat((x, x_newview), 1)
 
         encoder_states = []

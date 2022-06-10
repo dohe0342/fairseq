@@ -218,7 +218,6 @@ class TransformerEncoderBase(FairseqEncoder):
             criterion = torch.nn.MSELoss(reduction='mean')
             x_newview, delta = viewmaker(x, None)
             loss = criterion(x_newview.reshape(-1, 768), x.reshape(-1, 768).detach())
-            print(loss)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)

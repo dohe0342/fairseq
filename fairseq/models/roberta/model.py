@@ -698,6 +698,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         return x, extra
 
     def extract_features(self, src_tokens, return_all_hiddens=False, **kwargs):
+        print(src_tokens.size())
         encoder_out = self.sentence_encoder(
             src_tokens,
             return_all_hiddens=return_all_hiddens,

@@ -624,6 +624,97 @@ class RobertaEncoder(FairseqEncoder):
         return self.args.max_positions
 
 
+class RobertaEncoder(FairseqEncoder):
+    """RoBERTa encoder."""
+
+    def __init__(self, args, dictionary):
+        super().__init__(dictionary)
+
+        # set any missing default values
+        base_architecture(args)
+        self.args = args
+
+        if args.encoder_layers_to_keep:
+            args.encoder_layers = len(args.encoder_layers_to_keep.split(","))
+
+        embed_tokens = self.build_embedding(
+            len(dictionary), args.encoder_embed_dim, dictionary.pad()
+        )
+
+        self.sentence_encoder = self.build_encoder(args, dictionary, embed_tokens)
+
+        self.lm_head = self.build_lm_head(
+            embed_dim=args.encoder_embed_dim,
+            output_dim=len(dictionary),
+            activation_fn=args.activation_fn,
+            weight=(
+                self.sentence_encoder.embed_tokens.weight
+                if not args.untie_weights_roberta
+                else None
+            ),
+        )
+
+    def build_embedding(self, vocab_size, embedding_dim, padding_idx):
+        return nn.Embedding(vocab_size, embedding_dim, padding_idx)
+
+    def build_encoder(self, args, dictionary, embed_tokens):
+        encoder = TransformerEncoder(args, dictionary, embed_tokens)
+        encoder.apply(init_bert_params)
+        return encoder
+
+    def build_lm_head(self, embed_dim, output_dim, activation_fn, weight):
+        return RobertaLMHead(embed_dim, output_dim, activation_fn, weight)
+
+    def forward(
+        self,
+        src_tokens,
+        features_only=False,
+        return_all_hiddens=False,
+        masked_tokens=None,
+        **unused,
+    ):
+        """
+        Args:
+            src_tokens (LongTensor): input tokens of shape `(batch, src_len)`
+            features_only (bool, optional): skip LM head and just return
+                features. If True, the output will be of shape
+                `(batch, src_len, embed_dim)`.
+            return_all_hiddens (bool, optional): also return all of the
+                intermediate hidden states (default: False).
+
+        Returns:
+            tuple:
+                - the LM output of shape `(batch, src_len, vocab)`
+                - a dictionary of additional data, where 'inner_states'
+                  is a list of hidden states. Note that the hidden
+                  states have shape `(src_len, batch, vocab)`.
+        """
+        x, extra = self.extract_features(
+            src_tokens, return_all_hiddens=return_all_hiddens
+        )
+        if not features_only:
+            x = self.output_layer(x, masked_tokens=masked_tokens)
+        return x, extra
+
+    def extract_features(self, src_tokens, return_all_hiddens=False, **kwargs):
+        encoder_out = self.sentence_encoder(
+            src_tokens,
+            return_all_hiddens=return_all_hiddens,
+            token_embeddings=kwargs.get("token_embeddings", None),
+        )
+        # T x B x C -> B x T x C
+        features = encoder_out["encoder_out"][0].transpose(0, 1)
+        inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
+        return features, {"inner_states": inner_states}
+
+    def output_layer(self, features, masked_tokens=None, **unused):
+        return self.lm_head(features, masked_tokens)
+
+    def max_positions(self):
+        """Maximum output length supported by the encoder."""
+        return self.args.max_positions
+
+
 @register_model_architecture("roberta", "roberta")
 def base_architecture(args):
     args.encoder_layers = safe_getattr(args, "encoder_layers", 12)

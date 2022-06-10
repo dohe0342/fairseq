@@ -26,6 +26,7 @@ from fairseq.modules.transformer_sentence_encoder import init_bert_params
 from fairseq.utils import safe_getattr, safe_hasattr
 
 from .hub_interface import RobertaHubInterface
+from fairseq.models.wav2vec.wav2vec2_asr import ViewMaker1
 
 logger = logging.getLogger(__name__)
 

@@ -161,24 +161,27 @@ class SentencePredictionCriterion(FairseqCriterion):
             and self.classification_head_name in model.classification_heads
         ), "model must provide sentence classification head for --criterion=sentence_prediction"
 
-        logits, extra = model(
+        logits_all, extra = model(
             **sample["net_input"],
             features_only=True,
             classification_head_name=self.classification_head_name,
         )
-        targets = model.get_targets(sample, [logits]).view(-1)
-        sample_size = targets.numel()
+        
+        loss = []
+        for logits in logits_all:
+            targets = model.get_targets(sample, [logits]).view(-1)
+            sample_size = targets.numel()
 
-        if not self.regression_target:
-            lprobs = F.log_softmax(logits, dim=-1, dtype=torch.float32)
-            task_loss = F.nll_loss(lprobs, targets, reduction="sum")
-        else:
-            logits = logits.view(-1).float()
-            targets = targets.float()
-            task_loss = F.mse_loss(logits, targets, reduction="sum")
+            if not self.regression_target:
+                lprobs = F.log_softmax(logits, dim=-1, dtype=torch.float32)
+                task_loss = F.nll_loss(lprobs, targets, reduction="sum")
+            else:
+                logits = logits.view(-1).float()
+                targets = targets.float()
+                task_loss = F.mse_loss(logits, targets, reduction="sum")
 
-        logging_output = {}
-        loss = task_loss
+            logging_output = {}
+            loss.append(task_loss)
         # mha & ffn regularization update
         if (
             hasattr(model.args, "mha_reg_scale_factor")

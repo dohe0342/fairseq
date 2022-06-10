@@ -212,7 +212,7 @@ class SentencePredictionCriterion(FairseqCriterion):
             preds = logits.argmax(dim=1)
             logging_output["ncorrect"] = (preds == targets).sum()
 
-        return loss, sample_size, logging_output
+        return (loss, extra[1]), sample_size, logging_output
 
     @staticmethod
     def reduce_metrics(logging_outputs) -> None:

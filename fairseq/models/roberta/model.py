@@ -705,6 +705,7 @@ class RobertaEncoderViewMaker(FairseqEncoder):
         )
         # T x B x C -> B x T x C
         features = encoder_out["encoder_out"][0].transpose(0, 1)
+        print(features.size())
         inner_states = encoder_out["encoder_states"] if return_all_hiddens else None
         return features, {"inner_states": inner_states}
 

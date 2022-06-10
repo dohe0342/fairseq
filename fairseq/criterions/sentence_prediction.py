@@ -183,6 +183,7 @@ class SentencePredictionCriterion(FairseqCriterion):
             logging_output = {}
             loss.append(task_loss)
         # mha & ffn regularization update
+        
         logits = logits_all[0]
 
         if (

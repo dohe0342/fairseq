@@ -223,7 +223,7 @@ class TransformerEncoderBase(FairseqEncoder):
    
             x_ori = x.clone().reshape(-1, 768).detach()
 
-            loss = criterion(x_newview, x_ori)
+            loss = criterion(x_newview.reshape(-1, 768), x_ori.reshape(-1, 768))
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)

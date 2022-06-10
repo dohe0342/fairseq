@@ -1028,7 +1028,7 @@ class Trainer(object):
                         )  # recursion to feed in same batch
                 
                 self.task.optimizer_step(
-                    [self.optimizer, self.optimizer2], model=self.model, update_num=self.get_num_updates()
+                    self.optimizer2, model=self.model, update_num=self.get_num_updates()
                 )
                 if self.cfg.common.amp and overflow:
                     if self._amp_retries == self.cfg.common.amp_batch_retries:

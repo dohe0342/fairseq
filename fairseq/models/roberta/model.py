@@ -250,10 +250,9 @@ class RobertaModel(FairseqEncoderModel):
         classification_head_name=None,
         **kwargs,
     ):
-        print(src_tokens.size())
         if classification_head_name is not None:
             features_only = True
-
+        print(self.encoder)
         x, extra = self.encoder(src_tokens, features_only, return_all_hiddens, **kwargs)
 
         if classification_head_name is not None:

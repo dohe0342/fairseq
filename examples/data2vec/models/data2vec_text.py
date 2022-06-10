@@ -110,7 +110,7 @@ class Data2VecTextModel(FairseqEncoderModel):
     ):
         if classification_head_name is not None:
             features_only = True
-
+        print('here!!!!!!!!!!!!!!!!!!!!!!!!!')
         res = self.encoder(
             src_tokens, target_tokens, features_only, return_all_hiddens, **kwargs
         )

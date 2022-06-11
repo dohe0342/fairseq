@@ -224,7 +224,7 @@ class TransformerEncoderBase(FairseqEncoder):
             x_ori = x.clone().reshape(-1, 768).detach()
             #loss = criterion(x_newview.reshape(-1, 768), x_ori)
             zero = torch.zeros(x_ori.size())
-            loss = criterion(delta, 0)
+            loss = criterion(delta, zero)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)

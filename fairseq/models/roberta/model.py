@@ -235,8 +235,8 @@ class RobertaModel(FairseqEncoderModel):
                 args.tokens_per_sample = task.max_positions()
             args.max_positions = args.tokens_per_sample
 
-        #encoder = RobertaEncoderViewMaker2(args, task.source_dictionary)
-        encoder = RobertaEncoder(args, task.source_dictionary)
+        encoder = RobertaEncoderViewMaker2(args, task.source_dictionary)
+        #encoder = RobertaEncoder(args, task.source_dictionary)
 
         if OmegaConf.is_config(args):
             OmegaConf.set_struct(args, True)

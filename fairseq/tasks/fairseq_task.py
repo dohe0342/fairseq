@@ -575,8 +575,8 @@ class FairseqTask(object):
                     optimizer[1].backward(loss[1]) ## try17, try18
 
             return loss, sample_size, logging_output
-
-        else:
+        
+        elif viewmaker:
             model.train()
             model.set_num_updates(update_num)
             with torch.autograd.profiler.record_function("forward"):

@@ -50,8 +50,8 @@ lr_scheduler:
 optimization:
   clip_norm: 0.0
   lr: [2e-05]
-  max_update: 2036
-  max_epoch: 10
+  max_update: 6108 #origin: 2036
+  max_epoch: 30 #origin: 10
 
 model:
   _name: roberta

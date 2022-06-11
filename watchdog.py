@@ -27,7 +27,9 @@ dirToWatchList = [
             "./examples/speech_recognition/",
             "./examples/speech_recognition/new/",
             "./examples/speech_recognition/new/conf/",
-            "./examples/speech_recognition/new/decoders/"
+            "./examples/speech_recognition/new/decoders/",
+            "./examples/roberta/config/pretraining/",
+            "./examples/roberta/config/finetuning/"
             ]
 
 lastmod = [int(os.path.getmtime(dirToWatch)) for dirToWatch in dirToWatchList]

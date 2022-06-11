@@ -413,6 +413,7 @@ def validate_and_save(
 
     # Save checkpoint
     do_save=False
+    should_stop=False
     if do_save or should_stop:
         checkpoint_utils.save_checkpoint(
             cfg.checkpoint, trainer, epoch_itr, valid_losses[0]

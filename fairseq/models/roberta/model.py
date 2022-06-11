@@ -757,7 +757,7 @@ class RobertaEncoderViewMaker2(FairseqEncoder):
             ),
         )
 
-        self.viewmaker = ViewMaker1(num_channels=768)
+        self.viewmaker = ViewMaker1(num_channels=768, distortion_budget=0.001)
 
     def build_embedding(self, vocab_size, embedding_dim, padding_idx):
         return nn.Embedding(vocab_size, embedding_dim, padding_idx)

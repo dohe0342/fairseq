@@ -214,7 +214,6 @@ class TransformerEncoderBase(FairseqEncoder):
         if has_pads:
             x = x * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x))
         
-        '''
         loss = None
         if viewmaker is not None:
             criterion = torch.nn.MSELoss(reduction='mean')
@@ -225,17 +224,13 @@ class TransformerEncoderBase(FairseqEncoder):
             x_ori = x.clone().reshape(-1, 768).detach()
 
             loss = criterion(x_newview.reshape(-1, 768), x_ori)
-        '''
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
-
-        '''
         if viewmaker is not None:
             x_newview = x_newview.transpose(0, 1)
             x = torch.cat((x, x_newview), 1)
             encoder_padding_mask = torch.cat((encoder_padding_mask, encoder_padding_mask), 0)
-        '''
 
         encoder_states = []
         fc_results = []

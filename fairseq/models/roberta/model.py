@@ -261,7 +261,7 @@ class RobertaModel(FairseqEncoderModel):
             #x_ori = self.classification_heads[classification_head_name](x[0])
             #x_newview = self.classification_heads[classification_head_name](x[1])
         #return (x_ori, x_newview), extra
-        return x
+        return x, extra
 
     def _get_adaptive_head_loss(self):
         norm_loss = 0

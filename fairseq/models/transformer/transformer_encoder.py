@@ -222,8 +222,8 @@ class TransformerEncoderBase(FairseqEncoder):
             if has_pads:
                 x_newview = x_newview * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x_newview))
             x_ori = x.clone().reshape(-1, 768).detach()
-
-            loss = criterion(x_newview.reshape(-1, 768), x_ori)
+            #loss = criterion(x_newview.reshape(-1, 768), x_ori)
+            loss = criterion(delta, 0)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)

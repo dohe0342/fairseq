@@ -612,7 +612,8 @@ class FairseqTask(object):
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## try25 try 26 try 27
                     #optimizer[1].backward(lambda_*(loss[0][1])+loss[1])
                     #optimizer[1].backward(-loss[0][1]+loss[1])
-                    if random.random() > 0.95:
+                    #if random.random() > 0.95:
+                    if update_num % 50 == 0:
                         optimizer[1].backward(-0.001*loss[0][1])
         else:
             model.train()

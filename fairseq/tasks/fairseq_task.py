@@ -17,7 +17,7 @@ from fairseq.dataclass import FairseqDataclass
 from fairseq.dataclass.utils import gen_parser_from_dataclass
 from fairseq.optim.amp_optimizer import AMPOptimizer
 from omegaconf import DictConfig
-
+import random
 
 logger = logging.getLogger(__name__)
 

@@ -8,8 +8,8 @@ fairseq-hydra-train \
     task.data=/home/work/workspace/fairseq/examples/roberta/$TASK-bin \
     checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt \
     criterion._name=sentence_prediction_viewmaker 
-    optimization.max_update=6108 \
-    optimization.max_epoch=30 
+    #optimization.max_update=6108 \
+    #optimization.max_epoch=30 
     #checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/2022-06-11/06-08-23/checkpoints \
 	#checkpoint.restore_file=checkpoint_last.pt
     #dataset.batch_size=64

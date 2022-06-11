@@ -4,7 +4,7 @@ TASK=${task^^}
 
 for i in {0..4}
 do
-	fairseq-hydra-train \
+	CUDA_VISIBLE_DEVICES=$2 fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
 		--config-name $task \
 		task.data=/home/work/workspace/fairseq/examples/roberta/$TASK-bin \

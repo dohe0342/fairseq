@@ -2,7 +2,7 @@ git pull
 task=$1
 TASK=${task^^}
 
-for i in {0..3}
+for i in {0..2}
 do
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \

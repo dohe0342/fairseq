@@ -1028,6 +1028,7 @@ class Trainer(object):
                         )  # recursion to feed in same batch
                 
                 if self.get_num_updates() % 156 == 0:
+                    self.zero_grad2()
                     self.task.optimizer_step(
                         self.optimizer2, model=self.model, update_num=self.get_num_updates()
                     )

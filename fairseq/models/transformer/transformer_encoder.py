@@ -223,7 +223,7 @@ class TransformerEncoderBase(FairseqEncoder):
                 x_newview = x_newview * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x_newview))
             x_ori = x.clone().reshape(-1, 768).detach()
             #loss = criterion(x_newview.reshape(-1, 768), x_ori)
-            zero = torch.zeros(delta.size())
+            zero = torch.zeros(delta.size()).to('cuda')
             loss = criterion(delta, zero)
 
         # B x T x C -> T x B x C

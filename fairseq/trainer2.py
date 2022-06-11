@@ -1027,12 +1027,12 @@ class Trainer(object):
                             samples, raise_oom
                         )  # recursion to feed in same batch
                 
-                if self.get_num_updates() % 156 == 0:
-                    self.optimizer2.multiply_grads(1/156.)
-                    self.task.optimizer_step(
-                        self.optimizer2, model=self.model, update_num=self.get_num_updates()
-                    )
-                    self.zero_grad2()
+                #if self.get_num_updates() % 156 == 0:
+                #self.optimizer2.multiply_grads(1/156.)
+                self.task.optimizer_step(
+                    self.optimizer2, model=self.model, update_num=self.get_num_updates()
+                )
+                self.zero_grad2()
                 if self.cfg.common.amp and overflow:
                     if self._amp_retries == self.cfg.common.amp_batch_retries:
                         logger.info("AMP: skipping this batch.")

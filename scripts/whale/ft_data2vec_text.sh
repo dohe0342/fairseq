@@ -10,7 +10,7 @@ fairseq-hydra-train \
     criterion._name=sentence_prediction_viewmaker \
     optimization.max_update=6108 \
     optimization.max_epoch=30 \
-    checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/2022-06-11/03-26-09/checkpoints	
+    #checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/2022-06-11/03-26-09/checkpoints	
     #dataset.batch_size=64
     #+model.branch_ctc_v1=false \
     #+model.branch_ctc_v2=false \

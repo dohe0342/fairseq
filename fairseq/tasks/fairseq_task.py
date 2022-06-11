@@ -613,8 +613,7 @@ class FairseqTask(object):
                     #optimizer[1].backward(lambda_*(loss[0][1])+loss[1])
                     #optimizer[1].backward(-loss[0][1]+loss[1])
                     #if random.random() > 0.95:
-                    if update_num % 50 == 0:
-                        optimizer[1].backward(-0.001*loss[0][1])
+                    optimizer[1].backward(-0.001*loss[0][1])
         else:
             model.train()
             model.set_num_updates(update_num)

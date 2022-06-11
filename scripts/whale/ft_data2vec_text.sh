@@ -17,7 +17,7 @@ TASK=${task^^}
     #+model.branch_ctc_v2=false \
     #+model.branch_ctc_v3=false 
 python ../../fairseq_cli/hydra_train.py -m \
-	--config-dir examples/roberta/config/finetuning \
+	--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
     --config-name $task \
 	task.data=/home/work/workspace/fairseq/examples/roberta/$TASK-bin \
 	checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt

@@ -1,10 +1,13 @@
 git pull
-task=$1
-TASK=${task^^}
+task1=$1
+TASK1=${task^^}
+
+task2=$2
+TASK2=${task^^}
 
 for i in {0..4}
 do
-	CUDA_VISIBLE_DEVICES=$2 fairseq-hydra-train \
+	CUDA_VISIBLE_DEVICES=$3 fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
 		--config-name $task \
 		task.data=/home/work/workspace/fairseq/examples/roberta/$TASK-bin \

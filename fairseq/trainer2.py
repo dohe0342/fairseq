@@ -1028,7 +1028,6 @@ class Trainer(object):
                         )  # recursion to feed in same batch
                 
                 itr = int(self.cfg.optimization.max_update/self.cfg.optimization.max_epoch)
-                print(itr)
                 if self.get_num_updates() % itr == 0:
                     self.optimizer2.multiply_grads(1/itr)
                     self.task.optimizer_step(

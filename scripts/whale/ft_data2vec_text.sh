@@ -19,6 +19,6 @@ TASK=${task^^}
 python ../../fairseq_cli/hydra_train.py -m \
 	--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \
     --config-name $task \
-	criterion._name=sentecne_prediction_viewmaker
+	criterion._name=sentecne_prediction_viewmaker \
 	task.data=/home/work/workspace/fairseq/examples/roberta/$TASK-bin \
 	checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt

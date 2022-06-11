@@ -50,7 +50,7 @@ lr_scheduler:
 optimization:
   clip_norm: 0.0
   lr: [1e-05]
-  max_update: 113272
+  max_update: 226544 #113272
   max_epoch: 20 #10
 
 model:

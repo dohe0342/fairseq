@@ -22,4 +22,5 @@ do
 		checkpoint.restore_file=/home/work/workspace/models/data2vec_model/nlp_base.pt \
 		criterion._name=sentence_prediction_viewmaker \
 		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/"$task1"_try$i
+
 done

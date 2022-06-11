@@ -218,7 +218,7 @@ class TransformerEncoderBase(FairseqEncoder):
         if viewmaker is not None:
             criterion = torch.nn.MSELoss(reduction='mean')
             x_newview, delta = viewmaker(x, encoder_padding_mask)
-            x_newview = x + delta
+            x_newview = x.clone().detach() + delta
             if has_pads:
                 x_newview = x_newview * (1 - encoder_padding_mask.unsqueeze(-1).type_as(x_newview))
             

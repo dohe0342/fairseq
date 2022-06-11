@@ -1,9 +1,9 @@
 git pull
 task1=$1
-TASK1=${task^^}
+TASK1=${task1^^}
 
 task2=$2
-TASK2=${task^^}
+TASK2=${task2^^}
 
 for i in {0..4}
 do

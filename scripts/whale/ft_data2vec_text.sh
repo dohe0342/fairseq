@@ -5,7 +5,7 @@ TASK1=${task1^^}
 task2=$2
 TASK2=${task2^^}
 
-for i in {0..4}
+for i in {5..9}
 do
 	CUDA_VISIBLE_DEVICES=$3 fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/roberta/config/finetuning \

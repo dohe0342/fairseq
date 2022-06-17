@@ -584,6 +584,7 @@ class CtcCriterion(FairseqCriterion):
         """
         return True
 
+
 @register_criterion("branch_ctc_v1", dataclass=CtcCriterionConfig)
 class BranchCtcCriterionV1(CtcCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):

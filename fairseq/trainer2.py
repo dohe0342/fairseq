@@ -1026,6 +1026,10 @@ class Trainer(object):
                         return self.train_step(
                             samples, raise_oom
                         )  # recursion to feed in same batch
+                self.task.optimizer_step(
+                    self.optimizer2, model=self.model, update_num=self.get_num_updates()
+                    )
+
                 ''' 
                 itr = int(self.cfg.optimization.max_update/self.cfg.optimization.max_epoch)
                 if self.get_num_updates() % itr == 0:

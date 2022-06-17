@@ -368,7 +368,7 @@ class CtcCriterion(FairseqCriterion):
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
 
-        if 1:
+        if 0:
             lprobs2 = lprobs[:,int(lprobs.size()[1]/2):,:]
             lprobs = lprobs[:,:int(lprobs.size()[1]/2),:]
 

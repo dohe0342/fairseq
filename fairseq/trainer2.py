@@ -867,7 +867,7 @@ class Trainer(object):
                         sample=sample,
                         model=self.model,
                         criterion=self.criterion,
-                        optimizer=[self.optimizer, self.optimizer2] if epoch >= 0 else [self.optimizer2],
+                        optimizer=[self.optimizer, self.optimizer2] if epoch >= 10 else [self.optimizer2],
                         #optimizer=[self.optimizer2],
                         update_num=self.get_num_updates(),
                         ignore_grad=is_dummy_batch,
@@ -1026,7 +1026,7 @@ class Trainer(object):
                         return self.train_step(
                             samples, raise_oom
                         )  # recursion to feed in same batch
-                
+                ''' 
                 itr = int(self.cfg.optimization.max_update/self.cfg.optimization.max_epoch)
                 if self.get_num_updates() % itr == 0:
                     self.optimizer2.multiply_grads(1/itr)
@@ -1034,6 +1034,7 @@ class Trainer(object):
                         self.optimizer2, model=self.model, update_num=self.get_num_updates()
                     )
                     self.zero_grad2()
+                '''
                 if self.cfg.common.amp and overflow:
                     if self._amp_retries == self.cfg.common.amp_batch_retries:
                         logger.info("AMP: skipping this batch.")

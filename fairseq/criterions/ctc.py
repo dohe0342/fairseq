@@ -410,6 +410,8 @@ class CtcCriterion(FairseqCriterion):
         loss.backward()
         print('2222', sample["net_input"]["source"].grad)
 
+        return
+
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])
         #set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)

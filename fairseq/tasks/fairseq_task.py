@@ -597,8 +597,6 @@ class FairseqTask(object):
                         loss[1] *= 0
                 with torch.autograd.profiler.record_function("backward"):
                     #loss[0][1] /= sample_size
-                    optimizer[0].backward(loss[0][0]+0.001*loss[0][1], retain_graph=True)
-                    #optimizer[0].backward(loss[0][0], retain_graph=True)
                     #optimizer[1].backward(-0.0001*(loss[0][0]+loss[0][1])+loss[1]) ## try12
                     ##optimizer[1].backward(-0.00001*(loss[0][1])+loss[1]) ## try15
                     ##optimizer[1].backward(-0.00005*(loss[0][1])+loss[1]) ## try16
@@ -609,7 +607,7 @@ class FairseqTask(object):
                     #lambda_ = -0.00001*(update_num/24000.)*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 23
                     #lambda_ = -0.00001*(math.exp(update_num/80000))*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 24
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)/200.)) ## try 25:viewmaker-large
-                    #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## try25 try 26 try 27
+                    lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## try25 try 26 try 27
                     #optimizer[1].backward(lambda_*(loss[0][1])+loss[1])
                     #optimizer[1].backward(-loss[0][1]+loss[1])
                     #if random.random() > 0.95:

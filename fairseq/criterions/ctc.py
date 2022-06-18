@@ -361,11 +361,14 @@ class CtcCriterion(FairseqCriterion):
 
         self.zero_infinity = cfg.zero_infinity
         self.sentence_avg = cfg.sentence_avg
+    
+    def get_fsgm(self, model, sample):
+        diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
+
 
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])
         set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
-        print(set_grad)
         net_output = model(**sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

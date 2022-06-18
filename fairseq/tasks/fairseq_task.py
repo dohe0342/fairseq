@@ -614,6 +614,7 @@ class FairseqTask(object):
                     optimizer[1].backward(-0.0001*loss[0][1])
         
         elif fgsm:
+            for i in range(2):
             model.train()
             model.set_num_updates(update_num)
             with torch.autograd.profiler.record_function("forward"):

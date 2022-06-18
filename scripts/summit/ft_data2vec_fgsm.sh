@@ -4,7 +4,7 @@ exp_name=$1
 
 mkdir /home/work/workspace/fairseq/scripts/whale/outputs/$1
 fairseq-hydra-train \
-	--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
+	--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 	--config-name base_100h_whale \
 	common.user_dir=examples/data2vec \
 	task.data=/workspace/LibriSpeech/manifests \

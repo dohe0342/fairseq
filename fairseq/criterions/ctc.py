@@ -317,6 +317,7 @@ class CtcCriterion(FairseqCriterion):
         """
         return True
 
+
 @register_criterion("ctc", dataclass=CtcCriterionConfig)
 class CtcCriterion(FairseqCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):

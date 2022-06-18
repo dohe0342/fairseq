@@ -406,7 +406,7 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
             loss.backward()
-            print(diff_able.grad)
+            print(sample["net_input"]["source"].grad)
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

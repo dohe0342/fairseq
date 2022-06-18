@@ -406,9 +406,9 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
         
-        print(sample["net_input"]["source"].grad)
+        print('1111', sample["net_input"]["source"].grad)
         loss.backward()
-        print(sample["net_input"]["source"].grad)
+        print('2222', sample["net_input"]["source"].grad)
         
         return loss, sample_size, logging_output
 

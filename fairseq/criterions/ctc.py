@@ -367,8 +367,7 @@ class CtcCriterion(FairseqCriterion):
         diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
         sample["net_input"]["source"] = diff_able
         
-        model.valid()
-
+        model.eval()
         net_output = model(**sample["net_input"])
     
         lprobs = model.get_normalized_probs(

@@ -370,9 +370,9 @@ class CtcCriterion(FairseqCriterion):
         #model.eval()
         net_output = model(**sample["net_input"])
         #model.train()
-        #for n, p in model.named_parameters():
-        #    if p.requires_grad:
-        #        p.requries_grad=False
+        for n, p in model.named_parameters():
+            if p.requires_grad:
+                p.requries_grad=False
         
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

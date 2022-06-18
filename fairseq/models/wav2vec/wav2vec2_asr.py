@@ -302,7 +302,6 @@ class Wav2VecCtc(BaseFairseqModel):
 
     def forward(self, tgt_layer=False, **kwargs):
         x = self.w2v_encoder(**kwargs) if not tgt_layer else self.w2v_encoder(tgt_layer=tgt_layer, **kwargs)
-        print(self.w2v_encoder)
         return x
 
 
@@ -538,7 +537,7 @@ class Wav2VecEncoder(FairseqEncoder):
         self.num_updates = num_updates
 
     def forward(self, source, padding_mask, **kwargs):
-
+        print('here!!!!!!!!!!!!!!!!!!!!!!!!!')
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

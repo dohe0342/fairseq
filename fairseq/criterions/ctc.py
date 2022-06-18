@@ -366,12 +366,14 @@ class CtcCriterion(FairseqCriterion):
         origin = sample["net_input"]["source"].clone()
         diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
         sample["net_input"]["source"] = diff_able
-        with torch.no_grad():
-            net_output = model(**sample["net_input"])
         
-            lprobs = model.get_normalized_probs(
-                net_output, log_probs=True
-            ).contiguous()  # (T, B, C) from the encoder
+        model.valid()
+
+        net_output = model(**sample["net_input"])
+    
+        lprobs = model.get_normalized_probs(
+            net_output, log_probs=True
+        ).contiguous()  # (T, B, C) from the encoder
         
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]

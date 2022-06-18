@@ -11,5 +11,5 @@ fairseq-hydra-train \
 	task.normalize=true \
 	model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
 	criterion._name=ctc_fgsm \
-	checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \ 
+	checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 	+model.viewmaker=true

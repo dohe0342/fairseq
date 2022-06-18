@@ -612,6 +612,7 @@ class FairseqTask(object):
                     #optimizer[1].backward(-loss[0][1]+loss[1])
                     #if random.random() > 0.95:
                     optimizer[1].backward(-0.0001*loss[0][1])
+        
         elif fgsm:
             model.train()
             model.set_num_updates(update_num)

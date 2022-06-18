@@ -409,7 +409,6 @@ class CtcCriterion(FairseqCriterion):
         print('1111', sample["net_input"]["source"].grad)
         loss.backward()
         print('2222', sample["net_input"]["source"].grad)
-
         return
 
     def forward(self, model, sample, reduce=True):

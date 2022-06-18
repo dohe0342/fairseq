@@ -405,6 +405,8 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
+        loss.backward()
+        print(sample["net_input"]["source"].grad)
         
         return loss
 

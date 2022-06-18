@@ -370,7 +370,7 @@ class CtcCriterion(FairseqCriterion):
         model.eval()
         net_output = model(**sample["net_input"])
         model.train()
-    
+        
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
@@ -405,7 +405,8 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-
+        loss.backward()
+        print(diff_able.grad)
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )

@@ -410,7 +410,6 @@ class CtcCriterion(FairseqCriterion):
         
         return loss, sample_size, logging_output
 
-
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])
         #set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)

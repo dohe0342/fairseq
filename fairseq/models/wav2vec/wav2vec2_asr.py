@@ -302,6 +302,7 @@ class Wav2VecCtc(BaseFairseqModel):
 
     def forward(self, tgt_layer=False, **kwargs):
         x = self.w2v_encoder(**kwargs) if not tgt_layer else self.w2v_encoder(tgt_layer=tgt_layer, **kwargs)
+        print(self.w2v_encoder)
         return x
 
 

@@ -330,6 +330,8 @@ class Data2VecAudioModel(BaseFairseqModel):
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
         
         features = source
+        
+        print(features)
 
         if self.feature_grad_mult > 0:
             features = self.feature_extractor(features)

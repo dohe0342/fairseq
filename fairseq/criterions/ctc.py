@@ -363,8 +363,7 @@ class CtcCriterion(FairseqCriterion):
         self.sentence_avg = cfg.sentence_avg
 
     def forward(self, model, sample, reduce=True):
-        net_output_fgsm = model(**sample["net_input"], fgsm=True)
-
+        print(sample["net_input"]["source"])
         net_output = model(**sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

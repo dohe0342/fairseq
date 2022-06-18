@@ -554,7 +554,8 @@ class Wav2VecEncoder(FairseqEncoder):
 
             # B x T x C -> T x B x C
             x = x.transpose(0, 1)
-
+        
+        print(x)
         x = self.final_dropout(x)
 
         if self.proj:

@@ -537,7 +537,6 @@ class Wav2VecEncoder(FairseqEncoder):
         self.num_updates = num_updates
 
     def forward(self, source, padding_mask, **kwargs):
-        print('here!!!!!!!!!!!!!!!!!!!!!!!!!')
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

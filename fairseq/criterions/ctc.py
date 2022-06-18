@@ -407,6 +407,7 @@ class CtcCriterion(FairseqCriterion):
             )
             loss.backward()
             print(diff_able.grad)
+        
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )

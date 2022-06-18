@@ -364,7 +364,7 @@ class CtcCriterion(FairseqCriterion):
 
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])
-        set_grad = torch.autograd.Variable(sample["net_input"]["source"], require_grad=True)
+        set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
         print(set_grad)
         net_output = model(**sample["net_input"])
         lprobs = model.get_normalized_probs(

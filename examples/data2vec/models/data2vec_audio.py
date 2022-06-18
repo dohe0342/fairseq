@@ -409,6 +409,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
             '''
         
+        print(features)
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
             if features_newview is not None:

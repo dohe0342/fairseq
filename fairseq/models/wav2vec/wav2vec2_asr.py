@@ -559,6 +559,8 @@ class Wav2VecEncoder(FairseqEncoder):
         if self.proj:
             x = self.proj(x)
 
+        print(x)
+
         return {
             "encoder_out": x,  # T x B x C
             "padding_mask": padding_mask,  # B x T,

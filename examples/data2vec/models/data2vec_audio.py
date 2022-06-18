@@ -331,8 +331,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         
         features = source
         
-        print(features)
-
         if self.feature_grad_mult > 0:
             features = self.feature_extractor(features)
             if self.feature_grad_mult != 1.0:
@@ -410,7 +408,8 @@ class Data2VecAudioModel(BaseFairseqModel):
             sim_min20 = sim[:10].sum() / 10.
             print(float(sim_avg.data), float(sim_max20.data), float(sim_min20.data), float(loss.data))
             '''
-
+        
+        print(features)
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
             if features_newview is not None:

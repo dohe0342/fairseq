@@ -369,9 +369,9 @@ class CtcCriterion(FairseqCriterion):
         
         net_output = model(**sample["net_input"])
         
-        for n, p in model.named_parameters():
-            if 'feature_extractor' in n:
-                p.requires_grad = False
+        #for n, p in model.named_parameters():
+        #    if 'feature_extractor' in n:
+        #        p.requires_grad = False
         
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

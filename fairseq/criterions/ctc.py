@@ -398,7 +398,7 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
 
         with torch.backends.cudnn.flags(enabled=False):
-            loss = -F.ctc_loss(
+            loss = F.ctc_loss(
                 lprobs,
                 targets_flat,
                 input_lengths,
@@ -409,8 +409,9 @@ class CtcCriterion(FairseqCriterion):
             )
         
         if sample["net_input"]["source"].grad is not None:
-            x_adv.grad.data.fill_(0)
-        cost.backward()
+            sample["net_input"]["source"].grad.data.fill_(0)
+        
+        loss.backward()
 
         x_adv.grad.sign_()
         x_adv = x_adv - eps*x_adv.grad

@@ -407,7 +407,8 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-        if x_adv.grad is not None:
+        
+        if sample["net_input"]["source"].grad is not None:
             x_adv.grad.data.fill_(0)
         cost.backward()
 

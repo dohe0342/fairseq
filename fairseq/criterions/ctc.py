@@ -407,8 +407,13 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
+        if x_adv.grad is not None:
+            x_adv.grad.data.fill_(0)
+        cost.backward()
+
+        x_adv.grad.sign_()
+        x_adv = x_adv - eps*x_adv.grad
         loss.backward()
-        print(sample["net_input"]["source"].grad)
         
         return loss
 

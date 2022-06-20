@@ -543,12 +543,7 @@ class CtcCriterion(FairseqCriterion):
         )
 
         sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
-        logging_output = {
-            "loss": utils.item(loss.data),  # * sample['ntokens'],
-            "ntokens": ntokens,
-            "nsentences": sample["id"].numel(),
-            "sample_size": sample_size,
-        }
+        logging_output["loss fgsm"] = utils.item(loss.data)
 
         if not model.training:
             import editdistance

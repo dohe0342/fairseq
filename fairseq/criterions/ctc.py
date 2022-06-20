@@ -430,6 +430,7 @@ class CtcCriterion(FairseqCriterion):
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,
+            "snr": snr,
         }
 
         return loss, sample_size, logging_output

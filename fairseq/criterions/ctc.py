@@ -413,6 +413,7 @@ class CtcCriterion(FairseqCriterion):
         
         if ignore_grad:
             loss *= 0
+
         with torch.autograd.profiler.record_function("backward"):
             loss.backward(retain_graph=True)
         

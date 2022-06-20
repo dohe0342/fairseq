@@ -622,7 +622,7 @@ class FairseqTask(object):
                     del loss
                     loss_, sample_size, logging_output = criterion.forward_fgsm(model, sample, logging_output)
             if ignore_grad:
-                loss *= 0
+                loss_ *= 0
             with torch.autograd.profiler.record_function("backward"):
                 optimizer.backward(loss)
         

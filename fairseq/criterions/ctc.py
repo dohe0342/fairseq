@@ -414,7 +414,7 @@ class CtcCriterion(FairseqCriterion):
         with torch.autograd.profiler.record_function("backward"):
             loss.backward(retain_graph=True)
         
-        eps = 0.0001
+        eps = 0.00001
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
 

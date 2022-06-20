@@ -532,6 +532,7 @@ class CtcCriterion(FairseqCriterion):
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,
+            "snr": 0,
         }
 
         if not model.training:

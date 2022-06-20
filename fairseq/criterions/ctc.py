@@ -428,8 +428,10 @@ class CtcCriterion(FairseqCriterion):
         eps = 0.1
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
-
-        snr = 20*torch.log10(torch.norm(origin, dim=1)/torch.norm(sample["net_input"]["source"], dim=1))
+        
+        origin = torch.norm(origin, dim=1)
+        noise = torch.norm(sample["net_input"]["source"], dim=1) - origin
+        snr = 20*torch.log10(origin/torch.norm(sample["net_input"]["source"], dim=1))
         snr = snr.sum() / origin.size()[0]
         
         ntokens = (

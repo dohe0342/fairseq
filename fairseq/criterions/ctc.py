@@ -431,7 +431,7 @@ class CtcCriterion(FairseqCriterion):
         
         origin = torch.norm(origin, dim=1)
         noise = torch.norm(sample["net_input"]["source"], dim=1) - origin
-        snr = 20*torch.log10(origin/torch.norm(sample["net_input"]["source"], dim=1))
+        snr = 20*torch.log10(noise/origin)
         snr = snr.sum() / origin.size()[0]
         
         ntokens = (

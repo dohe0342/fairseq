@@ -417,6 +417,8 @@ class CtcCriterion(FairseqCriterion):
         eps = 0.0001
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
+
+        snr = 20*torch.log10(torch.norm(origin, dim=0)/torch.norm(sample["net_input"]["source"], dim=0))/origin.size()[0]
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

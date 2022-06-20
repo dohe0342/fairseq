@@ -414,7 +414,8 @@ class CtcCriterion(FairseqCriterion):
         loss.backward()
 
         sample["net_input"]["source"].grad.sign_()
-        x_adv = x_adv - eps*x_adv.grad
+        sample["net_input"]["source"] = sample["net_input"]["source"] \ 
+                                        - eps*sample["net_input"]["source"].grad
         
         return loss
 

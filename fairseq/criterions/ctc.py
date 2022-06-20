@@ -363,7 +363,7 @@ class CtcCriterion(FairseqCriterion):
         self.sentence_avg = cfg.sentence_avg
     
     def forward_and_get_fgsm(self, model, sample):
-        #origin = sample["net_input"]["source"].clone()
+        origin = sample["net_input"]["source"].clone()
         diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
         sample["net_input"]["source"] = diff_able
         

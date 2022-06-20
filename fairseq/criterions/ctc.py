@@ -411,11 +411,12 @@ class CtcCriterion(FairseqCriterion):
         if sample["net_input"]["source"].grad is not None:
             sample["net_input"]["source"].grad.data.fill_(0)
         
-        loss.backward()
+        with torch.autograd.profiler.record_function("backward"):
+            loss.backward()
 
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] \ 
-                                            - eps*sample["net_input"]["source"].grad
+                                            + eps*sample["net_input"]["source"].grad
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

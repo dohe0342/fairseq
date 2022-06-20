@@ -425,7 +425,7 @@ class CtcCriterion(FairseqCriterion):
                 print('gradient = ', p.grad)
         '''
 
-        eps = 0.001
+        eps = 0.1
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
 

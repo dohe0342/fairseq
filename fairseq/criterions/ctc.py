@@ -610,7 +610,7 @@ class CtcCriterion(FairseqCriterion):
 
         loss_sum = utils.item(sum(log.get("loss", 0) for log in logging_outputs))
         loss_fgsm_sum = utils.item(sum(log.get("loss fgsm", 0) for log in logging_outputs))
-        snr = utils.item(sum(log.get("snr", 0) for log in logging_outputs))
+        snr_sum = utils.item(sum(log.get("snr", 0) for log in logging_outputs))
         ntokens = utils.item(sum(log.get("ntokens", 0) for log in logging_outputs))
         nsentences = utils.item(
             sum(log.get("nsentences", 0) for log in logging_outputs)
@@ -624,6 +624,9 @@ class CtcCriterion(FairseqCriterion):
         )
         metrics.log_scalar(
             "loss fgsm", loss_fgsm_sum / sample_size / math.log(2), sample_size, round=3
+        )
+        metrics.log_scalar(
+            "snr", snr_sum / sample_size / math.log(2), sample_size, round=3
         )
 
         metrics.log_scalar("ntokens", ntokens)

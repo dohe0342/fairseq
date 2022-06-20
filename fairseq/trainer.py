@@ -289,7 +289,7 @@ class Trainer(object):
         return self._lr_scheduler
 
     def _build_optimizer(self, pcgrad=False, name='viewmaker'):
-        for n, p in model.named_parameters():
+        for n, p in self.model.named_parameters():
             if 'feature_extractor' in n:
                 p.requires_grad = False
 

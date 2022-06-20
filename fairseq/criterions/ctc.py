@@ -417,6 +417,12 @@ class CtcCriterion(FairseqCriterion):
         with torch.autograd.profiler.record_function("backward"):
             loss.backward(retain_graph=True)
         
+        for n, p in model.named_parameters():
+            if 'feature_extractor' in n:
+                print(p.grad)
+            else:
+                print('gradient = ', p.grad)
+
         eps = 0.0001
         sample["net_input"]["source"].grad.sign_()
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad

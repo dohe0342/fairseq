@@ -411,6 +411,8 @@ class CtcCriterion(FairseqCriterion):
         if sample["net_input"]["source"].grad is not None:
             sample["net_input"]["source"].grad.data.fill_(0)
         
+        if ignore_grad:
+            loss *= 0
         with torch.autograd.profiler.record_function("backward"):
             loss.backward(retain_graph=True)
         

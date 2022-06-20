@@ -420,6 +420,7 @@ class CtcCriterion(FairseqCriterion):
 
         snr = 20*torch.log10(torch.norm(origin, dim=0)/torch.norm(sample["net_input"]["source"], dim=0))/origin.size()[0]
         print(snr)
+        print(snr.size())
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

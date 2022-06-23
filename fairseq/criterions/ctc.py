@@ -433,7 +433,7 @@ class CtcCriterion(FairseqCriterion):
         
         snr = torch.log10(20*(origin/noise))
         
-        sample["net_input"]["source"] = sample["net_input"]["source"] + noise
+        sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
         
         snr_avg = snr.sum() / origin.size()[0]
         

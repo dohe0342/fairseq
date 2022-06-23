@@ -432,7 +432,7 @@ class CtcCriterion(FairseqCriterion):
         origin = torch.norm(origin, dim=1)
         noise = torch.norm(sample["net_input"]["source"], dim=1) - origin
         snr = torch.log10(20*(noise/origin))
-        snr = snr.sum() / origin.size()[0]
+        snr_avg = snr.sum() / origin.size()[0]
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
@@ -444,7 +444,7 @@ class CtcCriterion(FairseqCriterion):
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,
-            "snr": snr,
+            "snr": snr_avg,
         }
 
         return loss, sample_size, logging_output

@@ -425,7 +425,7 @@ class CtcCriterion(FairseqCriterion):
                 print('gradient = ', p.grad)
         '''
 
-        #eps = 0.1
+        eps = 0.01
         sample["net_input"]["source"].grad.sign_()
 
         origin = torch.norm(origin, dim=1)
@@ -433,8 +433,6 @@ class CtcCriterion(FairseqCriterion):
         
         snr = torch.log10(20*(origin/noise))
         
-        #ten = 10*tensor.ones_like(origin).cuda().half()
-        eps = origin/100
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
         
         snr_avg = snr.sum() / origin.size()[0]

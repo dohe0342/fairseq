@@ -112,10 +112,6 @@ class CtcCriterion(FairseqCriterion):
             net_output, log_probs=True
         ).contiguous()  # (T, B, C) from the encoder
 
-        if 0:
-            lprobs2 = lprobs[:,int(lprobs.size()[1]/2):,:]
-            lprobs = lprobs[:,:int(lprobs.size()[1]/2),:]
-
         if "src_lengths" in sample["net_input"]:
             input_lengths = sample["net_input"]["src_lengths"]
         else:
@@ -127,9 +123,6 @@ class CtcCriterion(FairseqCriterion):
                     (lprobs.size(1),), lprobs.size(0), dtype=torch.long
                 )
 
-        if lprobs.size()[1] != input_lengths.size()[0]:
-            input_lengths = input_lengths[:int(input_lengths.size()[0]/2)]
-
         pad_mask = (sample["target"] != self.pad_idx) & (
             sample["target"] != self.eos_idx
         )
@@ -140,12 +133,7 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
 
         with torch.backends.cudnn.flags(enabled=False):
-            loss = 0
-            if 0:
-                print('lprobs size = ', torch.cuda.current_device(), lprobs.size())
-                print('target flat size = ', torch.cuda.current_device(), targets_flat.size())
-                print('input lengths size = ', torch.cuda.current_device(), input_lengths.size())
-            loss += F.ctc_loss(
+            loss = F.ctc_loss(
                 lprobs,
                 targets_flat,
                 input_lengths,
@@ -154,17 +142,6 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-            '''
-            loss += F.ctc_loss(
-                lprobs2,
-                targets_flat,
-                input_lengths,
-                target_lengths,
-                blank=self.blank_idx,
-                reduction="sum",
-                zero_infinity=self.zero_infinity,
-            )
-            '''
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
@@ -245,7 +222,7 @@ class CtcCriterion(FairseqCriterion):
                 logging_output["c_errors"] = c_err
                 logging_output["c_total"] = c_len
 
-        return [loss, net_output["loss"]], sample_size, logging_output
+        return loss, sample_size, logging_output
 
     @staticmethod
     def reduce_metrics(logging_outputs) -> None:

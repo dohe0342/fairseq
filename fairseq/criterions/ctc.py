@@ -425,13 +425,18 @@ class CtcCriterion(FairseqCriterion):
                 print('gradient = ', p.grad)
         '''
 
-        eps = 0.1
+        #eps = 0.1
         sample["net_input"]["source"].grad.sign_()
+
+        origin = torch.norm(origin, dim=1)
+        noise = torch.norm(sample["net_input"]["source"].grad, dim=1)
+        
+        snr = torch.log10(20*(noise/origin))
+        
+        #ten = 10*tensor.ones_like(origin).cuda().half()
+        eps = origin/100
         sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
         
-        origin = torch.norm(origin, dim=1)
-        noise = torch.norm(sample["net_input"]["source"], dim=1) - origin
-        snr = torch.log10(20*(noise/origin))
         snr_avg = snr.sum() / origin.size()[0]
         
         ntokens = (

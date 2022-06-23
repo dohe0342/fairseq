@@ -429,7 +429,7 @@ class CtcCriterion(FairseqCriterion):
         sample["net_input"]["source"].grad.sign_()
 
         origin = torch.norm(origin, dim=1)
-        noise = torch.norm(sample["net_input"]["source"].grad.clone(), dim=1)
+        noise = torch.norm(0.01*sample["net_input"]["source"].grad.clone(), dim=1)
         
         snr = torch.log10(20*(origin/noise))
         

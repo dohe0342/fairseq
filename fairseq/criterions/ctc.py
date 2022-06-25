@@ -521,9 +521,6 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
         
-        if sample["net_input"]["source"].grad is not None:
-            sample["net_input"]["source"].grad.data.fill_(0)
-        
         if ignore_grad:
             loss *= 0
 

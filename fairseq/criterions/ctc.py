@@ -478,10 +478,6 @@ class CtcCriterion(FairseqCriterion):
         return loss, sample_size, logging_output
     
     def forward_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
-        origin = sample["net_input"]["source"].clone()
-        diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
-        sample["net_input"]["source"] = diff_able
-
         sample["net_input"]["cnn_fgsm"] = True
         
         net_output = model(**sample["net_input"])

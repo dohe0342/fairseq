@@ -552,7 +552,7 @@ class CtcCriterion(FairseqCriterion):
             "snr": 0.,
         }
 
-        return loss, sample_size, logging_output
+        return cnn_feat, sample_size, logging_output
 
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])

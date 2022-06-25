@@ -729,6 +729,7 @@ class CtcCriterion(FairseqCriterion):
         
         else:
             sample["net_input"]["cnn_fgsm"] = True
+        
         net_output = model(**sample["net_input"])
         
         #for n, p in model.named_parameters():

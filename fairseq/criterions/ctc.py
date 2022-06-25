@@ -555,6 +555,7 @@ class CtcCriterion(FairseqCriterion):
         return cnn_feat, sample_size, logging_output
     
     def forward_cnn_fgsm(self, model, sample, logging_output, cnn_feat, reduce=True):
+        sample["net_input"]["cnn_feat"] = cnn_feat
         net_output = model(**sample["net_input"])
         lprobs = model.get_normalized_probs(
             net_output, log_probs=True

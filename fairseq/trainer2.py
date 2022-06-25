@@ -816,7 +816,7 @@ class Trainer(object):
         self.model.train()
         self.criterion.train()
         self.zero_grad()
-        #self.zero_grad2()
+        self.zero_grad2()
 
         metrics.log_start_time("train_wall", priority=800, round=0)
 

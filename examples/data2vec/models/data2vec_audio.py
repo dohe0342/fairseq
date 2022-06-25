@@ -339,7 +339,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 features = GradMultiply.apply(features, self.feature_grad_mult)
         else:
             with torch.no_grad() if cnn_fgsm or viewmaker else contextlib.ExitStack():
-            features = self.feature_extractor(features)
+                features = self.feature_extractor(features)
 
         features = features.transpose(1, 2)
         features = self.layer_norm(features)

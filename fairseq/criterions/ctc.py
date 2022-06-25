@@ -528,6 +528,7 @@ class CtcCriterion(FairseqCriterion):
         cnn_feat = net_output["cnn_feat"]
         if cnn_feat.grad is not None:
             cnn_feat.grad.data.fill_(0)
+
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
         

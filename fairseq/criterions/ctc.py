@@ -428,7 +428,7 @@ class CtcCriterion(FairseqCriterion):
             "snr": snr_avg,
         }
 
-        return sample_size, logging_output
+        return None, sample_size, logging_output
     
     def forward_fgsm(self, model, sample, logging_output, reduce=True):
         #print(sample["net_input"]["source"])

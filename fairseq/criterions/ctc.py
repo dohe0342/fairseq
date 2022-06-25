@@ -540,7 +540,7 @@ class CtcCriterion(FairseqCriterion):
 
         origin = origin.reshape(-1, 512)
         print(origin.size())
-        print(origin.norm(dim=0).size())
+        print(origin.norm(dim=1).size())
         origin = origin/origin.norm(dim=0)
         
         conv_feat_ = conv_feat.reshape(-1, 512)

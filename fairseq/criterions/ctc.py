@@ -393,7 +393,8 @@ class CtcCriterion(FairseqCriterion):
 
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
-       
+        
+        del loss
         '''
         for n, p in model.named_parameters():
             if 'feature_extractor' in n:

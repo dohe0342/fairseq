@@ -531,13 +531,14 @@ class CtcCriterion(FairseqCriterion):
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
         
-        eps = 0.001
-        conv_feat.grad.sign_()
-        
-        noise = eps*conv_feat.grad
-        print(noise.square().sum().sqrt())
+        eps = 0.01
 
+        origin = conv_feat.data.clone()
+
+        conv_feat.grad.sign_()
         conv_feat = conv_feat + eps*conv_feat.grad 
+
+        print(origin.size())
                 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

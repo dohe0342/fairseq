@@ -554,22 +554,29 @@ class Wav2VecEncoder(FairseqEncoder):
 
         with torch.no_grad() if not ft else contextlib.ExitStack():
             res = self.w2v_model.extract_features(**w2v_args)
-
+            
             x = res["x"]
+            x_new = res["x_new"]
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C
             x = x.transpose(0, 1)
-        
+            x_new = x_new.transpose(0, 1)
+
         x = self.final_dropout(x)
+        x_new = self.final_dropout(x_new)
+        spk_prob = None
 
         if self.proj:
             x = self.proj(x)
-
+            x_new = self.proj(x_new)
+                    
         return {
             "encoder_out": x,  # T x B x C
+            "encoder_out_new": x_new,   # T x B x C 
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
+            "loss": res["loss"],
         }
 
     def forward_torchscript(self, net_input):

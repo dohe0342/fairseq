@@ -726,9 +726,9 @@ class CtcCriterion(FairseqCriterion):
             origin = sample["net_input"]["source"].clone()
             diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
             sample["net_input"]["source"] = diff_able
-        
-        net_output = model(**sample["net_input"])
-        
+            net_output = model(**sample["net_input"])
+        else:
+            net_output = model(**sample["net_input"], cnn_fgsm=True)
         #for n, p in model.named_parameters():
         #    if 'feature_extractor' in n:
         #        p.requires_grad = False

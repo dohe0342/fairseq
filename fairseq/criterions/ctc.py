@@ -538,14 +538,15 @@ class CtcCriterion(FairseqCriterion):
         conv_feat.grad.sign_()
         conv_feat = conv_feat + eps*conv_feat.grad 
         
-        origin = origin.reshape(-1, 512)
-        origin = origin/origin.norm(dim=1).unsqueeze(1)
-        
-        conv_feat_ = conv_feat.reshape(-1, 512)
-        conv_feat_ = conv_feat_ / conv_feat_.norm(dim=1).unsqueeze(1)
+        if 0:
+            origin = origin.reshape(-1, 512)
+            origin = origin/origin.norm(dim=1).unsqueeze(1)
+            
+            conv_feat_ = conv_feat.reshape(-1, 512)
+            conv_feat_ = conv_feat_ / conv_feat_.norm(dim=1).unsqueeze(1)
 
-        sim = torch.mm(origin, conv_feat_.T)
-        sim = sim.diagonal().sum()/sim.size()[0]
+            sim = torch.mm(origin, conv_feat_.T)
+            sim = sim.diagonal().sum()/sim.size()[0]
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

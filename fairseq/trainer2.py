@@ -927,30 +927,16 @@ class Trainer(object):
         # gather logging outputs from all replicas
         if self._sync_stats():
             train_time = self._local_cumulative_training_time()
-            if extra_kwargs["uses_branch_v1"]: 
-                for i in range(len(logging_outputs)):
-                    (
-                        logging_outputs[i],
-                        (
-                            sample_size,
-                            ooms,
-                            total_train_time,
-                        ),
-                    ) = self._aggregate_logging_outputs(
-                        logging_outputs[i], sample_size, ooms, train_time, ignore=is_dummy_batch
-                    )
-
-            else:
+            (
+                logging_outputs,
                 (
-                    logging_outputs,
-                    (
-                        sample_size,
-                        ooms,
-                        total_train_time,
-                    ),
-                ) = self._aggregate_logging_outputs(
-                    logging_outputs, sample_size, ooms, train_time, ignore=is_dummy_batch
-                )
+                    sample_size,
+                    ooms,
+                    total_train_time,
+                ),
+            ) = self._aggregate_logging_outputs(
+                logging_outputs, sample_size, ooms, train_time, ignore=is_dummy_batch
+            )
 
             self._cumulative_training_time = (
                 total_train_time / self.data_parallel_world_size

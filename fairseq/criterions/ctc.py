@@ -534,10 +534,9 @@ class CtcCriterion(FairseqCriterion):
         
         del loss
         
-        print(conv_feat.grad)
         eps = 0.01
         conv_feat.grad.sign_()
-        conv_feat = cnn_feat + eps*cnn_feat.grad 
+        conv_feat = conv_feat + eps*conv_feat.grad 
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

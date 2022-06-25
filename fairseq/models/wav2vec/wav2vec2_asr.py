@@ -573,31 +573,21 @@ class Wav2VecEncoder(FairseqEncoder):
             x = self.proj(x)
             if x_new is not None:
                 x_new = self.proj(x_new)
-                    
-        return {
-            "encoder_out": x,  # T x B x C
-            "encoder_out_new": x_new,   # T x B x C 
-            "padding_mask": padding_mask,  # B x T,
-            "layer_results": res["layer_results"],
-            "loss": res["loss"],
-        }
-
-            x = res["x"]
-            padding_mask = res["padding_mask"]
-
-            # B x T x C -> T x B x C
-            x = x.transpose(0, 1)
         
-        x = self.final_dropout(x)
-
-        if self.proj:
-            x = self.proj(x)
-
-        return {
-            "encoder_out": x,  # T x B x C
-            "padding_mask": padding_mask,  # B x T,
-            "layer_results": res["layer_results"],
-        }
+        if x_new is not None: 
+            return {
+                "encoder_out": x,  # T x B x C
+                "encoder_out_new": x_new,   # T x B x C 
+                "padding_mask": padding_mask,  # B x T,
+                "layer_results": res["layer_results"],
+                "loss": res["loss"],
+            }
+        else:
+            return {
+                "encoder_out": x,  # T x B x C
+                "padding_mask": padding_mask,  # B x T,
+                "layer_results": res["layer_results"],
+            }
 
     def forward_torchscript(self, net_input):
         if torch.jit.is_scripting():

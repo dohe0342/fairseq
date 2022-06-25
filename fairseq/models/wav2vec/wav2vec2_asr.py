@@ -556,7 +556,7 @@ class Wav2VecEncoder(FairseqEncoder):
             res = self.w2v_model.extract_features(**w2v_args)
             
             x = res["x"]
-            x_new = res["x_new"]
+            x_new = res["x_new"] if "x_new" in res else None
             padding_mask = res["padding_mask"]
 
             # B x T x C -> T x B x C
@@ -577,6 +577,23 @@ class Wav2VecEncoder(FairseqEncoder):
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
             "loss": res["loss"],
+        }
+
+            x = res["x"]
+            padding_mask = res["padding_mask"]
+
+            # B x T x C -> T x B x C
+            x = x.transpose(0, 1)
+        
+        x = self.final_dropout(x)
+
+        if self.proj:
+            x = self.proj(x)
+
+        return {
+            "encoder_out": x,  # T x B x C
+            "padding_mask": padding_mask,  # B x T,
+            "layer_results": res["layer_results"],
         }
 
     def forward_torchscript(self, net_input):

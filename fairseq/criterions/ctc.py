@@ -539,12 +539,10 @@ class CtcCriterion(FairseqCriterion):
         conv_feat = conv_feat + eps*conv_feat.grad 
 
         origin = origin.reshape(-1, 512)
-        print(origin.size())
-        print(origin.norm(dim=1).size())
-        origin = origin/origin.norm(dim=0)
+        origin = origin/origin.norm(dim=1).unsqueeze(1)
         
         conv_feat_ = conv_feat.reshape(-1, 512)
-        conv_feat_ = conv_feat_ / conv_feat_.norm(dim=0)
+        conv_feat_ = conv_feat_ / conv_feat_.norm(dim=1).unsqueeze(1)
 
         sim = torch.mm(origin, conv_feat_.T)
         sim = sim.diagonal().sum()

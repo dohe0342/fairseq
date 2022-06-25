@@ -329,7 +329,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         **kwargs,
     ):
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
-        conv_feat = kwargs['conv_feat'] if 'cnn_feat' in kwargs else None
+        conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
 
         if conv_feat is None:

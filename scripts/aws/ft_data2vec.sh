@@ -1,7 +1,7 @@
 for i in {0..9} ; do
 	fairseq-hydra-train \
 		--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
-		--config-name base_100h_whale \
+		--config-name base_100h_aws_g5 \
 		common.user_dir=examples/data2vec \
 		task.data=/home/work/workspace/LibriSpeech/manifests \
 		task.normalize=true \

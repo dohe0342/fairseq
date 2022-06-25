@@ -544,13 +544,9 @@ class Wav2VecEncoder(FairseqEncoder):
             "source": source,
             "padding_mask": padding_mask,
             "mask": self.apply_mask and self.training,
-        } if cnn_fgsm is None else {
-            "source": source,
-            "padding_mask": padding_mask,
-            "mask": self.apply_mask and self.training,
-            "cnn_fgsm": cnn_fgsm,
-            "cnn_feat": cnn_feat,
-        }
+            "cnn_fgsm": cnn_fgsm if cnn_fgsm is not None else None,
+            "cnn_feat": cnn_feat if cnn_feat is not None else None,
+        } 
 
         ft = self.freeze_finetune_updates <= self.num_updates
 

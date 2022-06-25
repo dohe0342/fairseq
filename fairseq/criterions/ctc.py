@@ -538,7 +538,7 @@ class CtcCriterion(FairseqCriterion):
         conv_feat.grad.sign_()
         conv_feat = conv_feat + eps*conv_feat.grad 
         
-        if 0:
+        if 1:
             origin = origin.reshape(-1, 512)
             origin = origin/origin.norm(dim=1).unsqueeze(1)
             

@@ -546,7 +546,7 @@ class CtcCriterion(FairseqCriterion):
         sim = torch.mm(origin, conv_feat_.T)
         print(sim.size())
         sim = sim.diagonal().sum()/sim.size()[0]
-        print(sim, )
+        print(sim)
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

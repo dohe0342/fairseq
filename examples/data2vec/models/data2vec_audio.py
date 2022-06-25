@@ -407,7 +407,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             if cnn_fgsm is None:
                 features = self.post_extract_proj(features)
             else:
-                features = self.post_extract_proj(features_)
+                features = self.post_extract_proj(features_diff)
 
             if features_newview is not None:
                 features_newview = self.post_extract_proj(features_newview)
@@ -470,7 +470,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             return {
                 "x": x,
                 "x_new": x_new if viewmaker is not None else None,
-                "conv_feat": features_ if cnn_fgsm is not None else None,
+                "conv_feat": features_diff if cnn_fgsm is not None else None,
                 "padding_mask": padding_mask,
                 "layer_results": layer_results,
                 "dropped_layer": dropped_layer,

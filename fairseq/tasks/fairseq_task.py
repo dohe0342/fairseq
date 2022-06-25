@@ -618,6 +618,8 @@ class FairseqTask(object):
                     #optimizer[1].backward(-loss[0][1]+loss[1])
         
         elif fgsm:
+            input_fgsm=False
+            cnn_fgsm=True
             model.train()
             model.set_num_updates(update_num)
             with torch.autograd.profiler.record_function("forward"):

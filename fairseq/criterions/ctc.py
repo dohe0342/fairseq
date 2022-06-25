@@ -537,7 +537,6 @@ class CtcCriterion(FairseqCriterion):
         eps = 0.01
         
         cnn_feat.grad.sign_()
-        
         cnn_feat = cnn_feat + eps*cnn_feat.grad 
         
         ntokens = (

@@ -538,7 +538,8 @@ class Wav2VecEncoder(FairseqEncoder):
 
     def forward(self, source, padding_mask, **kwargs):
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
-
+        cnn_feat = kwargs['cnn_feat'] if 'cnn_feat' in kwargs else None
+        
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,
@@ -548,6 +549,7 @@ class Wav2VecEncoder(FairseqEncoder):
             "padding_mask": padding_mask,
             "mask": self.apply_mask and self.training,
             "cnn_fgsm": cnn_fgsm,
+            "cnn_feat": cnn_feat,
         }
 
         ft = self.freeze_finetune_updates <= self.num_updates

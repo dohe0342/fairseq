@@ -391,6 +391,9 @@ class Data2VecAudioModel(BaseFairseqModel):
         loss = None
         features_newview = None
         x_new = None
+        if cnn_fgsm is not None:
+            features = torch.autograd.Variable(conv_features.data, requires_grad=True)
+
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)

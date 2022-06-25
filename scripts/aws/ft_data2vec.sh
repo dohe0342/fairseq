@@ -3,7 +3,7 @@ for i in {0..9} ; do
 		--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_aws_g5 \
 		common.user_dir=examples/data2vec \
-		task.data=/home/work/workspace/LibriSpeech/manifests \
+		task.data=//workspace/LibriSpeech/manifests \
 		task.normalize=true \
 		model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \
 		criterion._name=viewmaker \

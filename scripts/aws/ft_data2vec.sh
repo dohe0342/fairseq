@@ -1,10 +1,6 @@
 for i in {0..9} ; do
-	if [ $i -eq 0 ] ; then
-	mkdir /home/work/workspace/fairseq/scripts/whale/outputs/$1
-	#cp /home/work/workspace/fairseq/scripts/whale/outputs/pretrained_lightweight_viewmaker.pt /home/work/workspace/fairseq/scripts/whale/outputs/$1/checkpoint_last.pt
-	fi
 	fairseq-hydra-train \
-		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
+		--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_whale \
 		common.user_dir=examples/data2vec \
 		task.data=/home/work/workspace/LibriSpeech/manifests \

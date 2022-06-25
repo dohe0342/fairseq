@@ -525,19 +525,19 @@ class CtcCriterion(FairseqCriterion):
         if ignore_grad:
             loss *= 0
 
-        cnn_feat = net_output["conv_feat"]
-        if cnn_feat.grad is not None:
-            cnn_feat.grad.data.fill_(0)
+        conv_feat = net_output["conv_feat"]
+        if conv_feat.grad is not None:
+            conv_feat.grad.data.fill_(0)
 
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
         
         del loss
         
-        print(cnn_feat)
+        print(conv_feat.grad)
         eps = 0.01
-        cnn_feat.grad.sign_()
-        cnn_feat = cnn_feat + eps*cnn_feat.grad 
+        conv_feat.grad.sign_()
+        conv_feat = cnn_feat + eps*cnn_feat.grad 
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

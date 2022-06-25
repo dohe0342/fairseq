@@ -1,4 +1,5 @@
-for i in {0..9} ; do
+for i in {0..9}
+do
 	fairseq-hydra-train \
 		--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_aws_p4 \

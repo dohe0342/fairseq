@@ -402,7 +402,7 @@ class CtcCriterion(FairseqCriterion):
                 print('gradient = ', p.grad)
         '''
 
-        eps = 0.01
+        eps = 0.02
         sample["net_input"]["source"].grad.sign_()
 
         origin = torch.norm(origin, dim=1)

@@ -549,7 +549,6 @@ class CtcCriterion(FairseqCriterion):
             "sample_size": sample_size,
             "snr": 0.,
         }
-
         del loss
         
         return conv_feat, sample_size, logging_output

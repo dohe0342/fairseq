@@ -10,5 +10,5 @@ fairseq-hydra-train \
 	task.data=/workspace/LibriSpeech/manifests \
 	task.normalize=true \
 	model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
-	criterion._name=ctc \
+	criterion._name=ctc_fgsm \
 	checkpoint.save_dir=/workspace/fairseq/scripts/ant/outputs/$1

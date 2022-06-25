@@ -554,7 +554,7 @@ class CtcCriterion(FairseqCriterion):
 
         return cnn_feat, sample_size, logging_output
     
-    def forward_fgsm(self, model, sample, logging_output, reduce=True):
+    def forward_cnn_fgsm(self, model, sample, logging_output, reduce=True):
         #print(sample["net_input"]["source"])
         #set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
         net_output = model(**sample["net_input"])

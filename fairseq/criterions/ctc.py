@@ -477,7 +477,7 @@ class CtcCriterion(FairseqCriterion):
 
         return loss, sample_size, logging_output
     
-    def forward_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
+    def forward_and_get_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
         sample["net_input"]["cnn_fgsm"] = True
         
         net_output = model(**sample["net_input"])
@@ -553,6 +553,54 @@ class CtcCriterion(FairseqCriterion):
         }
 
         return cnn_feat, sample_size, logging_output
+    
+    def forward_fgsm(self, model, sample, logging_output, reduce=True):
+        #print(sample["net_input"]["source"])
+        #set_grad = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
+        net_output = model(**sample["net_input"])
+        lprobs = model.get_normalized_probs(
+            net_output, log_probs=True
+        ).contiguous()  # (T, B, C) from the encoder
+
+        if "src_lengths" in sample["net_input"]:
+            input_lengths = sample["net_input"]["src_lengths"]
+        else:
+            if net_output["padding_mask"] is not None:
+                non_padding_mask = ~net_output["padding_mask"]
+                input_lengths = non_padding_mask.long().sum(-1)
+            else:
+                input_lengths = lprobs.new_full(
+                    (lprobs.size(1),), lprobs.size(0), dtype=torch.long
+                )
+
+        pad_mask = (sample["target"] != self.pad_idx) & (
+            sample["target"] != self.eos_idx
+        )
+        targets_flat = sample["target"].masked_select(pad_mask)
+        if "target_lengths" in sample:
+            target_lengths = sample["target_lengths"]
+        else:
+            target_lengths = pad_mask.sum(-1)
+
+        with torch.backends.cudnn.flags(enabled=False):
+            loss = F.ctc_loss(
+                lprobs,
+                targets_flat,
+                input_lengths,
+                target_lengths,
+                blank=self.blank_idx,
+                reduction="sum",
+                zero_infinity=self.zero_infinity,
+            )
+
+        ntokens = (
+            sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
+        )
+
+        sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
+        logging_output["loss fgsm"] = utils.item(loss.data)
+
+        return loss, sample_size, logging_output
 
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])

@@ -677,7 +677,7 @@ class CtcCriterion(FairseqCriterion):
         """
         return True
 
-@register_criterion("ctc_input_fgsm", dataclass=CtcCriterionConfig)
+@register_criterion("ctc_cnn_fgsm", dataclass=CtcCriterionConfig)
 class CtcCriterion(FairseqCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(task)
@@ -722,14 +722,7 @@ class CtcCriterion(FairseqCriterion):
         self.sentence_avg = cfg.sentence_avg
     
     def forward_and_get_fgsm(self, model, sample, optimizer, ignore_grad=False):
-        if input_fgsm:
-            origin = sample["net_input"]["source"].clone()
-            diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
-            sample["net_input"]["source"] = diff_able
-        
-        else:
-            sample["net_input"]["cnn_fgsm"] = True
-        
+        sample["net_input"]["cnn_fgsm"] = True
         net_output = model(**sample["net_input"])
         
         #for n, p in model.named_parameters():

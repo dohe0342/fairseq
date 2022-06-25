@@ -550,7 +550,6 @@ class Wav2VecEncoder(FairseqEncoder):
             "cnn_fgsm": cnn_fgsm,
         }
 
-
         ft = self.freeze_finetune_updates <= self.num_updates
 
         with torch.no_grad() if not ft else contextlib.ExitStack():

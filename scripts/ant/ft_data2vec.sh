@@ -1,8 +1,33 @@
 git pull
+
+exp_name=$1
+
 fairseq-hydra-train \
 	--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
     --config-name base_100h_ant \
 	common.user_dir=examples/data2vec \
     task.data=/workspace/LibriSpeech/manifests \
-    model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
+	task.normalize=true \
+	model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
+	criterion._name=viewmaker \
+	checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 	+model.viewmaker=true \
+
+:<<'END'
+for i in {0..0} ; do
+    if [ $i -eq 0 ] ; then
+    mkdir /home/work/workspace/fairseq/scripts/whale/outputs/$1
+    #cp /home/work/workspace/fairseq/scripts/whale/outputs/pretrained_lightweight_viewmaker.pt /home/work/workspace/fairseq/scripts/whale/outputs/$1/checkpoint_last.pt
+    fi  
+    fairseq-hydra-train \
+        --config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
+        --config-name base_100h_whale \
+        common.user_dir=examples/data2vec \
+        task.data=/home/work/workspace/LibriSpeech/manifests \
+        task.normalize=true \
+        model.w2v_path=/home/work/workspace/models/data2vec_model/audio_base_ls.pt \
+        criterion._name=viewmaker \
+        checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
+        +model.viewmaker=true \
+done
+END

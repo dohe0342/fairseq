@@ -721,10 +721,11 @@ class CtcCriterion(FairseqCriterion):
         self.zero_infinity = cfg.zero_infinity
         self.sentence_avg = cfg.sentence_avg
     
-    def forward_and_get_fgsm(self, model, sample, optimizer, ignore_grad=False):
-        origin = sample["net_input"]["source"].clone()
-        diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
-        sample["net_input"]["source"] = diff_able
+    def forward_and_get_fgsm(self, model, sample, optimizer, ignore_grad=False, input_fgsm=False):
+        if input_fgsm:
+            origin = sample["net_input"]["source"].clone()
+            diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
+            sample["net_input"]["source"] = diff_able
         
         net_output = model(**sample["net_input"])
         

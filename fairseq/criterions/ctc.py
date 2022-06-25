@@ -531,15 +531,14 @@ class CtcCriterion(FairseqCriterion):
             optimizer.backward(loss, retain_graph=True)
        
         eps = 0.01
-        #sample["net_input"]["source"].grad.sign_()
+        
         origin = torch.norm(net_output["cnn_feat"].data.clone(), dim=1)
         cnn_feat = net_output["cnn_feat"]
         cnn_feat.grad.sign_()
         noise = torch.norm(eps*cnn_feat.grad.clone(), dim=1)
         
         snr = torch.log10(20*(origin/noise))
-        
-        #sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
+        cnn_feat = cnn_feat + eps*cnn_feat.grad 
         
         snr_avg = snr.sum() / origin.size()[0]
         

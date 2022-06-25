@@ -8,5 +8,7 @@ for i in {0..9} ; do
 		model.w2v_path=/opt/ml/input/data/data/audio_base_ls.pt \
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/opt/ml/model \
-		+model.viewmaker=true \
+		dataset.max_tokens=3200000 \
+		optimization.update_freq=[4] \
+		+model.viewmaker=true
 done

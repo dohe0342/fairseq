@@ -629,7 +629,7 @@ class FairseqTask(object):
                         loss, sample_size, logging_output = criterion.forward_fgsm(model, sample, logging_output)
                     elif cnn_fgsm:
                         conv_feat, sample_size, logging_output = criterion.forward_and_get_cnn_fgsm(model, sample, optimizer, ignore_grad)
-                        loss, sample_size, logging_output = criterion.forward_cnn_fgsm(model, sample, logging_output, cnn_feat)
+                        loss, sample_size, logging_output = criterion.forward_cnn_fgsm(model, sample, logging_output, conv_feat)
 
             if ignore_grad:
                 loss *= 0

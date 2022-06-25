@@ -571,7 +571,8 @@ class Wav2VecEncoder(FairseqEncoder):
 
         if self.proj:
             x = self.proj(x)
-            x_new = self.proj(x_new)
+            if x_new is not None:
+                x_new = self.proj(x_new)
                     
         return {
             "encoder_out": x,  # T x B x C

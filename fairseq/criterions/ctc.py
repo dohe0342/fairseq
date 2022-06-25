@@ -525,7 +525,7 @@ class CtcCriterion(FairseqCriterion):
         if ignore_grad:
             loss *= 0
 
-        cnn_feat = net_output["cnn_feat"]
+        cnn_feat = net_output["conv_feat"]
         if cnn_feat.grad is not None:
             cnn_feat.grad.data.fill_(0)
 

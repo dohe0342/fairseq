@@ -531,8 +531,9 @@ class CtcCriterion(FairseqCriterion):
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
         
-        eps = 0.01
+        eps = 0.001
         conv_feat.grad.sign_()
+        
         noise = eps*conv_feat.grad
         print(noise.square().sum().sqrt())
 

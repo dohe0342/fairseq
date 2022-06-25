@@ -532,7 +532,6 @@ class CtcCriterion(FairseqCriterion):
         with torch.autograd.profiler.record_function("backward"):
             optimizer.backward(loss, retain_graph=True)
         
-        del loss
         
         eps = 0.01
         conv_feat.grad.sign_()
@@ -551,6 +550,8 @@ class CtcCriterion(FairseqCriterion):
             "snr": 0.,
         }
 
+        del loss
+        
         return conv_feat, sample_size, logging_output
     
     def forward_cnn_fgsm(self, model, sample, logging_output, conv_feat, reduce=True):

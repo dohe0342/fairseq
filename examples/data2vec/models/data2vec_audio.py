@@ -408,6 +408,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 features = self.post_extract_proj(features)
             else:
                 features = self.post_extract_proj(features_)
+
             if features_newview is not None:
                 features_newview = self.post_extract_proj(features_newview)
          

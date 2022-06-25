@@ -540,14 +540,11 @@ class CtcCriterion(FairseqCriterion):
 
         origin = origin.reshape(-1, 512)
         origin = origin/origin.norm(dim=0)
-        print(origin.size())
         conv_feat_ = conv_feat.reshape(-1, 512)
         conv_feat_ = conv_feat_ / conv_feat_.norm(dim=0)
 
         sim = torch.mm(origin, conv_feat_.T)
-        print(sim.size())
         sim = sim.diagonal().sum()/sim.size()[0]
-        print(sim)
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

@@ -476,6 +476,96 @@ class CtcCriterion(FairseqCriterion):
         logging_output["loss fgsm"] = utils.item(loss.data)
 
         return loss, sample_size, logging_output
+    
+    def forward_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
+        origin = sample["net_input"]["source"].clone()
+        diff_able = torch.autograd.Variable(sample["net_input"]["source"].data, requires_grad=True)
+        sample["net_input"]["source"] = diff_able
+        
+        net_output = model(**sample["net_input"])
+        
+        #for n, p in model.named_parameters():
+        #    if 'feature_extractor' in n:
+        #        p.requires_grad = False
+        
+        lprobs = model.get_normalized_probs(
+            net_output, log_probs=True
+        ).contiguous()  # (T, B, C) from the encoder
+        
+        if "src_lengths" in sample["net_input"]:
+            input_lengths = sample["net_input"]["src_lengths"]
+        else:
+            if net_output["padding_mask"] is not None:
+                non_padding_mask = ~net_output["padding_mask"]
+                input_lengths = non_padding_mask.long().sum(-1)
+            else:
+                input_lengths = lprobs.new_full(
+                    (lprobs.size(1),), lprobs.size(0), dtype=torch.long
+                )
+
+        pad_mask = (sample["target"] != self.pad_idx) & (
+            sample["target"] != self.eos_idx
+        )
+        targets_flat = sample["target"].masked_select(pad_mask)
+        if "target_lengths" in sample:
+            target_lengths = sample["target_lengths"]
+        else:
+            target_lengths = pad_mask.sum(-1)
+
+        with torch.backends.cudnn.flags(enabled=False):
+            loss = F.ctc_loss(
+                lprobs,
+                targets_flat,
+                input_lengths,
+                target_lengths,
+                blank=self.blank_idx,
+                reduction="sum",
+                zero_infinity=self.zero_infinity,
+            )
+        
+        if sample["net_input"]["source"].grad is not None:
+            sample["net_input"]["source"].grad.data.fill_(0)
+        
+        if ignore_grad:
+            loss *= 0
+
+        with torch.autograd.profiler.record_function("backward"):
+            optimizer.backward(loss, retain_graph=True)
+       
+        '''
+        for n, p in model.named_parameters():
+            if 'feature_extractor' in n:
+                print(p.grad)
+            else:
+                print('gradient = ', p.grad)
+        '''
+
+        eps = 0.02
+        sample["net_input"]["source"].grad.sign_()
+
+        origin = torch.norm(origin, dim=1)
+        noise = torch.norm(eps**sample["net_input"]["source"].grad.clone(), dim=1)
+        
+        snr = torch.log10(20*(origin/noise))
+        
+        sample["net_input"]["source"] = sample["net_input"]["source"] + eps*sample["net_input"]["source"].grad
+        
+        snr_avg = snr.sum() / origin.size()[0]
+        
+        ntokens = (
+            sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
+        )
+
+        sample_size = sample["target"].size(0) if self.sentence_avg else ntokens
+        logging_output = {
+            "loss": utils.item(loss.data),  # * sample['ntokens'],
+            "ntokens": ntokens,
+            "nsentences": sample["id"].numel(),
+            "sample_size": sample_size,
+            "snr": snr_avg,
+        }
+
+        return loss, sample_size, logging_output
 
     def forward(self, model, sample, reduce=True):
         #print(sample["net_input"]["source"])

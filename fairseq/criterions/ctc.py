@@ -533,10 +533,11 @@ class CtcCriterion(FairseqCriterion):
         
         eps = 0.01
         conv_feat.grad.sign_()
-        conv_feat = conv_feat + eps*conv_feat.grad 
         noise = eps*conv_feat.grad
         print(noise.square().sum().sqrt())
-        
+
+        conv_feat = conv_feat + eps*conv_feat.grad 
+                
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )

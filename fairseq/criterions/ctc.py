@@ -532,15 +532,10 @@ class CtcCriterion(FairseqCriterion):
        
         eps = 0.01
         
-        origin = torch.norm(net_output["cnn_feat"].data.clone(), dim=1)
         cnn_feat = net_output["cnn_feat"]
         cnn_feat.grad.sign_()
-        noise = torch.norm(eps*cnn_feat.grad.clone(), dim=1)
         
-        snr = torch.log10(20*(origin/noise))
         cnn_feat = cnn_feat + eps*cnn_feat.grad 
-        
-        snr_avg = snr.sum() / origin.size()[0]
         
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
@@ -552,7 +547,7 @@ class CtcCriterion(FairseqCriterion):
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,
-            "snr": snr_avg,
+            "snr": 0.,
         }
 
         return loss, sample_size, logging_output

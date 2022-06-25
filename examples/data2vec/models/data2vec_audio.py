@@ -372,7 +372,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             conv_features = features.clone()
         
         else:
-            features = conv_feat  
+            features = conv_feat.detach() 
         '''
         if self.cfg.ch_prune_idx != -1:
             num = int(self.cfg.ch_prune_idx)

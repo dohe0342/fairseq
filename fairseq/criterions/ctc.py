@@ -533,7 +533,8 @@ class CtcCriterion(FairseqCriterion):
             optimizer.backward(loss, retain_graph=True)
         
         del loss
-
+        
+        print(cnn_feat)
         eps = 0.01
         cnn_feat.grad.sign_()
         cnn_feat = cnn_feat + eps*cnn_feat.grad 

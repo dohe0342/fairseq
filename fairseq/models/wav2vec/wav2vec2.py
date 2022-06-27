@@ -610,13 +610,12 @@ class Wav2Vec2Model(BaseFairseqModel):
 
             features = features.transpose(1, 2)
             features = self.layer_norm(features)
-            unmasked_features = features.clone()
-
-            #features[0,:,:300] = 0.
-            conv_features = features.clone()
         else:
             features = conv_feat.detach()
         
+        unmasked_features = features.clone()
+        conv_features = features.clone()
+
         if padding_mask is not None and padding_mask.any():
             input_lengths = (1 - padding_mask.long()).sum(-1)
             # apply conv formula to get real output_lengths

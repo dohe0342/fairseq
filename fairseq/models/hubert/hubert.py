@@ -450,10 +450,14 @@ class HubertModel(BaseFairseqModel):
 
             features = features.transpose(1, 2)
             features = self.layer_norm(features)
-            unmasked_features = features.clone()
+        
+        else:
+            features = conv_feat
+        
+        unmasked_features = features.clone()
 
-            if padding_mask is not None:
-                padding_mask = self.forward_padding_mask(features, padding_mask)
+        if padding_mask is not None:
+            padding_mask = self.forward_padding_mask(features, padding_mask)
 
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

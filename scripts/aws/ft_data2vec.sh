@@ -14,8 +14,8 @@ then
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \
 			dataset.max_tokens=3200000 \
-			optimization.update_freq=[4] \
-			+model.viewmaker=true
+			optimization.update_freq=[2] \
+			+model.viewmaker=tre
 	done
 else
 	for i in {0..9}
@@ -30,7 +30,7 @@ else
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \
 			dataset.max_tokens=3200000 \
-			optimization.update_freq=[4] \
+			optimization.update_freq=[2] \
 			+model.viewmaker=true
 	done
 fi

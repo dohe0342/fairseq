@@ -120,7 +120,11 @@ class HubertAsrConfig(FairseqDataclass):
     )
     normalize: bool = II("task.normalize")
     data: str = II("task.data")
-
+    
+    viewmaker: bool = field(
+        default=False,
+        metadata={"help": "viewmaker"},
+    )    
     # this holds the loaded hubert args
     w2v_args: Any = None
 

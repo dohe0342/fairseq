@@ -659,7 +659,13 @@ class Wav2Vec2Model(BaseFairseqModel):
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
 
         if self.post_extract_proj is not None:
-            features = self.post_extract_proj(features)
+            if cnn_fgsm is None:
+                features = self.post_extract_proj(features)
+            else:
+                features = self.post_extract_proj(features_diff)
+
+            if features_newview is not None:
+                features_newview = self.post_extract_proj(features_newview)
 
         features = self.dropout_input(features)
         unmasked_features = self.dropout_features(unmasked_features)

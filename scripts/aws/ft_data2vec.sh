@@ -10,7 +10,7 @@ then
 			common.user_dir=examples/data2vec \
 			task.data=/opt/ml/code/LibriSpeech/manifests \
 			task.normalize=true \
-			model.w2v_path=/opt/ml/input/data/model/audio_base_ls.pt \
+			model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \
 			dataset.max_tokens=3200000 \

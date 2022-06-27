@@ -12,4 +12,4 @@ fairseq-hydra-train \
 	criterion._name=ctc \
 	checkpoint.save_dir=/opt/ml/model \
 	dataset.max_tokens=3200000 \
-	optimization.update_freq=[4]
+	optimization.update_freq=[2]

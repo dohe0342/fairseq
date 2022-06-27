@@ -528,7 +528,13 @@ class HubertModel(BaseFairseqModel):
             )
 
         if features_only:
-            return {"x": x, "padding_mask": padding_mask, "features": features}
+            return {"x": x,
+                    "x_new": x_new if viewmaekr is not None else None,
+                    "conv_feat": features_diff if cnn_fgsm is not None else None,
+                    "padding_mask": padding_mask, 
+                    "features": features,
+                    "loss": loss,
+                }
 
         def compute_pred(proj_x, target, label_embs):
             # compute logits for the i-th label set

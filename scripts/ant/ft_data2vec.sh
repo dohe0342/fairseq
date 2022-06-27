@@ -19,7 +19,7 @@ then
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
-		common.user_dir=examples/data2vec \
+		common.user_dir=examples/hubert \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \

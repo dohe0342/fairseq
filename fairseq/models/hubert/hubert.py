@@ -459,8 +459,34 @@ class HubertModel(BaseFairseqModel):
         if padding_mask is not None:
             padding_mask = self.forward_padding_mask(features, padding_mask)
 
+        loss = None
+        features_newview = None
+        x_new = None
+        if cnn_fgsm is not None:
+            features_diff = torch.autograd.Variable(conv_features.data, requires_grad=True)
+    
+        if viewmaker is not None:
+            criterion = nn.MSELoss(reduction='mean')
+            features_newview, delta = viewmaker(conv_features, padding_mask)
+            loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+    
         if self.post_extract_proj is not None:
-            features = self.post_extract_proj(features)
+            if cnn_fgsm is None:
+                features = self.post_extract_proj(features)
+            else:
+                features = self.post_extract_proj(features_diff)
+
+            if features_newview is not None:
+                features_newview = self.post_extract_proj(features_newview)
+
+        if self.post_extract_proj is not None:
+            if cnn_fgsm is None:
+                features = self.post_extract_proj(features)
+            else:
+                features = self.post_extract_proj(features_diff)
+
+            if features_newview is not None:
+                features_newview = self.post_extract_proj(features_newview)
 
         features = self.dropout_input(features)
         unmasked_features = self.dropout_features(unmasked_features)

@@ -658,8 +658,6 @@ class Wav2Vec2Model(BaseFairseqModel):
             features_newview, delta = viewmaker(conv_features, padding_mask)
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
 
-
-
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 

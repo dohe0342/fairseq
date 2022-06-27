@@ -744,6 +744,7 @@ class Wav2Vec2Model(BaseFairseqModel):
                 "features": unmasked_features,
                 "layer_results": layer_results,
                 "dropped_layer": dropped_layer,
+                "loss": loss,
             }
 
         if self.quantizer:

@@ -593,6 +593,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         padding_count=None,
         **kwargs,
     ):
+        print(kwargs)
         
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
         conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None

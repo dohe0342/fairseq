@@ -740,6 +740,8 @@ class Wav2Vec2Model(BaseFairseqModel):
         if features_only:
             return {
                 "x": x,
+                "x_new": x_new if viewmaker is not None else None,
+                "conv_feat": features_diff if cnn_fgsm is not None else None,
                 "padding_mask": padding_mask,
                 "features": unmasked_features,
                 "layer_results": layer_results,

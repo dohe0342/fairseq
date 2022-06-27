@@ -434,8 +434,14 @@ class HubertModel(BaseFairseqModel):
         output_layer: Optional[int] = None,
         **kwargs,
     ) -> Dict[str, torch.Tensor]:
-        """output layer is 1-based"""
-        features = self.forward_features(source)
+        
+        cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None 
+        conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None 
+        viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None 
+        
+        if conv_feat is None:
+            """output layer is 1-based"""
+            features = self.forward_features(source)
         if target_list is not None:
             features, target_list = self.forward_targets(features, target_list)
 

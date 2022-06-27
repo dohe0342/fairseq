@@ -1381,6 +1381,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             return [utils.softmax(logits.float(), dim=-1), utils.softmax(logits_new.float(), dim=-1)]
 
     def forward(self, source, padding_mask, **kwargs):
+        print(self.viewmaker)
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,

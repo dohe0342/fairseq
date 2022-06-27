@@ -19,7 +19,7 @@ then
 else
 	fairseq-hydra-train \
 		--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
-		--config-name base_100h_aws_p4 \
+		--config-name base_100h_aws_$instance \
 		common.user_dir=examples/data2vec \
 		task.data=/opt/ml/code/LibriSpeech/manifests \
 		task.normalize=true \

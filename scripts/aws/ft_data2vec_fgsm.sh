@@ -26,3 +26,4 @@ else
 		model.w2v_path=/opt/ml/input/data/model/audio_base_ls.pt \
 		criterion._name=ctc \
 		checkpoint.save_dir=/opt/ml/model 
+fi

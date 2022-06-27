@@ -727,6 +727,13 @@ class Wav2Vec2Model(BaseFairseqModel):
                 layer=layer
         )
         
+        if features_newview is not None:
+            x_new, _, _ = self.encoder(
+                x, 
+                padding_mask=padding_mask, 
+                layer=layer
+        )
+
         if 0:
             return (conv_features, enc_input, x)
 

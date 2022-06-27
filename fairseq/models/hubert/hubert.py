@@ -452,7 +452,7 @@ class HubertModel(BaseFairseqModel):
             features = self.layer_norm(features)
         
         else:
-            features = conv_feat
+            features = conv_feat.detach()
         
         unmasked_features = features.clone()
 

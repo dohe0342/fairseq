@@ -346,12 +346,10 @@ class Data2VecAudioModel(BaseFairseqModel):
             features = features.transpose(1, 2)
             features = self.layer_norm(features)
 
-                        
-            conv_features = features.clone()
-        
         else:
             features = conv_feat.detach() 
         
+        conv_features = features.clone()
         orig_padding_mask = padding_mask
 
         if padding_mask is not None and padding_mask.any():

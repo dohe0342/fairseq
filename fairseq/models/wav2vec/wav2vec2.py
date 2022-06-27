@@ -613,38 +613,37 @@ class Wav2Vec2Model(BaseFairseqModel):
             unmasked_features = features.clone()
 
             #features[0,:,:300] = 0.
-
-            if padding_mask is not None and padding_mask.any():
-                input_lengths = (1 - padding_mask.long()).sum(-1)
-                # apply conv formula to get real output_lengths
-                output_lengths = self._get_feat_extract_output_lengths(input_lengths)
-
-                padding_mask = torch.zeros(
-                    features.shape[:2], dtype=features.dtype, device=features.device
-                )
-
-                # these two operations makes sure that all values
-                # before the output lengths indices are attended to
-                padding_mask[
-                    (
-                        torch.arange(padding_mask.shape[0], device=padding_mask.device),
-                        output_lengths - 1,
-                    )
-                ] = 1
-                padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
-            else:
-                padding_mask = None
-
-            time_steps_to_drop = features.size(1) % self.crop_seq_to_multiple
-            if time_steps_to_drop != 0:
-                features = features[:, :-time_steps_to_drop]
-                unmasked_features = unmasked_features[:, :-time_steps_to_drop]
-                if padding_mask is not None:
-                    padding_mask = padding_mask[:, :-time_steps_to_drop]
-            
             conv_features = features.clone()
         else:
             features = conv_feat.detach()
+        
+        if padding_mask is not None and padding_mask.any():
+            input_lengths = (1 - padding_mask.long()).sum(-1)
+            # apply conv formula to get real output_lengths
+            output_lengths = self._get_feat_extract_output_lengths(input_lengths)
+
+            padding_mask = torch.zeros(
+                features.shape[:2], dtype=features.dtype, device=features.device
+            )
+
+            # these two operations makes sure that all values
+            # before the output lengths indices are attended to
+            padding_mask[
+                (
+                    torch.arange(padding_mask.shape[0], device=padding_mask.device),
+                    output_lengths - 1,
+                )
+            ] = 1
+            padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
+        else:
+            padding_mask = None
+
+        time_steps_to_drop = features.size(1) % self.crop_seq_to_multiple
+        if time_steps_to_drop != 0:
+            features = features[:, :-time_steps_to_drop]
+            unmasked_features = unmasked_features[:, :-time_steps_to_drop]
+            if padding_mask is not None:
+                padding_mask = padding_mask[:, :-time_steps_to_drop]
 
         loss = None
         features_newview = None

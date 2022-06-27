@@ -3,6 +3,7 @@ mode="w2v"
 exp_name=$1
 
 if [ $mode -eq "w2v" ]; then
+	echo "here!!"
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \

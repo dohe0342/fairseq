@@ -593,12 +593,9 @@ class Wav2Vec2Model(BaseFairseqModel):
         padding_count=None,
         **kwargs,
     ):
-        print(kwargs)
-        
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
         conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
-        print(viewmaker)
 
         if conv_feat is None:
             if self.feature_grad_mult > 0:
@@ -846,7 +843,12 @@ class Wav2Vec2Model(BaseFairseqModel):
 
     def extract_features(self, source, padding_mask, mask=False, layer=None, **kwargs,):
         res = self.forward(
-            source, padding_mask, mask=mask, features_only=True, layer=layer
+            source, 
+            padding_mask, 
+            mask=mask, 
+            features_only=True, 
+            layer=layer,
+            **kwargs,
         )
         return res
 

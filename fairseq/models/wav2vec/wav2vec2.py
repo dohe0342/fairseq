@@ -694,6 +694,15 @@ class Wav2Vec2Model(BaseFairseqModel):
                 mask_indices=mask_indices,
                 mask_channel_indices=mask_channel_indices,
             )
+
+            if features_newview is not None:
+                x_new, _ = self.apply_mask(
+                    features_newview,
+                    padding_mask,
+                    mask_indices=None,
+                    mask_channel_indices=mask_channel_indices,
+                )
+
             if not is_xla_tensor(x) and mask_indices is not None:
                 # tpu-comment: reducing the size in a dynamic way causes
                 # too many recompilations on xla.

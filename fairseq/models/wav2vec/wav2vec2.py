@@ -597,51 +597,56 @@ class Wav2Vec2Model(BaseFairseqModel):
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
         conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
-        if self.feature_grad_mult > 0:
-            features = self.feature_extractor(source)
-            if self.feature_grad_mult != 1.0:
-                features = GradMultiply.apply(features, self.feature_grad_mult)
-        else:
-            with torch.no_grad():
+
+        if conv_feat is None:
+            if self.feature_grad_mult > 0:
                 features = self.feature_extractor(source)
+                if self.feature_grad_mult != 1.0:
+                    features = GradMultiply.apply(features, self.feature_grad_mult)
+            else:
+                with torch.no_grad():
+                    features = self.feature_extractor(source)
 
-        features_pen = features.float().pow(2).mean()
+            features_pen = features.float().pow(2).mean()
 
-        features = features.transpose(1, 2)
-        features = self.layer_norm(features)
-        unmasked_features = features.clone()
+            features = features.transpose(1, 2)
+            features = self.layer_norm(features)
+            unmasked_features = features.clone()
 
-        #features[0,:,:300] = 0.
+            #features[0,:,:300] = 0.
 
-        if padding_mask is not None and padding_mask.any():
-            input_lengths = (1 - padding_mask.long()).sum(-1)
-            # apply conv formula to get real output_lengths
-            output_lengths = self._get_feat_extract_output_lengths(input_lengths)
+            if padding_mask is not None and padding_mask.any():
+                input_lengths = (1 - padding_mask.long()).sum(-1)
+                # apply conv formula to get real output_lengths
+                output_lengths = self._get_feat_extract_output_lengths(input_lengths)
 
-            padding_mask = torch.zeros(
-                features.shape[:2], dtype=features.dtype, device=features.device
-            )
-
-            # these two operations makes sure that all values
-            # before the output lengths indices are attended to
-            padding_mask[
-                (
-                    torch.arange(padding_mask.shape[0], device=padding_mask.device),
-                    output_lengths - 1,
+                padding_mask = torch.zeros(
+                    features.shape[:2], dtype=features.dtype, device=features.device
                 )
-            ] = 1
-            padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
-        else:
-            padding_mask = None
 
-        time_steps_to_drop = features.size(1) % self.crop_seq_to_multiple
-        if time_steps_to_drop != 0:
-            features = features[:, :-time_steps_to_drop]
-            unmasked_features = unmasked_features[:, :-time_steps_to_drop]
-            if padding_mask is not None:
-                padding_mask = padding_mask[:, :-time_steps_to_drop]
-        
-        conv_features = features.clone()
+                # these two operations makes sure that all values
+                # before the output lengths indices are attended to
+                padding_mask[
+                    (
+                        torch.arange(padding_mask.shape[0], device=padding_mask.device),
+                        output_lengths - 1,
+                    )
+                ] = 1
+                padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
+            else:
+                padding_mask = None
+
+            time_steps_to_drop = features.size(1) % self.crop_seq_to_multiple
+            if time_steps_to_drop != 0:
+                features = features[:, :-time_steps_to_drop]
+                unmasked_features = unmasked_features[:, :-time_steps_to_drop]
+                if padding_mask is not None:
+                    padding_mask = padding_mask[:, :-time_steps_to_drop]
+            
+            conv_features = features.clone()
+        else:
+            features = conv_feat.detach()
+
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 

@@ -148,7 +148,10 @@ class HubertCtc(BaseFairseqModel):
     @classmethod
     def build_model(cls, cfg: HubertCtcConfig, task: FairseqTask):
         """Build a new model instance."""
-        w2v_encoder = HubertEncoder(cfg, task)
+        if cfg.viewmaker:
+            w2v_encoder = HubertEncoder(cfg, task)
+        else:
+            w2v_encoder = HubertEncoder(cfg, task)
         return cls(cfg, w2v_encoder)
 
     def get_normalized_probs(self, net_output, log_probs):

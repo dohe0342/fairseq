@@ -2,7 +2,7 @@ git pull
 mode="w2v"
 exp_name=$1
 
-if [ $mode -eq "w2v" ]
+if [ $mode == "w2v" ]
 then
 	echo "here!!"
 	fairseq-hydra-train \

@@ -508,7 +508,8 @@ class HubertModel(BaseFairseqModel):
         else:
             x = features
             mask_indices = None
-
+            if features_newview is not None:
+                x_new = features_newview
         # feature: (B, T, D), float
         # target: (B, T), long
         # x: (B, T, D), float
@@ -519,6 +520,12 @@ class HubertModel(BaseFairseqModel):
             padding_mask=padding_mask,
             layer=None if output_layer is None else output_layer - 1,
         )
+        if features_newview is not None:
+            x_new, _, _ = self.encoder(
+                x_new,
+                padding_mask=padding_mask,
+                layer=None if output_layer is None else output_layer -1,
+            )
 
         if features_only:
             return {"x": x, "padding_mask": padding_mask, "features": features}

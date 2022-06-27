@@ -17,7 +17,7 @@ then
 elif [ $mode == "hubert" ]
 then
 	#fairseq-hydra-train \
-	python /workspace/fairseq/fairseq_cli/hydra_train.py
+	python /workspace/fairseq/fairseq_cli/hydra_train.py \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
 		common.user_dir=examples/hubert \

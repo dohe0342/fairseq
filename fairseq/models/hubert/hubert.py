@@ -495,7 +495,10 @@ class HubertModel(BaseFairseqModel):
         unmasked_features = self.dropout_features(unmasked_features)
 
         if mask:
-            x, mask_indices = self.apply_mask(features, padding_mask, target_list)
+            x, mask_indices = self.apply_mask(features, 
+                                              padding_mask, 
+                                              target_list
+                                              )
             if features_newview is not None:
                 x_new, _ = self.apply_mask(
                     features_newview,

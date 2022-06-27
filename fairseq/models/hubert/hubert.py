@@ -442,6 +442,7 @@ class HubertModel(BaseFairseqModel):
         if conv_feat is None:
             """output layer is 1-based"""
             features = self.forward_features(source)
+        
         if target_list is not None:
             features, target_list = self.forward_targets(features, target_list)
 

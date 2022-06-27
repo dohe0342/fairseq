@@ -668,6 +668,9 @@ class Wav2Vec2Model(BaseFairseqModel):
                 features_newview = self.post_extract_proj(features_newview)
 
         features = self.dropout_input(features)
+        if features_newview is not None:
+            features_newview = self.dropout_input(features_newview)
+
         unmasked_features = self.dropout_features(unmasked_features)
 
         num_vars = None

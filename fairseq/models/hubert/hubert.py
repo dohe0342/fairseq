@@ -432,6 +432,7 @@ class HubertModel(BaseFairseqModel):
         mask: bool = True,
         features_only: bool = False,
         output_layer: Optional[int] = None,
+        **kwargs,
     ) -> Dict[str, torch.Tensor]:
         """output layer is 1-based"""
         features = self.forward_features(source)

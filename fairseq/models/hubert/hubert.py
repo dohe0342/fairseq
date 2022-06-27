@@ -442,18 +442,18 @@ class HubertModel(BaseFairseqModel):
         if conv_feat is None:
             """output layer is 1-based"""
             features = self.forward_features(source)
-        
-        if target_list is not None:
-            features, target_list = self.forward_targets(features, target_list)
+            
+            if target_list is not None:
+                features, target_list = self.forward_targets(features, target_list)
 
-        features_pen = features.float().pow(2).mean()
+            features_pen = features.float().pow(2).mean()
 
-        features = features.transpose(1, 2)
-        features = self.layer_norm(features)
-        unmasked_features = features.clone()
+            features = features.transpose(1, 2)
+            features = self.layer_norm(features)
+            unmasked_features = features.clone()
 
-        if padding_mask is not None:
-            padding_mask = self.forward_padding_mask(features, padding_mask)
+            if padding_mask is not None:
+                padding_mask = self.forward_padding_mask(features, padding_mask)
 
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)

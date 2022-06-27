@@ -14,6 +14,19 @@ then
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 		+model.viewmaker=true
+elif [ $mode == "hubert" ]
+then
+	fairseq-hydra-train \
+		--config-dir /workspace/fairseq/examples/hubert/config/finetuning \
+		--config-name base_100h_ant \
+		common.user_dir=examples/data2vec \
+		task.data=/workspace/LibriSpeech/manifests \
+		task.normalize=false \
+		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
+		criterion._name=viewmaker \
+		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
+		+model.viewmaker=true
+
 else
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \

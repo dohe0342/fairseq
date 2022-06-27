@@ -9,7 +9,7 @@ then
 			--config-name base_100h_aws_g5 \
 			common.user_dir=examples/data2vec \
 			task.data=/opt/ml/code/LibriSpeech/manifests \
-			task.normalize=true \
+			task.normalize=false \
 			model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \

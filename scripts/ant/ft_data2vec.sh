@@ -8,7 +8,8 @@ fairseq-hydra-train \
 	common.user_dir=examples/data2vec \
     task.data=/workspace/LibriSpeech/manifests \
 	task.normalize=true \
-	model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
+	model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
+	#model.w2v_path=/workspace/models/data2vec_model/audio_base_ls.pt \
 	criterion._name=viewmaker \
 	checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 	+model.viewmaker=true \

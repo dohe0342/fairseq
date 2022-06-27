@@ -2,8 +2,8 @@
 
 #mkdir /home/work/workspace/fairseq/scripts/whale/outputs/$1
 #mkdir /opt/ml/code/fairseq/scripts/aws/output/$1
-mode="w2v"
-instance="g5"
+mode="d2v"
+instance="p4"
 
 if [ $mode == "w2v" ]
 then

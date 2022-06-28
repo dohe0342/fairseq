@@ -13,8 +13,6 @@ then
 			model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \
-			dataset.max_tokens=3200000 \
-			optimization.update_freq=[2] \
 			+model.viewmaker=true
 	done
 else
@@ -29,8 +27,6 @@ else
 			model.w2v_path=/opt/ml/input/data/model/audio_base_ls.pt \
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/opt/ml/model \
-			dataset.max_tokens=3200000 \
-			optimization.update_freq=[2] \
 			+model.viewmaker=true
 	done
 fi

@@ -403,6 +403,16 @@ class Data2VecAudioModel(BaseFairseqModel):
             features_newview, delta = viewmaker(conv_features, padding_mask)
             #loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
             features_newview = features + delta
+
+            origin = features.data.clone().reshape(-1, 512)
+            new = features_newview.data.clone().reshape(-1, 512)
+            
+            origin = origin / origin.norm(dim=1).unsqueeze(1)
+            new = new / new.norm(dim=1).unsqueeze(1)
+
+            sim = torch.mm(origin, new)
+            sim_avg = sim.diagonal().sum() / sim.size()[0]
+            print('sim avg = ', sim_avg)
             
         if self.post_extract_proj is not None:
             if cnn_fgsm is None:

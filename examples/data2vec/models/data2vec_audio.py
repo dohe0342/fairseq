@@ -412,7 +412,7 @@ class Data2VecAudioModel(BaseFairseqModel):
 
             sim = torch.mm(origin, new.T)
             sim_avg = sim.diagonal().sum() / sim.size()[0]
-            print('sim avg = ', sim_avg)
+            #print('sim avg = ', sim_avg)
             
         if self.post_extract_proj is not None:
             if cnn_fgsm is None:

@@ -404,8 +404,8 @@ class Data2VecAudioModel(BaseFairseqModel):
             #loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
             features_newview = features + delta
 
-            origin = features.data.clone().reshape(-1, 512)
-            new = features_newview.data.clone().reshape(-1, 512)
+            origin = features.clone().reshape(-1, 512)
+            new = features_newview.clone().reshape(-1, 512)
             
             origin = origin / origin.norm(dim=1).unsqueeze(1)
             new = new / new.norm(dim=1).unsqueeze(1)

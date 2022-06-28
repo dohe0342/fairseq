@@ -924,7 +924,7 @@ class CtcCriterion(FairseqCriterion):
         logging_output = {
             "loss": utils.item(loss[0].data),  # * sample['ntokens'],
             "loss viewmaker ctc": utils.item(loss[1].data),  # * sample['ntokens'],
-            "loss mse": utils.item(net_output["loss"].data),
+            "loss mse": utils.item(net_output["loss"].data) if net_output["loss"] is not None else 0.,
             "ntokens": ntokens,
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,

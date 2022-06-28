@@ -402,6 +402,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             #criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
             #loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+            features_newview = features+delta
             
         if self.post_extract_proj is not None:
             if cnn_fgsm is None:

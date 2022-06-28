@@ -1,5 +1,6 @@
 mode="d2v"
 instance="p4"
+
 if [ $mode == "w2v" ]
 then
 	for i in {0..9}

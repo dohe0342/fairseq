@@ -410,7 +410,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             origin = origin / origin.norm(dim=1).unsqueeze(1)
             new = new / new.norm(dim=1).unsqueeze(1)
 
-            sim = torch.mm(origin, new)
+            sim = torch.mm(origin, new.T)
             sim_avg = sim.diagonal().sum() / sim.size()[0]
             print('sim avg = ', sim_avg)
             

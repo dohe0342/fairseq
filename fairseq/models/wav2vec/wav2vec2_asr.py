@@ -1716,6 +1716,7 @@ class ViewMaker1(BaseFairseqModel):
             y_pixels *= padding_mask_
             y_pixels = y_pixels.transpose(1,2)
         
+        print(y_pixels) 
         distortion_budget = self.distortion_budget
         delta = torch.tanh(y_pixels) # Project to [-1, 1]
         avg_magnitude = delta.abs().mean([1,2], keepdim=True)

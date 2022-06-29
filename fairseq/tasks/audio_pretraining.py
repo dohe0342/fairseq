@@ -105,19 +105,6 @@ class AudioPretrainingConfig(FairseqDataclass):
         },
     )
     
-    eval_wer: bool = field(
-        default=False,
-        metadata={
-            "help": "flag to compute mask indices in data preparation.",
-        },
-    )
-    eval_wer_config: bool = field(
-        default=False,
-        metadata={
-            "help": "flag to compute mask indices in data preparation.",
-        },
-    )
-
 
 @register_task("audio_pretraining", dataclass=AudioPretrainingConfig)
 class AudioPretrainingTask(FairseqTask):

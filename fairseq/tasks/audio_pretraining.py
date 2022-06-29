@@ -104,6 +104,13 @@ class AudioPretrainingConfig(FairseqDataclass):
             "target texts): none/low/high (default: none). "
         },
     )
+    
+    eval_wer: bool = field(
+        default=False,
+        metadata={
+            "help": "flag to compute mask indices in data preparation.",
+        },
+    )
 
 
 @register_task("audio_pretraining", dataclass=AudioPretrainingConfig)

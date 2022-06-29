@@ -1710,7 +1710,7 @@ class ViewMaker1(BaseFairseqModel):
     
     def get_delta2(self, y_pixels, padding_mask, eps=1e-4):
         '''Constrains the input perturbation by projecting it onto an L1 sphere'''
-        print(~padding_mask)
+        print(torch.logical_not(padding_mask))
         if padding_mask is not None:
             padding_mask_ = padding_mask.long().unsqueeze(2)
             y_pixels = y_pixels.transpose(1,2)

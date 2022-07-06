@@ -480,15 +480,6 @@ class HubertModel(BaseFairseqModel):
             if features_newview is not None:
                 features_newview = self.post_extract_proj(features_newview)
 
-        if self.post_extract_proj is not None:
-            if cnn_fgsm is None:
-                features = self.post_extract_proj(features)
-            else:
-                features = self.post_extract_proj(features_diff)
-
-            if features_newview is not None:
-                features_newview = self.post_extract_proj(features_newview)
-
         features = self.dropout_input(features)
         if features_newview is not None:
             features_newview = self.dropout_input(features_newview)

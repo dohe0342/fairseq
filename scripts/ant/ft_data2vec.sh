@@ -21,6 +21,7 @@ then
 		--config-name base_100h_ant \
 		common.user_dir=examples/hubert \
 		task.data=/workspace/LibriSpeech/manifests \
+		task.label_dir=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=viewmaker \

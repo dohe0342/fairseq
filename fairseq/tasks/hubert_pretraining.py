@@ -151,7 +151,7 @@ class HubertPretrainingTask(FairseqTask):
                 Dictionary.load(f"{label_dir}/dict.{label}.txt")
                 for label in self.cfg.labels
             ]
-        try:
+        except:
             dictionaries = [
                 Dictionary.load(f"{label_dir}/dict.ltr.txt")
                 for label in self.cfg.labels

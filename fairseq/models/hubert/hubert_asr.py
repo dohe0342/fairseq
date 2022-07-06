@@ -356,6 +356,130 @@ class HubertEncoder(FairseqEncoder):
         return state_dict
 
 
+class HubertEncoderViewMaker(FairseqEncoder):
+    def __init__(self, cfg: HubertAsrConfig, task):
+        self.apply_mask = cfg.apply_mask
+
+        arg_overrides = {
+            "dropout": cfg.dropout,
+            "activation_dropout": cfg.activation_dropout,
+            "dropout_input": cfg.dropout_input,
+            "attention_dropout": cfg.attention_dropout,
+            "mask_length": cfg.mask_length,
+            "mask_prob": cfg.mask_prob,
+            "mask_selection": cfg.mask_selection,
+            "mask_other": cfg.mask_other,
+            "no_mask_overlap": cfg.no_mask_overlap,
+            "mask_channel_length": cfg.mask_channel_length,
+            "mask_channel_prob": cfg.mask_channel_prob,
+            "mask_channel_selection": cfg.mask_channel_selection,
+            "mask_channel_other": cfg.mask_channel_other,
+            "no_mask_channel_overlap": cfg.no_mask_channel_overlap,
+            "encoder_layerdrop": cfg.layerdrop,
+            "feature_grad_mult": cfg.feature_grad_mult,
+        }
+
+        if cfg.w2v_args is None:
+            state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
+            w2v_args = state.get("cfg", None)
+            if w2v_args is None:
+                w2v_args = convert_namespace_to_omegaconf(state["args"])
+            cfg.w2v_args = w2v_args
+        else:
+            state = None
+            w2v_args = cfg.w2v_args
+            if isinstance(w2v_args, Namespace):
+                cfg.w2v_args = w2v_args = convert_namespace_to_omegaconf(w2v_args)
+
+        assert cfg.normalize == w2v_args.task.normalize, (
+            "Fine-tuning works best when data normalization is the same. "
+            "Please check that --normalize is set or unset for "
+            "both pre-training and here"
+        )
+
+        w2v_args.task.data = cfg.data
+        pretrain_task = tasks.setup_task(w2v_args.task)
+        if state is not None and "task_state" in state:
+            # This will load the stored "dictionaries" object
+            pretrain_task.load_state_dict(state["task_state"])
+        else:
+            pretrain_task.load_state_dict(task.state_dict())
+
+        model = pretrain_task.build_model(w2v_args.model, from_checkpoint=True)
+        if state is not None and not cfg.no_pretrained_weights:
+            # set strict=False because we omit some modules
+            model.load_state_dict(state["model"], strict=False)
+
+        model.remove_pretraining_modules()
+
+        super().__init__(pretrain_task.source_dictionary)
+
+        d = w2v_args.model.encoder_embed_dim
+
+        self.w2v_model = model
+
+        self.final_dropout = nn.Dropout(cfg.final_dropout)
+        self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.num_updates = 0
+
+        if task.target_dictionary is not None:
+            self.proj = Linear(d, len(task.target_dictionary))
+        elif getattr(cfg, "decoder_embed_dim", d) != d:
+            self.proj = Linear(d, cfg.decoder_embed_dim)
+        else:
+            self.proj = None
+
+    def set_num_updates(self, num_updates):
+        """Set the number of parameters updates."""
+        super().set_num_updates(num_updates)
+        self.num_updates = num_updates
+
+    def forward(self, source, padding_mask, tbc=True, **kwargs):
+
+        w2v_args = {
+            "source": source,
+            "padding_mask": padding_mask,
+            "mask": self.apply_mask and self.training,
+        }
+
+        ft = self.freeze_finetune_updates <= self.num_updates
+
+        with torch.no_grad() if not ft else contextlib.ExitStack():
+            x, padding_mask = self.w2v_model.extract_features(**w2v_args)
+
+            if tbc:
+                # B x T x C -> T x B x C
+                x = x.transpose(0, 1)
+
+        x = self.final_dropout(x)
+
+        if self.proj:
+            x = self.proj(x)
+
+        return {
+            "encoder_out": x,  # T x B x C
+            "encoder_padding_mask": padding_mask,  # B x T
+            "padding_mask": padding_mask,
+        }
+
+    def reorder_encoder_out(self, encoder_out, new_order):
+        if encoder_out["encoder_out"] is not None:
+            encoder_out["encoder_out"] = encoder_out["encoder_out"].index_select(
+                1, new_order
+            )
+        if encoder_out["encoder_padding_mask"] is not None:
+            encoder_out["encoder_padding_mask"] = encoder_out[
+                "encoder_padding_mask"
+            ].index_select(0, new_order)
+        return encoder_out
+
+    def max_positions(self):
+        """Maximum input length supported by the encoder."""
+        return None
+
+    def upgrade_state_dict_named(self, state_dict, name):
+        return state_dict
+
 def Embedding(num_embeddings, embedding_dim, padding_idx):
     m = nn.Embedding(num_embeddings, embedding_dim, padding_idx=padding_idx)
     nn.init.normal_(m.weight, mean=0, std=embedding_dim**-0.5)

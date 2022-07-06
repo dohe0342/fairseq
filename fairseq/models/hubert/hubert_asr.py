@@ -430,6 +430,9 @@ class HubertEncoderViewMaker(FairseqEncoder):
         else:
             self.proj = None
 
+        self.blank_mode = "add"
+        self.blank_weight = 0.
+
     def set_num_updates(self, num_updates):
         """Set the number of parameters updates."""
         super().set_num_updates(num_updates)

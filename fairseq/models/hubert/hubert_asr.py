@@ -436,11 +436,11 @@ class HubertEncoderViewMaker(FairseqEncoder):
         self.num_updates = num_updates
 
     def forward(self, source, padding_mask, tbc=True, **kwargs):
-
         w2v_args = {
             "source": source,
             "padding_mask": padding_mask,
             "mask": self.apply_mask and self.training,
+            "viewmaker": self.viewmaker,
         }
 
         ft = self.freeze_finetune_updates <= self.num_updates

@@ -152,11 +152,9 @@ class HubertPretrainingTask(FairseqTask):
                 for label in self.cfg.labels
             ]
         except:
-            print('here!!!!!!!!!!!!!!!!!!!')
+            self.cfg.fine_tuning = True
             dictionaries = [None]
         
-        print('*'*10)
-        print(self.cfg.fine_tuning)
         return dictionaries[0] if self.cfg.fine_tuning else dictionaries
 
     def get_label_dir(self) -> str:

@@ -602,6 +602,7 @@ class HubertModel(BaseFairseqModel):
             mask=mask,
             features_only=True,
             output_layer=output_layer,
+            **kwargs,
         )
         feature = res["features"] if ret_conv else res["x"]
         return feature, res["padding_mask"]

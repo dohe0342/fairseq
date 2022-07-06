@@ -313,7 +313,6 @@ class HubertModel(BaseFairseqModel):
         else:
             self.final_proj = nn.Linear(cfg.encoder_embed_dim, final_dim)
         
-        print(self.final_proj)
         # modules below are not needed during fine-tuning
         if any([d is None for d in dictionaries]):
             logger.info("cannot find dictionary. assume will be used for fine-tuning")
@@ -465,7 +464,7 @@ class HubertModel(BaseFairseqModel):
         features_newview = None
         x_new = None
         if cnn_fgsm is not None:
-            features_diff = torch.autograd.Variable(conv_features.data, requires_grad=True)
+            features_diff = torch.autograd.Variable(unmasked_features.data, requires_grad=True)
     
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')

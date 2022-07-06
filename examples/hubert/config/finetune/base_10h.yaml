@@ -18,7 +18,7 @@ distributed_training:
   find_unused_parameters: true
   distributed_world_size: 1
   distributed_port: 29671
-  nprocs_per_node: 8
+  nprocs_per_node: 1
 
 task:
   _name: hubert_pretraining
@@ -34,8 +34,8 @@ dataset:
   max_tokens: 3200000
   validate_after_updates: ${model.freeze_finetune_updates}
   validate_interval: 5
-  train_subset: train
-  valid_subset: valid
+  train_subset: train-100
+  valid_subset: dev-other
 
 criterion:
   _name: ctc
@@ -45,7 +45,7 @@ optimization:
   max_update: 25000
   lr: [2e-5]
   sentence_avg: true
-  update_freq: [1]
+  update_freq: [8]
 
 optimizer:
   _name: adam

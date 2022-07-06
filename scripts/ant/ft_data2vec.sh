@@ -24,6 +24,7 @@ then
 		task.normalize=false \
 		task.fine_tuning=true \
 		task.labels=["ltr"] \
+		task.single_target=true \
 		model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \

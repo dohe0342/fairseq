@@ -5,3 +5,5 @@ models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([ckpt_
 model = models[0]
 
 print(model)
+print(cfg)
+print(task)

@@ -605,7 +605,7 @@ class HubertModel(BaseFairseqModel):
             **kwargs,
         )
         feature = res["features"] if ret_conv else res["x"]
-        return feature, res["padding_mask"]
+        return feature, res["padding_mask"], res
 
     def get_logits(self, net_output, is_masked=True):
         if is_masked:

@@ -1,4 +1,4 @@
-mode="d2v"
+mode="w2v"
 instance="p4"
 
 if [ $mode == "w2v" ]

@@ -152,6 +152,7 @@ class HubertPretrainingTask(FairseqTask):
                 for label in self.cfg.labels
             ]
         except:
+            print('here!!!!!!!!!!!!!!!!!!!')
             dictionaries = [None]
         
         print('*'*10)

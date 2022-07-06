@@ -463,6 +463,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
 
         return {
             "encoder_out": x,  # T x B x C
+            "encoder_out_new": x_new,   # T X B X C
             "encoder_padding_mask": padding_mask,  # B x T
             "padding_mask": padding_mask,
         }

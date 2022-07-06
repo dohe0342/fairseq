@@ -22,8 +22,9 @@ then
 		common.user_dir=examples/hubert \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
+		+task.fine_tuning=true \
 		task.labels=["ltr"] \
-		task.single_target=true \
+		+task.single_target=true \
 		model._name=hubert_ctc \
 		model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=viewmaker \

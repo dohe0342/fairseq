@@ -18,7 +18,7 @@ from fairseq.dataclass.utils import convert_namespace_to_omegaconf
 from fairseq.models import BaseFairseqModel, FairseqEncoder, register_model
 from fairseq.models.hubert.hubert import MASKING_DISTRIBUTION_CHOICES
 from fairseq.tasks import FairseqTask
-from fairseq.models.wav2vec.wav2vec2_asr import Wav2VecEncoderViewMaker
+from fairseq.models.wav2vec.wav2vec2_asr import ViewMaker1
 
 @dataclass
 class HubertAsrConfig(FairseqDataclass):

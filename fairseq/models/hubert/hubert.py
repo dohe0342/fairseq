@@ -619,7 +619,7 @@ class HubertModel(BaseFairseqModel):
         logits_new = self.get_logits(net_output, net_output["encoder_out_new"])
 
         if log_probs:
-            return [utils.log_softmax(logits.float(), dim=-1), utils.log_softmax(logits_new.float(), d  im=-1)]
+            return [utils.log_softmax(logits.float(), dim=-1), utils.log_softmax(logits_new.float(), dim=-1)]
         else:
             return [utils.softmax(logits.float(), dim=-1), utils.softmax(logits_new.float(), dim=-1)]
 

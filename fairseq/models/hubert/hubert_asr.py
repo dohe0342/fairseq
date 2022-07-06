@@ -466,6 +466,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
         
         print('\n\n\n')
         print(res["loss"])
+        print('\n\n\n')
         return {
             "encoder_out": x,  # T x B x C
             "encoder_out_new": x_new,   # T X B X C

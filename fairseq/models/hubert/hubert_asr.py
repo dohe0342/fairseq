@@ -447,6 +447,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
 
         with torch.no_grad() if not ft else contextlib.ExitStack():
             x, padding_mask, res = self.w2v_model.extract_features(**w2v_args)
+            x_new = res["x_new"]
 
             if tbc:
                 # B x T x C -> T x B x C

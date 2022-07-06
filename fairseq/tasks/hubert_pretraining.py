@@ -152,8 +152,9 @@ class HubertPretrainingTask(FairseqTask):
                 for label in self.cfg.labels
             ]
         except:
-            self.cfg.fine_tuning = True
-            dictionaries = [[None]]
+            #self.cfg.fine_tuning = True
+            #dictionaries = [[None]]
+            print('here!')
         
         return dictionaries[0] if self.cfg.fine_tuning else dictionaries
 

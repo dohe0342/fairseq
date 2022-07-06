@@ -20,7 +20,6 @@ then
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
 		common.user_dir=examples/hubert \
-		task.fine_tuning=true \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		task.labels=["ltr"] \

@@ -310,12 +310,12 @@ class Trainer(object):
         params_w2v = [] 
         for n, p in self.model.named_parameters():
             if 'viewmaker' not in n and 'feature_extractor' not in n and p.requires_grad:
-                print(n)
                 params_w2v.append(p)
 
         params_viewmaker = []
         for n, p in self.model.named_parameters():
             if 'viewmaker' in n and p.requires_grad:
+                print(n)
                 params_viewmaker.append(p)
 
         params_all = [params_w2v, params_viewmaker]

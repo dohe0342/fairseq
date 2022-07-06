@@ -504,9 +504,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
             return [utils.log_softmax(logits.float(), dim=-1), utils.log_softmax(logits_new.float(), dim=-1)]
         else:
             return [utils.softmax(logits.float(), dim=-1), utils.softmax(logits_new.float(), dim=-1)]
-
-
-
+    
     def reorder_encoder_out(self, encoder_out, new_order):
         if encoder_out["encoder_out"] is not None:
             encoder_out["encoder_out"] = encoder_out["encoder_out"].index_select(
@@ -524,6 +522,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
 
     def upgrade_state_dict_named(self, state_dict, name):
         return state_dict
+
 
 def Embedding(num_embeddings, embedding_dim, padding_idx):
     m = nn.Embedding(num_embeddings, embedding_dim, padding_idx=padding_idx)

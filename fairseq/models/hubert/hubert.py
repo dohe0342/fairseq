@@ -594,6 +594,7 @@ class HubertModel(BaseFairseqModel):
         mask: bool = False,
         ret_conv: bool = False,
         output_layer: Optional[int] = None,
+        **kwargs,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         res = self.forward(
             source,

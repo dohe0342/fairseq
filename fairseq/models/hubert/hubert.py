@@ -468,7 +468,7 @@ class HubertModel(BaseFairseqModel):
     
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')
-            features_newview, delta = viewmaker(conv_features, padding_mask)
+            features_newview, delta = viewmaker(unmasked_features, padding_mask)
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
     
         if self.post_extract_proj is not None:

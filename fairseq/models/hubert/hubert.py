@@ -612,6 +612,17 @@ class HubertModel(BaseFairseqModel):
         targets_list = [x.new_zeros(x.size(0), dtype=torch.long) for x in logits_list]
         return targets_list
 
+    def get_normalized_probs(self, net_output, log_probs):
+        """Get normalized probabilities (or log probs) from a net's output."""
+
+        logits = self.get_logits(net_output, net_output["encoder_out"])
+        logits_new = self.get_logits(net_output, net_output["encoder_out_new"])
+
+        if log_probs:
+            return [utils.log_softmax(logits.float(), dim=-1), utils.log_softmax(logits_new.float(), d  im=-1)]
+        else:
+            return [utils.softmax(logits.float(), dim=-1), utils.softmax(logits_new.float(), dim=-1)]
+
     def get_extra_losses(self, net_output):
         extra_losses = []
         names = []

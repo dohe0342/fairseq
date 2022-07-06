@@ -466,6 +466,7 @@ class HubertEncoderViewMaker(FairseqEncoder):
             "encoder_out_new": x_new,   # T X B X C
             "encoder_padding_mask": padding_mask,  # B x T
             "padding_mask": padding_mask,
+            "loss": res["loss"],
         }
 
     def reorder_encoder_out(self, encoder_out, new_order):

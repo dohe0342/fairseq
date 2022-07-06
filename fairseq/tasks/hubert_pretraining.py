@@ -146,15 +146,10 @@ class HubertPretrainingTask(FairseqTask):
 
     def load_dictionaries(self):
         label_dir = self.cfg.data if self.cfg.label_dir is None else self.cfg.label_dir
-        try:
-            dictionaries = [
-                Dictionary.load(f"{label_dir}/dict.{label}.txt")
-                for label in self.cfg.labels
-            ]
-        except:
-            #self.cfg.fine_tuning = True
-            #dictionaries = [[None]]
-            print('here!')
+        dictionaries = [
+            Dictionary.load(f"{label_dir}/dict.{label}.txt")
+            for label in self.cfg.labels
+        ]
         
         return dictionaries[0] if self.cfg.fine_tuning else dictionaries
 

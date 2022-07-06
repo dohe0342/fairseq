@@ -312,7 +312,8 @@ class HubertModel(BaseFairseqModel):
             )
         else:
             self.final_proj = nn.Linear(cfg.encoder_embed_dim, final_dim)
-
+        
+        print(self.final_proj)
         # modules below are not needed during fine-tuning
         if any([d is None for d in dictionaries]):
             logger.info("cannot find dictionary. assume will be used for fine-tuning")

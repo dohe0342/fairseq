@@ -304,7 +304,8 @@ class HubertModel(BaseFairseqModel):
                 nn.Linear(final_dim, final_dim * 2), nn.GLU()
             )
 
-        self.untie_final_proj = cfg.untie_final_proj
+        #self.untie_final_proj = cfg.untie_final_proj
+        self.untie_final_proj = False
         if self.untie_final_proj:
             self.final_proj = nn.Linear(
                 cfg.encoder_embed_dim, final_dim * len(dictionaries)

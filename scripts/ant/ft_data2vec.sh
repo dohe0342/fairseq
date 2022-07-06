@@ -22,6 +22,7 @@ then
 		common.user_dir=examples/hubert \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
+		task.fine_tuning=true
 		model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \

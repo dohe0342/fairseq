@@ -16,7 +16,6 @@ then
 		+model.viewmaker=true
 elif [ $mode == "hubert" ]
 then
-	#python /workspace/fairseq/fairseq_cli/hydra_train.py \
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
@@ -27,7 +26,6 @@ then
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 		+model.viewmaker=true
-
 else
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \

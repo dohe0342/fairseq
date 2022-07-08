@@ -14,7 +14,7 @@ common_eval:
   results_path: null
   path: null
   post_process: letter
-  quiet: true
+  quiet: false
 dataset:
   max_tokens: 2000000
   gen_subset: test

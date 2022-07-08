@@ -18,7 +18,7 @@ do
 		decoding.lmpath=/workspace/fairseq/lm_model/4-gram.arpa.gz \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$2 \
-		common_eval.path=/workspace/fairseq/examples/data2vec/wav2vec_model/$model \
+		common_eval.path=/workspace/models/data2vec/wav2vec_model/$model \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1
 done

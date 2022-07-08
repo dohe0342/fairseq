@@ -17,6 +17,19 @@ then
 			+model.viewmaker=true
 		rm /opt/ml/model/crash.pt
 	done
+
+elif [ $mode == "hubert" ]
+then
+	fairseq-hydra-train \
+		--config-dir /home/work/workspace/fairseq/examples/hubert/config/finetune \
+		--config-name base_100h_whale \
+		task.label_dir=/home/work/workspace/LibriSpeech/manifests \
+		task.data=/home/work/workspace/LibriSpeech/manifests \
+		task.normalize=false \
+		model.w2v_path=/home/work/workspace/models/hubert_model/hubert_base_ls960.pt \
+		criterion._name=ctc \
+		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1
+
 else
 	for i in {0..9}
 	do

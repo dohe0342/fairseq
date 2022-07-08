@@ -322,6 +322,7 @@ class Trainer(object):
         self._optimizer = []
 
         for i, params in enumerate(params_all):
+            print(len(params))
             if i == 1:
                 self.cfg.optimizer.lr=[0.001]
             if self.is_fsdp and self.cfg.common.fp16:

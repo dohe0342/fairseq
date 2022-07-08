@@ -28,7 +28,7 @@ then
 		task.normalize=false \
 		model.w2v_path=/opt/ml/input/data/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=ctc \
-		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1
+		checkpoint.save_dir=/opt/ml/model \
 
 else
 	for i in {0..9}

@@ -14,7 +14,7 @@ do
 		task.labels=ltr \
 		decoding.type=kenlm \
 		decoding.lmweight=2.13 decoding.wordscore=-0.52 decoding.silweight=0 \
-		decoding.lexicon=/workspace/fairseq/lm_model/librispeech_lexicon.lst \
+		decoding.lexicon=/workspace/fairseq/lm_model/librispeech_lexicon2.lst \
 		decoding.lmpath=/workspace/fairseq/lm_model/4-gram.arpa.gz \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \

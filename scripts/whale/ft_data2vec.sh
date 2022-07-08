@@ -24,7 +24,7 @@ then
 		task.normalize=false \
 		model.w2v_path=/home/work/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=ctc \
-		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/hubert_baseline
+		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1
 else
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

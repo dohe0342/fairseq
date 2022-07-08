@@ -30,7 +30,6 @@ task:
 dataset:
   num_workers: 6
   max_tokens: 3200000
-  validate_after_updates: ${model.freeze_finetune_updates}
   train_subset: train-100
   valid_subset: dev-other
   validate_interval: 50

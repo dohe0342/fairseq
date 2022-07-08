@@ -17,7 +17,6 @@ distributed_training:
   ddp_backend: legacy_ddp
   find_unused_parameters: true
   distributed_world_size: 4
-  distributed_port: 29671
   nprocs_per_node: 1
 
 task:

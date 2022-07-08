@@ -8,7 +8,7 @@ then
 		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
 		common.user_dir=examples/data2vec \
-		task.data=/workspace/LibriSpeech/manifests \
+		task.data=/home/work/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
 		criterion._name=viewmaker \

@@ -28,7 +28,8 @@ then
 		task.normalize=false \
 		model.w2v_path=/opt/ml/input/data/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=ctc \
-		checkpoint.save_dir=/opt/ml/model \
+		checkpoint.save_dir=/opt/ml/model
+	rm /opt/ml/model/crash.pt
 
 else
 	for i in {0..9}

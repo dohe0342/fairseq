@@ -16,7 +16,7 @@ then
 		+model.viewmaker=true
 elif [ $mode == "hubert" ]
 then
-
+	echo "todo"
 else
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \

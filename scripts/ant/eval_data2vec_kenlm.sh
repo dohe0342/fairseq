@@ -10,7 +10,7 @@ do
 		--config-name infer \
 		task=audio_finetuning \
 		task.data=/workspace/LibriSpeech/manifests \
-		common.user_dir=examples/data2vec \
+		common.user_dir=/workspace/fairseq/examples/data2vec \
 		task.labels=ltr \
 		decoding.type=kenlm \
 		decoding.lmweight=2.13 decoding.wordscore=-0.52 decoding.silweight=0 \

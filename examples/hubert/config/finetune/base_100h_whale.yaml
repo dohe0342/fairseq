@@ -5,7 +5,7 @@ common:
   log_format: json
   log_interval: 200
   tensorboard_logdir: tblog
-  #seed: 1337
+  seed: 1337
 
 checkpoint:
   save_interval: 5

@@ -21,4 +21,4 @@ do
 		common_eval.path=/home/work/workspace/fairseq/examples/data2vec/data2vec_model/$model \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1
-	done
+done

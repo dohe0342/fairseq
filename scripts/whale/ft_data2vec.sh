@@ -18,7 +18,13 @@ elif [ $mode == "hubert" ]
 then
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/hubert/config/finetuning \
-		--config-name base_100h_whale
+		--config-name base_100h_whale \
+		task.label_dir=/home/work/workspace/LibriSpeech/manifests \
+		task.data=/home/work/workspace/LibriSpeech/manifests \
+		task.normalize=false \
+		model.w2v_path=/home/work/workspace/models/hubert_model/hubert_base_ls_960.pt \
+		criterion._name=viewmaker \
+		checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/hubert_baseline
 else
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

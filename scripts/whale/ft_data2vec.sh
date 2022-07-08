@@ -5,7 +5,7 @@ exp_name=$1
 if [ $mode == "w2v" ]
 then
 	fairseq-hydra-train \
-		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
+		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name base_100h_ant \
 		common.user_dir=examples/data2vec \
 		task.data=/workspace/LibriSpeech/manifests \

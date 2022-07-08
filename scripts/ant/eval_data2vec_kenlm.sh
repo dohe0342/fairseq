@@ -16,7 +16,8 @@ do
 		decoding.lmweight=2.13 decoding.wordscore=-0.52 decoding.silweight=0 \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
 		decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz \
-		decoding.unique_wer_file=False \
+		decoding.unique_wer_file=false \
+		decoding.quiet=false \
 		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/$model \
 	   	decoding.beam=1500 \

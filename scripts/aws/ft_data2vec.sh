@@ -24,7 +24,7 @@ then
 		--config-dir /workspace/fairseq/examples/hubert/config/finetune \
 		--config-name base_100h_aws_$instance \
 		task.label_dir=/opt/ml/code/LibriSpeech/manifests \
-		task.data=/workspace/LibriSpeech/manifests \
+		task.data=/opt/ml/code/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/home/work/workspace/models/hubert_model/hubert_base_ls960.pt \
 		criterion._name=ctc \

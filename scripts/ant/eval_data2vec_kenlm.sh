@@ -17,7 +17,7 @@ do
 		decoding.lexicon=/workspace/fairseq/lm_model/librispeech_lexicon.lst \
 		decoding.lmpath=/workspace/fairseq/lm_model/4-gram.arpa.gz \
 		decoding.unique_wer_file=False \
-		dataset.gen_subset=$2 \
+		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/$model \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1

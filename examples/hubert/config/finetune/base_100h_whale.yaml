@@ -18,7 +18,7 @@ distributed_training:
   find_unused_parameters: true
   distributed_world_size: 1
   distributed_port: 29671
-  nprocs_per_node: 1
+  nprocs_per_node: 4
 
 task:
   _name: hubert_pretraining

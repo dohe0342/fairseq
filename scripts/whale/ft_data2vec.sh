@@ -6,7 +6,7 @@ if [ $mode == "w2v" ]
 then
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
-		--config-name base_100h_ant \
+		--config-name base_100h_whale \
 		common.user_dir=examples/data2vec \
 		task.data=/home/work/workspace/LibriSpeech/manifests \
 		task.normalize=false \
@@ -16,11 +16,13 @@ then
 		+model.viewmaker=true
 elif [ $mode == "hubert" ]
 then
-	echo "todo"
+	fairseq-hydra-train \
+		--config-dir /home/work/workspace/fairseq/examples/hubert/config/finetuning \
+		--config-name base_100h_whale
 else
 	fairseq-hydra-train \
 		--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
-		--config-name base_100h_ant \
+		--config-name base_100h_whale \
 		common.user_dir=examples/data2vec \
 		task.data=/home/work/workspace/LibriSpeech/manifests \
 		task.normalize=true \

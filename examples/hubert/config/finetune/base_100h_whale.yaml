@@ -14,7 +14,7 @@ checkpoint:
   best_checkpoint_metric: wer
 
 distributed_training:
-  ddp_backend: c10d
+  ddp_backend: legacy_ddp
   find_unused_parameters: true
   distributed_world_size: 4
   distributed_port: 29671

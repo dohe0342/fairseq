@@ -12,7 +12,7 @@ do
 		task.normalize=false \
 		common_eval.path=/workspace/models/hubert_model/hubert_baseline.pt \
 		dataset.gen_subset=$subset \
-		decoding.decoder.lexicon=/path/to/lexicon \
+		decoding.decoder.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
 		decoding.decoder.lmpath=/path/to/arpa
 	echo ""
 	echo ""

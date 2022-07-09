@@ -11,7 +11,6 @@ do
 			--config-name infer_viterbi \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			task.normalize=false \
-			decoding.exp_dir=/home/work/workspace/fairseq/scripts/whale/outputs/hubert_baseline \
 			dataset.gen_subset=$subset \
 			common_eval.path=/home/work/workspace/models/hubert_model/$model 
 	else

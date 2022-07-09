@@ -1,6 +1,5 @@
 git pull
 source ~/.bashrc
-path=/home/work/workspace/exp/viewmaker_try23_labmda_cosine_annealing_progressive_linear_growing/model
 model=$1
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other"

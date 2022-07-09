@@ -31,7 +31,7 @@ do
 			dataset.gen_subset=$subset \
 			common_eval.path=/home/work/workspace/models/data2vec_model/$model \
 			distributed_training.distributed_world_size=1 
-
+	fi
 	echo ""
 	echo ""
 done

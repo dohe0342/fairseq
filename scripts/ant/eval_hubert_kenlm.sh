@@ -9,7 +9,7 @@ do
 		--config-dir /workspace/fairseq/examples/hubert/config/decode \
 		--config-name infer_kenlm \
 		task.data=/workspace/LibriSpeech/manifests \
-		task.normalize=[true|false] \
+		task.normalize=false \
 		decoding.exp_dir=/path/to/experiment/directory \
 		common_eval.path=/path/to/checkpoint
 		dataset.gen_subset=test \

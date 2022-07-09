@@ -19,7 +19,7 @@ task:
 
 decoding:
   type: viterbi
-  unique_wer_file: true
+  unique_wer_file: false
 common_eval:
   results_path: ???
   path: ???

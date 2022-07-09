@@ -10,7 +10,7 @@ do
 		--config-name infer_kenlm \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
-		common_eval.path=/workspace/models/hubert_model/hubert_baseline.pt
+		common_eval.path=/workspace/models/hubert_model/hubert_baseline.pt \
 		dataset.gen_subset=test \
 		decoding.decoder.lexicon=/path/to/lexicon \
 		decoding.decoder.lmpath=/path/to/arpa

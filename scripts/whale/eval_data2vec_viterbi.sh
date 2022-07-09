@@ -7,8 +7,8 @@ do
 	if [[ "$model" ~= "hubert" ]]
 	then
 		CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
-			--config-dir /home/work/workspace/fairseq/examples/hubert/config/decode \
-			--config-name infer \
+			--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
+			--config-name infer_viterbi \
 			task=audio_finetuning \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			common.user_dir=examples/data2vec \

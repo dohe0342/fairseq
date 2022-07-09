@@ -10,7 +10,7 @@ do
 		task=audio_finetuning \
 		task.data=/home/work/workspace/LibriSpeech/manifests \
 		common.user_dir=examples/data2vec \
-		task.labels=["ltr"] \
+		task.labels=ltr \
 		decoding.type=viterbi \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \

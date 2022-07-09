@@ -13,7 +13,7 @@ do
 			task.normalize=false \
 			decoding.exp_dir=/home/work/workspace/fairseq/scripts/whale/outputs/hubert_baseline \
 			dataset.gen_subset=$subset \
-			common_eval.path=/home/work/workspace/models/hubert_model/$model \
+			common_eval.path=/home/work/workspace/models/hubert_model/$model 
 	else
 		CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 			--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \

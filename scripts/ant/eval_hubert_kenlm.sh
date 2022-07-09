@@ -6,7 +6,7 @@ for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
 	echo "====================   $model // $subset   ===================="
 	python /workspace/fairseq/examples/speech_recognition/new/infer.py \
-		--config-dir /path/to/fairseq-py/examples/hubert/config/decode \
+		--config-dir /workspace/fairseq//examples/hubert/config/decode \
 		--config-name infer_kenlm \
 		task.data=/path/to/data \
 		task.normalize=[true|false] \

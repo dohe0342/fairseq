@@ -9,15 +9,11 @@ do
 		CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 			--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \
 			--config-name infer_viterbi \
-			task=audio_finetuning \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
-			common.user_dir=examples/data2vec \
-			task.labels=ltr \
-			decoding.type=viterbi \
-			decoding.unique_wer_file=False \
+			task.normalize=false \
+			decoding.exp_dir=/home/work/workspace/fairseq/scripts/whale/outputs/hubert_baseline \
 			dataset.gen_subset=$subset \
 			common_eval.path=/home/work/workspace/models/hubert_model/$model \
-			distributed_training.distributed_world_size=1 
 	else
 		CUDA_VISIBLE_DEVICES=$2 python /home/work/workspace/fairseq/examples/speech_recognition/new/infer.py \
 			--config-dir /home/work/workspace/fairseq/examples/speech_recognition/new/conf \

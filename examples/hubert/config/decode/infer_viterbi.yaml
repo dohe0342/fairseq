@@ -24,6 +24,7 @@ common_eval:
   results_path: ???
   path: ???
   post_process: letter
+  quiet: true
 dataset:
   max_tokens: 1100000
   gen_subset: ???

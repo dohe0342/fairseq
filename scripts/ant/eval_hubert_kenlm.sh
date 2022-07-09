@@ -15,4 +15,6 @@ do
 		dataset.gen_subset=test \
 		decoding.decoder.lexicon=/path/to/lexicon \
 		decoding.decoder.lmpath=/path/to/arpa
+	echo ""
+	echo ""
 done

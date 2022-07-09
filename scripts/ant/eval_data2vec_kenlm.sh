@@ -18,7 +18,7 @@ do
 		decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz \
 		decoding.unique_wer_file=true \
 		dataset.gen_subset=$subset \
-		common_eval.path=/workspace/models/wav2vec_model/$model \
+		common_eval.path=/workspace/models/hubert_model/$model \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1
 done

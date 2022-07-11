@@ -28,7 +28,7 @@ then
         task.normalize=false \
         model.w2v_path=/opt/ml/input/data/model/hubert_base_ls960.pt \
         criterion._name=viewmaker \
-        checkpoint.save_dir=/opt/ml/code/fairseq/scripts/whale/outputs/$1 \
+		checkpoint.save_dir=/opt/ml/model \
         +model.viewmaker=true
 	rm /opt/ml/model/crash.pt
 

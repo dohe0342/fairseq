@@ -402,7 +402,7 @@ class InferenceProcessor:
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
             #print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))
-            print(zero_count.sum().item(), zero_count.size()[0])
+            #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0
             #for i in range(len(conf)):

@@ -400,7 +400,7 @@ class InferenceProcessor:
             conf, idx = emission_prob.max(1)
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            print(zero_count.sum())
+            print(zero_count.sum().data)
             #print(idx)
             #count = 0
             #for i in range(len(conf)):
@@ -413,7 +413,7 @@ class InferenceProcessor:
             #print('hypo sentence = ')
             #print(hypo_sentence)
             #exit()
-        
+         
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)
         self.wps_meter.update(num_generated_tokens)

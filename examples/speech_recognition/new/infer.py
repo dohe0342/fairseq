@@ -401,6 +401,7 @@ class InferenceProcessor:
             zero = torch.zeros_like(idx)
             zero_count = torch.cuda.LongTensor(torch.eq(zero, idx))
             print(zero_count)
+            exit()
             #print(idx)
             #count = 0
             #for i in range(len(conf)):

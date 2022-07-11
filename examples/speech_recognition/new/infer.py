@@ -303,7 +303,6 @@ class InferenceProcessor:
             toks = sample["target"]
         toks = toks[batch_id, :]
         
-        print(hypo["tokens"].int())
         # Processes hypothesis.
         hyp_pieces = self.tgt_dict.string(hypo["tokens"].int().cpu())
         if "words" in hypo:

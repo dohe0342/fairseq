@@ -22,7 +22,7 @@ elif [ $mode == "hubert" ]
 then
     fairseq-hydra-train \
         --config-dir /opt/ml/code/fairseq/examples/hubert/config/finetune \
-        --config-name base_100h_whale \
+        --config-name base_100h_aws_$instance \
         task.label_dir=/opt/ml/code/LibriSpeech/manifests \
         task.data=/opt/ml/code/LibriSpeech/manifests \
         task.normalize=false \

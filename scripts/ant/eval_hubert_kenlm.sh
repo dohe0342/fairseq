@@ -14,7 +14,9 @@ do
 		task.normalize=false \
 		dataset.gen_subset=$subset \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
-		decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz
+		decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz \
+		decoding.lmweight=2.15 \
+		decoding.wordscore=-0.52
 	#model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 	echo ""
 	echo ""

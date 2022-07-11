@@ -1,5 +1,5 @@
 mode="hubert"
-instance="g5"
+instance="p4"
 
 if [ $mode == "w2v" ]
 then

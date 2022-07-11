@@ -16,7 +16,7 @@ checkpoint:
 distributed_training:
   ddp_backend: legacy_ddp
   find_unused_parameters: true
-  distributed_world_size: 4
+  distributed_world_size: 8
 
 task:
   _name: hubert_pretraining

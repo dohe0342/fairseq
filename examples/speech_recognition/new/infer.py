@@ -302,7 +302,8 @@ class InferenceProcessor:
         else:
             toks = sample["target"]
         toks = toks[batch_id, :]
-
+        
+        print(hypo["tokens"].int())
         # Processes hypothesis.
         hyp_pieces = self.tgt_dict.string(hypo["tokens"].int().cpu())
         if "words" in hypo:
@@ -401,7 +402,7 @@ class InferenceProcessor:
             conf, idx = emission_prob.max(1)
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))
+            #print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))
             #print(idx)
             #count = 0
             #for i in range(len(conf)):

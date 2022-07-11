@@ -5,7 +5,7 @@ common:
   log_format: json
   log_interval: 200
   tensorboard_logdir: tblog
-  #seed: 1337
+  seed: 1337
 
 checkpoint:
   save_interval: 5
@@ -14,11 +14,9 @@ checkpoint:
   best_checkpoint_metric: wer
 
 distributed_training:
-  ddp_backend: c10d
+  ddp_backend: legacy_ddp
   find_unused_parameters: true
-  distributed_world_size: 1
-  distributed_port: 29671
-  nprocs_per_node: 1
+  distributed_world_size: 4
 
 task:
   _name: hubert_pretraining
@@ -32,10 +30,8 @@ task:
 dataset:
   num_workers: 6
   max_tokens: 3200000
-  validate_after_updates: ${model.freeze_finetune_updates}
   train_subset: train-100
   valid_subset: dev-other
-  #validate_interval: 5
   
 criterion:
   _name: ctc
@@ -43,9 +39,9 @@ criterion:
 
 optimization:
   max_update: 80000
-  lr: [2e-5]
+  lr: [3e-5]
   sentence_avg: true
-  update_freq: [8]
+  update_freq: [2]
 
 optimizer:
   _name: adam
@@ -54,10 +50,12 @@ optimizer:
 
 lr_scheduler:
   _name: tri_stage
-  warmup_steps: 8000
-  hold_steps: 0
-  decay_steps: 72000
+  phase_ratio: [0.1, 0.4, 0.5]
   final_lr_scale: 0.05
+  #warmup_steps: 8000
+  #hold_steps: 0
+  #decay_steps: 72000
+  #final_lr_scale: 0.05
 
 model:
   _name: hubert_ctc
@@ -66,7 +64,7 @@ model:
   mask_selection: static
   mask_length: 10
   mask_other: 0
-  mask_prob: 0.75
+  mask_prob: 0.65
   mask_channel_selection: static
   mask_channel_length: 64
   mask_channel_other: 0

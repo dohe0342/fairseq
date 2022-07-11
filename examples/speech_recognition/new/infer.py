@@ -399,7 +399,7 @@ class InferenceProcessor:
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
             zero = torch.zeros_like(idx)
-            zero_count = torch.cuda.LongTensor(torch.eq(zero, idx))
+            zero_count = torch.LongTensor(torch.eq(zero, idx))
             print(zero_count)
             exit()
             #print(idx)

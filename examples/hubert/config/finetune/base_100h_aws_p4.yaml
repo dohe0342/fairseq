@@ -41,7 +41,7 @@ optimization:
   max_update: 80000
   lr: [3e-5]
   sentence_avg: true
-  update_freq: [2]
+  update_freq: [1]
 
 optimizer:
   _name: adam

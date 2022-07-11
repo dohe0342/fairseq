@@ -253,7 +253,7 @@ class HubertEncoder(FairseqEncoder):
             "encoder_layerdrop": cfg.layerdrop,
             "feature_grad_mult": cfg.feature_grad_mult,
         }
-
+        
         if cfg.w2v_args is None:
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)

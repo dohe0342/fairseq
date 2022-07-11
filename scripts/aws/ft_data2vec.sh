@@ -30,7 +30,7 @@ then
         criterion._name=viewmaker \
         checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
         +model.viewmaker=true
-		rm /opt/ml/model/crash.pt
+	rm /opt/ml/model/crash.pt
 
 else
 	for i in {0..9}

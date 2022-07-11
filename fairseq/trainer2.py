@@ -314,8 +314,8 @@ class Trainer(object):
 
         params_viewmaker = []
         for n, p in self.model.named_parameters():
-            print(n)
             if 'viewmaker' in n and p.requires_grad:
+                print(n)
                 params_viewmaker.append(p)
 
         params_all = [params_w2v, params_viewmaker]

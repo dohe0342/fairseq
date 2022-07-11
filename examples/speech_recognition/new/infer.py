@@ -398,12 +398,15 @@ class InferenceProcessor:
             emission_prob = h[0]["emission"]
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
+            zero = torch.zeros_like(idx)
+            zero_count = torch.cuda.LongTensor(torch.eq(zero, idx))
+            print(zero_count)
             #print(idx)
-            count = 0
-            for i in range(len(conf)):
+            #count = 0
+            #for i in range(len(conf)):
             #   print(label_dict[idx[i].item()], conf[i])
-                if idx[i].item() == 0:
-                    count += 1
+            #    if idx[i].item() == 0:
+            #        count += 1
             #    hypo_sentence += label_dict[idx[i].item()]
             #print(count)
             #print(sample['id'])

@@ -8,7 +8,7 @@ model=$1
 #for subset in "train-100" "train-360" "train-500" ##"dev-clean" "dev-other" "test-clean" "test-other"
 #for subset in "it_was2"
 #for model in "wav2vec_small_100h.pt" "wav2vec_small_960h.pt" "wav2vec_big_100h.pt" "wav2vec_big_960h.pt" "wav2vec_vox_100h_new.pt" "wav2vec_vox_960h_new.pt"
-for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
+for subset in "dev-clean" #"dev-other" "test-clean" "test-other" 
 #for i in {0..17}
 do
 	#let first=$i*5

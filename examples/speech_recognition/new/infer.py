@@ -400,7 +400,7 @@ class InferenceProcessor:
             conf, idx = emission_prob.max(1)
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            print(zero_count.sum().data[0], emission_prob.size()[0])
+            print(zero_count.sum().item(), emission_prob.size()[0])
             #print(idx)
             #count = 0
             #for i in range(len(conf)):

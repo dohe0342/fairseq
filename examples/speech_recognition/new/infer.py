@@ -401,10 +401,10 @@ class InferenceProcessor:
             #print(idx)
             count = 0
             for i in range(len(conf)):
-                #print(label_dict[idx[i].item()], conf[i])
+            #   print(label_dict[idx[i].item()], conf[i])
                 if idx[i].item() == 0:
                     count += 1
-             #   hypo_sentence += label_dict[idx[i].item()]
+            #    hypo_sentence += label_dict[idx[i].item()]
             #print(count)
             #print(sample['id'])
             #print('hypo sentence = ')

@@ -149,6 +149,7 @@ class HubertCtc(BaseFairseqModel):
     def build_model(cls, cfg: HubertCtcConfig, task: FairseqTask):
         """Build a new model instance."""
         if cfg.viewmaker:
+            print('here!!!!!!!!!!!!!!!!!!1')
             w2v_encoder = HubertEncoderViewMaker(cfg, task)
         else:
             w2v_encoder = HubertEncoder(cfg, task)

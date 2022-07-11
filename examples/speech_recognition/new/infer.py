@@ -347,7 +347,7 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
-        label_dict = {0: '',
+        label_dict = {0: ' ',
                       1: '29',
                       2: '30',
                       3: '31',

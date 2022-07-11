@@ -396,6 +396,7 @@ class InferenceProcessor:
         for h in hypos:
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
+            print(len(h[0]["tokens"]))
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
             zero = torch.zeros_like(idx)

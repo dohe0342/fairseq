@@ -26,7 +26,7 @@ then
         task.label_dir=/opt/ml/code/LibriSpeech/manifests \
         task.data=/opt/ml/code/LibriSpeech/manifests \
         task.normalize=false \
-        model.w2v_path=/opt/ml/input/data/model/hubert_model/hubert_base_ls960.pt \
+        model.w2v_path=/opt/ml/input/data/model/hubert_base_ls960.pt \
         criterion._name=viewmaker \
         checkpoint.save_dir=/opt/ml/code/fairseq/scripts/whale/outputs/$1 \
         +model.viewmaker=true

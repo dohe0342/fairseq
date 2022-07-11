@@ -387,29 +387,29 @@ class InferenceProcessor:
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]
         
-        print('target sentence = ')
-        print(target_sentence)
-        print('\n\n')
+        #print('target sentence = ')
+        #print(target_sentence)
+        #print('\n\n')
 
         softmax = torch.nn.Softmax(dim=1)
         
         for h in hypos:
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
-            print(emission_prob.size())
+            #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
-            print(idx)
+            #print(idx)
             count = 0
             for i in range(len(conf)):
                 #print(label_dict[idx[i].item()], conf[i])
                 if idx[i].item() == 0:
                     count += 1
                 hypo_sentence += label_dict[idx[i].item()]
-            print(count)
-            print(sample['id'])
-            print('hypo sentence = ')
-            print(hypo_sentence)
-            exit()
+            #print(count)
+            #print(sample['id'])
+            #print('hypo sentence = ')
+            #print(hypo_sentence)
+            #exit()
         
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)

@@ -415,7 +415,6 @@ class InferenceProcessor:
             #exit()
          
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
-        print(num_generated_tokens)
         self.gen_timer.stop(num_generated_tokens)
         self.wps_meter.update(num_generated_tokens)
 

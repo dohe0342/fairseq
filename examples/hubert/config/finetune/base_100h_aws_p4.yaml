@@ -5,7 +5,6 @@ common:
   log_format: json
   log_interval: 200
   tensorboard_logdir: tblog
-  seed: 1337
 
 checkpoint:
   no_epoch_checkpoints: true

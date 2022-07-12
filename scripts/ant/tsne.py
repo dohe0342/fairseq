@@ -36,12 +36,11 @@ print(sum(num_list))
 
 colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 
-for i, ax in enumerate(ax_list):
-    scatter_list.append(ax.scatter(output[:, 0], 
-                            output[:, 1], 
-                            #c = color_list[i],
-                            cmap='rainbow',
-                            s=2.5, label=labels[i]))
+scatter_list.append(ax.scatter(output[:, 0], 
+                        output[:, 1], 
+                        #c = color_list[i],
+                        cmap='rainbow',
+                        s=2.5, label=labels[i]))
 
 plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
 plt.close()

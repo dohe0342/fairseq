@@ -28,7 +28,7 @@ for cls in class_list:
             np_list = file.reshape(1, 512)
             first = False
         else:
-            np_list = np.stack((np_list, file.reshape(1, 512)), axis=0)
+            np_list = np.stack((np_list, file), axis=0)
         print('np shape = ', np_list.shape)
 
 print(np_list.shape)

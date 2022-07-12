@@ -10,11 +10,15 @@ hypo1_list = []
 hypo2_list = []
 ref_list = []
 
-for line in infer_log:
+for line in infer1_log:
     if 'HYPO:' in line:
         hypo1_list.append(line[50:].replace('\n', ''))
     if 'REF:' in line:
         ref_list.append(line[49:].replace('\n', ''))
+
+for line in infer2_log:
+    if 'HYPO:' in line:
+        hypo2_list.append(line[50:].replace('\n', ''))
 
 count = 0
 aligned_list = []

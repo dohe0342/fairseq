@@ -408,12 +408,12 @@ class InferenceProcessor:
             #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            '''
             if padding_mask is not None:
                 zero_count *= padding_mask[enum].cpu()
                 print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
             else:
                 print(zero_count.sum().item(), zero_count.size()[0])
+
             '''
             import random
             import numpy as np
@@ -423,7 +423,7 @@ class InferenceProcessor:
                         feat = conv_feat[batch][time].cpu().numpy()
                         #print(feat.shape)
                         np.save(f'/workspace/fairseq/scripts/ant/t100_cnnfeat/{int(idx[time])}/{str(random.randint(0,1000000)).zfill(7)}.npy', feat)
-
+            '''
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0

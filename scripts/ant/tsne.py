@@ -16,61 +16,50 @@ matplotlib.rc('ytick', labelsize=28)
 
 tsne = TSNE(n_components=2, init='random')
 
-for enum, key in enumerate(out_output):
-    if enum < 4:
-        continue
-    #if 's2' in key:
-    #    break
-    if mode == 'load':
-        target_array = np.load(f'./{title}_{datanum}_target.npy')
-        out_output[key] = np.load(f'./{title}_{key}_{datanum}_feat.npy').astype(np.float64)
-        print(f'{key} feature load done')
-        print(f'{key} feature shape {out_output[key].shape}')
+out_output[key] = tsne.fit_transform(out_output[key])
 
-    out_output[key] = tsne.fit_transform(out_output[key])
+min_lim = np.around(out_output[key].min())
+max_lim = np.around(out_output[key].max())
 
-    min_lim = np.around(out_output[key].min())
-    max_lim = np.around(out_output[key].max())
+lim = max([-min_lim, max_lim])
+print(f'limit = {lim}')
+print('')
 
-    lim = max([-min_lim, max_lim])
-    print(f'limit = {lim}')
-    print('')
+#fig, (ax1, ax2, ax3, ax4) = plt.subplots(1,4, figsize=(44,10))
+#fig, (ax1, ax2, ax3, ax4) = plt.subplots(1,4, figsize=(44,10))
+if dataset_num == 1:
+    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
+    ax_list = [ax_list]
+else:
+    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
 
-    #fig, (ax1, ax2, ax3, ax4) = plt.subplots(1,4, figsize=(44,10))
-    #fig, (ax1, ax2, ax3, ax4) = plt.subplots(1,4, figsize=(44,10))
-    if dataset_num == 1:
-        fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
-        ax_list = [ax_list]
-    else:
-        fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
+print('ax list length = ', len(ax_list))
+
+for ax in ax_list:
+    ax.set_xlim(-lim-1, lim+1)
+    ax.set_ylim(-lim-1, lim+1)
     
-    print('ax list length = ', len(ax_list))
+output_array = out_output[key]
 
-    for ax in ax_list:
-        ax.set_xlim(-lim-1, lim+1)
-        ax.set_ylim(-lim-1, lim+1)
-        
-    output_array = out_output[key]
+scatter_list = []
+labels = ['Original CIFAR-10', 'DeepInversion', 'Ours']
+color_list = ['tab:green', 'tab:purple', 'tab:orange']
 
-    scatter_list = []
-    labels = ['Original CIFAR-10', 'DeepInversion', 'Ours']
-    color_list = ['tab:green', 'tab:purple', 'tab:orange']
+for i, ax in enumerate(ax_list):
+    scatter_list.append(ax.scatter(output_array[datanum*i:datanum*(i+1), 0], 
+                            output_array[datanum*i:datanum*(i+1), 1], 
+                            #c = target_array[datanum*i:datanum*(i+1),0],
+                            c = color_list[i],
+                            s=2.5, label=labels[i]))
+                            #cmap = plt.cm.get_cmap('rainbow', 10), label=labels))
 
+if enum >= 5:  
     for i, ax in enumerate(ax_list):
-        scatter_list.append(ax.scatter(output_array[datanum*i:datanum*(i+1), 0], 
-                                output_array[datanum*i:datanum*(i+1), 1], 
-                                #c = target_array[datanum*i:datanum*(i+1),0],
-                                c = color_list[i],
-                                s=2.5, label=labels[i]))
-                                #cmap = plt.cm.get_cmap('rainbow', 10), label=labels))
-    
-    if enum >= 5:  
-        for i, ax in enumerate(ax_list):
-            #ax.set_title(title_list[i])
-            #ax.legend(scatter_list[i].legend_elements()[0], labels)
-            ax.legend(fontsize=32, markerscale=10, loc='lower right')
+        #ax.set_title(title_list[i])
+        #ax.legend(scatter_list[i].legend_elements()[0], labels)
+        ax.legend(fontsize=32, markerscale=10, loc='lower right')
 
-    #plt.suptitle(f'{key} {datanum} T-SNE result', fontsize=30)
-    plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
-    plt.close()
+#plt.suptitle(f'{key} {datanum} T-SNE result', fontsize=30)
+plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
+plt.close()
 

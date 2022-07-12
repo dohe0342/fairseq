@@ -346,9 +346,6 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
-        print(conv_feat.size(), padding_mask.size())
-        print(conv_feat[-1][-10:])
-        exit()
 
         label_dict = {0: ' ',
                       1: '29',
@@ -397,6 +394,7 @@ class InferenceProcessor:
             padding_mask = ~padding_mask
             padding_mask.int()
         
+            
         for enum, h in enumerate(hypos):
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
@@ -410,11 +408,20 @@ class InferenceProcessor:
             #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
+            '''
             if padding_mask is not None:
                 zero_count *= padding_mask[enum].cpu()
                 print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
             else:
                 print(zero_count.sum().item(), zero_count.size()[0])
+            '''
+            import random
+            if padding_mask is not None:
+                for batch in range(padding_mask.size()[0]):
+                    for time in range(padding_mask[batch].sum()):
+                        feat = conv_feat[batch][time].cpu().numpy()
+                        np.save(f'./t100_cnnfeat/{idx[time]}/{random.randint(0,1000000)}.npy', feat)
+
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0

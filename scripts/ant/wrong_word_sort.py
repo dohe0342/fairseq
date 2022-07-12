@@ -24,6 +24,10 @@ count1 = 0
 aligned_list1 = []
 wrong_dict1 = {}
 
+count2 = 0
+aligned_list2 = []
+wrong_dict2 = {}
+
 for hypo, ref in zip(hypo1_list, ref_list):
     hypo = hypo.split()
     ref = ref.split()

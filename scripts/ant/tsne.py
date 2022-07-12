@@ -15,7 +15,7 @@ import matplotlib
 matplotlib.rc('xtick', labelsize=28)
 matplotlib.rc('ytick', labelsize=28)
 
-np_list = np.empty((1, 512))
+np_list = None
 class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
 first = True
 

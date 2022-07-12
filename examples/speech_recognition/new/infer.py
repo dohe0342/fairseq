@@ -416,6 +416,7 @@ class InferenceProcessor:
                 print(zero_count.sum().item(), zero_count.size()[0])
             '''
             import random
+            import numpy as np
             if padding_mask is not None:
                 for batch in range(padding_mask.size()[0]):
                     for time in range(padding_mask[batch].sum()):

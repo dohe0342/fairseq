@@ -22,7 +22,7 @@ for line in infer_log2:
 
 count = 0
 aligned_list = []
-wrong_dict = {}
+wrong_dict1 = {}
 
 for hypo, ref in zip(hypo1_list, ref_list):
     hypo = hypo.split()

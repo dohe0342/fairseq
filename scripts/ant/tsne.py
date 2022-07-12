@@ -1,11 +1,5 @@
 import os
-import torch
-import torch.nn as nn
 import numpy as np
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
-import torchvision
-import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 from tsnecuda import TSNE
 import argparse

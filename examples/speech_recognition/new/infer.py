@@ -321,11 +321,10 @@ class InferenceProcessor:
             print(f"{tgt_pieces} ({speaker}-{sid})", file=self.ref_units_file)
             print(f"{tgt_words} ({speaker}-{sid})", file=self.ref_words_file)
 
-        if not self.cfg.common_eval.quiet or 1:
+        if not self.cfg.common_eval.quiet:
             logger.info(f"HYPO: {hyp_words}")
             logger.info(f"REF: {tgt_words}")
             logger.info("---------------------")
-        exit()
         hyp_words, tgt_words = hyp_words.split(), tgt_words.split()
 
         return editdistance.eval(hyp_words, tgt_words), len(tgt_words)

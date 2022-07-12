@@ -4,7 +4,7 @@ for filename in filename_list:
     file = open(filename, 'r').readlines()
     all_blank = 0
     all_length = 0
-    for line in file[4:-3]:
+    for line in file[4:-4]:
         print(line)
         blank, length = line.split(' ')
         blank = int(blank)

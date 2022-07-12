@@ -422,7 +422,7 @@ class InferenceProcessor:
                     for time in range(padding_mask[batch].sum()):
                         feat = conv_feat[batch][time].cpu().numpy()
                         print(feat.shape)
-                        np.save(f'./t100_cnnfeat/{idx[time]}/{str(random.randint(0,1000000)).zfill(7)}.npy', feat)
+                        np.save(f'./t100_cnnfeat/{int(idx[time])}/{str(random.randint(0,1000000)).zfill(7)}.npy', feat)
 
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)

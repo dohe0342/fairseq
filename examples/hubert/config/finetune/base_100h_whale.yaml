@@ -8,8 +8,6 @@ common:
   seed: 1337
 
 checkpoint:
-  save_interval: 5
-  keep_interval_updates: 1
   no_epoch_checkpoints: true
   best_checkpoint_metric: wer
 

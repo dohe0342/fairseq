@@ -16,7 +16,7 @@ matplotlib.rc('ytick', labelsize=28)
 
 tsne = TSNE(n_components=2, init='random')
 
-out_output[key] = tsne.fit_transform(out_output[key])
+output = tsne.fit_transform(output)
 
 min_lim = np.around(out_output[key].min())
 max_lim = np.around(out_output[key].max())

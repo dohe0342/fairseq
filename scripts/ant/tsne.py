@@ -34,7 +34,7 @@ output = tsne.fit_transform(np_list)
 print(output.shape)
 print(sum(num_list))
 
-scatter_list = []
+colors = cm.rainbow(np.linspace(0, 1, len(ys)))
 
 for i, ax in enumerate(ax_list):
     scatter_list.append(ax.scatter(output[:, 0], 

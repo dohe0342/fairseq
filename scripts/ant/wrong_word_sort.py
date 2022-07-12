@@ -5,12 +5,13 @@ from wer import editDistance, getStepList, alignedPrint
 
 infer_log = open(f'./None/{sys.argv[1]}/test-other/infer.log', 'r').readlines()
 
-hypo_list = []
+hypo1_list = []
+hypo2_list = []
 ref_list = []
 
 for line in infer_log:
     if 'HYPO:' in line:
-        hypo_list.append(line[50:].replace('\n', ''))
+        hypo1_list.append(line[50:].replace('\n', ''))
     if 'REF:' in line:
         ref_list.append(line[49:].replace('\n', ''))
 
@@ -19,7 +20,7 @@ count = 0
 aligned_list = []
 wrong_dict = {}
 
-for hypo, ref in zip(hypo_list, ref_list):
+for hypo, ref in zip(hypo1_list, ref_list):
     hypo = hypo.split()
     ref = ref.split()
     

@@ -51,8 +51,8 @@ for hypo, ref in zip(hypo2_list, ref_list):
     
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
-        try: wrong_dict2[(r, h)] += 1
-        except: wrong_dict2[(r, h)] = 1
+        try: wrong_dict1[r].append(h)
+        except: wrong_dict1[r] = [h]
 
 #wrong_dict1 = sorted(wrong_dict1.items(), key=lambda x:x[1], reverse=True)
 #wrong_dict2 = sorted(wrong_dict2.items(), key=lambda x:x[1], reverse=True)

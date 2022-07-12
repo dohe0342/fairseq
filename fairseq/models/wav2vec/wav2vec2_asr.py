@@ -567,7 +567,7 @@ class Wav2VecEncoder(FairseqEncoder):
         return {
             "encoder_out": x,  # T x B x C
             #"conv_feat": res["conv_feat"] if cnn_fgsm is not None else None,
-            "conv_feat": res["conv_feat"]
+            "conv_feat": res["conv_feat"],
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
         }

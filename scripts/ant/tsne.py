@@ -15,10 +15,10 @@ class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
 first = True
 
 num_list = []
-for cls in class_list:
+for cls in tqdm(class_list):
     file_list = sorted(glob.glob(f'{cls}/*'))
     enum = 0
-    for enum, file in enumerate(file_list):
+    for enum, file in tqdm(enumerate(file_list), leave=False):
         file = np.load(file)
         if first:
             np_list = file.reshape(1, 512)

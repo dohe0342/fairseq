@@ -389,7 +389,7 @@ class InferenceProcessor:
         #print('target sentence = ')
         #print(target_sentence)
         #print('\n\n')
-        print(padding_mask.sum())
+        print(padding_mask.size(), padding_mask.sum())
         exit()
         softmax = torch.nn.Softmax(dim=1)
         

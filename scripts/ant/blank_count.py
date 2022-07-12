@@ -5,6 +5,7 @@ for filename in filename_list:
     all_blank = 0
     all_length = 0
     for line in file[4:-3]:
+        print(line)
         blank, length = line.split(' ')
         blank = int(blank)
         length = int(length.replace('\n', ''))

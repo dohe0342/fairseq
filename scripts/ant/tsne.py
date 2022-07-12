@@ -9,11 +9,20 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 from tsnecuda import TSNE
 import argparse
+import glob
 
 import matplotlib
 matplotlib.rc('xtick', labelsize=28)
 matplotlib.rc('ytick', labelsize=28)
 
+np_list = None
+class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
+for cls in class_list:
+    file_list = sorted(glob.glob(f'{cls}/*'))
+    for file in file_list:
+        file = np.load(file)
+        np_list.
+        
 tsne = TSNE(n_components=2, init='random')
 
 output = tsne.fit_transform(output)

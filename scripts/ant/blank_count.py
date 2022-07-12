@@ -1,4 +1,4 @@
-filename_list = ["d2v_vanilla_blank.txt", "d2v_mba_blank.txt"]
+filename_list = ["d2v_vanilla_blank.txt", "d2v_fgsm_blank.txt", "d2v_mba_blank.txt"]
 
 for filename in filename_list:
     file = open(filename, 'r').readlines()

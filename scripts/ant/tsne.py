@@ -51,14 +51,10 @@ if dataset_num == 1 or 1:
 else:
     fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
 
-print('ax list length = ', len(ax_list))
-
 for ax in ax_list:
     ax.set_xlim(-lim-1, lim+1)
     ax.set_ylim(-lim-1, lim+1)
     
-output_array = out_output[key]
-
 scatter_list = []
 labels = ['Original CIFAR-10', 'DeepInversion', 'Ours']
 color_list = ['tab:green', 'tab:purple', 'tab:orange']

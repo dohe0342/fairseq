@@ -346,6 +346,9 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
+        print(conv_feat.size())
+        exit()
+
         label_dict = {0: ' ',
                       1: '29',
                       2: '30',

@@ -31,4 +31,3 @@ do
 		distributed_training.distributed_world_size=1 
 	echo ""
 done
-

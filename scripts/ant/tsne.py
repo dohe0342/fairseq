@@ -26,7 +26,7 @@ for cls in tqdm(class_list):
         else:
             np_list = np.concatenate((np_list, file.reshape(1, 512)), axis=0)
         
-        if enum >= 500:
+        if enum >= 300:
             break
 
     num_list.append(enum+1 if enum != 0 else 0)

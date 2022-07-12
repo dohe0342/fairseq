@@ -29,7 +29,7 @@ for cls in tqdm(class_list):
         if enum >= 100:
             break
 
-    num_list.append(enum)
+    num_list.append(enum+1 if enum != 0 else 0)
 print(num_list)
 
 tsne = TSNE(n_components=2, init='random')

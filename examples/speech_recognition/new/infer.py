@@ -346,7 +346,7 @@ class InferenceProcessor:
             sample=sample,
         )
         #print(sample)
-        print(conv_feat.size())
+        print(conv_feat.size(), padding_mask.size())
         exit()
 
         label_dict = {0: ' ',

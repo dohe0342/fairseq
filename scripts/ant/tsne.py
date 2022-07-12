@@ -22,7 +22,10 @@ for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))
     for file in file_list:
         file = np.load(file)
-        np.concatenate((np_list, file), axis=0)
+        if np_list.shape[0] == 1:
+            np_list = file
+        else:
+            np.concatenate((np_list, file), axis=0)
         print(np_list.shape)
 
 

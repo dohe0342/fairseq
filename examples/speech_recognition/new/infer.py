@@ -390,6 +390,7 @@ class InferenceProcessor:
         #print(target_sentence)
         #print('\n\n')
         padding_mask = ~padding_mask
+        padding_mask.int()
         softmax = torch.nn.Softmax(dim=1)
         
         for h in hypos:
@@ -405,6 +406,7 @@ class InferenceProcessor:
             #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
+            zero_count *= padding_mask
             #print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)

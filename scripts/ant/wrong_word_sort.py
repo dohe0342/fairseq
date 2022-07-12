@@ -38,8 +38,8 @@ for hypo, ref in zip(hypo1_list, ref_list):
     
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
-        try: wrong_dict1[(r, h)] += 1
-        except: wrong_dict1[(r, h)] = 1
+        try: wrong_dict1[r] = h
+        except: wrong_dict1[r] = h
 
 for hypo, ref in zip(hypo2_list, ref_list):
     hypo = hypo.split()

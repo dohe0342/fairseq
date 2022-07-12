@@ -21,7 +21,10 @@ first = True
 
 for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))
-    for file in file_list:
+    for enum, file in enumerate(file_list):
+        if enum > 2000:
+            break
+
         file = np.load(file)
         #if np_list.shape[0] == 1:
         if first:

@@ -16,7 +16,6 @@ first = True
 
 num_list = []
 for cls in tqdm(class_list):
-    print(cls)
     file_list = sorted(glob.glob(f'{cls}/*'))
     enum = 0
     for enum in tqdm(range(len(file_list)), leave=False):

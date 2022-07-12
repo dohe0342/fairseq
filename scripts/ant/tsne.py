@@ -19,10 +19,13 @@ np_list = None
 class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
 first = True
 
+num_list = []
 for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))
+    enum = 0
     for enum, file in enumerate(file_list):
         if enum > 500:
+            
             break
 
         file = np.load(file)

@@ -11,4 +11,4 @@ for filename in filename_list:
         all_blank += blank
         all_length += length
 
-    print(filename, all_blank, all_length)
+    print(filename, all_blank, all_length, all_blank/all_length)

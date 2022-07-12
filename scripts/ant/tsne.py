@@ -59,6 +59,7 @@ for ax in ax_list:
     ax.set_ylim(-lim-1, lim+1)
     
 scatter_list = []
+#color_list = 
 #color_list = ['tab:green', 'tab:purple', 'tab:orange']
 
 for i, ax in enumerate(ax_list):

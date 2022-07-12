@@ -39,5 +39,5 @@ colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 for o, c in zip(output, colors):
     plt.scatter(o[0], o[1], color=c)
 
-plt.savefig('./vanilla_decision.png', bbox_inches='tight', dpi=600)
+plt.savefig('./vanilla_decision.png', bbox_inches='tight', dpi=300)
 plt.close()

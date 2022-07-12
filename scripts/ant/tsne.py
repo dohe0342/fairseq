@@ -5,7 +5,7 @@ from tsnecuda import TSNE
 import argparse
 import glob
 from tqdm import tqdm
-
+import matplotlib.cm as cm
 import matplotlib
 matplotlib.rc('xtick', labelsize=28)
 matplotlib.rc('ytick', labelsize=28)

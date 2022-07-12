@@ -325,7 +325,7 @@ class InferenceProcessor:
             logger.info(f"HYPO: {hyp_words}")
             logger.info(f"REF: {tgt_words}")
             logger.info("---------------------")
-
+        exit()
         hyp_words, tgt_words = hyp_words.split(), tgt_words.split()
 
         return editdistance.eval(hyp_words, tgt_words), len(tgt_words)

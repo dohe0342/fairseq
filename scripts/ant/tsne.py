@@ -35,13 +35,6 @@ tsne = TSNE(n_components=2, init='random')
 
 output = tsne.fit_transform(np_list)
 
-min_lim = np.around(out_output[key].min())
-max_lim = np.around(out_output[key].max())
-
-lim = max([-min_lim, max_lim])
-print(f'limit = {lim}')
-print('')
-
 if dataset_num == 1 or 1:
     fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
     ax_list = [ax_list]

@@ -38,11 +38,6 @@ colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 
 for o, c in zip(output, colors):
     plt.scatter(o[0], o[1], color=c)
-scatter_list.append(ax.scatter(output[:, 0], 
-                        output[:, 1], 
-                        #c = color_list[i],
-                        cmap='rainbow',
-                        s=2.5, label=labels[i]))
 
 plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
 plt.close()

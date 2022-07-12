@@ -35,17 +35,7 @@ for hypo, ref in zip(hypo1_list, ref_list):
     for r, h in zip(ref_s, hypo_s):
         try: wrong_dict[(r, h)] += 1
         except: wrong_dict[(r, h)] = 1
-    '''
-    if len(hypo) != len(ref):
-        d = editDistance(hypo, ref)
-        aligned_list.append(getStepList(hypo, ref, d))
-    else:
-        for h, r in zip(hypo, ref):
-            if h != r:
-                try: wrong_dict[(h, r)] += 1
-                except: wrong_dict[(h, r)] = 0
-    '''
-#print(aligned_list)
+
 wrong_dict = sorted(wrong_dict.items(), key=lambda x:x[1], reverse=True)
 for pair, count in wrong_dict:
     print(pair[0], pair[1], count)

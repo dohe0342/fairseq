@@ -3,7 +3,8 @@ import glob
 import sys
 from wer import editDistance, getStepList, alignedPrint
 
-infer_log = open(f'./None/{sys.argv[1]}/test-other/infer.log', 'r').readlines()
+infer_log1 = open(f'./None/{sys.argv[1]}/test-other/infer.log', 'r').readlines()
+infer_log2 = open(f'./None/{sys.argv[2]}/test-other/infer.log', 'r').readlines()
 
 hypo1_list = []
 hypo2_list = []
@@ -14,7 +15,6 @@ for line in infer_log:
         hypo1_list.append(line[50:].replace('\n', ''))
     if 'REF:' in line:
         ref_list.append(line[49:].replace('\n', ''))
-
 
 count = 0
 aligned_list = []

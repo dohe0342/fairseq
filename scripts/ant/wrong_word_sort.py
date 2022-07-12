@@ -58,4 +58,5 @@ for hypo, ref in zip(hypo2_list, ref_list):
 #wrong_dict2 = sorted(wrong_dict2.items(), key=lambda x:x[1], reverse=True)
 
 for enum, r, h in enumerate(wrong_dict.items()):
-    print(pair[0], pair[1], count)
+    #print(pair[0], pair[1], count)
+    print(r, h)

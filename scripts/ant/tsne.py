@@ -15,13 +15,14 @@ import matplotlib
 matplotlib.rc('xtick', labelsize=28)
 matplotlib.rc('ytick', labelsize=28)
 
-np_list = None
+np_list = np.empty(512)
 class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
 for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))
     for file in file_list:
         file = np.load(file)
-        np_list.
+        np.append(np_list, file)
+
         
 tsne = TSNE(n_components=2, init='random')
 

@@ -34,7 +34,7 @@ for cls in class_list:
             first = False
         else:
             np_list = np.concatenate((np_list, file.reshape(1, 512)), axis=0)
-    num_list.append(enum)
+    num_list.append(enum-1)
 print(num_list)
 
 tsne = TSNE(n_components=2, init='random')

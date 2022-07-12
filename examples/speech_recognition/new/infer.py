@@ -389,7 +389,8 @@ class InferenceProcessor:
         #print('target sentence = ')
         #print(target_sentence)
         #print('\n\n')
-
+        print(padding_mask.sum())
+        exit()
         softmax = torch.nn.Softmax(dim=1)
         
         for h in hypos:

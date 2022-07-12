@@ -20,9 +20,7 @@ for cls in class_list:
     for enum, file in enumerate(file_list):
         if enum > 2000:
             break
-
         file = np.load(file)
-        #if np_list.shape[0] == 1:
         if first:
             np_list = file.reshape(1, 512)
             first = False

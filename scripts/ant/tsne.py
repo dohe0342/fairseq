@@ -16,6 +16,7 @@ matplotlib.rc('xtick', labelsize=28)
 matplotlib.rc('ytick', labelsize=28)
 
 np_list = np.empty(0, 512)
+print(np_list.shape)
 class_list = sorted(glob.glob('./vanilla_t100_cnnfeat/*'))
 for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))

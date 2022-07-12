@@ -29,7 +29,7 @@ for cls in class_list:
             first = False
         else:
             np.concatenate((np_list, file.reshape(1, 512)), axis=0)
-        print(np_list.shape)
+            print(file.shape)
 
 
 print(np_list.shape)

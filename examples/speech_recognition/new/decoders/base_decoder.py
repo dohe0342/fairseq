@@ -46,7 +46,7 @@ class BaseDecoder:
         if len(models) == 1:
             model = models[0]
             encoder_out = model(**encoder_input)
-            print(encoder_out["padding_mask"])
+            print(encoder_out["padding_mask"].size())
             if hasattr(model, "get_logits"):
                 emissions = model.get_logits(encoder_out)
             else:

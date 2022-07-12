@@ -429,7 +429,6 @@ class InferenceProcessor:
             )
             self.total_errors += errs
             self.total_length += length
-            print(errs)
 
         self.log({"wps": round(self.wps_meter.avg)})
         if "nsentences" in sample:

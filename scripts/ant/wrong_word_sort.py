@@ -39,7 +39,7 @@ for hypo, ref in zip(hypo1_list, ref_list):
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
         try: wrong_dict1[r].append(('vanilla', h))
-        except: wrong_dict1[r] = [h]
+        except: wrong_dict1[r] = [('vanilla', h)]
 
 for hypo, ref in zip(hypo2_list, ref_list):
     hypo = hypo.split()
@@ -52,7 +52,7 @@ for hypo, ref in zip(hypo2_list, ref_list):
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
         try: wrong_dict1[r].append(('mba', h))
-        except: wrong_dict1[r] = [h]
+        except: wrong_dict1[r] = [('mba', h)]
 
 #wrong_dict1 = sorted(wrong_dict1.items(), key=lambda x:x[1], reverse=True)
 #wrong_dict2 = sorted(wrong_dict2.items(), key=lambda x:x[1], reverse=True)

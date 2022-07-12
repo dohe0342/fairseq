@@ -21,7 +21,7 @@ for line in infer_log2:
         hypo2_list.append(line[50:].replace('\n', ''))
 
 count = 0
-aligned_list = []
+aligned_list1 = []
 wrong_dict1 = {}
 
 for hypo, ref in zip(hypo1_list, ref_list):

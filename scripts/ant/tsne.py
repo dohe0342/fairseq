@@ -39,7 +39,7 @@ print(np_list.shape)
 print(output.shape)
 print(sum(num_list))
 
-colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
+colors = cm.rainbow(np.linspace(0, 1, sum(num_list)))
 
 for enum in range(output.shape[0]):
     plt.scatter(output[enum][0], output[enum][1], color=colors[enum])

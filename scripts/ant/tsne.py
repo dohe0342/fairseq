@@ -66,13 +66,6 @@ for i, ax in enumerate(ax_list):
                             s=2.5, label=labels[i]))
                             #cmap = plt.cm.get_cmap('rainbow', 10), label=labels))
 
-if enum >= 5:  
-    for i, ax in enumerate(ax_list):
-        #ax.set_title(title_list[i])
-        #ax.legend(scatter_list[i].legend_elements()[0], labels)
-        ax.legend(fontsize=32, markerscale=10, loc='lower right')
-
-#plt.suptitle(f'{key} {datanum} T-SNE result', fontsize=30)
 plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
 plt.close()
 

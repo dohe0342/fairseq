@@ -35,10 +35,6 @@ print(sum(num_list))
 fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
 ax_list = [ax_list]
 
-for ax in ax_list:
-    ax.set_xlim(-lim-1, lim+1)
-    ax.set_ylim(-lim-1, lim+1)
-    
 scatter_list = []
 #color_list = 
 #color_list = ['tab:green', 'tab:purple', 'tab:orange']

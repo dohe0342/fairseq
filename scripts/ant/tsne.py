@@ -22,7 +22,7 @@ first = True
 for cls in class_list:
     file_list = sorted(glob.glob(f'{cls}/*'))
     for enum, file in enumerate(file_list):
-        if enum > 1000:
+        if enum > 500:
             break
 
         file = np.load(file)

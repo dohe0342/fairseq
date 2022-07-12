@@ -42,7 +42,7 @@ print(sum(num_list))
 colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 
 for enum in range(output.shape[0]):
-    plt.scatter(output[enum][0], output[enum][1], color=colors[int(enum/300)])
+    plt.scatter(output[enum][0], output[enum][1], color=colors[int(enum/201)])
 
 plt.savefig('./vanilla_decision.png', bbox_inches='tight', dpi=300)
 plt.close()

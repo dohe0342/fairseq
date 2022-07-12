@@ -389,9 +389,9 @@ class InferenceProcessor:
         #print('target sentence = ')
         #print(target_sentence)
         #print('\n\n')
-        padding_mask = ~padding_mask
-        padding_mask.int()
-        softmax = torch.nn.Softmax(dim=1)
+        if padding_mask is not None:
+            padding_mask = ~padding_mask
+            padding_mask.int()
         
         for enum, h in enumerate(hypos):
             #emission_prob = softmax(h[0]["emission"])
@@ -406,8 +406,11 @@ class InferenceProcessor:
             #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            zero_count *= padding_mask[enum].cpu()
-            print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
+            if padding_mask is not None:
+                zero_count *= padding_mask[enum].cpu()
+                print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
+            else:
+                print(zero_count.sum().item(), zero_count.size()[0])
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0

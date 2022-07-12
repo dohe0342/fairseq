@@ -25,6 +25,7 @@ for cls in class_list:
     enum = 0
     for enum, file in enumerate(file_list):
         if enum > 500:
+            num_list.append(enum)
             
             break
 

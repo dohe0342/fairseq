@@ -393,7 +393,7 @@ class InferenceProcessor:
         padding_mask.int()
         softmax = torch.nn.Softmax(dim=1)
         
-        for h in hypos:
+        for enum, h in enumerate(hypos):
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
             #print(len(h[0]["tokens"]))
@@ -406,7 +406,7 @@ class InferenceProcessor:
             #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
-            zero_count *= padding_mask
+            zero_count *= padding_mask[enum]
             print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)

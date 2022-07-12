@@ -23,7 +23,8 @@ for cls in class_list:
         file = np.load(file)
         np.append(np_list, file)
 
-        
+print(np_list.shape)
+exit()
 tsne = TSNE(n_components=2, init='random')
 
 output = tsne.fit_transform(output)

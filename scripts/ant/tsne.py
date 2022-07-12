@@ -25,8 +25,6 @@ for cls in class_list:
     enum = 0
     for enum, file in enumerate(file_list):
         if enum > 500:
-            num_list.append(enum)
-            
             break
 
         file = np.load(file)
@@ -36,7 +34,8 @@ for cls in class_list:
             first = False
         else:
             np_list = np.concatenate((np_list, file.reshape(1, 512)), axis=0)
-        print('np shape = ', np_list.shape)
+    num_list.append(enum)
+print(num_list)
 
 tsne = TSNE(n_components=2, init='random')
 

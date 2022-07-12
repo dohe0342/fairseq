@@ -407,7 +407,7 @@ class InferenceProcessor:
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
             zero_count *= padding_mask[enum].cpu()
-            print(zero_count.sum().item(), padding_mask[enum].cpu().sum())
+            print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0

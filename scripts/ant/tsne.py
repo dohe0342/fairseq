@@ -23,6 +23,7 @@ for cls in class_list:
     for file in file_list:
         file = np.load(file)
         np.append(np_list, file)
+        print(np_list.shape)
 
 
 print(np_list.shape)

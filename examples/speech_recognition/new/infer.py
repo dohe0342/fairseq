@@ -398,11 +398,11 @@ class InferenceProcessor:
             #print(len(h[0]["tokens"]))
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
-            print('length of idx = ', idx.size()[0])
-            for i in idx:
-                print(i.item(), end=' ')
-            print('')
-            print('')
+            #print('length of idx = ', idx.size()[0])
+            #for i in idx:
+            #    print(i.item(), end=' ')
+            #print('')
+            #print('')
             zero = torch.zeros_like(idx)
             zero_count = torch.eq(zero, idx).int()
             #print(zero_count.sum().item(), zero_count.sum().item()+len(h[0]["tokens"]))

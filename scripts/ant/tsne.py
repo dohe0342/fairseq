@@ -34,11 +34,9 @@ for cls in class_list:
             np_list = np.concatenate((np_list, file.reshape(1, 512)), axis=0)
         print('np shape = ', np_list.shape)
 
-print(np_list.shape)
-exit()
 tsne = TSNE(n_components=2, init='random')
 
-output = tsne.fit_transform(output)
+output = tsne.fit_transform(np_list)
 
 min_lim = np.around(out_output[key].min())
 max_lim = np.around(out_output[key].max())

@@ -27,10 +27,7 @@ for hypo, ref in zip(hypo1_list, ref_list):
     d = editDistance(ref, hypo)
     aligned = getStepList(ref, hypo, d)
     aligned_list.append(aligned)
-    #try: alignedPrint(aligned, ref, hypo)
-    #except: count+=1 #print(' '.join(hypo), '\n\n', ' '.join(ref))
-    #print(ref)
-    #exit()
+    
     ref_s, hypo_s = alignedPrint(aligned, ref, hypo)
     for r, h in zip(ref_s, hypo_s):
         try: wrong_dict[(r, h)] += 1

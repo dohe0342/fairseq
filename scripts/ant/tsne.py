@@ -19,7 +19,7 @@ for cls in tqdm(class_list):
     file_list = sorted(glob.glob(f'{cls}/*'))
     enum = 0
     for enum in tqdm(range(len(file_list)), leave=False):
-        if enum > 50000:
+        if enum > 50:
             break
         file = np.load(file_list[enum])
         if first:

@@ -41,9 +41,9 @@ print(sum(num_list))
 
 colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 
-for o in output:
+for enum, o in enumerate(output):
     print(o)
-    plt.scatter(o[0], o[1], color=c)
+    plt.scatter(o[0], o[1], color=colors[enum])
 
 plt.savefig('./vanilla_decision.png', bbox_inches='tight', dpi=300)
 plt.close()

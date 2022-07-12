@@ -56,15 +56,14 @@ for ax in ax_list:
     ax.set_ylim(-lim-1, lim+1)
     
 scatter_list = []
-color_list = ['tab:green', 'tab:purple', 'tab:orange']
+#color_list = ['tab:green', 'tab:purple', 'tab:orange']
 
 for i, ax in enumerate(ax_list):
     scatter_list.append(ax.scatter(output_array[datanum*i:datanum*(i+1), 0], 
                             output_array[datanum*i:datanum*(i+1), 1], 
-                            #c = target_array[datanum*i:datanum*(i+1),0],
-                            c = color_list[i],
+                            #c = color_list[i],
+                            cmap='rainbow',
                             s=2.5, label=labels[i]))
-                            #cmap = plt.cm.get_cmap('rainbow', 10), label=labels))
 
 plt.savefig(f'./tsne_dh_res/{title_}/{datanum_}/{trial}/'+title+f'_{key}'+'.png', bbox_inches='tight', dpi=600)
 plt.close()

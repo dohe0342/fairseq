@@ -20,7 +20,7 @@ for line in infer_log2:
     if 'HYPO:' in line:
         hypo2_list.append(line[50:].replace('\n', ''))
 
-count = 0
+count1 = 0
 aligned_list1 = []
 wrong_dict1 = {}
 

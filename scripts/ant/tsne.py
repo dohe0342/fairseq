@@ -18,8 +18,8 @@ num_list = []
 for cls in tqdm(class_list):
     file_list = sorted(glob.glob(f'{cls}/*'))
     enum = 0
-    for enum, file in tqdm(enumerate(file_list), leave=False):
-        file = np.load(file)
+    for enum in tqdm(range(len(file_list)), leave=False):
+        file = np.load(file_list[enum])
         if first:
             np_list = file.reshape(1, 512)
             first = False

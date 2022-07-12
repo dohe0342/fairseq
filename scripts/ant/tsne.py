@@ -28,7 +28,7 @@ for cls in class_list:
             np_list = file.reshape(1, 512)
             first = False
         else:
-            np.concatenate((np_list, file.reshape(1, 512)), axis=0)
+            np.concatenate((np_list, file.reshape(1, 512)))
         print(np_list.shape)
 
 print(np_list.shape)

@@ -10,10 +10,6 @@ import matplotlib.pyplot as plt
 #from sklearn.manifold import TSNE
 from tsnecuda import TSNE
 import argparse
-#from resnet_cifar import ResNet34, ResNet18
-from resnet_cifar3 import ResNet34
-from torch_resnet import resnet18, resnet34, resnet50
-import vgg
 
 import matplotlib
 matplotlib.rc('xtick', labelsize=28)

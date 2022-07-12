@@ -45,8 +45,11 @@ lim = max([-min_lim, max_lim])
 print(f'limit = {lim}')
 print('')
 
-fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
-ax_list = [ax_list]
+if dataset_num == 1 or 1:
+    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
+    ax_list = [ax_list]
+else:
+    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
 
 print('ax list length = ', len(ax_list))
 

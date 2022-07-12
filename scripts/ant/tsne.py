@@ -36,6 +36,8 @@ print(sum(num_list))
 
 colors = cm.rainbow(np.linspace(0, 1, len(num_list)))
 
+for o, c in zip(output, colors):
+    plt.scatter(o[0], o[1], color=
 scatter_list.append(ax.scatter(output[:, 0], 
                         output[:, 1], 
                         #c = color_list[i],

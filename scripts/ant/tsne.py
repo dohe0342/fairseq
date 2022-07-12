@@ -33,11 +33,8 @@ tsne = TSNE(n_components=2, init='random')
 
 output = tsne.fit_transform(np_list)
 print(output.shape)
-if dataset_num == 1 or 1:
-    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
-    ax_list = [ax_list]
-else:
-    fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
+fig, ax_list = plt.subplots(1,dataset_num, figsize=(11*dataset_num,10))
+ax_list = [ax_list]
 
 for ax in ax_list:
     ax.set_xlim(-lim-1, lim+1)

@@ -398,6 +398,7 @@ class InferenceProcessor:
             #print(len(h[0]["tokens"]))
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)
+            print('length of idx = ', idx.size()[0])
             for i in idx:
                 print(i.item(), end=' ')
             print('')

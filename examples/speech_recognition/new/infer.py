@@ -423,7 +423,7 @@ class InferenceProcessor:
                         feat = conv_feat[batch][time].cpu().numpy()
                         #print(feat.shape)
                         #np.save(f'./t100_cnnfeat/{int(idx[time])}/{str(random.randint(0,1000000)).zfill(7)}.npy', feat)
-                        np.save('./temp.npy', feat)
+                        np.save('./1111.npy', feat)
                         exit()
 
             #print(zero_count.sum().item(), zero_count.size()[0])

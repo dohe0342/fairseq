@@ -398,6 +398,7 @@ class InferenceProcessor:
         for enum, h in enumerate(hypos):
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
+            print(emission_prob)
             #print(len(h[0]["tokens"]))
             #print(emission_prob.size())
             conf, idx = emission_prob.max(1)

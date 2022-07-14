@@ -401,7 +401,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         if viewmaker is not None:
             criterion = nn.MSELoss(reduction='mean')
             #features_newview, delta = viewmaker(conv_features, padding_mask)
-            print(conv_features.size())
             indices = torch.randperm(conv_features.size(2)).to('cuda')
             features_newview = torch.index_select(conv_features, dim=2, index=indices)
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))

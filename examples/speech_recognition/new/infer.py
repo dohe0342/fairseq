@@ -340,7 +340,8 @@ class InferenceProcessor:
                     #print(f'set {name} to 0.')
         '''         
         self.gen_timer.start()
-        hypos, padding_mask, conv_feat = self.task.inference_step(
+        #hypos, padding_mask, conv_feat = self.task.inference_step(
+        hypos = self.task.inference_step(
             generator=self.generator,
             models=self.models,
             sample=sample,

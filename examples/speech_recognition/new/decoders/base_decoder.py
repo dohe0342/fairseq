@@ -36,7 +36,7 @@ class BaseDecoder:
         }
         emissions = self.get_emissions(models, encoder_input)
         #return (self.decode(emissions[0]), emissions[1], emissions[2])
-        return self.decode(emissions[0]
+        return self.decode(emissions)
 
     def get_emissions(
         self,

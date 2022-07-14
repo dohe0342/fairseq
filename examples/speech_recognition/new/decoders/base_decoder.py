@@ -68,7 +68,8 @@ class BaseDecoder:
             else:
                 emissions = models[0].get_normalized_probs(encoder_out, log_probs=True)
 
-        return (emissions.transpose(0, 1).float().cpu().contiguous(), encoder_out["padding_mask"], encoder_out["conv_feat"])
+        #return (emissions.transpose(0, 1).float().cpu().contiguous(), encoder_out["padding_mask"], encoder_out["conv_feat"])
+        return emissions.transpose(0, 1).float().cpu().contiguous()
 
     def get_tokens(self, idxs: torch.IntTensor) -> torch.LongTensor:
         idxs = (g[0] for g in it.groupby(idxs))

@@ -390,11 +390,11 @@ class InferenceProcessor:
         #print('target sentence = ')
         #print(target_sentence)
         #print('\n\n')
+        '''
         if padding_mask is not None:
             padding_mask = ~padding_mask
             padding_mask.int()
         
-        '''            
         for enum, h in enumerate(hypos):
             #emission_prob = softmax(h[0]["emission"])
             emission_prob = h[0]["emission"]
@@ -415,7 +415,7 @@ class InferenceProcessor:
             else:
                 print(zero_count.sum().item(), zero_count.size()[0])
         '''
-            '''
+        '''
             import random
             import numpy as np
             if padding_mask is not None:
@@ -424,7 +424,7 @@ class InferenceProcessor:
                         feat = conv_feat[batch][time].cpu().numpy()
                         #print(feat.shape)
                         np.save(f'/workspace/fairseq/scripts/ant/t100_cnnfeat/{int(idx[time])}/{str(random.randint(0,1000000)).zfill(7)}.npy', feat)
-            '''
+        '''
             #print(zero_count.sum().item(), zero_count.size()[0])
             #print(idx)
             #count = 0

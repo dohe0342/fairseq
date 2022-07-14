@@ -403,7 +403,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             #features_newview, delta = viewmaker(conv_features, padding_mask)
             print(conv_features.size())
             indices = torch.randperm(conv_features.size(2))
-            features_newview = conv_features
+            features_newview = torch.index_select(conv_features, dim=2, index=indices)
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
 
             '''

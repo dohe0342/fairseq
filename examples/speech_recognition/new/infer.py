@@ -100,11 +100,12 @@ class InferenceProcessor:
         self.cfg = cfg
         self.task = tasks.setup_task(cfg.task)
 
-        models_hardloading = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/workspace/models/wav2vec_model/w2v_l_1gen.pt'])
-
         models, saved_cfg = self.load_model_ensemble()
-        del models
-        models = models_hardloading
+        
+        if 1:
+            models_hardloading = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/workspace/models/wav2vec_model/w2v_l_1gen.pt'])
+            del models
+            models = models_hardloading
         self.models = models
         '''
         with torch.no_grad():

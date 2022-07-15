@@ -102,14 +102,16 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         
-        if 1:
-            import fairseq
-            del models
-            models_hardloading, _, _ = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/workspace/models/wav2vec_model/w2v_l_1gen.pt'], arg_overrides=saved_cfg, strict=False)
-            models = models_hardloading
+        import pickle
+        with open('/workspace/models/wav2vec_model/w2v_l_3gen.pickle', 'rb') as f:
+            pickle_load_weights = pickle.load(f)    
 
-            print(models)
-            exit()
+        for k, v in pickle_load_weights.items():
+            print(k, v)
+        #for n, p in models[0].named_parameters():
+
+
+        
         self.models = models
         '''
         with torch.no_grad():

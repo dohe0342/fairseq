@@ -109,6 +109,7 @@ class InferenceProcessor:
             models = models_hardloading
 
             print(models)
+            exit()
         self.models = models
         '''
         with torch.no_grad():

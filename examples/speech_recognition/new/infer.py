@@ -108,6 +108,7 @@ class InferenceProcessor:
 
         for k, v in pickle_load_weights.items():
             print(k, v)
+        exit()
         #for n, p in models[0].named_parameters():
 
 

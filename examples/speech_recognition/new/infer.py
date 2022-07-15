@@ -104,7 +104,7 @@ class InferenceProcessor:
         
         import pickle
 
-        with open('/workspace/models/wav2vec_model/w2v_l_3gen.pickle', 'rb') as f:
+        with open('/workspace/models/wav2vec_model/w2v_l_2gen.pickle', 'rb') as f:
             pickle_load_weights = pickle.load(f)    
 
         #for k, v in pickle_load_weights.items():

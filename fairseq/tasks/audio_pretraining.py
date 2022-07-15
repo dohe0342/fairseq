@@ -107,7 +107,7 @@ class AudioPretrainingConfig(FairseqDataclass):
     eval_wer: bool = field(
         default=False, metadata={"help": "compute WER for Seq2Seq models"}
     )
-    eval_wer_config: str= field( 
+    eval_wer_config: str = field( 
         default_factory=lambda: GenerationConfig(),
         metadata={"help": "beam search config for evaluating wer during training"}, 
     )                                                                                                    

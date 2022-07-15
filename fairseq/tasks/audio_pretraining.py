@@ -107,7 +107,20 @@ class AudioPretrainingConfig(FairseqDataclass):
     eval_wer: bool = field(
         default=False, metadata={"help": "compute WER for Seq2Seq models"}
     )
-    
+    eval_wer_config: GenerationConfig = field( 
+        default_factory=lambda: GenerationConfig(),
+        metadata={"help": "beam search config for evaluating wer during training"}, 
+    )                                                                                                    
+    eval_wer_tokenizer: Any = field(
+        default=None,
+        metadata={"help": "tokenizer config for evaluating wer during training"},                        
+    )                                                                                                    
+    eval_wer_post_process: str = field(
+        default="letter",
+        metadata={
+            "help": "remove BPE tokens before scoring (can be sentencepiece, letter, and more)"
+        },
+    )   
 
 @register_task("audio_pretraining", dataclass=AudioPretrainingConfig)
 class AudioPretrainingTask(FairseqTask):

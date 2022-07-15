@@ -104,6 +104,9 @@ class AudioPretrainingConfig(FairseqDataclass):
             "target texts): none/low/high (default: none). "
         },
     )
+    eval_wer: bool = field(
+        default=False, metadata={"help": "compute WER for Seq2Seq models"}
+    )
     
 
 @register_task("audio_pretraining", dataclass=AudioPretrainingConfig)

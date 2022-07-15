@@ -103,14 +103,17 @@ class InferenceProcessor:
         models, saved_cfg = self.load_model_ensemble()
         
         import pickle
+        import numpy as np
+
         with open('/workspace/models/wav2vec_model/w2v_l_3gen.pickle', 'rb') as f:
             pickle_load_weights = pickle.load(f)    
 
         for k, v in pickle_load_weights.items():
             print(k, v)
         exit()
-        #for n, p in models[0].named_parameters():
-
+        for n, p in models[0].named_parameters():
+            if n in pickle_load_weights:
+                p.data = torch.nn.Parameter(
 
         
         self.models = models

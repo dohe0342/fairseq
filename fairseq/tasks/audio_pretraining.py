@@ -110,7 +110,7 @@ class AudioPretrainingConfig(FairseqDataclass):
     eval_wer_config: str = field( 
         metadata={"help": "beam search config for evaluating wer during training"}, 
     )                                                                                                    
-    eval_wer_tokenizer: Any = field(
+    eval_wer_tokenizer: str = field(
         default=None,
         metadata={"help": "tokenizer config for evaluating wer during training"},                        
     )                                                                                                    

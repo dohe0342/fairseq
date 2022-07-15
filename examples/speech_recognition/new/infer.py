@@ -105,7 +105,7 @@ class InferenceProcessor:
         if 1:
             import fairseq
             del models
-            models_hardloading, _, _ = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/workspace/models/wav2vec_model/w2v_l_1gen.pt'], arg_overrides=saved_cfg)
+            models_hardloading, _, _ = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/workspace/models/wav2vec_model/w2v_l_1gen.pt'], arg_overrides=saved_cfg, strict=False)
             models = models_hardloading
 
             print(models)

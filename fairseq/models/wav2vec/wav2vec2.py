@@ -607,7 +607,6 @@ class Wav2Vec2Model(BaseFairseqModel):
                     print('*'*30)
                     print(source.size())
                     print('*'*30)
-
                     features = self.feature_extractor(source)
 
             features_pen = features.float().pow(2).mean()

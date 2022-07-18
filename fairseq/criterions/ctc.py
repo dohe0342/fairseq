@@ -935,7 +935,7 @@ class CtcCriterion(FairseqCriterion):
 
             with torch.no_grad():
                 lprobs = [lprobs, lprobs2]
-                for lprob in lprobs:
+                for i, lprob in enumerate(lprobs):
                     lprobs_t = lprob.transpose(0, 1).float().contiguous().cpu()
 
                     c_err = 0

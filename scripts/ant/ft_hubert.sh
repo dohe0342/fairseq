@@ -6,4 +6,4 @@ fairseq-hydra-train \
     task.normalize=false \
     model.w2v_path=/workspace/model/hubert_base_ls960.pt \
     criterion._name=ctc \
-    checkpoint.save_dir=/opt/ml/model 
+    checkpoint.save_dir=/workspace/fairseq/scripts/ant/$1 

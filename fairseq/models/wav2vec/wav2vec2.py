@@ -614,6 +614,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             features = features.transpose(1, 2)
             features = self.layer_norm(features)
         else:
+            print('here!!!!!!!!!!!1')
             features = conv_feat.detach()
         
         unmasked_features = features.clone()

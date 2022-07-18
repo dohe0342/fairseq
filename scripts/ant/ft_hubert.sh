@@ -1,7 +1,7 @@
 fairseq-hydra-train \
     --config-dir /workspace/fairseq/examples/hubert/config/finetune \
     --config-name base_100h_ant \
-    model.w2v_path=/workspace/model/hubert_base_ls960.pt \
+    model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
     task.label_dir=/workspace/LibriSpeech/manifests \
     task.data=/workspace/LibriSpeech/manifests \
     task.normalize=false \

@@ -597,6 +597,8 @@ class Wav2Vec2Model(BaseFairseqModel):
         conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
         
+        print(source)
+        print("*"*30)
         if conv_feat is None:
             if self.feature_grad_mult > 0:
                 features = self.feature_extractor(source)

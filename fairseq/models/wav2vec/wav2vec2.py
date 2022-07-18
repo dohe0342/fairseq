@@ -604,9 +604,6 @@ class Wav2Vec2Model(BaseFairseqModel):
                     features = GradMultiply.apply(features, self.feature_grad_mult)
             else:
                 with torch.no_grad():
-                    print('*'*30)
-                    print(source.size())
-                    print('*'*30)
                     features = self.feature_extractor(source)
 
             features_pen = features.float().pow(2).mean()

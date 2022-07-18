@@ -1059,7 +1059,7 @@ class CtcCriterion(FairseqCriterion):
         w_errors_new = sum(log.get("w_errors viewmaker", 0) for log in logging_outputs)
         metrics.log_scalar("_w_errors viewmaker", w_errors)
         wv_errors_new = sum(log.get("wv_errors viewmaker", 0) for log in logging_outputs)
-        metrics.log_scalar("_wv_errors", wv_errors)
+        metrics.log_scalar("_wv_errors viewmaker", wv_errors)
         w_total_new = sum(log.get("w_total", 0) for log in logging_outputs)
         metrics.log_scalar("_w_total", w_total)
 

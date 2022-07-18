@@ -7,5 +7,4 @@ fairseq-hydra-train \
 	task.normalize=false \
 	model.w2v_path=/opt/ml/input/data/model/hubert_base_ls960.pt \
 	criterion._name=ctc \
-	checkpoint.save_dir=/opt/ml/model \
-	+model.viewmaker=true
+	checkpoint.save_dir=/opt/ml/model 

@@ -934,7 +934,9 @@ class CtcCriterion(FairseqCriterion):
             import editdistance
 
             with torch.no_grad():
-                lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
+                lprobs = [lprobs, lprobs2]
+                for lprob in lprobs:
+                lprobs_t = lprob.transpose(0, 1).float().contiguous().cpu()
 
                 c_err = 0
                 c_len = 0

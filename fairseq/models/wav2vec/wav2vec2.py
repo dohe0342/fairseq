@@ -962,6 +962,7 @@ class ConvFeatureExtractionModel(nn.Module):
         x = x.unsqueeze(1)
 
         for conv in self.conv_layers:
+            print(x.size())
             x = conv(x)
 
         return x

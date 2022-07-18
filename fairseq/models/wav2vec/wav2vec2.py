@@ -963,7 +963,6 @@ class ConvFeatureExtractionModel(nn.Module):
 
         for conv in self.conv_layers:
             x = conv(x)
-            print(x)
 
         return x
 

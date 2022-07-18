@@ -1109,7 +1109,7 @@ class CtcCriterion(FairseqCriterion):
                 else float("nan"),
             )
             metrics.log_derived(
-                "raw_wer",
+                "raw_wer viewmaker",
                 lambda meters: safe_round(
                     meters["_wv_errors viewmaker"].sum * 100.0 / meters["_w_total viewmaker"].sum, 3
                 )

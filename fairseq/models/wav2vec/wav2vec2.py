@@ -959,7 +959,6 @@ class ConvFeatureExtractionModel(nn.Module):
     def forward(self, x):
         # BxT -> BxCxT
         x = x.unsqueeze(1)
-        print(x.size())
 
         for conv in self.conv_layers:
             x = conv(x)

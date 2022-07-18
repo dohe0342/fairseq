@@ -33,7 +33,6 @@ then
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/opt/ml/model \
 		+model.viewmaker=true
-
 	rm /opt/ml/model/crash.pt
 
 else

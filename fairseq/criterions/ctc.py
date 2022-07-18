@@ -992,13 +992,20 @@ class CtcCriterion(FairseqCriterion):
                             wv_errs += dist
 
                         w_len += len(targ_words)
-
-                    logging_output["wv_errors"] = wv_errs
-                    logging_output["w_errors"] = w_errs
-                    logging_output["w_total"] = w_len
-                    logging_output["c_errors"] = c_err
-                    logging_output["c_total"] = c_len
-        
+                    
+                    if i == 0:
+                        logging_output["wv_errors"] = wv_errs
+                        logging_output["w_errors"] = w_errs
+                        logging_output["w_total"] = w_len
+                        logging_output["c_errors"] = c_err
+                        logging_output["c_total"] = c_len
+                    else:
+                        logging_output["wv_errors"] = wv_errs
+                        logging_output["w_errors"] = w_errs
+                        logging_output["w_total"] = w_len
+                        logging_output["c_errors"] = c_err
+                        logging_output["c_total"] = c_len
+ 
         return [loss, net_output["loss"]], sample_size, logging_output
 
     @staticmethod

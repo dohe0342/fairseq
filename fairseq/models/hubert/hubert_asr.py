@@ -255,7 +255,6 @@ class HubertEncoder(FairseqEncoder):
         }
         
         if cfg.w2v_args is None:
-            cfg.w2v_path = '/workspace/models/hubert_model/hubert_base_ls960.pt'
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)
             if w2v_args is None:

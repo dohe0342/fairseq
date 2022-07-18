@@ -1,7 +1,6 @@
-instance="g5"
 fairseq-hydra-train \
     --config-dir /opt/ml/code/fairseq/examples/hubert/config/finetune \
-    --config-name base_100h_aws_$instance \
+    --config-name base_100h_ant \
     task.label_dir=/opt/ml/code/LibriSpeech/manifests \
     task.data=/opt/ml/code/LibriSpeech/manifests \
     task.normalize=false \

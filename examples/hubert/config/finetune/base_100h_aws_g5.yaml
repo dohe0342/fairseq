@@ -55,21 +55,21 @@ lr_scheduler:
 
 model:
   _name: hubert_ctc
-  w2v_path: ???
+  w2v_path: ??? 
   apply_mask: true
   mask_selection: static
   mask_length: 10
   mask_other: 0
-  mask_prob: 0.75
+  mask_prob: 0.65
   mask_channel_selection: static
   mask_channel_length: 64
   mask_channel_other: 0
-  mask_channel_prob: 0.5
-  layerdrop: 0.1
-  dropout: 0.0
-  activation_dropout: 0.1
-  attention_dropout: 0.0
-  feature_grad_mult: 0.0
+  mask_channel_prob: 0.5 
+  layerdrop: 0.1 
+  dropout: 0.0 
+  activation_dropout: 0.1 
+  attention_dropout: 0.0 
+  feature_grad_mult: 0.0 
   freeze_finetune_updates: 0
 
 hydra:

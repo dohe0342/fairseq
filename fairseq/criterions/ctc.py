@@ -1078,7 +1078,7 @@ class CtcCriterion(FairseqCriterion):
                 lambda meters: safe_round(
                     meters["_c_errors viewmaker"].sum * 100.0 / meters["_c_total"].sum, 3
                 )
-                if meters["_c_total"].sum > 0
+                if meters["_c_total viewmaker"].sum > 0
                 else float("nan"),
             )
 

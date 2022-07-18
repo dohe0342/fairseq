@@ -597,6 +597,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         conv_feat = kwargs['conv_feat'] if 'conv_feat' in kwargs else None
         viewmaker = kwargs['viewmaker'] if 'viewmaker' in kwargs else None
         
+        print(source.size())
         if conv_feat is None:
             if self.feature_grad_mult > 0:
                 features = self.feature_extractor(source)
@@ -636,14 +637,14 @@ class Wav2Vec2Model(BaseFairseqModel):
             padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
         else:
             padding_mask = None
-
+        
         time_steps_to_drop = features.size(1) % self.crop_seq_to_multiple
         if time_steps_to_drop != 0:
             features = features[:, :-time_steps_to_drop]
             unmasked_features = unmasked_features[:, :-time_steps_to_drop]
             if padding_mask is not None:
                 padding_mask = padding_mask[:, :-time_steps_to_drop]
-
+        
         loss = None
         features_newview = None
         x_new = None

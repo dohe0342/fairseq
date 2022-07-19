@@ -33,6 +33,7 @@ do
 			decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz \
 			decoding.lmweight=2.15 \
 			decoding.wordscore=-0.52
+	fi
 	#model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 	echo ""
 	echo ""

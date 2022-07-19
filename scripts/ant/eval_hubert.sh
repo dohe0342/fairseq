@@ -15,11 +15,7 @@ do
 			common_eval.quiet=true \
 			task.data=/workspace/LibriSpeech/manifests \
 			task.normalize=false \
-			dataset.gen_subset=$subset \
-			decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
-			decoding.lmpath=/workspace/models/lm_model/4-gram.arpa.gz \
-			decoding.lmweight=2.15 \
-			decoding.wordscore=-0.52
+			dataset.gen_subset=$subset 
 	else
 		python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 			--config-dir /workspace/fairseq/examples/hubert/config/decode \

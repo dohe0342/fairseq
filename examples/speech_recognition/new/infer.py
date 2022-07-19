@@ -235,7 +235,7 @@ class InferenceProcessor:
         arg_overrides = ast.literal_eval(self.cfg.common_eval.model_overrides)
         models, saved_cfg = checkpoint_utils.load_model_ensemble(
             #utils.split_paths(self.cfg.common_eval.path, separator="\\"),
-            utils.split_paths('/workspace/models/wav2vec_model/wav2vec_big_10m.pt, separator="\\"),
+            utils.split_paths('/workspace/models/wav2vec_model/wav2vec_big_10m.pt', separator="\\"),
             arg_overrides=arg_overrides,
             task=self.task,
             suffix=self.cfg.checkpoint.checkpoint_suffix,

@@ -253,7 +253,7 @@ class HubertEncoder(FairseqEncoder):
             "encoder_layerdrop": cfg.layerdrop,
             "feature_grad_mult": cfg.feature_grad_mult,
         }
-        
+        print('*'*20) 
         print(cfg)
         if cfg.w2v_args is None:
             #cfg.w2v_path = '/workspace/models/hubert_model/hubert_base_ls960.pt'

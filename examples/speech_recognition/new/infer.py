@@ -103,7 +103,7 @@ class InferenceProcessor:
         models, saved_cfg = self.load_model_ensemble()
         
         import pickle
-
+        
         with open(self.cfg.common_eval.path, 'rb') as f:
             pickle_load_weights = pickle.load(f)    
 

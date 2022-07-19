@@ -48,13 +48,13 @@ optimizer:
 
 lr_scheduler:
   _name: tri_stage
-  phase_ratio: [0.1, 0.4, 0.5]
+  warmup_steps: 8000
+  hold_steps: 0
+  decay_steps: 72000
   final_lr_scale: 0.05
-  #warmup_steps: 8000
-  #hold_steps: 0
-  #decay_steps: 72000
+  #phase_ratio: [0.1, 0.4, 0.5]
   #final_lr_scale: 0.05
-
+  
 model:
   _name: hubert_ctc
   w2v_path: ???

@@ -24,7 +24,6 @@ do
 		python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 			--config-dir /workspace/fairseq/examples/hubert/config/decode \
 			--config-name infer_kenlm \
-			model.w2v_path=/workspace/models/hubert_model/hubert_base_ls960.pt \
 			common_eval.path=/workspace/models/hubert_model/hubert_baseline.pt \
 			common_eval.quiet=true \
 			task.data=/workspace/LibriSpeech/manifests \

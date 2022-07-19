@@ -253,9 +253,7 @@ class HubertEncoder(FairseqEncoder):
             "encoder_layerdrop": cfg.layerdrop,
             "feature_grad_mult": cfg.feature_grad_mult,
         }
-        print('*'*20) 
-        print(cfg)
-        print('*'*20) 
+        
         if cfg.w2v_args is None:
             #cfg.w2v_path = '/workspace/models/hubert_model/hubert_base_ls960.pt'
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)

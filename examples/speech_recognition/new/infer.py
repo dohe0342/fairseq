@@ -102,6 +102,7 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         
+        '''
         import pickle
 
         with open('/workspace/models/wav2vec_model/w2v_l_0gen.pickle', 'rb') as f:
@@ -115,7 +116,7 @@ class InferenceProcessor:
                 p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
             else:
                 print(n, 'not loaded!')
-        
+        '''
         self.models = models
         '''
         with torch.no_grad():

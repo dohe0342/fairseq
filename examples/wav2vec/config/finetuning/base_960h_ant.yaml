@@ -34,12 +34,12 @@ optimization:
   max_update: 320000
   lr: [0.0001]
   sentence_avg: true
+  update_freq: [24]
 
 optimizer:
   _name: adam
   adam_betas: (0.9,0.98)
   adam_eps: 1e-08
-  update_freq: [24]
 
 lr_scheduler:
   _name: tri_stage

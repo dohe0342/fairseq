@@ -1,7 +1,7 @@
 git pull
 source ~/.bashrc
 model=$1
-kenlm="true"
+kenlm="false"
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
 do

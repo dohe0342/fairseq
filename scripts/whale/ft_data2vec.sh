@@ -1,5 +1,5 @@
 git pull
-mode="hubert"
+mode="w2v"
 exp_name=$1
 
 if [ $mode == "w2v" ]

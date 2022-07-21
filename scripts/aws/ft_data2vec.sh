@@ -6,10 +6,9 @@ then
 	fairseq-hydra-train \
 			--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 			--config-name vox_100h_aws_$instance \
-			common.user_dir=examples/data2vec \
 			task.data=/opt/ml/code/LibriSpeech/manifests \
 			task.normalize=true \
-			model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
+			model.w2v_path=/opt/ml/input/data/model/wav2vec_vox_new.pt \
 			checkpoint.save_dir=/opt/ml/model \
 	rm /opt/ml/model/crash.pt
 	#for i in {0..9}

@@ -9,7 +9,7 @@ then
 		--config-name vox_100h_ant \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
-		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
+		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_vox_new.pt \
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 		+model.viewmaker=true

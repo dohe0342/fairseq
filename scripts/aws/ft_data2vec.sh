@@ -1,5 +1,5 @@
-mode="d2v"
-instance="p4"
+mode="w2v"
+instance="g5"
 
 if [ $mode == "w2v" ]
 then

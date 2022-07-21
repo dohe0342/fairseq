@@ -9,7 +9,7 @@ then
 			task.data=/opt/ml/code/LibriSpeech/manifests \
 			task.normalize=true \
 			model.w2v_path=/opt/ml/input/data/model/wav2vec_vox_new.pt \
-			checkpoint.save_dir=/opt/ml/model \
+			checkpoint.save_dir=/opt/ml/model 
 	rm /opt/ml/model/crash.pt
 elif [ $mode == "hubert" ]
 then

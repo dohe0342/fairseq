@@ -3,7 +3,7 @@ instance="g5"
 
 if [ $mode == "w2v" ]
 then
-	:>END'
+	: << "END"
 	fairseq-hydra-train \
 			--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 			--config-name vox_100h_aws_$instance \

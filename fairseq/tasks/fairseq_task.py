@@ -598,7 +598,7 @@ class FairseqTask(object):
                     ## loss[0] = [original ctc loss, perturb ctc loss]
                     ## loss[1] = MSE loss between original, perturb cnn feat
                     ## hard coding for freeze updates
-                    if 2100 < update_num <= 12100:
+                    if update_num <= 10000:
                         optimizer[0].backward(loss[0][0])
 
                     elif 10000 < update_num <= 12100:

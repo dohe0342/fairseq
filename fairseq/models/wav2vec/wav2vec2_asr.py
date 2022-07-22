@@ -147,6 +147,10 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     freeze_finetune_updates: int = field(
         default=0, metadata={"help": "dont finetune wav2vec for this many updates"}
     )
+    viewmaker_pretrain: int = field(
+        default=0, metadata={"help": "dont finetune wav2vec for this many updates"}
+    )
+
     feature_grad_mult: float = field(
         default=0.0, metadata={"help": "reset feature grad mult in wav2vec 2.0 to this"}
     )

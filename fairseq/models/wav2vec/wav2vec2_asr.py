@@ -1337,6 +1337,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.viewmaker_pretrain_updates = cfg.viewmaker_pretrain_updates
         self.num_updates = 0
 
         targ_d = None

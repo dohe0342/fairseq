@@ -600,7 +600,7 @@ class FairseqTask(object):
                     
                     ## hard coding for freeze updates
                     if update_num <= 10000:
-                        optimizer[0].backward(loss[0][0])
+                        optimizer[0].backward(loss[0][0], retain_graph=True)
                         if update_num <= 2100:
                             optimizer[1].backward(loss[1])
                     else:

@@ -594,8 +594,15 @@ class FairseqTask(object):
                     if len(loss) == 2 and loss[1] is not None:
                         loss[1] *= 0
                 with torch.autograd.profiler.record_function("backward"):
-                    #loss[0][1] /= sample_size
+                    ## loss[0] = [original ctc loss, perturb ctc loss]
+                    ## loss[1] = MSE loss between original, perturb cnn feat
+                    
                     optimizer[0].backward((loss[0][0] + loss[0][1]), retain_graph=True)
+                    lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train
+                    optimizer[1].backward(lambda_*loss[0][1]+loss[1])
+
+                    #loss[0][1] /= sample_size
+                    #optimizer[0].backward((loss[0][0] + loss[0][1]), retain_graph=True)
                     #optimizer[0].backward((loss[0][0] + loss[0][1]))
                     '''
                     optimizer[0].backward(loss[0][0], retain_graph=True)
@@ -618,8 +625,8 @@ class FairseqTask(object):
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## try25 try 26 try 27
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/3610.)) ## for hubert
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/11370.)) ## for wav2vec2 base 960h train
-                    lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train
-                    optimizer[1].backward(lambda_*loss[0][1]+loss[1])
+                    #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train
+                    #optimizer[1].backward(lambda_*loss[0][1]+loss[1])
                     #optimizer[1].backward(lambda_*loss[0][1])
                     #optimizer[1].backward(-loss[0][1]+loss[1])
         

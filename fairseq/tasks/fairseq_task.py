@@ -597,7 +597,7 @@ class FairseqTask(object):
                     ## optimizer = [optim for ASR model, optim for attacker(viewmaker)]
                     ## loss[0] = [original ctc loss, perturb ctc loss]
                     ## loss[1] = MSE loss between original, perturb cnn feat
-                    
+                    print('her') 
                     ## hard coding for freeze updates
                     if update_num <= 10000:
                         optimizer[0].backward(loss[0][0], retain_graph=True)

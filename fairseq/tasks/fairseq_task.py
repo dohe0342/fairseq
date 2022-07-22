@@ -602,7 +602,7 @@ class FairseqTask(object):
                         optimizer[1].backward(loss[1])
 
                     if 2100 < update_num <= 12100:
-                        optimizer[0].backward(loss[0][0], retain_graph=True)
+                        optimizer[0].backward(loss[0][0])
                     else:
                         optimizer[0].backward((loss[0][0] + loss[0][1]), retain_graph=True)
                         lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train

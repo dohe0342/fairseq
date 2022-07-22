@@ -7,6 +7,7 @@ then
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
 		--config-name vox_100h_ant \
+		common.user_dir=examples/data2vec \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=true \
 		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_vox_new.pt \

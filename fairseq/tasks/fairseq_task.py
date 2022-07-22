@@ -594,9 +594,14 @@ class FairseqTask(object):
                     if len(loss) == 2 and loss[1] is not None:
                         loss[1] *= 0
                 with torch.autograd.profiler.record_function("backward"):
+                    ## optimizer = [optim for ASR model, optim for attacker(viewmaker)]
                     ## loss[0] = [original ctc loss, perturb ctc loss]
                     ## loss[1] = MSE loss between original, perturb cnn feat
                     
+                    ## hard coding for freeze updates
+                    if update_num <= 10000:
+                        optimizer[0].backward(loss[0][0])
+                        optimizer[1].backward
                     optimizer[0].backward((loss[0][0] + loss[0][1]), retain_graph=True)
                     lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train
                     optimizer[1].backward(lambda_*loss[0][1]+loss[1])

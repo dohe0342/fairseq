@@ -601,7 +601,7 @@ class FairseqTask(object):
                     if 2100 < update_num <= 12100:
                         optimizer[0].backward(loss[0][0])
 
-                    if 10000 < update_num <= 12100:
+                    elif 10000 < update_num <= 12100:
                         optimizer[1].backward(loss[1])
 
                     else:

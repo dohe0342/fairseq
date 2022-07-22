@@ -147,7 +147,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     freeze_finetune_updates: int = field(
         default=0, metadata={"help": "dont finetune wav2vec for this many updates"}
     )
-    viewmaker_pretrain: int = field(
+    viewmaker_pretrain_updates: int = field(
         default=0, metadata={"help": "dont finetune wav2vec for this many updates"}
     )
 
@@ -482,6 +482,7 @@ class Wav2VecEncoder(FairseqEncoder):
 
         self.final_dropout = nn.Dropout(cfg.final_dropout)
         self.freeze_finetune_updates = cfg.freeze_finetune_updates
+        self.viewmaker_pretrain_updates = cfg.viewmaker_pretrain_updates
         self.num_updates = 0
 
         targ_d = None

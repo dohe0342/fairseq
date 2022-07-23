@@ -1395,7 +1395,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "viewmaker": self.viewmaker,
         }
 
-        ft = self.freeze_finetune_updates <= self.num_updates
+        ft = (self.freeze_finetune_updates <= self.num_updates) and (self.num_updates < self.viewmaker_pretrain_updates)
         with torch.no_grad() if not ft else contextlib.ExitStack():
             res = self.w2v_model.extract_features(**w2v_args)
 

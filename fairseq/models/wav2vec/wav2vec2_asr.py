@@ -1395,7 +1395,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "viewmaker": self.viewmaker,
         }
 
-        ft = (self.freeze_finetune_updates <= self.num_updates) and (self.num_updates < self.viewmaker_pretrain_updates)
+        ft = (self.freeze_finetune_updates <= self.num_updates) or (self.num_updates < self.viewmaker_pretrain_updates)
         print('*'*100)
         print(ft)
         print('*'*100)

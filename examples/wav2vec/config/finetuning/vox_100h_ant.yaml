@@ -56,4 +56,5 @@ model:
   layerdrop: 0.1
   activation_dropout: 0.1
   feature_grad_mult: 0.0
-  freeze_finetune_updates: 10
+  viewmaker_pretrain_updates: 2100
+  freeze_finetune_updates: 12100

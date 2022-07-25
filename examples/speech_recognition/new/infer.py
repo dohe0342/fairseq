@@ -157,10 +157,10 @@ class InferenceProcessor:
 
     def __enter__(self) -> "InferenceProcessor":
         if self.cfg.decoding.results_path is not None:
-            self.hypo_words_file = self.get_res_file("hypo.word")
-            self.hypo_units_file = self.get_res_file("hypo.units")
-            self.ref_words_file = self.get_res_file("ref.word")
-            self.ref_units_file = self.get_res_file("ref.units")
+            self.hypo_words_file = self.get_res_file(f"{self.cfg.dataset.gen_subset}.hypo.word")
+            self.hypo_units_file = self.get_res_file(f"{self.cfg.dataset.gen_subset}.hypo.units")
+            self.ref_words_file = self.get_res_file(f"{self.cfg.dataset.gen_subset}.ref.word")
+            self.ref_units_file = self.get_res_file(f"{self.cfg.dataset.gen_subset}.ref.units")
         return self
 
     def __exit__(self, *exc) -> bool:

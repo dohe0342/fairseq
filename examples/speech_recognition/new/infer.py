@@ -102,16 +102,17 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         
-        import pickle
-        
-        with open(self.cfg.common_eval.path, 'rb') as f:
-            pickle_load_weights = pickle.load(f)    
+        if 0:
+            import pickle
+            
+            with open(self.cfg.common_eval.path, 'rb') as f:
+                pickle_load_weights = pickle.load(f)    
 
-        for n, p in models[0].named_parameters():
-            if n in pickle_load_weights:
-                p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
-            else:
-                print(n, 'not loaded!')
+            for n, p in models[0].named_parameters():
+                if n in pickle_load_weights:
+                    p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
+                else:
+                    print(n, 'not loaded!')
         
         self.models = models
         '''

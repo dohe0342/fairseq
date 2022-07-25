@@ -28,7 +28,7 @@ do
 			task.labels=ltr \
 			decoding.type=viterbi \
 			decoding.unique_wer_file=true \
-			decoding.results_path=/workspace/fairseq/scripts \
+			decoding.results_path=/workspace/fairseq/scripts/ant \
 			dataset.gen_subset=$subset \
 			common_eval.quiet=true \
 			common_eval.path=/workspace/models/wav2vec_model/$model \

@@ -1,5 +1,5 @@
 git pull
-mode="d2v"
+mode="w2v"
 exp_name=$1
 
 if [ $mode == "w2v" ]
@@ -8,7 +8,7 @@ then
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
-			--config-name vox_100h_whale \
+			--config-name base_960h_whale \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			task.normalize=true \
 			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_vox_new.pt \

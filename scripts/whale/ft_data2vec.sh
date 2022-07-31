@@ -32,7 +32,7 @@ then
 			+model.viewmaker=true
 	done
 else
-	for i in {0..9}
+	for i in {0..19}
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

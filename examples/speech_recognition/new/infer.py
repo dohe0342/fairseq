@@ -467,7 +467,7 @@ class InferenceProcessor:
             )
             self.total_errors += errs
             self.total_length += length
-            print(errs)
+            print(errs, length)
             exit()
             
         self.log({"wps": round(self.wps_meter.avg)})

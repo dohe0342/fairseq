@@ -355,6 +355,7 @@ class InferenceProcessor:
         '''         
         self.gen_timer.start()
         print(sample['net_input']['source'].size())
+        sample['net_input']['source'] = torch.roll(sample['net_input']['source'], 1)
         #hypos, padding_mask, conv_feat = self.task.inference_step(
         hypos = self.task.inference_step(
             generator=self.generator,

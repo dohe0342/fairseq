@@ -335,7 +335,7 @@ class InferenceProcessor:
             print(f"{tgt_pieces} ({speaker}-{sid})", file=self.ref_units_file)
             print(f"{tgt_words} ({speaker}-{sid})", file=self.ref_words_file)
 
-        if not self.cfg.common_eval.quiet:
+        if not self.cfg.common_eval.quiet or 1:
             logger.info(f"HYPO: {hyp_words}")
             logger.info(f"REF: {tgt_words}")
             logger.info("---------------------")

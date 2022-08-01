@@ -29,7 +29,7 @@ do
 		decoding.results_path=/workspace/fairseq/scripts/ant \
 		dataset.gen_subset=$subset \
 		common_eval.quiet=true \
-		common_eval.path=/workspace/models/wav2vec_model/$model \
+		common_eval.path=/workspace/models/data2vec_model/$model \
 		distributed_training.distributed_world_size=1 
 	echo ""
 	echo ""

@@ -606,6 +606,7 @@ class FairseqTask(object):
                     #else:
                     optimizer[0].backward((loss[0][0] + loss[0][1]), retain_graph=True)
                     #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/2100.)) ## for wav2vec2 vox 100h train
+                    lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/34090.)) ## for wav2vec2 vox 960h train ##ver1
                     lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/34090.)) ## for wav2vec2 vox 960h train
                     optimizer[1].backward(lambda_*loss[0][1]+loss[1])
 

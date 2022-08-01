@@ -102,7 +102,7 @@ class InferenceProcessor:
 
         models, saved_cfg = self.load_model_ensemble()
         
-        if 1:
+        if 0:
             import pickle
             
             with open(self.cfg.common_eval.path, 'rb') as f:

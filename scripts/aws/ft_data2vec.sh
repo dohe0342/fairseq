@@ -20,7 +20,7 @@ END
 				--config-name base_960h_aws_$instance \
 				task.data=/opt/ml/code/LibriSpeech/manifests \
 				task.normalize=false \
-				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt
+				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
 				criterion._name=viewmaker \
 				checkpoint.save_dir=/opt/ml/model \
 				+model.viewmaker=true

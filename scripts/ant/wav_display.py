@@ -8,4 +8,4 @@ for wav_file in file_list:
     y, sr = librosa.load(wav_file, sr=48000)
     plt.figure()
     display.waveshow(y, sr=sr)
-    plt.savefig('./test_wavform.png', dpi=300)
+    plt.savefig('./test_wavf.png', dpi=300)

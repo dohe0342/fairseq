@@ -14,6 +14,7 @@ then
 			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
 			criterion._name=viewmaker \
 			checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
+			job_logging_cfg.handlers.file.filename={$exp_name}_$i.log \
 			+model.viewmaker=true
 	done
 elif [ $mode == "hubert" ]

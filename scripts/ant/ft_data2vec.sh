@@ -6,14 +6,13 @@ if [ $mode == "w2v" ]
 then
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
-		--config-name vox_100h_ant \
-		common.user_dir=examples/data2vec \
+		--config-name base_960h_ant \
 		task.data=/workspace/LibriSpeech/manifests \
-		task.normalize=true \
-		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_vox_new.pt \
-		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
-	   	criterion._name=viewmaker \
-		+model.viewmaker=true	
+		task.normalize=false \
+		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
+		checkpoint.save_dir=/workspace/fairseq/scripts/ant/outputs/$1
+	   	#criterion._name=viewmaker \
+		#+model.viewmaker=true	
 elif [ $mode == "hubert" ]
 then
 	echo "todo"

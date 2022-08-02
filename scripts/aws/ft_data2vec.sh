@@ -17,11 +17,10 @@ END
 		do
 			fairseq-hydra-train \
 				--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
-				--config-name vox_100h_aws_$instance \
-				common.user_dir=examples/data2vec \
+				--config-name base_960h_aws_$instance \
 				task.data=/opt/ml/code/LibriSpeech/manifests \
-				task.normalize=true \
-				model.w2v_path=/opt/ml/input/data/model/wav2vec_vox_new.pt \
+				task.normalize=false \
+				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
 				criterion._name=viewmaker \
 				checkpoint.save_dir=/opt/ml/model \
 				+model.viewmaker=true

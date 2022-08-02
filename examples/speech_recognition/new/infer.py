@@ -354,9 +354,9 @@ class InferenceProcessor:
                     #print(f'set {name} to 0.')
         '''         
         self.gen_timer.start()
-        print(sample['net_input']['source'].size())
+        #print(sample['net_input']['source'].size())
         #sample['net_input']['source'] = torch.roll(sample['net_input']['source'], 4000)
-        sample['net_input']['source'] = sample['net_input']['source'][:,12000:-4000]
+        #sample['net_input']['source'] = sample['net_input']['source'][:,12000:-4000]
         #hypos, padding_mask, conv_feat = self.task.inference_step(
         hypos = self.task.inference_step(
             generator=self.generator,
@@ -470,8 +470,8 @@ class InferenceProcessor:
             )
             self.total_errors += errs
             self.total_length += length
-            print(errs, length)
-            exit()
+            #print(errs, length)
+            #exit()
             
         self.log({"wps": round(self.wps_meter.avg)})
         if "nsentences" in sample:

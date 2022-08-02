@@ -19,6 +19,6 @@ class ViterbiDecoder(BaseDecoder):
     ) -> List[List[Dict[str, torch.LongTensor]]]:
         def get_pred(e):
             toks = e.argmax(dim=-1).unique_consecutive()
-            return toks[toks != self.blank]
+            return toks[toks != 100]#self.blank]
 
         return [[{"tokens": get_pred(x), "score": 0, "emission": x}] for x in emissions]

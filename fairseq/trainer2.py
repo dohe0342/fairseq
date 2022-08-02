@@ -56,7 +56,7 @@ class Trainer(object):
         self.task = task
         
         print('---'*30)
-        print(self.cfg.job_logging_cfg)
+        print(self.cfg.job_logging_cfg.handlers.file)
         print('---'*30)
         # catalog shared parameters
         shared_params = _catalog_shared_params(model)

@@ -22,12 +22,12 @@ def map_to_pred(batch):
     batch["transcription"] = transcription
     return batch
 
+
 processor = Wav2Vec2Processor.from_pretrained("kresnik/wav2vec2-large-xlsr-korean")
 model = Wav2Vec2ForCTC.from_pretrained("kresnik/wav2vec2-large-xlsr-korean").to('cuda')
 ds = load_dataset("kresnik/zeroth_korean", "clean")
 test_ds = ds['test']
 test_ds = test_ds.map(map_to_array)
 result = test_ds.map(map_to_pred, batched=True, batch_size=16, remove_columns=["speech"])
-
 print("WER:", wer(result["text"], result["transcription"]))
 

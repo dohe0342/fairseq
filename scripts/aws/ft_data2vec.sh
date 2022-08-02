@@ -1,5 +1,5 @@
 mode="w2v" 
-instance="p4"
+instance="g5"
 
 if [ $mode == "w2v" ]
 then
@@ -20,10 +20,10 @@ END
 				--config-name base_960h_aws_$instance \
 				task.data=/opt/ml/code/LibriSpeech/manifests \
 				task.normalize=false \
-				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
-				criterion._name=viewmaker \
-				checkpoint.save_dir=/opt/ml/model \
-				+model.viewmaker=true
+				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt
+				#criterion._name=viewmaker \
+				#checkpoint.save_dir=/opt/ml/model \
+				#+model.viewmaker=true
 		done
 	rm /opt/ml/model/crash.pt
 elif [ $mode == "hubert" ]

@@ -460,7 +460,7 @@ class InferenceProcessor:
         num_generated_tokens = sum(len(h[0]["tokens"]) for h in hypos)
         self.gen_timer.stop(num_generated_tokens)
         self.wps_meter.update(num_generated_tokens)
-        print(hypos[0][0].size())
+        print(hypos[0][0])
         for batch_id, sample_id in enumerate(sample["id"].tolist()):
             errs, length = self.process_sentence(
                 sample=sample,

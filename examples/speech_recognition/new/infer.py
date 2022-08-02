@@ -319,6 +319,7 @@ class InferenceProcessor:
         
         # Processes hypothesis.
         hyp_pieces = self.tgt_dict.string(hypo["tokens"].int().cpu())
+        print(hyp_pieces)
         if "words" in hypo:
             hyp_words = " ".join(hypo["words"])
         else:

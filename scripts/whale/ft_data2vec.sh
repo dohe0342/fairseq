@@ -4,7 +4,7 @@ exp_name=$1
 
 if [ $mode == "w2v" ]
 then
-	for i in {0..19}
+	for i in {0..29}
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
@@ -19,7 +19,7 @@ then
 	done
 elif [ $mode == "hubert" ]
 then
-	for i in {0..9}
+	for i in {0..29}
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/hubert/config/finetune \
@@ -33,7 +33,7 @@ then
 			+model.viewmaker=true
 	done
 else
-	for i in {0..19}
+	for i in {0..29}
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

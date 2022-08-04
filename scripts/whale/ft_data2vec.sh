@@ -12,8 +12,8 @@ then
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			task.normalize=false \
 			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
-			criterion._name=viewmaker \
 			checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
+			criterion._name=viewmaker \
 			+model.viewmaker=true
 	done
 elif [ $mode == "hubert" ]

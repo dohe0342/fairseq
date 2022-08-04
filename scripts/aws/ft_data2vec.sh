@@ -11,7 +11,7 @@ then
 			model.w2v_path=/opt/ml/input/data/model/wav2vec_vox_new.pt \
 			checkpoint.save_dir=/opt/ml/model 
 	rm /opt/ml/model/crash.pt
-: << "END"
+END
 	for i in {0..29}
 		do
 			fairseq-hydra-train \
@@ -25,7 +25,6 @@ then
 				+model.viewmaker=true
 		done
 	rm /opt/ml/model/crash.pt
-END
 elif [ $mode == "hubert" ]
 then
 	#for i in {0..9}

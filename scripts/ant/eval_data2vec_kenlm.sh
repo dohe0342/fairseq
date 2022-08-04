@@ -1,5 +1,4 @@
 git pull
-source ~/.bashrc
 model=$1
 
 for subset in "train-860" #"dev-clean" "dev-other" "test-clean" "test-other" 

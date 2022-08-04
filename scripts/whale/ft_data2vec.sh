@@ -11,7 +11,7 @@ then
 			--config-name vox_960h_whale \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			task.normalize=false \
-			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
+			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_vox_new.pt \
 			checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 
 			#criterion._name=viewmaker \
 			#+model.viewmaker=true

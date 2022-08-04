@@ -18,7 +18,7 @@ do
 		decoding.unique_wer_file=true \
 		decoding.results_path=/workspace/fairseq/scripts/ant/$subset \
 		dataset.gen_subset=$subset \
-		common_eval.path=/workspace/models/wav2vec_model/$model \
+		common_eval.path=/workspace/models/wav2vec_model/w2v_l_0gen.pickle \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1
 done

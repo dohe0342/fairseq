@@ -8,7 +8,7 @@ then
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
-			--config-name base_960h_whale \
+			--config-name vox_960h_whale \
 			task.data=/home/work/workspace/LibriSpeech/manifests \
 			task.normalize=false \
 			model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \

@@ -3,7 +3,7 @@ instance="p4"
 
 if [ $mode == "w2v" ]
 then
-: << "END"
+#: << "END"
 	fairseq-hydra-train \
 			--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 			--config-name vox_100h_aws_$instance \
@@ -12,7 +12,7 @@ then
 			model.w2v_path=/opt/ml/input/data/model/wav2vec_vox_new.pt \
 			checkpoint.save_dir=/opt/ml/model 
 	rm /opt/ml/model/crash.pt
-END
+#END
 : << "END"
 	for i in {0..29}
 		do

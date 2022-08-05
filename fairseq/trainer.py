@@ -50,10 +50,13 @@ class Trainer(object):
                 pickle_load_weights = pickle.load(f)    
 
             for n, p in model.named_parameters():
+                print(n)
+                '''
                 if n in pickle_load_weights:
                     p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
                 else:
                     print(n, 'not loaded!')
+                '''
 
 
         if isinstance(cfg, Namespace):

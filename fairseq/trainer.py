@@ -49,10 +49,10 @@ class Trainer(object):
             with open('/home/work/workspace/models/wavlm_model/wavlm_base.pickle', 'rb') as f:
                 pickle_load_weights = pickle.load(f) 
             
-            #for k, v in pickle_load_weights.items():
-            #    print(k)
-            #    break
+            for k, v in pickle_load_weights.items():
+                print(k)
             for n, p in model.named_parameters():
+                print(n)
                 n_ = n.replace('w2v_encoder.w2v_model.', '')
                 if n in pickle_load_weights:
                     p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))

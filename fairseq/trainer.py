@@ -59,7 +59,6 @@ class Trainer(object):
                 else:
                     print(n, 'not loaded!')
 
-
         if isinstance(cfg, Namespace):
             logger.warning(
                 "argparse.Namespace configuration is deprecated! Automatically converting to OmegaConf"

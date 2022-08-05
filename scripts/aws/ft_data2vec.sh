@@ -20,9 +20,9 @@ END
 				task.data=/opt/ml/code/LibriSpeech/manifests \
 				task.normalize=false \
 				model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
-				criterion._name=viewmaker \
 				checkpoint.save_dir=/opt/ml/model \
-				+model.viewmaker=true
+				#criterion._name=viewmaker \
+				#+model.viewmaker=true
 		done
 	rm /opt/ml/model/crash.pt
 elif [ $mode == "hubert" ]

@@ -51,10 +51,12 @@ class Trainer(object):
             
             wavlm_name = []
             wav2vec_name = []
-            for k, v in pickle_load_weights.items():
-                wavlm_name.append(k)
+            #for k, v in pickle_load_weights.items():
+            #    wavlm_name.append(k)
             for n, p in model.named_parameters():
-                wav2vec_name.append(n)
+                n_ = n.replace('w2v_encoder.w2v_model.', '')
+                print(n_)
+                #wav2vec_name.append(n)
                 '''
                 n_ = n.replace('w2v_encoder.w2v_model.', '')
                 if n in pickle_load_weights:
@@ -62,8 +64,6 @@ class Trainer(object):
                 else:
                     print(n, 'not loaded!')
                 '''
-            for i in range(len(wavlm_name)):
-                print(wavlm_name[i], wav2vec_name[i])
 
         if isinstance(cfg, Namespace):
             logger.warning(

@@ -29,7 +29,7 @@ from fairseq.models.ema import build_ema
 from fairseq.nan_detector import NanDetector
 from fairseq.optim import lr_scheduler
 from fairseq.utils import safe_hasattr
-
+import pickle
 ## for gradient surgery
 
 logger = logging.getLogger(__name__)
@@ -45,6 +45,16 @@ class Trainer(object):
     """
 
     def __init__(self, cfg: FairseqConfig, task, model, criterion, quantizer=None):
+        if 1:   
+            with open(self.cfg.common_eval.path, 'rb') as f:
+                pickle_load_weights = pickle.load(f)    
+
+            for n, p in models[0].named_parameters():
+                if n in pickle_load_weights:
+                    p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
+                else:
+                    print(n, 'not loaded!')
+
 
         if isinstance(cfg, Namespace):
             logger.warning(

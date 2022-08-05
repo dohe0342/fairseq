@@ -49,8 +49,9 @@ class Trainer(object):
             with open('/home/work/workspace/models/wavlm_model/wavlm_base.pickle', 'rb') as f:
                 pickle_load_weights = pickle.load(f) 
             
+            wavlm_name = []
             for k, v in pickle_load_weights.items():
-                print(k)
+                wavlm_name.append(k)
             for n, p in model.named_parameters():
                 print(n)
                 '''

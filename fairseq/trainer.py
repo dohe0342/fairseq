@@ -59,9 +59,6 @@ class Trainer(object):
                     p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))
                 else:
                     print(n, '\tnot loaded!')
-                
-                if i > 40:
-                    break
 
         if isinstance(cfg, Namespace):
             logger.warning(

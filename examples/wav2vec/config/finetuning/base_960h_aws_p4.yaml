@@ -31,7 +31,7 @@ criterion:
   zero_infinity: true
 
 optimization:
-  max_update: 160000
+  max_update: 240000
   lr: [0.0001]
   sentence_avg: true
   update_freq: [1]
@@ -43,7 +43,7 @@ optimizer:
 
 lr_scheduler:
   _name: tri_stage
-  phase_ratio: [0.2, 0.4, 0.5]
+  phase_ratio: [0.1, 0.4, 0.5]
   final_lr_scale: 0.05
 
 model:

@@ -55,7 +55,7 @@ class Trainer(object):
             for n, p in model.named_parameters():
                 n_ = n.replace('w2v_encoder.w2v_model.', '')
                 if n in pickle_load_weights:
-                    p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n]).to('cuda'))
+                    p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))
                 else:
                     print(n, 'not loaded!')
 

@@ -62,6 +62,8 @@ class Trainer(object):
                 else:
                     print(n, 'not loaded!')
                 '''
+            for i in range(len(wavlm_name)):
+                print(wavlm_name[i], wav2vec_name[i])
 
         if isinstance(cfg, Namespace):
             logger.warning(

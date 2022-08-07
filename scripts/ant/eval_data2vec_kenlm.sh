@@ -5,7 +5,7 @@ subset=$1
 for subset in $subset #"dev-clean" "dev-other" "test-clean" "test-other" 
 do
 	echo "====================   $model // $subset   ===================="
-	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \
+	python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \
 		task=audio_finetuning \

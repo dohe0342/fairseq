@@ -1424,7 +1424,7 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             num_buckets: int = 320,
             max_distance: int = 800,
             rescale_init: bool = False,
-            gru_rel_pos: bool = False,
+            gru_rel_pos: bool = True,
     ) -> None:
 
         super().__init__()

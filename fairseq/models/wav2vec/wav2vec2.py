@@ -1010,6 +1010,18 @@ class TransformerEncoder(nn.Module):
                 use_fp16=args.fp16,
                 pos_enc_type="abs",
             )
+		elif args.layer_type == "transformerpos":
+            layer = TransformerSentenceEncoderLayer(
+                embedding_dim=self.embedding_dim,
+                ffn_embedding_dim=args.encoder_ffn_embed_dim,
+                num_attention_heads=args.encoder_attention_heads,
+                dropout=self.dropout,
+                attention_dropout=args.attention_dropout,
+                activation_dropout=args.activation_dropout,
+                activation_fn=args.activation_fn,
+                layer_norm_first=args.layer_norm_first,
+            )
+
         layer = fsdp_wrap(layer)
         if args.checkpoint_activations:
             layer = checkpoint_wrapper(layer)

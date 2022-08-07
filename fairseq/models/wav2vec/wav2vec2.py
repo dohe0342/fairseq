@@ -1417,7 +1417,7 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             num_attention_heads: float = 12,
             dropout: float = 0.1,
             attention_dropout: float = 0.1,
-            activation_dropout: float = 0.1,
+            activation_dropout: float = 0.0,
             activation_fn: str = "relu",
             layer_norm_first: bool = False,
             has_relative_attention_bias: bool = False,

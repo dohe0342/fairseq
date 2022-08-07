@@ -1404,6 +1404,136 @@ class TransformerSentenceEncoderLayer(nn.Module):
         return x, (attn, layer_result)
 
 
+class TransformerSentenceEncoderLayer(nn.Module):
+    """
+    Implements a Transformer Encoder Layer used in BERT/XLM style pre-trained
+    models.
+    """
+
+    def __init__(
+            self,
+            embedding_dim: float = 768,
+            ffn_embedding_dim: float = 3072,
+            num_attention_heads: float = 8,
+            dropout: float = 0.1,
+            attention_dropout: float = 0.1,
+            activation_dropout: float = 0.1,
+            activation_fn: str = "relu",
+            layer_norm_first: bool = False,
+            has_relative_attention_bias: bool = False,
+            num_buckets: int = 0,
+            max_distance: int = 0,
+            rescale_init: bool = False,
+            gru_rel_pos: bool = False,
+    ) -> None:
+
+        super().__init__()
+        # Initialize parameters
+        self.embedding_dim = embedding_dim
+        self.dropout = dropout
+        self.activation_dropout = activation_dropout
+
+        # Initialize blocks
+        self.activation_name = activation_fn
+        self.activation_fn = get_activation_fn(activation_fn)
+        self.self_attn = MultiheadAttention(
+            self.embedding_dim,
+            num_attention_heads,
+            dropout=attention_dropout,
+            self_attention=True,
+            has_relative_attention_bias=has_relative_attention_bias,
+            num_buckets=num_buckets,
+            max_distance=max_distance,
+            rescale_init=rescale_init,
+            gru_rel_pos=gru_rel_pos,
+        )
+
+        self.dropout1 = nn.Dropout(dropout)
+        self.dropout2 = nn.Dropout(self.activation_dropout)
+        self.dropout3 = nn.Dropout(dropout)
+
+        self.layer_norm_first = layer_norm_first
+
+        # layer norm associated with the self attention layer
+        self.self_attn_layer_norm = LayerNorm(self.embedding_dim)
+
+        if self.activation_name == "glu":
+            self.fc1 = GLU_Linear(self.embedding_dim, ffn_embedding_dim, "swish")
+        else:
+            self.fc1 = nn.Linear(self.embedding_dim, ffn_embedding_dim)
+        self.fc2 = nn.Linear(ffn_embedding_dim, self.embedding_dim)
+
+        # layer norm associated with the position wise feed-forward NN
+        self.final_layer_norm = LayerNorm(self.embedding_dim)
+
+    def forward(
+            self,
+            x: torch.Tensor,
+            self_attn_mask: torch.Tensor = None,
+            self_attn_padding_mask: torch.Tensor = None,
+            need_weights: bool = False,
+            pos_bias=None
+    ):
+        """
+        LayerNorm is applied either before or after the self-attention/ffn
+        modules similar to the original Transformer imlementation.
+        """
+        residual = x
+
+        if self.layer_norm_first:
+            x = self.self_attn_layer_norm(x)
+            x, attn, pos_bias = self.self_attn(
+                query=x,
+                key=x,
+                value=x,
+                key_padding_mask=self_attn_padding_mask,
+                need_weights=False,
+                attn_mask=self_attn_mask,
+                position_bias=pos_bias
+            )
+            x = self.dropout1(x)
+            x = residual + x
+
+            residual = x
+            x = self.final_layer_norm(x)
+            if self.activation_name == "glu":
+                x = self.fc1(x)
+            else:
+                x = self.activation_fn(self.fc1(x))
+            x = self.dropout2(x)
+            x = self.fc2(x)
+            x = self.dropout3(x)
+            x = residual + x
+        else:
+            x, attn, pos_bias = self.self_attn(
+                query=x,
+                key=x,
+                value=x,
+                key_padding_mask=self_attn_padding_mask,
+                need_weights=need_weights,
+                attn_mask=self_attn_mask,
+                position_bias=pos_bias
+            )
+
+            x = self.dropout1(x)
+            x = residual + x
+
+            x = self.self_attn_layer_norm(x)
+
+            residual = x
+            if self.activation_name == "glu":
+                x = self.fc1(x)
+            else:
+                x = self.activation_fn(self.fc1(x))
+            x = self.dropout2(x)
+            x = self.fc2(x)
+            x = self.dropout3(x)
+            x = residual + x
+            x = self.final_layer_norm(x)
+
+        return x, attn, pos_bias
+
+
 class LayerInstanceNorm(nn.Module):
     __constants__ = ['normalized_shape', 'eps', 'elementwise_affine']
     normalized_shape: Tuple[int, ...]

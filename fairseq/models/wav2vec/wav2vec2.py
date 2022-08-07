@@ -1414,7 +1414,7 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             self,
             embedding_dim: float = 768,
             ffn_embedding_dim: float = 3072,
-            num_attention_heads: float = 8,
+            num_attention_heads: float = 12,
             dropout: float = 0.1,
             attention_dropout: float = 0.1,
             activation_dropout: float = 0.1,

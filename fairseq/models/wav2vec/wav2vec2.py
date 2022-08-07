@@ -1421,8 +1421,8 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             activation_fn: str = "gelu",
             layer_norm_first: bool = False,
             has_relative_attention_bias: bool = False,
-            num_buckets: int = 0,
-            max_distance: int = 0,
+            num_buckets: int = 320,
+            max_distance: int = 800,
             rescale_init: bool = False,
             gru_rel_pos: bool = False,
     ) -> None:

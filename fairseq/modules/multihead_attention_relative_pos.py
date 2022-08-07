@@ -14,6 +14,7 @@ from fairseq.modules.fairseq_dropout import FairseqDropout
 from fairseq.modules.quant_noise import quant_noise
 
 
+@with_incremental_state
 class MultiheadAttention(nn.Module):
     """Multi-headed attention.
 

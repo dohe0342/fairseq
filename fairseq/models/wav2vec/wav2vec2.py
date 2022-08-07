@@ -1531,7 +1531,7 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             x = residual + x
             x = self.final_layer_norm(x)
 
-        return x, attn, pos_bias
+        return x, (attn, pos_bias)
 
 
 class LayerInstanceNorm(nn.Module):

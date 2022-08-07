@@ -15,7 +15,7 @@ from fairseq.modules.quant_noise import quant_noise
 
 
 @with_incremental_state
-class MultiheadAttention(nn.Module):
+class MultiheadAttentionRelativePos(nn.Module):
     """Multi-headed attention.
 
     See "Attention Is All You Need" for more details.

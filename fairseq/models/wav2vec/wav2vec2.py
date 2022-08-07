@@ -1011,7 +1011,7 @@ class TransformerEncoder(nn.Module):
                 pos_enc_type="abs",
             )
 		elif args.layer_type == "transformerpos":
-            layer = TransformerSentenceEncoderLayer(
+            layer = TransformerSentenceEncoderLayerPos(
                 embedding_dim=self.embedding_dim,
                 ffn_embedding_dim=args.encoder_ffn_embed_dim,
                 num_attention_heads=args.encoder_attention_heads,

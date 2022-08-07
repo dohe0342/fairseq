@@ -1435,7 +1435,7 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
 
         # Initialize blocks
         self.activation_name = activation_fn
-        self.activation_fn = get_activation_fn(activation_fn)
+        self.activation_fn = utils.get_activation_fn(activation_fn)
         self.self_attn = MultiheadAttention(
             self.embedding_dim,
             num_attention_heads,

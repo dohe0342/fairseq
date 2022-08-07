@@ -1404,7 +1404,7 @@ class TransformerSentenceEncoderLayer(nn.Module):
         return x, (attn, layer_result)
 
 
-class TransformerSentenceEncoderLayer(nn.Module):
+class TransformerSentenceEncoderLayerPos(nn.Module):
     """
     Implements a Transformer Encoder Layer used in BERT/XLM style pre-trained
     models.

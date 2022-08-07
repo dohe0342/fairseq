@@ -657,7 +657,6 @@ class MultiheadAttention(nn.Module):
             state_dict[key] = value
 
 
-@with_incremental_state
 class MultiheadAttentionRelativePos(nn.Module):
     """Multi-headed attention.
 

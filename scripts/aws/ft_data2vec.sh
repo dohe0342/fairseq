@@ -12,7 +12,7 @@ then
 			checkpoint.save_dir=/opt/ml/model 
 	rm /opt/ml/model/crash.pt
 END
-	for i in {0..0}
+	for i in {0..29}
 		do
 			fairseq-hydra-train \
 				--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \

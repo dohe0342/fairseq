@@ -1,3 +1,19 @@
+import math
+from typing import Dict, List, Optional, Tuple
+
+import torch
+import torch.nn.functional as F
+#import torch.nn.functional2 as F
+#import functional as F
+from torch import Tensor, nn
+from torch.nn import Parameter
+
+from fairseq import utils
+from fairseq.incremental_decoding_utils import with_incremental_state
+from fairseq.modules.fairseq_dropout import FairseqDropout
+from fairseq.modules.quant_noise import quant_noise
+
+
 class MultiheadAttention(nn.Module):
     """Multi-headed attention.
 

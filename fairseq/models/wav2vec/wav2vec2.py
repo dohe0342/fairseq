@@ -27,7 +27,7 @@ from fairseq.modules import (
     GumbelVectorQuantizer,
     LayerNorm,
     MultiheadAttention,
-    MultiheadAttentionRelativePos
+    MultiheadAttentionRelativePos,
     RelPositionalEncoding,
     SamePad,
     TransposeLast,

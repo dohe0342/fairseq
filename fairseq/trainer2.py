@@ -603,6 +603,7 @@ class Trainer(object):
                 keys = [n for n in state["model"]]
                 for key in keys:
                     if 'viewmaker' in key:
+                        print(f'delete {key})
                         del state["model"][key]
                 del keys
                         

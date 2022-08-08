@@ -601,12 +601,12 @@ class Trainer(object):
                     logger.info(self.model)
                 
                 if self.cfg.model.init_viewmaker:
-                keys = [n for n in state["model"]]
-                for key in keys:
-                    if 'viewmaker' in key:
-                        print(f'delete {key}')
-                        del state["model"][key]
-                del keys
+                    keys = [n for n in state["model"]]
+                    for key in keys:
+                        if 'viewmaker' in key:
+                            print(f'delete {key}')
+                            del state["model"][key]
+                    del keys
                         
                 self.model.load_state_dict(
                     state["model"], strict=False, model_cfg=self.cfg.model

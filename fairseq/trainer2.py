@@ -600,6 +600,7 @@ class Trainer(object):
                         layer._prune_fc_layer(remove_index=remove_index)
                     logger.info(self.model)
                 
+                if self.cfg.model.init_viewmaker:
                 keys = [n for n in state["model"]]
                 for key in keys:
                     if 'viewmaker' in key:

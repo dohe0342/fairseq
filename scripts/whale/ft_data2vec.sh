@@ -6,7 +6,7 @@ if [ $mode == "w2v" ]
 then
 	for i in {0..29}
 	do
-		init=$(($i // 4))
+		init=$(($i / 4))
 		echo $init
 		exit 1;
 		fairseq-hydra-train \

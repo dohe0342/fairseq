@@ -221,7 +221,11 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "viewmaker"},
     )
-    
+    init_viewmaker: bool = field(
+        default=False,
+        metadata={"help": "viewmaker"},
+    )
+
     viewmaker_num: int = field(
         default=1,
         metadata={"help": "number of viewmaker"},

@@ -599,7 +599,8 @@ class Trainer(object):
                         )
                         layer._prune_fc_layer(remove_index=remove_index)
                     logger.info(self.model)
-
+                
+                print(state["model"])
                 self.model.load_state_dict(
                     state["model"], strict=False, model_cfg=self.cfg.model
                 )

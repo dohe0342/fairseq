@@ -605,10 +605,6 @@ class Trainer(object):
                     if 'viewmaker' in key:
                         del state["model"][key]
                 del keys
-                for n in state["model"]:
-                    if 'viewmaker' in n:
-                        print(f'delete {n}')
-                        del state["model"][n]
                         
                 self.model.load_state_dict(
                     state["model"], strict=False, model_cfg=self.cfg.model

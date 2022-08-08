@@ -903,9 +903,9 @@ class Trainer(object):
                     raise e
             except Exception:
                 self.consolidate_optimizer()
-                self.save_checkpoint(
-                    os.path.join(self.cfg.checkpoint.save_dir, "crash.pt"), {}
-                )
+                #self.save_checkpoint(
+                #    os.path.join(self.cfg.checkpoint.save_dir, "crash.pt"), {}
+                #)
                 raise
 
             if self.tpu and i < len(samples) - 1:

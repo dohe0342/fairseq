@@ -6,9 +6,6 @@ if [ $mode == "w2v" ]
 then
 	for i in {0..29}
 	do
-		init=$(($i / 4))
-		echo $init
-		exit 1;
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
 			--config-name base_960h_whale \
@@ -17,6 +14,7 @@ then
 			checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
 			criterion._name=viewmaker \
 			+model.viewmaker=true
+			+model.init_viewmaker=true
 	done
 elif [ $mode == "hubert" ]
 then

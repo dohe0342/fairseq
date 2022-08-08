@@ -6,7 +6,6 @@ if [ $mode == "w2v" ]
 then
 	for i in {0..29}
 	do
-		trial_4th = $(($i / 4))
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
 			--config-name base_960h_whale \

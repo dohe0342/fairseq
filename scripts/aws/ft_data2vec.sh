@@ -14,9 +14,6 @@ then
 END
 	for i in {0..29}
 		do
-			init = $($i / 4)
-			echo $init
-			exit 1;
 			fairseq-hydra-train \
 				--config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
 				--config-name base_960h_aws_$instance \

@@ -600,6 +600,11 @@ class Trainer(object):
                         layer._prune_fc_layer(remove_index=remove_index)
                     logger.info(self.model)
                 
+                keys = [n for n in state["model"]]
+                for key in keys:
+                    if 'viewmaker' in key:
+                        del state["model"][key]
+                del keys
                 for n in state["model"]:
                     if 'viewmaker' in n:
                         print(f'delete {n}')

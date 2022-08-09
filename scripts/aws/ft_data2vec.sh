@@ -70,9 +70,6 @@ then
             model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
             checkpoint.save_dir=/opt/ml/model \
             +model.wavlm=true
-            #criterion._name=viewmaker \
-            #+model.viewmaker=true \
-            #+model.init_viewmaker=true
     done
 
 else

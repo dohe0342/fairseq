@@ -45,6 +45,32 @@ class Trainer(object):
     """
 
     def __init__(self, cfg: FairseqConfig, task, model, criterion, quantizer=None):
+if 1: 
+            with open('/home/work/workspace/models/wavlm_model/wavlm_base.pickle', 'rb') as f:
+                pickle_load_weights = pickle.load(f) 
+       
+            wavlm_name = [] 
+            wav2vec_name = [] 
+            for k, v in pickle_load_weights.items():
+                wavlm_name.append(k)
+            for i, (n, p) in enumerate(model.named_parameters()):
+                wav2vec_name.append(n)
+                n_ = n.replace('w2v_encoder.w2v_model.', '')
+                if n_ in pickle_load_weights:
+                    p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))
+                else:
+                    print(n, '\tnot loaded!')
+                 
+            print('*'*20)
+            print(len(wavlm_name), len(wav2vec_name))
+            for w2v in wav2vec_name:
+                if w2v.replace('w2v_encoder.w2v_model.', '') not in wavlm_name:
+                    print(w2v, 'not in wavlm name list!!')
+            print('*'*20)
+                   
+            del wavlm_name
+            del wav2vec_name
+            del pickle_load_weights 
 
         if isinstance(cfg, Namespace):
             logger.warning(

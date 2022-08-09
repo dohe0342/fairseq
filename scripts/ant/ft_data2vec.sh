@@ -21,7 +21,7 @@ then
     do  
         fairseq-hydra-train \
             --config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
-            --config-name base_100h_aws_$instance \
+            --config-name base_100h_ant \
             task.data=/opt/ml/code/LibriSpeech/manifests \
             model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
             checkpoint.save_dir=/opt/ml/model \

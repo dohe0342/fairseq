@@ -225,15 +225,17 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "initialize new viewmaker"},
     )
-
     viewmaker_num: int = field(
         default=1,
         metadata={"help": "number of viewmaker"},
     )
-    
     ch_prune_idx: int = field(
         default=-1,
         metadata={"help": "number of viewmaker"},
+    )
+    wavlm: bool = field(
+        default=False,
+        metadata={"help": "viewmaker"},
     )
 
 

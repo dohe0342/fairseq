@@ -54,6 +54,7 @@ class Trainer(object):
             for k, v in pickle_load_weights.items():
                 wavlm_name.append(k)
             for i, (n, p) in enumerate(model.named_parameters()):
+                wav2vec_name.append(n)
                 n_ = n.replace('w2v_encoder.w2v_model.', '')
                 if n_ in pickle_load_weights:
                     p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))

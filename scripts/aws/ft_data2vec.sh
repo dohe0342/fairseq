@@ -14,7 +14,7 @@ then
 END
 	for i in {0..29}
 		do
-			init=$(($i / 4))
+			init=$(($i % 4))
 			if [ $init -eq 0 ]
 			then
 				fairseq-hydra-train \

@@ -65,7 +65,7 @@ class Trainer(object):
             print('*'*20)
             del wavlm_name
             del wav2vec_name
-            del 
+            del pickle_load_weights 
 
         if isinstance(cfg, Namespace):
             logger.warning(

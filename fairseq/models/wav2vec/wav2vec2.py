@@ -1485,7 +1485,8 @@ class TransformerSentenceEncoderLayerPos(nn.Module):
             self_attn_mask: torch.Tensor = None,
             self_attn_padding_mask: torch.Tensor = None,
             need_weights: bool = False,
-            pos_bias=None
+            pos_bias=None,
+            layer_num=0,
     ):
         """
         LayerNorm is applied either before or after the self-attention/ffn

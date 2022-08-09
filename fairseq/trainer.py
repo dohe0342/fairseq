@@ -51,8 +51,8 @@ class Trainer(object):
             
             wavlm_name = []
             wav2vec_name = []
-            #for k, v in pickle_load_weights.items():
-            #    wavlm_name.append(k)
+            for k, v in pickle_load_weights.items():
+                wavlm_name.append(k)
             for i, (n, p) in enumerate(model.named_parameters()):
                 n_ = n.replace('w2v_encoder.w2v_model.', '')
                 if n_ in pickle_load_weights:

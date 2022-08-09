@@ -63,6 +63,9 @@ class Trainer(object):
             
             print('*'*20)
             print(len(wavlm_name), len(wav2vec_name))
+            for w2v in wav2vec_name:
+                if wav.replace('w2v_encoder.w2v_model.', '') not in wavlm_name:
+                    print(w2v)
             print('*'*20)
             
             del wavlm_name

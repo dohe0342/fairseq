@@ -291,6 +291,7 @@ class Wav2Vec2Config(FairseqDataclass):
         metadata={"help": "Positional encoding type to use in conformer"},
     )
     fp16: bool = field(default=False, metadata={"help": "If fp16 is being used"})
+    wavlm: bool = field(default=False, metadata={"help": "If fp16 is being used"})
     
 
 @register_model("wav2vec2", dataclass=Wav2Vec2Config)

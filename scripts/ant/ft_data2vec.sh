@@ -25,9 +25,9 @@ then
             task.data=/workspace/LibriSpeech/manifests \
             model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
             checkpoint.save_dir=/workspace/fairseq/scripts/ant/$exp_name \
-            +model.wavlm=true \
-			+model.viewmaker=true \
-			criterion._name=viewmaker 
+            +model.wavlm=true
+			#+model.viewmaker=true \
+			#criterion._name=viewmaker 
     done
 
 elif [ $mode == "hubert" ]

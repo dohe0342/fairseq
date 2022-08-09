@@ -40,7 +40,7 @@ END
 					+model.viewmaker=true
 			fi
 		done
-	cp -r cd /opt/ml/code/fairseq/outputs /opt/ml/model/
+	cp -r /opt/ml/code/fairseq/outputs /opt/ml/model/
 	rm /opt/ml/model/crash.pt
 elif [ $mode == "hubert" ]
 then

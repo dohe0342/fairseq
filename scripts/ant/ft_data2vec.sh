@@ -23,7 +23,7 @@ then
             --config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
             --config-name base_100h_ant \
             task.data=/workspace/LibriSpeech/manifests \
-            model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
+            model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
             checkpoint.save_dir=/opt/ml/model \
             +model.wavlm=true
     done

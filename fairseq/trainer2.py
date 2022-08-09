@@ -46,7 +46,7 @@ class Trainer(object):
 
     def __init__(self, cfg: FairseqConfig, task, model, criterion, quantizer=None):
         if 1: 
-            with open('/home/work/workspace/models/wavlm_model/wavlm_base.pickle', 'rb') as f:
+            with open('/workspace/models/wavlm_model/wavlm_base.pickle', 'rb') as f:
                 pickle_load_weights = pickle.load(f) 
        
             wavlm_name = [] 

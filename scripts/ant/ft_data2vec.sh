@@ -10,9 +10,9 @@ then
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \
-		checkpoint.save_dir=/workspace/fairseq/scripts/ant/outputs/$1 \
-	   	criterion._name=viewmaker \
-		+model.viewmaker=true	
+		checkpoint.save_dir=/workspace/fairseq/scripts/ant/outputs/$1
+	   	#criterion._name=viewmaker \
+		#+model.viewmaker=true	
 elif [ $mode == "hubert" ]
 then
 	echo "todo"

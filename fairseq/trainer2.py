@@ -612,6 +612,7 @@ class Trainer(object):
                     state["model"], strict=False, model_cfg=self.cfg.model
                 )
                 print(state["optimizer"])
+                print(state["optimizer2"])
                 # save memory for later steps
                 del state["model"]
                 if utils.has_parameters(self.get_criterion()):

@@ -1170,6 +1170,7 @@ class TransformerEncoder(nn.Module):
                     r = x
                     break
         
+        print(len(layer_results))
         if r is not None:
             x = r
 

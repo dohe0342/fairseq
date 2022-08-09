@@ -651,7 +651,6 @@ class WavLMEncoder(FairseqEncoder):
             logger.info(w2v_args)
 
         else:
-            print('2'*100)
             state = None
             w2v_args = cfg.w2v_args
             if isinstance(w2v_args, Namespace):

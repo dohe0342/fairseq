@@ -1,5 +1,5 @@
 git pull
-mode="w2v"
+mode="wavlm"
 exp_name=$1
 
 if [ $mode == "w2v" ]

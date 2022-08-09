@@ -143,6 +143,7 @@ def main(cfg: FairseqConfig) -> None:
         quantizer = None
 
     # Build trainer
+    print(cfg.model.viewmaker)
     if cfg.common.model_parallel_size == 1:
         if cfg.model.viewmaker:
             trainer = Trainer2(cfg, task, model, criterion, quantizer)

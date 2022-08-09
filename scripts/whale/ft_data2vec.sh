@@ -35,7 +35,7 @@ then
 
 elif [ $mode == "wavlm" ]
 then
-	for i in {0..0}
+	for i in {0..29}
 	do
 		fairseq-hydra-train \
 			--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

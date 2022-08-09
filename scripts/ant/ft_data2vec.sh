@@ -14,6 +14,7 @@ then
 		+model.wavlm=true
 	   	#criterion._name=viewmaker \
 		#+model.viewmaker=true	
+
 elif [ $mode == "hubert" ]
 then
 	echo "todo"
@@ -28,6 +29,19 @@ else
 		criterion._name=viewmaker \
 		checkpoint.save_dir=/workspace/fairseq/scripts/whale/outputs/$1 \
 		+model.viewmaker=true
+
+elif [ $mode == "wavlm" ]
+then
+    for i in {0..0}
+    do  
+        fairseq-hydra-train \
+            --config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
+            --config-name base_100h_aws_$instance \
+            task.data=/opt/ml/code/LibriSpeech/manifests \
+            model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
+            checkpoint.save_dir=/opt/ml/model \
+            +model.wavlm=true
+    done
 fi
 
 :<<'END'

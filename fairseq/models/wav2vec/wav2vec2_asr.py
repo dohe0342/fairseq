@@ -235,7 +235,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
     wavlm: bool = field(
         default=False,
-        metadata={"help": "viewmaker"},
+        metadata={"help": "use wavlm"},
     )
 
 

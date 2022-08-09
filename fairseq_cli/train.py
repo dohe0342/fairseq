@@ -38,8 +38,8 @@ from fairseq.distributed import utils as distributed_utils
 from fairseq.file_io import PathManager
 from fairseq.logging import meters, metrics, progress_bar
 from fairseq.model_parallel.megatron_trainer import MegatronTrainer
-from fairseq.trainer import Trainer
-from fairseq.trainer2 import Trainer2
+from fairseq.trainer import Trainer as Trainer
+from fairseq.trainer2 import Trainer as Trainer2
 
 def main(cfg: FairseqConfig) -> None:
     if isinstance(cfg, argparse.Namespace):

@@ -31,6 +31,7 @@ from fairseq.modules import (
     SamePad,
     TransposeLast,
 )
+from fairseq.modules.multihead_attention_relative_pos import MultiheadAttentionRelativePos
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 from fairseq.modules.conformer_layer import ConformerWav2Vec2EncoderLayer
 from fairseq.modules.transformer_sentence_encoder import init_bert_params

@@ -637,7 +637,6 @@ class WavLMEncoder(FairseqEncoder):
             "checkpoint_activations": cfg.checkpoint_activations,
             "offload_activations": cfg.offload_activations,
             "min_params_to_wrap": cfg.min_params_to_wrap,
-            "layer_type": "transformerpos",
         }
         
         if cfg.w2v_args is None:

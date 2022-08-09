@@ -147,7 +147,7 @@ def main(cfg: FairseqConfig) -> None:
         if cfg.model.viewmaker:
             trainer = Trainer2(cfg, task, model, criterion, quantizer)
         else:
-            trainer = Trainer2(cfg, task, model, criterion, quantizer)
+            trainer = Trainer(cfg, task, model, criterion, quantizer)
     else:
         trainer = MegatronTrainer(cfg, task, model, criterion)
     logger.info(

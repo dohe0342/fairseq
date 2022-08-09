@@ -875,7 +875,7 @@ class Trainer(object):
             #    for k in sample['net_input']:
             #        print(k)
             #print('sample size = ', sample['net_input']['source'].size())
-
+            extra_kwargs["viewmaker"] = self.cfg.model.viewmaker
             def maybe_no_sync():
                 """
                 Whenever *samples* contains more than one mini-batch, we

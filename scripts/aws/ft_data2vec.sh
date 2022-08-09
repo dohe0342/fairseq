@@ -87,6 +87,9 @@ else
 	done
 fi
 
+cp -r /opt/ml/code/fairseq/outputs /opt/ml/model/
+rm /opt/ml/model/crash.pt
+
 #for i in {0..9}
 	#do
 	#	fairseq-hydra-train \

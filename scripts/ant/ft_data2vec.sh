@@ -14,8 +14,7 @@ then
 		+model.wavlm=true
 	   	#criterion._name=viewmaker \
 		#+model.viewmaker=true	
-
-	elif [ $mode == "wavlm" ]
+elif [ $mode == "wavlm" ]
 then
     for i in {0..0}
     do  

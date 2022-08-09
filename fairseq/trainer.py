@@ -835,6 +835,7 @@ class Trainer(object):
         extra_kwargs["uses_branch_v1"] = False 
         extra_kwargs["uses_branch_v2"] = False 
         extra_kwargs["uses_branch_v3"] = False 
+        extra_kwargs["viewmaker"] = self.cfg.model.viewmaker
 
         # forward and backward pass
         logging_outputs, sample_size, ooms = [], 0, 0

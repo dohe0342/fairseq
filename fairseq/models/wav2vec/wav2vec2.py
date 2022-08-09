@@ -40,8 +40,7 @@ from .utils import pad_to_multiple
 
 EXTRACTOR_MODE_CHOICES = ChoiceEnum(["default", "layer_norm"])
 MASKING_DISTRIBUTION_CHOICES = ChoiceEnum(["static", "uniform", "normal", "poisson"])
-LAYER_TYPE_CHOICES = ChoiceEnum(["transformer", "conformer"])
-
+LAYER_TYPE_CHOICES = ChoiceEnum(["transformer", "conformer", "transformerpos"])
 
 @dataclass
 class Wav2Vec2Config(FairseqDataclass):

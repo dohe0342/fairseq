@@ -60,9 +60,11 @@ class Trainer(object):
                     p.data = torch.nn.Parameter(torch.tensor(pickle_load_weights[n_]).to('cuda'))
                 else:
                     print(n, '\tnot loaded!')
+            
             print('*'*20)
             print(len(wavlm_name), len(wav2vec_name))
             print('*'*20)
+            
             del wavlm_name
             del wav2vec_name
             del pickle_load_weights 

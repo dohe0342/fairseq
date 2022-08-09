@@ -520,7 +520,7 @@ class Wav2VecEncoder(FairseqEncoder):
                     }
                     assert isinstance(module, FullyShardedDataParallel)
                     with module.summon_full_params():
-                        module.load_state_dict(new_dict, strict=True)
+                        module.load_state_dict(new_dict, strict=False)
                     module._reset_lazy_init()
 
             # Once layers are loaded, filter them out and load everything else.

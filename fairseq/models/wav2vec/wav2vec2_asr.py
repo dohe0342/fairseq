@@ -640,6 +640,7 @@ class WavLMEncoder(FairseqEncoder):
         }
         
         if cfg.w2v_args is None:
+            print('1'*100)
             state = checkpoint_utils.load_checkpoint_to_cpu(cfg.w2v_path, arg_overrides)
             w2v_args = state.get("cfg", None)
             if w2v_args is None:

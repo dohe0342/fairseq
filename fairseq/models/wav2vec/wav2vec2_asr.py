@@ -1559,7 +1559,47 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
 
         self.blank_mode= "add"
         self.blank_weight = 0.
-    
+     
+    def load_model_weights(self, state, model, cfg):
+        if cfg.ddp_backend == "fully_sharded":
+            from fairseq.distributed import FullyShardedDataParallel
+
+            for name, module in model.named_modules():
+                if "encoder.layers" in name and len(name.split(".")) == 3:
+                    # Only for layers, we do a special handling and load the weights one by one
+                    # We dont load all weights together as that wont be memory efficient and may
+                    # cause oom
+                    new_dict = {
+                        k.replace(name + ".", ""): v
+                        for (k, v) in state["model"].items()
+                        if name + "." in k
+                    }
+                    assert isinstance(module, FullyShardedDataParallel)
+                    with module.summon_full_params():
+                        module.load_state_dict(new_dict, strict=True)
+                    module._reset_lazy_init()
+
+            # Once layers are loaded, filter them out and load everything else.
+            r = re.compile("encoder.layers.\d.")
+            filtered_list = list(filter(r.match, state["model"].keys()))
+
+            new_big_dict = {
+                k: v for (k, v) in state["model"].items() if k not in filtered_list
+            }
+
+            model.load_state_dict(new_big_dict, strict=False)
+        else:
+            if "_ema" in state["model"]:
+                del state["model"]["_ema"]
+            if cfg.init_transformer:
+                keys = list(state["model"].keys())
+                for key in keys:
+                    if 'encoder.layer' in key:
+                        del state["model"][key]
+                model.load_state_dict(state["model"], strict=False)
+            else:
+                model.load_state_dict(state["model"], strict=False)
+   
     def get_logits(self, net_output, logits, normalize=False):
         if self.blank_weight != 0:
             if self.blank_mode == "add":

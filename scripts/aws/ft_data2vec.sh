@@ -68,7 +68,7 @@ then
             --config-name base_100h_whale \
             task.data=/opt/ml/code/LibriSpeech/manifests \
             model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \
-            checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
+            checkpoint.save_dir=/opt/ml/model \
             +model.wavlm=true
             #criterion._name=viewmaker \
             #+model.viewmaker=true \

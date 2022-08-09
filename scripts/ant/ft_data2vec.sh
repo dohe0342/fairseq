@@ -20,7 +20,7 @@ then
     for i in {0..0}
     do  
         fairseq-hydra-train \
-            --config-dir /opt/ml/code/fairseq/examples/wav2vec/config/finetuning \
+            --config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
             --config-name base_100h_aws_$instance \
             task.data=/opt/ml/code/LibriSpeech/manifests \
             model.w2v_path=/opt/ml/input/data/model/wav2vec_small.pt \

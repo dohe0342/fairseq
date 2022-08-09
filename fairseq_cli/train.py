@@ -144,7 +144,10 @@ def main(cfg: FairseqConfig) -> None:
 
     # Build trainer
     if cfg.common.model_parallel_size == 1:
-        trainer = Trainer(cfg, task, model, criterion, quantizer)
+        if cfg.model.viewmaker:
+            trainer = Trainer2(cfg, task, model, criterion, quantizer)
+        else:
+            trainer = Trainer2(cfg, task, model, criterion, quantizer)
     else:
         trainer = MegatronTrainer(cfg, task, model, criterion)
     logger.info(

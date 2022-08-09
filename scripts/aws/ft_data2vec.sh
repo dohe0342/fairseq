@@ -1,4 +1,4 @@
-mode="w2v" 
+mode="wavlm" 
 instance="g5"
 
 if [ $mode == "w2v" ]

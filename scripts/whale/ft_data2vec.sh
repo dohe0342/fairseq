@@ -17,7 +17,7 @@ then
 				checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
 				criterion._name=viewmaker \
 				+model.viewmaker=true \
-				+model.init_viewmaker=true \
+				+model.init_viewmaker=true 
 		else
 			fairseq-hydra-train \
 				--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \
@@ -26,9 +26,8 @@ then
 				model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
 				checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
 				criterion._name=viewmaker \
-				+model.viewmaker=true \
-				+model.init_viewmaker=true \
-
+				+model.viewmaker=true 
+		fi
 	done
 
 elif [ $mode == "hubert" ]

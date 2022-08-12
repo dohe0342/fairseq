@@ -4,7 +4,7 @@ exp_name=$1
 
 if [ $mode == "w2v" ]
 then
-	for i in {0..0}
+	for i in {0..29}
 	do
 		init=$(($i % 4)) 
 		if [ $init -eq 0 ] 

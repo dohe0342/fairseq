@@ -8,15 +8,9 @@ do
 	  --path /workspace/models/$model \
 	  --gen-subset $subset \
 	  --results-path /workspace/fairseq/examples/wav2vec/ctc_eval \
-	  --w2l-decoder fairseqlm \
-	  --lexicon /workspace/models/lm_model/librispeech_lexicon.lst \
-	  --lm-model /workspace/models/lm_model/lm_librispeech_word_transformer.pt \
-	  --lm-weight 0.87 \
-	  --word-score -1 \
-	  --sil-weight 0 \
+	  --w2l-decoder viterbi \
 	  --criterion ctc \
 	  --labels ltr \
 	  --max-tokens 4000000 \
-	  --post-process letter \
-	  --beam=1
+	  --post-process letter
 done

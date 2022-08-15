@@ -25,12 +25,12 @@ do
 		common.user_dir=examples/data2vec \
 		task.labels=ltr \
 		decoding.type=viterbi \
-		decoding.unique_wer_file=true \
-		decoding.results_path=/workspace/fairseq/scripts/ant \
+		decoding.unique_wer_file=false \
 		dataset.gen_subset=$subset \
 		common_eval.quiet=true \
 		common_eval.path=/workspace/models/data2vec_model/$model \
 		distributed_training.distributed_world_size=1 
+		#decoding.results_path=/workspace/fairseq/scripts/ant \
 	echo ""
 	echo ""
 done

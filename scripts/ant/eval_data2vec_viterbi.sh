@@ -20,7 +20,7 @@ do
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/new/infer.py \
 		--config-dir /workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \
-		task=audio_finetuning \
+		task=audio_pretraining \
 		task.data=/workspace/LibriSpeech/manifests \
 		common.user_dir=examples/data2vec \
 		task.labels=ltr \

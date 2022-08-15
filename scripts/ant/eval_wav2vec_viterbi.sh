@@ -3,7 +3,7 @@ for subset in "dev-clean" "dev-other" "test-clean" "test-other"
 do
 	CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/infer.py \
 	  /workspace/LibriSpeech/manifests \
-	  --task audio_finetuning \
+	  --task audio_pretraining \
 	  --nbest 1 \
 	  --path /workspace/models/$model \
 	  --gen-subset $subset \

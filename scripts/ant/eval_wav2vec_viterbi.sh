@@ -4,7 +4,7 @@ do
 	CUDA_VISIBLE_DEVICES=$2 python /workspace/fairseq/examples/speech_recognition/infer.py \
 	  /workspace/LibriSpeech/manifests \
 	  --task audio_pretraining \
-	  --path $model
+	  --path $model \
 	  --gen-subset $subset \
 	  --w2l-decoder viterbi \
 	  --criterion ctc \

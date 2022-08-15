@@ -5,7 +5,6 @@ do
 	  /workspace/LibriSpeech/manifests \
 	  --task audio_pretraining \
 	  --gen-subset $subset \
-	  --results-path /workspace/fairseq/examples/wav2vec/ctc_eval \
 	  --w2l-decoder viterbi \
 	  --criterion ctc \
 	  --labels ltr \

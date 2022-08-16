@@ -14,19 +14,19 @@ then
 				--config-name base_960h_whale \
 				task.data=/home/work/workspace/LibriSpeech/manifests \
 				model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
-				checkpoint.save_dir=/home/work/workspace/fairseq_whale2/scripts/whale2/outputs/$1 \
-				criterion._name=viewmaker \
-				+model.viewmaker=true \
-				+model.init_viewmaker=true 
+				checkpoint.save_dir=/home/work/workspace/fairseq_whale2/scripts/whale2/outputs/$1 
+				#criterion._name=viewmaker \
+				#+model.viewmaker=true \
+				#+model.init_viewmaker=true 
 		else
 			fairseq-hydra-train \
 				--config-dir /home/work/workspace/fairseq_whale2/examples/wav2vec/config/finetuning \
 				--config-name base_960h_whale \
 				task.data=/home/work/workspace/LibriSpeech/manifests \
 				model.w2v_path=/home/work/workspace/models/wav2vec_model/wav2vec_small.pt \
-				checkpoint.save_dir=/home/work/workspace/fairseq_whale2/scripts/whale2/outputs/$1 \
-				criterion._name=viewmaker \
-				+model.viewmaker=true 
+				checkpoint.save_dir=/home/work/workspace/fairseq_whale2/scripts/whale2/outputs/$1
+				#criterion._name=viewmaker \
+				#+model.viewmaker=true 
 		fi
 	done
 

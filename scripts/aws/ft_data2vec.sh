@@ -12,7 +12,7 @@ then
 			checkpoint.save_dir=/opt/ml/model 
 	rm /opt/ml/model/crash.pt
 END
-	for i in {0..29}
+	for i in {0..99}
 		do
 			init=$(($i % 4))
 			if [ $init -eq 0 ]

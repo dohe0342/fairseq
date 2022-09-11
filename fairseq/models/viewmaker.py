@@ -8,7 +8,6 @@ https://github.com/pytorch/examples/blob/0c1654d6913f77f09c0505fb284d977d89c17c1
 import torch
 import torch.nn as nn
 from torch.nn import functional as init
-from torchsummaryX import summary
 from torch.autograd import Variable
 import glob
 import numpy as np

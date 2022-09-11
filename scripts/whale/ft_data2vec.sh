@@ -4,9 +4,9 @@ exp_name=$1
 
 if [ $mode == "w2v" ]
 then
-	for i in {2..29}
+	for i in {0..29}
 	do
-		init=$(($i % 4)) 
+		init=$(($i % 3)) 
 		if [ $init -eq 0 ] 
 		then
 			fairseq-hydra-train \

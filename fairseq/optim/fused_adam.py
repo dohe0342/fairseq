@@ -210,11 +210,7 @@ class FusedAdamV1(torch.optim.Optimizer):
                     exp_avg_sq = exp_avg_sq.float() * state["exp_avg_sq_scale"]
                 beta1, beta2 = group["betas"]
                 
-                try: 
-                    state["step"] += 1
-                except: 
-                    state["step"] = 122219
-                    state["step"] += 1
+                state["step"] += 1
 
                 with torch.cuda.device(p_data_fp32.device):
                     fused_adam_cuda.adam(

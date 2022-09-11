@@ -7,7 +7,7 @@ then
 	for i in {0..29}
 	do
 		init=$(($i % 4)) 
-		if [ $init -eq 3 ] 
+		if [ $init -eq 2 ] 
 		then
 			fairseq-hydra-train \
 				--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

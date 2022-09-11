@@ -6,8 +6,8 @@ if [ $mode == "w2v" ]
 then
 	for i in {0..29}
 	do
-		init=$(($i % 3)) 
-		if [ $init -eq 0 ] 
+		init=$(($i % 4)) 
+		if [ $init -eq 3 ] 
 		then
 			fairseq-hydra-train \
 				--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

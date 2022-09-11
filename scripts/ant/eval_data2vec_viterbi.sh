@@ -9,7 +9,8 @@ model=$1
 #for subset in "it_was2"
 #for model in "wav2vec_small_100h.pt" "wav2vec_small_960h.pt" "wav2vec_big_100h.pt" "wav2vec_big_960h.pt" "wav2vec_vox_100h_new.pt" "wav2vec_vox_960h_new.pt"
 #for model in "100h_860h_mpl_alpha_01_bootstrap_ultratio02_ct04.pickle" "100h_860h_mpl_alpha_01_bootstrap_ultratio02.pickle" "100h_860h_mpl_alpha_01_bootstrap_ultratio02_currct.pickle" "100h_860h_mpl_alpha_01_bootstrap_ultratio02_ct02.pickle" "100h_860h_mpl_alpha_01_bootstrap_ultratio02_currwordleven.pickle" "960h_finetuned_asml3_conf.pickle"
-for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
+#for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
+for subset in "ted-valid" "ted-test" "wsj-valid" "wsj-test"
 #for i in {0..17}
 do
 	#let first=$i*5

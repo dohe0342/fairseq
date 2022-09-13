@@ -15,5 +15,7 @@ do
 		decoding.lmpath=/path/to/lm \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=/path/to/checkpoint.pt decoding.beam=1500 distributed_training.distributed_world_size=${num_gpus}
+		common_eval.path=/path/to/checkpoint.pt \
+		decoding.beam=500 \
+		distributed_training.distributed_world_size=1
 done

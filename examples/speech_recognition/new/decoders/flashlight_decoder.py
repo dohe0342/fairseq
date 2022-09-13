@@ -46,8 +46,20 @@ except ImportError:
         "Please install from "
         "https://github.com/facebookresearch/flashlight/tree/master/bindings/python"
     )
-    LM = object
-    LMState = object
+    from torchaudio.flashlight_lib_text_dictionary import create_word_dict, load_words
+    from torchaudio.flashlight_lib_text_decoder import (
+        CriterionType,
+        LexiconDecoderOptions,
+        KenLM,
+        LM, 
+        LMState,
+        SmearingMode,
+        Trie,
+        LexiconDecoder,
+    )   
+
+    #LM = object
+    #LMState = object
 
 
 class KenLMDecoder(BaseDecoder):

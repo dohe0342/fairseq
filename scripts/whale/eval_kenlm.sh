@@ -8,9 +8,7 @@ do
 		common.user_dir=/home/work/workspace/fairseq/examples/data2vec \
 		task.labels=ltr \
 		decoding.type=kenlm \
-		decoding.lmweight=2.0 \ 
-		decoding.wordscore=-0.3 \
-		decoding.silweight=0.0 \
+		decoding.lmweight=2.0 decoding.wordscore=-0.3 decoding.silweight=0.0 \
 		decoding.lexicon=/home/work/workspace/models/lm/librispeech-lexicon.txt \
 		decoding.lmpath=/home/work/workspace/models/lm/4-gram.arpa.gz \
 		decoding.unique_wer_file=False \

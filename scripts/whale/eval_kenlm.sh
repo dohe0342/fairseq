@@ -15,7 +15,7 @@ do
 		decoding.lmpath=/path/to/lm \
 		decoding.unique_wer_file=False \
 		dataset.gen_subset=$subset \
-		common_eval.path=/path/to/checkpoint.pt \
+		common_eval.path=/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt \
 		decoding.beam=500 \
 		distributed_training.distributed_world_size=1
 done

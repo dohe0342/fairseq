@@ -12,7 +12,8 @@ do
 		decoding.wordscore=-0.3 \
 		decoding.silweight=0.0 \
 		decoding.lexicon=/home/work/workspace/models/lm/librispeech-lexicon.txt \
-		decoding.lmpath=/path/to/lm decoding.unique_wer_file=True \
+		decoding.lmpath=/path/to/lm \
+		decoding.unique_wer_file=False \
 		dataset.gen_subset=dev_clean,dev_other,test_clean,test_other \
 		common_eval.path=/path/to/checkpoint.pt decoding.beam=1500 distributed_training.distributed_world_size=${num_gpus}
 done

@@ -318,6 +318,7 @@ class InferenceProcessor:
         toks = toks[batch_id, :]
         print('*'*100)
         print(sample.keys())
+        print(sample['id'])
         print('*'*100)
         
         # Processes hypothesis.

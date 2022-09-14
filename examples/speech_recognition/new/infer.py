@@ -316,6 +316,10 @@ class InferenceProcessor:
         else:
             toks = sample["target"]
         toks = toks[batch_id, :]
+        print('*'*100)
+        for key in sample:
+            print(key)
+        print('*'*100)
         
         # Processes hypothesis.
         hyp_pieces = self.tgt_dict.string(hypo["tokens"].int().cpu())

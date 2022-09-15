@@ -1,6 +1,6 @@
 import os
 import cifar10.model_loader
-from model import Wav2Vec2Ctc
+from model import load
 
 
 def load(dataset, model_name, model_file, data_parallel=False):

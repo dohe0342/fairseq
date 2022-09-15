@@ -1,7 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.tensor as Tensor
-import Tuple
 from fairseq.models.wav2vec.wav2vec2_asr import Wav2VecEncoder
 from fairseq.models.wav2vec.wav2vec2_asr import Wav2Vec2CtcConfig
 from fairseq.data.data_utils import lengths_to_padding_mask
@@ -46,7 +44,7 @@ class Wav2Vec2Ctc(nn.Module):
 
         return input_lengths.to(torch.long)
 
-    def forward(self, inputs: Tensor, input_lengths: Tensor) -> Tuple[Tensor, Tensor]:
+    def forward(self, inputs, input_lengths):
         if self.normalize:
             with torch.no_grad():
                 inputs = F.layer_norm(inputs, inputs.shape)

@@ -5,7 +5,7 @@ from fairseq.models.wav2vec.wav2vec2_asr import Wav2Vec2CtcConfig
 from fairseq.data.data_utils import lengths_to_padding_mask
 
 
-def model_load(model_file, data_parallel=False):
+def w2v_load(model_file, data_parallel=False):
     net = Wav2Vec2Ctc()
     if data_parallel: # the model is saved in data paralle mode
         net = torch.nn.DataParallel(net)

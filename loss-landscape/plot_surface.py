@@ -74,7 +74,7 @@ def setup_surface_file(args, surf_file, dir_file):
     return surf_file
 
 
-def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, args):
+def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, args, cfg, task):
     """
         Calculate the loss values and accuracies of modified models in parallel
         using MPI reduce.
@@ -108,6 +108,9 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
     criterion = nn.CrossEntropyLoss()
     if args.loss_name == 'mse':
         criterion = nn.MSELoss()
+    elif args.loss_name == 'ctc':
+        cfg = CtcCriterionConfig()
+        criterion = CtcCriterion
 
     # Loop over all uncalculated loss values
     for count, ind in enumerate(inds):

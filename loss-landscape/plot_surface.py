@@ -112,7 +112,6 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
         if args.model == 'viewmaker': criterion = CtcCriterionViewmaker(cfg.criterion, task)
         else: criterion = CtcCriterion(cfg.criterion, task)
 
-
     # Loop over all uncalculated loss value
     for count, ind in enumerate(inds):
         loader = dataloader.next_epoch_itr(shuffle=False)

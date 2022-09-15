@@ -1,3 +1,4 @@
+import torch.nn as nn
 from fairseq.models.wav2vec.wav2vec2_asr import Wav2VecEncoder
 from fairseq.models.wav2vec.wav2vec2_asr import Wav2Vec2CtcConfig
 from fairseq.data.data_utils import lengths_to_padding_mask

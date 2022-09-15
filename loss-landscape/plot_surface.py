@@ -280,7 +280,7 @@ if __name__ == '__main__':
         torchvision.datasets.CIFAR10(root=args.dataset + '/data', train=True, download=True)
 
     mpi.barrier(comm)
-    _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
+    _, cfg = fairseq.checkpoint_utils.load_model_ensemble([args.model_file])
     
     task = tasks.setup_task(cfg.task)
     task.load_dataset(

@@ -1,6 +1,6 @@
 import os
 import cifar10.model_loader
-import 
+from model import Wav2Vec2Ctc
 
 def load(dataset, model_name, model_file, data_parallel=False):
     if dataset == 'cifar10':
@@ -9,4 +9,3 @@ def load(dataset, model_name, model_file, data_parallel=False):
     return net
 
 if __name__ == '__main__':
-    

@@ -67,8 +67,8 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 batch_size = sample["id"].size(0)
                 total += batch_size
                 if use_cuda:
-                    sample["net_input"] = sample["net_input"].to('cuda')
-                    print(sample["net_input"].get_device())
+                    #sample["net_input"] = sample["net_input"].to('cuda')
+                    print(sample["id"].get_device())
                     exit()
                 outputs = net(inputs)
                 loss = criterion(outputs, targets)

@@ -282,6 +282,7 @@ if __name__ == '__main__':
     _, _, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
     task.load_dataset()
     print(task.datasets)
+    exit()
     '''
     trainloader, testloader = dataloader.load_dataset(args.dataset, args.datapath,
                                 args.batch_size, args.threads, args.raw_data,

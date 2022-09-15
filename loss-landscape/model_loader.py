@@ -7,7 +7,7 @@ def load(dataset, model_name, model_file, data_parallel=False):
     if dataset == 'cifar10':
         net = cifar10.model_loader.load(model_name, model_file, data_parallel)
     elif dataset == 'LibriSpeech':
-        net = 
+        net = w2v_load('/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt') 
     return net
 
 if __name__ == '__main__':

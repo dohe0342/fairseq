@@ -251,16 +251,20 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     # Setup the direction file and the surface file
     #--------------------------------------------------------------------------
+    print('1')
     dir_file = net_plotter.name_direction_file(args) # name the direction file
+    print('2')
     if rank == 0:
         net_plotter.setup_direction(args, dir_file, net)
-
+    print('3')
     surf_file = name_surface_file(args, dir_file)
+    print('4')
     if rank == 0:
         setup_surface_file(args, surf_file, dir_file)
-
+    print('5')
     # wait until master has setup the direction file and surface file
     mpi.barrier(comm)
+    print('6')
 
     # load directions
     d = net_plotter.load_directions(dir_file)

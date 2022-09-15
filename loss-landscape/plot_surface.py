@@ -280,38 +280,36 @@ if __name__ == '__main__':
         torchvision.datasets.CIFAR10(root=args.dataset + '/data', train=True, download=True)
 
     mpi.barrier(comm)
-    _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
-    
-    print(task.cfg.data)
-    task.load_dataset(
-            'train-960',
-            task_cfg=task.cfg,
-    )
-    trainloader = task.get_batch_iterator(
-            dataset=task.dataset('train-960'),
-            max_tokens=4000000,
-            max_sentences=None,
-            max_positions=(sys.maxsize, sys.maxsize),
-            ignore_invalid_inputs=cfg.dataset.skip_invalid_size_inputs_valid_test,
-            required_batch_size_multiple=cfg.dataset.required_batch_size_multiple,
-            seed=777,
-            num_shards=8,
-            shard_id=rank,
-            num_workers=6,
-            data_buffer_size=cfg.dataset.data_buffer_size,
-            disable_iterator_cache=False,
-        ).next_epoch_itr(shuffle=False)
 
-    print(task.datasets)
-    print(trainloader)
-    exit()
-    '''
-    trainloader, testloader = dataloader.load_dataset(args.dataset, args.datapath,
+    if rank != 0 and args.dataset == 'cifar10':
+        trainloader, testloader = dataloader.load_dataset(args.dataset, args.datapath,
                                 args.batch_size, args.threads, args.raw_data,
                                 args.data_split, args.split_idx,
                                 args.trainloader, args.testloader)
-    '''
 
+    elif args.dataset == 'LibriSpeech':
+        _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
+        
+        task.load_dataset(
+                'train-960',
+                task_cfg=task.cfg,
+        )
+        trainloader = task.get_batch_iterator(
+                dataset=task.dataset('train-960'),
+                max_tokens=4000000,
+                max_sentences=None,
+                max_positions=(sys.maxsize, sys.maxsize),
+                ignore_invalid_inputs=cfg.dataset.skip_invalid_size_inputs_valid_test,
+                required_batch_size_multiple=cfg.dataset.required_batch_size_multiple,
+                seed=777,
+                num_shards=8,
+                shard_id=rank,
+                num_workers=6,
+                data_buffer_size=cfg.dataset.data_buffer_size,
+                disable_iterator_cache=False,
+            ).next_epoch_itr(shuffle=False)
+
+    
     #--------------------------------------------------------------------------
     # Start the computation
     #--------------------------------------------------------------------------

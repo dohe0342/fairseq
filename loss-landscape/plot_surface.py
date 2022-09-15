@@ -89,7 +89,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
         shape = xcoordinates.shape if ycoordinates is None else (len(xcoordinates),len(ycoordinates))
         losses = -np.ones(shape=shape)
         accuracies = -np.ones(shape=shape)
-        if rank == 0:
+        if rank == args.root_rank:
             f[loss_key] = losses
             f[acc_key] = accuracies
     else:
@@ -141,7 +141,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
         total_sync += syc_time
 
         # Only the master node writes to the file - this avoids write conflicts
-        if rank == 0:
+        if rank == args.root_rank:
             f[loss_key][:] = losses
             f[acc_key][:] = accuracies
             f.flush()

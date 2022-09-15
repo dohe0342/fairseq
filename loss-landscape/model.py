@@ -15,7 +15,7 @@ class Wav2Vec2Ctc(nn.Module):
         cfg._name = "wav2vec"
 
         self.normalize = cfg.normalize
-        self.w2v_encoder = Wav2VecEncoder(cfg, len(vocab))
+        self.w2v_encoder = Wav2VecEncoder(cfg, 32)
 
         function_type = type(self.w2v_encoder.w2v_model._get_feat_extract_output_lengths)
         self.w2v_encoder.w2v_model._get_feat_extract_output_lengths = function_type(

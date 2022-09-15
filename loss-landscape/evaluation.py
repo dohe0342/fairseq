@@ -83,4 +83,4 @@ def eval_loss(net, criterion, loader, use_cuda=False):
     else:
         total_loss = total_loss
     
-    return total_loss, 100.#100.*correct/total
+    return total_loss, 0.#100.*correct/total

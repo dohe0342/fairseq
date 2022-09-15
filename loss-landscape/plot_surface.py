@@ -310,9 +310,6 @@ if __name__ == '__main__':
                 disable_iterator_cache=False,
             ).next_epoch_itr(shuffle=False)
     
-    for sample in trainloader:
-        print(sample["id"].get_device())
-        exit()
     #--------------------------------------------------------------------------
     # Start the computation
     #--------------------------------------------------------------------------

@@ -298,7 +298,7 @@ if __name__ == '__main__':
 
     elif args.dataset == 'LibriSpeech':
         task.load_dataset(
-                'dev-clean',
+                args.subset,
                 task_cfg=task.cfg,
         )
         

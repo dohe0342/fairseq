@@ -814,7 +814,7 @@ class CtcCriterion(FairseqCriterion):
         return True
 
 @register_criterion("viewmaker", dataclass=CtcCriterionConfig)
-class CtcCriterion(FairseqCriterion):
+class CtcCriterion_viewmaker(FairseqCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(task)
         self.blank_idx = (

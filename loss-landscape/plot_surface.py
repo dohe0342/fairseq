@@ -125,6 +125,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
         # Record the time to compute the loss value
         loss_start = time.time()
         loss, acc = evaluation.eval_loss(net, criterion, dataloader, args.cuda)
+        print(rank, loss)
         loss_compute_time = time.time() - loss_start
 
         # Record the result in the local array

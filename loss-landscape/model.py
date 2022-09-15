@@ -28,7 +28,7 @@ class Wav2Vec2Ctc(nn.Module):
 
         self.blank_weight = cfg.blank_weight
         self.blank_mode = cfg.blank_mode
-        self.overwrite_param('home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt')
+        self.overwrite_param('/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt')
     
     def overwrite_param(self, path):
         model = torch.load(path)['model']

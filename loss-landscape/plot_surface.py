@@ -267,6 +267,7 @@ if __name__ == '__main__':
     if len(d) == 2 and rank == 0:
         similarity = proj.cal_angle(proj.nplist_to_tensor(d[0]), proj.nplist_to_tensor(d[1]))
         print('cosine similarity between x-axis and y-axis: %f' % similarity)
+    
     exit() 
     #--------------------------------------------------------------------------
     # Setup dataloader

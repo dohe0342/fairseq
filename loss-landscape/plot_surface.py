@@ -287,6 +287,7 @@ if __name__ == '__main__':
             'train-960',
             task_cfg=task,
     )
+
     print(task.datasets)
     exit()
     '''

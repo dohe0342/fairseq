@@ -11,7 +11,7 @@ def w2v_load(model_file, data_parallel=False):
         net = torch.nn.DataParallel(net)
 
     if model_file:
-        net.overwrite_param(model_file)
+        net.module.overwrite_param(model_file)
 
     if data_parallel: # convert the model back to the single GPU version
         net = net.module

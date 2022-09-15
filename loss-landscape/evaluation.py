@@ -23,6 +23,7 @@ def eval_loss(net, criterion, loader, args):
     Returns:
         loss value and accuracy
     """
+    use_cuda = args.cuda
     correct = 0
     total_loss = 0
     total = 0 # number of samples

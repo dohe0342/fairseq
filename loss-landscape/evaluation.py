@@ -73,8 +73,8 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                     if "net_input" not in sample:
                         continue
                 
-                print(model.get_device()) 
-                loss, sample_size, logging_output = criterion(model, sample)
+                print(net.get_device()) 
+                loss, sample_size, logging_output = criterion(netl, sample)
                 
                 total_loss += loss.item()*batch_size
                 _, predicted = torch.max(outputs.data, 1)

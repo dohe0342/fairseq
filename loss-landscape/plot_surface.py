@@ -251,12 +251,12 @@ if __name__ == '__main__':
     # Load models and extract parameters
     #--------------------------------------------------------------------------
     if args.dataset == 'LibriSpeech':
-        net = model_loader.load(args.dataset, args.model, args.model_file)
-    else:
         models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
         net = models[0]
         del net.w2v_encoder.viewmaker
         print(net)
+    else:
+        net = model_loader.load(args.dataset, args.model, args.model_file)
     
     w = net_plotter.get_weights(net) # initial parameters
     s = copy.deepcopy(net.state_dict()) # deepcopy since state_dict are references

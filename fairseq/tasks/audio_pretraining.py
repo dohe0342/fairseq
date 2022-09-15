@@ -162,7 +162,7 @@ class AudioPretrainingTask(FairseqTask):
 
             self.datasets[split] = FileAudioDataset(
                 manifest_path=manifest_path,
-                sample_rate=16000,#task_cfg.get("sample_rate", self.cfg.sample_rate),
+                sample_rate=task_cfg.get("sample_rate", self.cfg.sample_rate),
                 max_sample_size=self.cfg.max_sample_size,
                 min_sample_size=self.cfg.min_sample_size,
                 pad=task_cfg.labels is not None or task_cfg.enable_padding,

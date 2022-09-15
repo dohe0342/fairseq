@@ -23,7 +23,7 @@ import plot_1D
 import model_loader
 import scheduler
 import mpi4pytorch as mpi
-from fairseq.criterions.ctc import CtcCriterionConfig, CtcCriterion, CtcCriterion_viewmaker
+from fairseq.criterions.ctc import CtcCriterionConfig, CtcCriterion, CtcCriterionViewmaker
 from fairseq import tasks
 import fairseq
 

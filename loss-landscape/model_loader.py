@@ -10,4 +10,5 @@ def load(dataset, model_name, model_file, data_parallel=False):
 
 if __name__ == '__main__':
     net = Wav2Vec2Ctc()
+    net.overwrite_param('/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt')
     print(net)

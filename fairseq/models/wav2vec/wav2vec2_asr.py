@@ -1638,7 +1638,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "source": source,
             "padding_mask": padding_mask,
             "mask": self.apply_mask and self.training,
-            "viewmaker": self.viewmaker,
+            "viewmaker": self.viewmaker if self.viewmaker else None,
         }
         
         ft = (self.freeze_finetune_updates <= self.num_updates) or (self.num_updates <= self.viewmaker_pretrain_updates)

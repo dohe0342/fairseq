@@ -69,14 +69,13 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 batch_size = sample["id"].size(0)
                 total += batch_size
                 if use_cuda:
-                    device = torch.cuda.current_device()
+                    #device = torch.cuda.current_device()
                     #sample["id"] = sample["id"].to(device)
                     #sample = utils.move_to_cuda(sample)
                     #if "net_input" not in sample:
                     #    continue
                     #print(sample["id"].get_device())
                     print(sample["id"], device)
-                exit()
                 outputs = net(inputs)
                 loss = criterion(outputs, targets)
                 total_loss += loss.item()*batch_size

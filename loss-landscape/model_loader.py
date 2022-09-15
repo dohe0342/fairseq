@@ -15,3 +15,6 @@ if __name__ == '__main__':
                 model_file='/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt', \
                 data_parallel=True
                )
+    state = net.state_dict()
+    for n, p in state.items():
+        print(n)

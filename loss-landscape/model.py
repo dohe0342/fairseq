@@ -28,6 +28,14 @@ class Wav2Vec2Ctc(nn.Module):
 
         self.blank_weight = cfg.blank_weight
         self.blank_mode = cfg.blank_mode
+        
+    
+    def overwrite_param(self, path):
+        model = torch.load(path)['model']
+        for n , p in self.w2v_encoder.named_parameters():
+            try: p.data = model[n]
+            except: print('model has no params named {n}!')
+            
 
     #FIXME: More clever way!
     @staticmethod

@@ -124,10 +124,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
 
         # Record the time to compute the loss value
         loss_start = time.time()
-        if args.dataset == 'LibriSpeech':
-            loss, acc = evaluation_asr.eval_loss(net, criterion, dataloader, args.cuda)
-        else:
-            loss, acc = evaluation.eval_loss(net, criterion, dataloader, args.cuda)
+        loss, acc = evaluation.eval_loss(net, criterion, dataloader, args.cuda)
         loss_compute_time = time.time() - loss_start
 
         # Record the result in the local array

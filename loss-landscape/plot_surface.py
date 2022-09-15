@@ -309,7 +309,9 @@ if __name__ == '__main__':
                 data_buffer_size=cfg.dataset.data_buffer_size,
                 disable_iterator_cache=False,
             ).next_epoch_itr(shuffle=False)
-        print(len(trainloader))
+        
+        for sample in trainloader:
+            print(rank, sample["id"][0])
     
     #--------------------------------------------------------------------------
     # Start the computation

@@ -254,7 +254,6 @@ if __name__ == '__main__':
         models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
         net = models[0]
         del net.w2v_encoder.viewmaker
-        print(net)
     else:
         net = model_loader.load(args.dataset, args.model, args.model_file)
     

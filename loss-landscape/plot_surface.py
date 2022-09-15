@@ -23,6 +23,8 @@ import plot_1D
 import model_loader
 import scheduler
 import mpi4pytorch as mpi
+from fairseq.criterions.ctc import CtcCriterionConfig, CtcCriterion
+
 
 def name_surface_file(args, dir_file):
     # skip if surf_file is specified in args

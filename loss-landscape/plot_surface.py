@@ -172,6 +172,7 @@ if __name__ == '__main__':
 
     # data parameters
     parser.add_argument('--dataset', default='cifar10', help='cifar10 | imagenet')
+    parser.add_argument('--subset', default='train-100', help='cifar10 | imagenet')
     parser.add_argument('--datapath', default='cifar10/data', metavar='DIR', help='path to the dataset')
     parser.add_argument('--raw_data', action='store_true', default=False, help='no data preprocessing')
     parser.add_argument('--data_split', default=1, type=int, help='the number of splits for the dataloader')

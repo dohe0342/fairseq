@@ -294,6 +294,7 @@ if __name__ == '__main__':
                 'train-960',
                 task_cfg=task.cfg,
         )
+        
         trainloader = task.get_batch_iterator(
                 dataset=task.dataset('train-960'),
                 max_tokens=4000000,
@@ -308,8 +309,9 @@ if __name__ == '__main__':
                 data_buffer_size=cfg.dataset.data_buffer_size,
                 disable_iterator_cache=False,
             ).next_epoch_itr(shuffle=False)
-
     
+    for sample in trainloader:
+        print(sample["id"])
     #--------------------------------------------------------------------------
     # Start the computation
     #--------------------------------------------------------------------------

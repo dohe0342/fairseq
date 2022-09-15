@@ -1,6 +1,7 @@
+from fairseq.models.wav2vec.wav2vec2_asr import Wav2VecEncoder
+from fairseq.models.wav2vec.wav2vec2_asr import Wav2Vec2CtcConfig
 
-
-class RepresenationModel(nn.Module):
+class Wav2Vec2Ctc(nn.Module):
     def __init__(
             self,
             config,

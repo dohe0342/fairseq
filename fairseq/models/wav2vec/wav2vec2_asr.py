@@ -263,7 +263,9 @@ class Wav2VecCtc(BaseFairseqModel):
         """Build a new model instance."""
         #w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary)) if cfg.branch_ctc_v1 \
         #                    else Wav2VecEncoder(cfg, len(task.target_dictionary))
-        
+        if task.target_dictionary is None:
+            task.target_dictionary = ['temp' for i in range(32)]
+
         if cfg.branch_ctc_v1:
             w2v_encoder = Wav2VecEncoderBranchCtcV1(cfg, len(task.target_dictionary))
         elif cfg.branch_ctc_v2 or cfg.branch_ctc_v3:

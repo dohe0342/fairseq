@@ -253,7 +253,6 @@ if __name__ == '__main__':
     #net = model_loader.load(args.dataset, args.model, args.model_file)
     models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
     net = models[0]
-    print(net)
     w = net_plotter.get_weights(net) # initial parameters
     s = copy.deepcopy(net.state_dict()) # deepcopy since state_dict are references
     if args.ngpu > 1:

@@ -281,7 +281,6 @@ if __name__ == '__main__':
 
     mpi.barrier(comm)
     _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
-    task = tasks.setup_task(task)
     
     task.load_dataset(
             'train-960',

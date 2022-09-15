@@ -33,7 +33,7 @@ class Wav2Vec2Ctc(nn.Module):
         model = torch.load(path)['model']
         for n , p in self.w2v_encoder.named_parameters():
             try: p.data = model[n]
-            except: print('model has no params named {n}!')
+            except: print(f'model has no params named {n}!')
         
 
     #FIXME: More clever way!

@@ -35,8 +35,8 @@ class Wav2Vec2Ctc(nn.Module):
             n = 'w2v_encoder.' + n
             try: p.data = model[n]
             except: print(f'model has no params named {n}!')
-        for n in model:
-            print(n)
+        #for n in model:
+        #    print(n)
         
 
     #FIXME: More clever way!

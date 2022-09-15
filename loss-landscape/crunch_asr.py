@@ -1,12 +1,8 @@
 import argparse
 import h5py
 import time
-import socket
-import os
-import sys
 import numpy as np
 import torch.nn as nn
-import dataloader
 import evaluation
 import projection as proj
 import net_plotter

@@ -12,7 +12,7 @@ from fairseq import utils
 
 
 def eval_loss(net, criterion, loader, args):
-a   """
+    """
     Evaluate the loss value for a given 'net' on the dataset provided by the loader.
 
     Args:

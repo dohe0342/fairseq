@@ -109,7 +109,9 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
     if args.loss_name == 'mse':
         criterion = nn.MSELoss()
     elif args.loss_name == 'ctc':
-        criterion = CtcCriterionViewmaker(cfg.criterion, task)
+        if args.model == 'viewmaker': criterion = CtcCriterionViewmaker(cfg.criterion, task)
+        else: criterion = CtcCriterion(cfg.criterion, task)
+
 
     # Loop over all uncalculated loss value
     for count, ind in enumerate(inds):

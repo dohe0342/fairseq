@@ -11,4 +11,5 @@ def load(dataset, model_name=None, model_file=None, data_parallel=False):
     return net
 
 if __name__ == '__main__':
-    load('LibriSpeech', '/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt')
+    net = load('LibriSpeech', '/home/work/workspace/models/wav2vec_model/wav2vec_small_100h.pt')
+    print(net)

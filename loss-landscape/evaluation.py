@@ -66,6 +66,7 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 correct += predicted.cpu().eq(targets).sum().item()
         else:
             for batch_idx, sample in enumerate(loader):
+                print(batch_idx)
                 if use_cuda:
                     sample = utils.move_to_cuda(sample)
                 if "net_input" not in sample:

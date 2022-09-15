@@ -24,6 +24,7 @@ import model_loader
 import scheduler
 import mpi4pytorch as mpi
 from fairseq.criterions.ctc import CtcCriterionConfig, CtcCriterion
+from fairseq import tasks
 import fairseq
 
 
@@ -281,6 +282,7 @@ if __name__ == '__main__':
     mpi.barrier(comm)
     
     _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
+
     task.load_dataset(
             'train-960',
             task_cfg=task,

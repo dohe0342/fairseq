@@ -283,7 +283,6 @@ if __name__ == '__main__':
     _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
     
     print(task.cfg.data)
-    print(task.cfg.subset)
     task.load_dataset(
             'train-960',
             task_cfg=task.cfg,

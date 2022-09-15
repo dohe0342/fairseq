@@ -69,6 +69,8 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 batch_size = sample["id"].size(0)
                 total += batch_size
                 if use_cuda:
+                    device = torch.cuda.current_device()
+                    sample["id"] = sample["id"].to(device)
                     sample = utils.move_to_cuda(sample)
                     # Happens on the last batch.
                     if "net_input" not in sample:

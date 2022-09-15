@@ -42,25 +42,6 @@ class Wav2Vec2Ctc(nn.Module):
 
         return input_lengths.to(torch.long)
 
-    def download_pretrained_model(self):
-        if self.config.model == 'k-w2v':
-            path = "/models/checkpoint_best_new.pt"
-
-        elif self.config.model == 'xlsr':
-            old_path = "/models/xlsr2_300m.pt"
-            path = "/models/xlsr2_300m_new.pt"
-
-            model = torch.load(old_path)
-            w2v_b = torch.load("/models/checkpoint_best_new.pt")
-            del model['cfg']['task']
-            model['cfg']['task'] = w2v_b['cfg']['task']
-            model['cfg']['task']['normalize'] = True
-            torch.save(model, path)
-            del model
-            del w2v_b
-
-        return path
-
     def forward(self, inputs: Tensor, input_lengths: Tensor) -> Tuple[Tensor, Tensor]:
         if self.normalize:
             with torch.no_grad():

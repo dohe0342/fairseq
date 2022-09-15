@@ -8,6 +8,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import time
 from torch.autograd.variable import Variable
+from fairseq import utils
+
 
 def eval_loss(net, criterion, loader, use_cuda=False):
     """

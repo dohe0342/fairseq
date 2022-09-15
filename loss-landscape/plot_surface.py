@@ -303,6 +303,7 @@ if __name__ == '__main__':
         ).next_epoch_itr(shuffle=False)
 
     print(task.datasets)
+    print(trainloader)
     exit()
     '''
     trainloader, testloader = dataloader.load_dataset(args.dataset, args.datapath,

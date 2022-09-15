@@ -287,7 +287,20 @@ if __name__ == '__main__':
             'train-960',
             task_cfg=task.cfg,
     )
-    
+    trainloader = self.task.get_batch_iterator(
+            dataset=self.task.dataset('train-960'),
+            max_tokens=self.cfg.dataset.max_tokens,
+            max_sentences=self.cfg.dataset.batch_size,
+            max_positions=(sys.maxsize, sys.maxsize),
+            ignore_invalid_inputs=self.cfg.dataset.skip_invalid_size_inputs_valid_test,
+            required_batch_size_multiple=self.cfg.dataset.required_batch_size_multiple,
+            seed=self.cfg.common.seed,
+            num_shards=self.data_parallel_world_size,
+            shard_id=self.data_parallel_rank,
+            num_workers=self.cfg.dataset.num_workers,
+            data_buffer_size=self.cfg.dataset.data_buffer_size,
+            disable_iterator_cache=disable_iterator_cache,
+        ).next_epoch_itr(shuffle=False)
 
     print(task.datasets)
     exit()

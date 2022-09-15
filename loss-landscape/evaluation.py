@@ -74,7 +74,7 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                     if "net_input" not in sample:
                         continue
                     print(sample["id"].get_device())
-                    exit()
+                exit()
                 outputs = net(inputs)
                 loss = criterion(outputs, targets)
                 total_loss += loss.item()*batch_size

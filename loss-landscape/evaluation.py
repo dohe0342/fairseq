@@ -11,7 +11,7 @@ from torch.autograd.variable import Variable
 from fairseq import utils
 
 
-def eval_loss(net, criterion, loader, use_cuda=False):
+def eval_loss(net, criterion, loader, args):
     """
     Evaluate the loss value for a given 'net' on the dataset provided by the loader.
 

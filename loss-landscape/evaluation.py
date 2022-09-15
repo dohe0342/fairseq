@@ -77,7 +77,6 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                  
                 #total_loss += loss[0][0].item()#*batch_size
                 total_loss += loss[0][0].item()/sample_size
-        print(total_loss) 
     
     if total != 0:
         total_loss = total_loss / total

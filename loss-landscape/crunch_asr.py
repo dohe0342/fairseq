@@ -1,4 +1,23 @@
+import argparse
+import h5py
+import time
+import socket
+import os
+import sys
 import numpy as np
+import torch.nn as nn
+import dataloader
+import evaluation
+import projection as proj
+import net_plotter
+import plot_2D
+import plot_1D
+import model_loader
+import scheduler
+import mpi4pytorch as mpi
+from fairseq.criterions.ctc import CtcCriterionConfig, CtcCriterion
+from fairseq import tasks
+import fairseq
 
 
 def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, args):

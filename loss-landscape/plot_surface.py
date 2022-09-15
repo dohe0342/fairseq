@@ -170,6 +170,7 @@ if __name__ == '__main__':
     parser.add_argument('--cuda', '-c', action='store_true', help='use cuda')
     parser.add_argument('--threads', default=2, type=int, help='number of threads')
     parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use for each rank, useful for data parallel evaluation')
+    parser.add_argument('--root_rank', type=int, default=0, help='number of GPUs to use for each rank, useful for data parallel evaluation')
     parser.add_argument('--batch_size', default=128, type=int, help='minibatch size')
 
     # data parameters
@@ -272,10 +273,10 @@ if __name__ == '__main__':
     # Setup the direction file and the surface file
     #--------------------------------------------------------------------------
     dir_file = net_plotter.name_direction_file(args) # name the direction file
-    if rank == 0:
+    if rank == args.root_rank:
         net_plotter.setup_direction(args, dir_file, net)
     surf_file = name_surface_file(args, dir_file)
-    if rank == 0:
+    if rank == args.root_rank:
         setup_surface_file(args, surf_file, dir_file)
     
     # wait until master has setup the direction file and surface file

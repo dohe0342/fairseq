@@ -4,16 +4,11 @@ from fairseq.models.wav2vec.wav2vec2_asr import Wav2Vec2CtcConfig
 class Wav2Vec2Ctc(nn.Module):
     def __init__(
             self,
-            config,
-            num_classes: int,
-            device: torch.device = 'cuda',
-            vocab=None
     ):
         super(RepresenationModel, self).__init__()
-        self.device = device
-        self.config = config
-
-        w2v_path = self.download_pretrained_model()
+        
+        #w2v_path = self.download_pretrained_model()
+        w2v_path = '/home/work/workspace/models/wav2vec_model/wav2vec_small.pt'
         cfg = Wav2Vec2CtcConfig()
         cfg.w2v_path = w2v_path
         cfg.normalize = False if self.config.model == 'k-w2v' else True

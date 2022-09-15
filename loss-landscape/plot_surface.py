@@ -80,7 +80,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
         using MPI reduce.
     """
 
-    f = h5py.File(surf_file, 'r+' if rank == 0 else 'r')
+    f = h5py.File(surf_file, 'r+' if rank == args.root_rank else 'r')
     losses, accuracies = [], []
     xcoordinates = f['xcoordinates'][:]
     ycoordinates = f['ycoordinates'][:] if 'ycoordinates' in f.keys() else None

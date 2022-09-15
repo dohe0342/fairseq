@@ -16,5 +16,5 @@ if __name__ == '__main__':
                 data_parallel=True
                )
     state = net.state_dict()
-    for n, p in state.items():
+    for n in state:
         print(n)

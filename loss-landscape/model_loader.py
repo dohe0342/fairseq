@@ -9,3 +9,5 @@ def load(dataset, model_name, model_file, data_parallel=False):
     return net
 
 if __name__ == '__main__':
+    net = Wav2Vec2Ctc()
+    print(net)

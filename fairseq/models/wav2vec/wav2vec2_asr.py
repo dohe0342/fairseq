@@ -276,6 +276,8 @@ class Wav2VecCtc(BaseFairseqModel):
         else:
             if task.taget_dictionary is None:
                 w2v_encoder = Wav2VecEncoder(cfg, 32)
+            else:
+                w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))
 
         return cls(cfg, w2v_encoder)
 

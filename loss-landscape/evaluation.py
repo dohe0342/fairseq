@@ -68,8 +68,8 @@ def eval_loss(net, criterion, loader, use_cuda=False):
             for batch_idx, sample in enumerate(loader):
                 if use_cuda:
                     sample = utils.move_to_cuda(sample)
-                    if "net_input" not in sample:
-                        continue
+                if "net_input" not in sample:
+                    continue
                 
                 loss, sample_size, logging_output = criterion(net, sample)
                 print(sample_size)

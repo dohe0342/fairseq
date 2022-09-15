@@ -258,7 +258,6 @@ if __name__ == '__main__':
     if rank == 0:
         setup_surface_file(args, surf_file, dir_file)
 
-    exit()
     # wait until master has setup the direction file and surface file
     mpi.barrier(comm)
     print('6')

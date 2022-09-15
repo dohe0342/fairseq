@@ -252,6 +252,7 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     if args.dataset == 'LibriSpeech':
         models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
+        models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/home/work/workspace/fairseq/scripts/whale/outputs/w2v_b_960h_mba3f/checkpoint_best.pt'])
         net = models[0]
         net.eval()
     else:

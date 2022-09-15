@@ -316,7 +316,11 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     # Start the computation
     #--------------------------------------------------------------------------
-    crunch(surf_file, net, w, s, d, trainloader, 'train_loss', 'train_acc', comm, rank, args, cfg=cfg, task=task)
+    if args.dataset == 'LibriSpeech':
+        crunch(surf_file, net, w, s, d, trainloader, 'train_loss', 'train_acc', comm, rank, args, cfg=cfg, task=task)
+    else:
+        crunch(surf_file, net, w, s, d, trainloader, 'train_loss', 'train_acc', comm, rank, args)
+
     # crunch(surf_file, net, w, s, d, testloader, 'test_loss', 'test_acc', comm, rank, args)
 
     #--------------------------------------------------------------------------

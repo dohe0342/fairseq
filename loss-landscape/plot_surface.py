@@ -316,7 +316,7 @@ if __name__ == '__main__':
                 num_workers=6,
                 data_buffer_size=cfg.dataset.data_buffer_size,
                 disable_iterator_cache=False,
-            ).next_epoch_itr()
+            )
         
     #--------------------------------------------------------------------------
     # Start the computation

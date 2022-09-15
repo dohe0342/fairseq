@@ -109,8 +109,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
     if args.loss_name == 'mse':
         criterion = nn.MSELoss()
     elif args.loss_name == 'ctc':
-        cfg = CtcCriterionConfig()
-        criterion = CtcCriterion
+        criterion = CtcCriterion(cfg.criterion, task)
 
     # Loop over all uncalculated loss values
     for count, ind in enumerate(inds):

@@ -303,7 +303,7 @@ if __name__ == '__main__':
         )
         
         trainloader = task.get_batch_iterator(
-                dataset=task.dataset('train-960'),
+                dataset=task.dataset(args.subset),
                 max_tokens=4000000,
                 max_sentences=None,
                 max_positions=(sys.maxsize, sys.maxsize),

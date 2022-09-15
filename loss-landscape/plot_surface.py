@@ -252,9 +252,13 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     if args.dataset == 'LibriSpeech':
         models, temp1, temp2 = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
-        temp1, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/home/work/workspace/fairseq/scripts/whale/outputs/w2v_b_960h_mba3f/checkpoint_best.pt'])
+        temp3, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task(['/home/work/workspace/fairseq/scripts/whale/outputs/w2v_b_960h_mba3f/checkpoint_best.pt'])
         net = models[0]
         net.eval()
+
+        del temp1
+        del temp2
+        del temp3
     else:
         net = model_loader.load(args.dataset, args.model, args.model_file)
     

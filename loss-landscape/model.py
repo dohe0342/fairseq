@@ -11,7 +11,7 @@ class Wav2Vec2Ctc(nn.Module):
         w2v_path = '/home/work/workspace/models/wav2vec_model/wav2vec_small.pt'
         cfg = Wav2Vec2CtcConfig()
         cfg.w2v_path = w2v_path
-        cfg.normalize = False if self.config.model == 'k-w2v' else True
+        cfg.normalize = False
         cfg._name = "wav2vec"
 
         self.normalize = cfg.normalize

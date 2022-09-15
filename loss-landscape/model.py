@@ -9,7 +9,7 @@ class Wav2Vec2Ctc(nn.Module):
     def __init__(
             self,
     ):
-        super(RepresenationModel, self).__init__()
+        super(Wav2Vec2Ctc, self).__init__()
         
         #w2v_path = self.download_pretrained_model()
         w2v_path = '/home/work/workspace/models/wav2vec_model/wav2vec_small.pt'

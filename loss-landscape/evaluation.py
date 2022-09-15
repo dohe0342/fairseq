@@ -72,6 +72,7 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                         continue
                 
                 loss, sample_size, logging_output = criterion(net, sample)
+                print(sample_size)
                 batch_size = sample_size
                 total += batch_size
                 

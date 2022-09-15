@@ -260,18 +260,14 @@ if __name__ == '__main__':
 
     # wait until master has setup the direction file and surface file
     mpi.barrier(comm)
-    print('6')
 
     # load directions
     d = net_plotter.load_directions(dir_file)
-    print('7')
     # calculate the consine similarity of the two directions
     if len(d) == 2 and rank == 0:
         similarity = proj.cal_angle(proj.nplist_to_tensor(d[0]), proj.nplist_to_tensor(d[1]))
         print('cosine similarity between x-axis and y-axis: %f' % similarity)
-    print('8')
-    print(net)
-    exit()
+    
     #--------------------------------------------------------------------------
     # Setup dataloader
     #--------------------------------------------------------------------------

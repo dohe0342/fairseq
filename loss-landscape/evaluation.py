@@ -69,6 +69,7 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 if use_cuda:
                     sample["net_input"] = sample["net_input"].to('cuda')
                     print(sample["net_input"].get_device())
+                    exit()
                     #inputs, targets = inputs.cuda(), targets.cuda()
                 outputs = net(inputs)
                 loss = criterion(outputs, targets)

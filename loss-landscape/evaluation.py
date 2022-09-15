@@ -66,14 +66,15 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                 correct += predicted.cpu().eq(targets).sum().item()
         else:
             for batch_idx, sample in enumerate(loader):
-                batch_size = sample["id"].size(0)
-                total += batch_size
                 if use_cuda:
                     sample = utils.move_to_cuda(sample)
                     if "net_input" not in sample:
                         continue
                 
                 loss, sample_size, logging_output = criterion(net, sample)
+                batch_size = sample_size
+                total += batch_size
+
                 
                 total_loss += loss.item()*batch_size
 

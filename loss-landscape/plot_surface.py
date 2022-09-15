@@ -287,7 +287,7 @@ if __name__ == '__main__':
             'train-960',
             task_cfg=task.cfg,
     )
-    trainloader = self.task.get_batch_iterator(
+    trainloader = task.get_batch_iterator(
             dataset=self.task.dataset('train-960'),
             max_tokens=4000000,
             max_sentences=None,

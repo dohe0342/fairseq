@@ -279,6 +279,9 @@ def name_direction_file(args):
     dir_file = ""
 
     file1, file2, file3 = args.model_file, args.model_file2, args.model_file3
+    
+    model_name = file1.split('/')[-1]
+    file1 = f'/home/work/workspace/fairseq/loss-landscape/landscape/{model_name}'
 
     # name for xdirection
     if file2:

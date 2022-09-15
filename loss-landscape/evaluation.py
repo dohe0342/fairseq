@@ -75,8 +75,11 @@ def eval_loss(net, criterion, loader, args):
                 loss, sample_size, logging_output = criterion(net, sample)
                 batch_size = sample_size
                 total += batch_size
-                 
-                total_loss += loss[0][0].item()#*batch_size
+                
+                if args.model == 'viewmaker':
+                    total_loss += loss[0][0].item()#*batch_size
+                else:
+                    total_loss += loss.item()#*batch_size
                 #total_loss += loss[0][0].item()/sample_size
     
     if total != 0:

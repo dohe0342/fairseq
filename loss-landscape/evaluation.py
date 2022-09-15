@@ -74,10 +74,7 @@ def eval_loss(net, criterion, loader, use_cuda=False):
                         continue
                 
                 loss, sample_size, logging_output = criterion(net, sample)
-                print(loss)
                 
                 total_loss += loss.item()*batch_size
-                _, predicted = torch.max(outputs.data, 1)
-                correct += predicted.eq(targets).sum().item()
 
-    return total_loss/total, 100.*correct/total
+    return total_loss/total, 100.#100.*correct/total

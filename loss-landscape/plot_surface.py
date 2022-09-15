@@ -280,15 +280,16 @@ if __name__ == '__main__':
         torchvision.datasets.CIFAR10(root=args.dataset + '/data', train=True, download=True)
 
     mpi.barrier(comm)
-    
+    ''' 
     _, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([args.model_file])
-
+    
     task.load_dataset(
             'train-960',
             task_cfg=task,
     )
     print(task.datasets)
     exit()
+    '''
     '''
     trainloader, testloader = dataloader.load_dataset(args.dataset, args.datapath,
                                 args.batch_size, args.threads, args.raw_data,

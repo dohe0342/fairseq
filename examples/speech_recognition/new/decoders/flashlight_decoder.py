@@ -189,7 +189,7 @@ class KenLMDecoder(BaseDecoder):
 
         for b in range(B):
             for enum, result in enumerate(nbest_results):
-                hypos[b][enum]["words"].append(viterbi_hypos[b][-1])
+                hypos[b][enum]["words"].append(viterbi_sentence[b][-1])
         
         print(hypos)
         return hypos

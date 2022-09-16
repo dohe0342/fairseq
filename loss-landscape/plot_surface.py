@@ -115,6 +115,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
     # Loop over all uncalculated loss value
     for count, ind in enumerate(inds):
         loader = dataloader.next_epoch_itr(shuffle=False)
+        print(len(loader))
         # Get the coordinates of the loss value being calculated
         coord = coords[count]
 

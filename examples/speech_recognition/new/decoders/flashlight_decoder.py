@@ -165,8 +165,6 @@ class KenLMDecoder(BaseDecoder):
         viterbi_hypos = self.viterbi.decode(emissions)
         print(viterbi_hypos)
         #viterbi_hypos = [self.tgt_dict.string(viterbi_hypos[b]["tokens"].int().cpu()) for b in range(B)]
-        print(viterbi_hypos)
-
         hypos = []
         for b in range(B):
             emissions_ptr = emissions.data_ptr() + 4 * b * emissions.stride(0)

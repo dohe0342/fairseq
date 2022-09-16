@@ -43,26 +43,36 @@ try:
         Trie,
     )
     from flashlight.lib.text.dictionary import create_word_dict, load_words
-except ImportError:
-    warnings.warn(
-        "flashlight python bindings are required to use this functionality. "
-        "Please install from "
-        "https://github.com/facebookresearch/flashlight/tree/master/bindings/python"
-    )
-    from torchaudio.flashlight_lib_text_dictionary import create_word_dict, load_words
-    from torchaudio.flashlight_lib_text_decoder import (
-        CriterionType,
-        LexiconDecoderOptions,
-        KenLM,
-        LM, 
-        LMState,
-        SmearingMode,
-        Trie,
-        LexiconDecoder,
+except:
+    import torchaudio
+    torchaudio._extension._load_lib("libtorchaudio_decoder")
+ 
+    from torchaudio._torchaudio_decoder import (
+        _create_word_dict as create_word_dict,
+        _load_words as load_words,
     )   
-
-    #LM = object
-    #LMState = object
+ 
+    from torchaudio._torchaudio_decoder import (
+        _LM as LM, 
+        _CriterionType as CriterionType,
+        _KenLM as KenLM,
+        _LexiconDecoder as LexiconDecoder,
+        _LexiconDecoderOptions as LexiconDecoderOptions,
+        _LexiconFreeDecoder as LexiconFreeDecoder,
+        _LexiconFreeDecoderOptions as LexiconFfreeDecoderOptions,
+        _SmearingMode as SmearingMode,
+        _Trie as Trie,
+    )   
+         
+    try:
+        from torchaudio._torchaudio_decoder import (
+            _DecodeResult as DecodeResult,
+            _LMState as LMState,
+        )   
+    except:
+        print('DecodeReult, LMState import fail...')
+        DecodeResult = object
+        LMState = object
 
 
 class KenLMDecoder(BaseDecoder):

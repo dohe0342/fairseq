@@ -166,7 +166,6 @@ class KenLMDecoder(BaseDecoder):
         viterbi_sentence = [post_process(self.tgt_dict.string( \
                                 viterbi_hypos[b][0]["tokens"].int().cpu()), 'letter') \
                             for b in range(B)]
-        print(viterbi_sentence)
         
         hypos = []
         for b in range(B):
@@ -191,7 +190,8 @@ class KenLMDecoder(BaseDecoder):
         for b in range(B):
             for enum, result in enumerate(nbest_results):
                 hypos[b][enum]["words"].append(viterbi_hypos[b][-1])
-
+        
+        print(hypos)
         return hypos
 
 

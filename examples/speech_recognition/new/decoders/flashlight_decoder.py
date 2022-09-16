@@ -71,6 +71,7 @@ class KenLMDecoder(BaseDecoder):
 
         self.nbest = cfg.nbest
         self.unitlm = cfg.unitlm
+        self.viterbi = ViterbiDecoder(tgt_dict)
 
         if cfg.lexicon:
             self.lexicon = load_words(cfg.lexicon)

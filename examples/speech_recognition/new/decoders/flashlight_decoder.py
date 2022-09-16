@@ -24,6 +24,9 @@ from typing import List
 
 from .decoder_config import FlashlightDecoderConfig
 from .base_decoder import BaseDecoder
+from fairseq.data.data_utils import post_process
+from .viterbi_decoder import ViterbiDecoder
+
 
 try:
     from flashlight.lib.text.decoder import (
@@ -159,7 +162,6 @@ class KenLMDecoder(BaseDecoder):
         viterbi_hypos = self.viterbi.decode(emissions)
         viterbi_hypos = self.tgt_dict.string(viterbi_hypos["tokens"].int().cpu())
         print(viterbi_hypos)
-
 
         B, T, N = emissions.size()
         hypos = []

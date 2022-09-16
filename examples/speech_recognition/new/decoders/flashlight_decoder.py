@@ -155,6 +155,12 @@ class KenLMDecoder(BaseDecoder):
         self,
         emissions: torch.FloatTensor,
     ) -> List[List[Dict[str, torch.LongTensor]]]:
+
+        viterbi_hypos = self.viterbi.decode(emissions)
+        viterbi_hypos = self.tgt_dict.string(viterbi_hypos["tokens"].int().cpu())
+        print(viterbi_hypos)
+
+
         B, T, N = emissions.size()
         hypos = []
         for b in range(B):

@@ -258,7 +258,9 @@ if __name__ == '__main__':
 
         net = models[0]
         for n, p in net.named_parameters():
-            
+            try: p.data = temp0[0].state_dict()[n]
+            except: print(f'no parameter named {n}')
+
         net.eval()
 
         del temp1

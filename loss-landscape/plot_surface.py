@@ -263,9 +263,13 @@ if __name__ == '__main__':
 
         net.eval()
 
+        del temp0
         del temp1
         del temp2
         del temp3
+        del temp4
+        del temp5
+
     else:
         net = model_loader.load(args.dataset, args.model, args.model_file)
     

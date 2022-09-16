@@ -19,6 +19,6 @@ do
 		decoding.results_path=/workspace/fairseq/scripts/ant/$subset \
 		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_100h.pt \
-	   	decoding.beam=50 \
+	   	decoding.beam=5 \
 		distributed_training.distributed_world_size=1
 done

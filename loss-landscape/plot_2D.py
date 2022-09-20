@@ -38,7 +38,8 @@ def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel
     if (len(x) <= 1 or len(y) <= 1):
         print('The length of coordinates is not enough for plotting contours')
         return
-
+    
+    '''
     # --------------------------------------------------------------------
     # Plot 2D contours
     # --------------------------------------------------------------------
@@ -63,7 +64,7 @@ def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel
     sns_plot.invert_yaxis()
     sns_plot.get_figure().savefig(surf_file + '_' + surf_name + '_2dheat.pdf',
                                   dpi=300, bbox_inches='tight', format='pdf')
-
+    '''
     # --------------------------------------------------------------------
     # Plot 3D surface
     # --------------------------------------------------------------------
@@ -72,7 +73,9 @@ def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel
     Axes3D.set_zlim(zmin=0, zmax=600)
     surf = ax.plot_surface(Y, X, Z, cmap=cm.coolwarm, linewidth=0, antialiased=False)
     fig.colorbar(surf, shrink=0.5, aspect=5)
-    fig.savefig(surf_file + '_' + surf_name + '_3dsurface.pdf', dpi=500,
+    #fig.savefig(surf_file + '_' + surf_name + '_3dsurface.pdf', dpi=500,
+    #            bbox_inches='tight', format='pdf')
+    fig.savefig('./wav2vec2_3dsurface.pdf', dpi=500,
                 bbox_inches='tight', format='pdf')
 
     f.close()

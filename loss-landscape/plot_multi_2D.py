@@ -95,6 +95,8 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     #fig = plt.figure()
     fig, ax = plt.subplots(1, 2)
     print(ax)
+    print(len(ax))
+    print(len(ax[0]))
 
     ax = Axes3D(ax[0][1], elev=20)
     ax.set_zlim(zmin=0, zmax=730)

@@ -44,7 +44,7 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     y2 = np.array(f2['ycoordinates'][:])
     X2, Y2 = np.meshgrid(x2, y2)
 
-    if surf_name2 in f2.keys():
+    if surf_name in f2.keys():
         Z2 = np.array(f2[surf_name][:])
     elif surf_name == 'train_err' or surf_name == 'test_err' :
         Z = 100 - np.array(f[surf_name][:])

@@ -69,13 +69,13 @@ def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel
     # Plot 3D surface
     # --------------------------------------------------------------------
     fig = plt.figure()
-    ax = Axes3D(fig, elev=20)
+    ax = Axes3D(fig, elev=2000)
     ax.set_zlim(zmin=0, zmax=730)
     surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, linewidth=0, antialiased=False)
     #fig.colorbar(surf, shrink=0.5, aspect=5)
     #fig.savefig(surf_file + '_' + surf_name + '_3dsurface.pdf', dpi=500,
     #            bbox_inches='tight', format='pdf')
-    fig.savefig('./wav2vec2_mba_3dsurface.pdf', dpi=600,
+    fig.savefig('./wav2vec2_3dsurface.pdf', dpi=600,
                 bbox_inches='tight', format='pdf')
 
     f.close()

@@ -15,13 +15,37 @@ import seaborn as sns
 def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vmax=10, vlevel=0.5, show=False):
     """Plot 2D contour map and 3D surface."""
 
-    f = h5py.File(surf_file, 'r')
-    x = np.array(f['xcoordinates'][:])
-    y = np.array(f['ycoordinates'][:])
-    X, Y = np.meshgrid(x, y)
+    f1 = h5py.File(surf_file1, 'r')
+    x1 = np.array(f['xcoordinates'][:])
+    y1 = np.array(f['ycoordinates'][:])
+    X1, Y1 = np.meshgrid(x, y)
 
-    if surf_name in f.keys():
-        Z = np.array(f[surf_name][:])
+    if surf_name in f1.keys():
+        Z1 = np.array(f1[surf_name][:])
+    elif surf_name == 'train_err' or surf_name == 'test_err' :
+        Z = 100 - np.array(f[surf_name][:])
+    else:
+        print ('%s is not found in %s' % (surf_name, surf_file))
+
+    print('------------------------------------------------------------------')
+    print('plot_2d_contour')
+    print('------------------------------------------------------------------')
+    print("loading surface file: " + surf_file1)
+    print('len(xcoordinates): %d   len(ycoordinates): %d' % (len(x1), len(y1)))
+    print('max(%s) = %f \t min(%s) = %f' % (surf_name, np.max(Z1), surf_name, np.min(Z1)))
+    print(Z1)
+
+    if (len(x1) <= 1 or len(y1) <= 1):
+        print('The length of coordinates is not enough for plotting contours')
+        return
+    
+    f2 = h5py.File(surf_file2, 'r')
+    x2 = np.array(f['xcoordinates'][:])
+    y2 = np.array(f['ycoordinates'][:])
+    X2, Y2 = np.meshgrid(x, y)
+
+    if surf_name2 in f2.keys():
+        Z2 = np.array(f2[surf_name][:])
     elif surf_name == 'train_err' or surf_name == 'test_err' :
         Z = 100 - np.array(f[surf_name][:])
     else:
@@ -31,14 +55,14 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     print('plot_2d_contour')
     print('------------------------------------------------------------------')
     print("loading surface file: " + surf_file)
-    print('len(xcoordinates): %d   len(ycoordinates): %d' % (len(x), len(y)))
-    print('max(%s) = %f \t min(%s) = %f' % (surf_name, np.max(Z), surf_name, np.min(Z)))
-    print(Z)
+    print('len(xcoordinates): %d   len(ycoordinates): %d' % (len(x2), len(y2)))
+    print('max(%s) = %f \t min(%s) = %f' % (surf_name, np.max(Z2), surf_name, np.min(Z2)))
+    print(Z2)
 
-    if (len(x) <= 1 or len(y) <= 1):
+    if (len(x2) <= 1 or len(y2) <= 1):
         print('The length of coordinates is not enough for plotting contours')
         return
-    
+
     '''
     # --------------------------------------------------------------------
     # Plot 2D contours
@@ -68,7 +92,8 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     # --------------------------------------------------------------------
     # Plot 3D surface
     # --------------------------------------------------------------------
-    fig = plt.figure()
+    #fig = plt.figure()
+
     ax = Axes3D(fig, elev=20)
     ax.set_zlim(zmin=0, zmax=730)
     surf = ax.plot_surface(Y, X, Z, cmap=cm.coolwarm, linewidth=0, antialiased=False)

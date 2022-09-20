@@ -12,7 +12,7 @@ from os.path import exists
 import seaborn as sns
 
 
-def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel=0.5, show=False):
+def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vmax=10, vlevel=0.5, show=False):
     """Plot 2D contour map and 3D surface."""
 
     f = h5py.File(surf_file, 'r')

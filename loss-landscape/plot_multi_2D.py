@@ -95,8 +95,8 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     #fig = plt.figure()
     fig, ax = plt.subplots(1, 2)
 
-    ax[0][1] = Axes3D(fig, elev=20)
-    ax[0][1].set_zlim(zmin=0, zmax=730)
+    ax = Axes3D(ax[0][1], elev=20)
+    ax.set_zlim(zmin=0, zmax=730)
     surf = ax[0][1].plot_surface(Y, X, Z, cmap=cm.coolwarm, linewidth=0, antialiased=False)
     #fig.colorbar(surf, shrink=0.5, aspect=5)
     #fig.savefig(surf_file + '_' + surf_name + '_3dsurface.pdf', dpi=500,

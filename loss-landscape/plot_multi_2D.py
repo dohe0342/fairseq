@@ -92,7 +92,7 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     # --------------------------------------------------------------------
     # Plot 3D surface
     # --------------------------------------------------------------------
-    fig = plt.figure()
+    fig = plt.figure(figsize=plt.figaspect(0.5))
     ax = fig.add_subplot(1, 2, 1, projection='3d')
     #ax = Axes3D(fig, elev=20)
     surf = ax.plot_surface(Y1, X1, Z1, cmap=cm.coolwarm, linewidth=0, antialiased=False)

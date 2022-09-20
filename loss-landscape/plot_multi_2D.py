@@ -54,7 +54,7 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     print('------------------------------------------------------------------')
     print('plot_2d_contour')
     print('------------------------------------------------------------------')
-    print("loading surface file: " + surf_file)
+    print("loading surface file: " + surf_file2)
     print('len(xcoordinates): %d   len(ycoordinates): %d' % (len(x2), len(y2)))
     print('max(%s) = %f \t min(%s) = %f' % (surf_name, np.max(Z2), surf_name, np.min(Z2)))
     print(Z2)

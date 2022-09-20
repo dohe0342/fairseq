@@ -188,7 +188,8 @@ def plot_2d_eig_ratio(surf_file, val_1='min_eig', val_2='max_eig', show=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Plot 2D loss surface')
-    parser.add_argument('--surf_file', '-f', default='', help='The h5 file that contains surface values')
+    parser.add_argument('--surf_file1', '-f1', default='', help='The h5 file that contains surface values')
+    parser.add_argument('--surf_file2', '-f2', default='', help='The h5 file that contains surface values')
     parser.add_argument('--dir_file', default='', help='The h5 file that contains directions')
     parser.add_argument('--proj_file', default='', help='The h5 file that contains the projected trajectories')
     parser.add_argument('--surf_name', default='train_loss', help='The type of surface to plot')
@@ -199,7 +200,7 @@ if __name__ == '__main__':
     parser.add_argument('--show', action='store_true', default=False, help='show plots')
 
     args = parser.parse_args()
-
+    '''
     if exists(args.surf_file) and exists(args.proj_file) and exists(args.dir_file):
         plot_contour_trajectory(args.surf_file, args.dir_file, args.proj_file,
                                 args.surf_name, args.vmin, args.vmax, args.vlevel, args.show)
@@ -207,3 +208,5 @@ if __name__ == '__main__':
         plot_trajectory(args.proj_file, args.dir_file, args.show)
     elif exists(args.surf_file):
         plot_2d_contour(args.surf_file, args.surf_name, args.vmin, args.vmax, args.vlevel, args.show)
+    '''
+    plot_2d_contour(args.surf_file1, args.surf_file2, args.surf_name, args.vmin, args.vmax, args.vlevel, args.show)

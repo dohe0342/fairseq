@@ -16,8 +16,8 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
     """Plot 2D contour map and 3D surface."""
 
     f1 = h5py.File(surf_file1, 'r')
-    x1 = np.array(f['xcoordinates'][:])
-    y1 = np.array(f['ycoordinates'][:])
+    x1 = np.array(f1['xcoordinates'][:])
+    y1 = np.array(f1['ycoordinates'][:])
     X1, Y1 = np.meshgrid(x, y)
 
     if surf_name in f1.keys():
@@ -40,8 +40,8 @@ def plot_2d_contour(surf_file1, surf_file2, surf_name='train_loss', vmin=0.1, vm
         return
     
     f2 = h5py.File(surf_file2, 'r')
-    x2 = np.array(f['xcoordinates'][:])
-    y2 = np.array(f['ycoordinates'][:])
+    x2 = np.array(f2['xcoordinates'][:])
+    y2 = np.array(f2['ycoordinates'][:])
     X2, Y2 = np.meshgrid(x, y)
 
     if surf_name2 in f2.keys():

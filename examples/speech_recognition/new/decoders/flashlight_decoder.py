@@ -171,7 +171,6 @@ class KenLMDecoder(BaseDecoder):
     ) -> List[List[Dict[str, torch.LongTensor]]]:
         
         B, T, N = emissions.size()
-        
         #viterbi_hypos = self.viterbi.decode(emissions)
         #viterbi_sentence = [post_process(self.tgt_dict.string( \
         #                        viterbi_hypos[b][0]["tokens"].int().cpu()), 'letter') \

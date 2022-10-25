@@ -18,6 +18,7 @@ do
 		decoding.unique_wer_file=false \
 		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_100h.pt \
+		common.quiet=false \
 	   	decoding.beam=5 \
 		distributed_training.distributed_world_size=1
 done

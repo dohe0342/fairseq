@@ -10,6 +10,7 @@ import torch
 from fairseq.data.dictionary import Dictionary
 from fairseq.models.fairseq_model import FairseqModel
 import numpy as np
+import random
 
 
 class BaseDecoder:
@@ -50,7 +51,7 @@ class BaseDecoder:
             encoder_out = model(**encoder_input)
             emissions = model.get_normalized_probs(encoder_out, log_probs=False)
             emissions_numpy = emissions.cpu().numpy()
-            
+            np.save('./test-clean-part_emissions/1
             '''
             if hasattr(model, "get_logits"):
                 emissions = model.get_logits(encoder_out)

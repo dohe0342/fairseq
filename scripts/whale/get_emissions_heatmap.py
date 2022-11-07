@@ -9,4 +9,4 @@ for filname in filelist:
     for b, emission in enumerate(emissions):
         plt.matshow(emission)
         plt.colorbar()
-        plt.savefig(f'{model_number}_{str(b).zfill(2)}.png', dpi=300)
+        plt.savefig(f'./test-clean-part_emissions/{model_number}_{str(b).zfill(2)}.png', dpi=300)

@@ -1,7 +1,8 @@
 git pull
 model=$1
 
-for subset in "dev-clean" "dev-other" "test-clean" "test-other"
+#for subset in "dev-clean" "dev-other" "test-clean" "test-other"
+for subset in "test-clean-part"
 do
 	echo "====================   $model // $subset   ===================="
 	if [[ "$model" =~ "hubert" ]]

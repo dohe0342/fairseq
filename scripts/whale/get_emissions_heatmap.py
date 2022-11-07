@@ -10,3 +10,4 @@ for filename in filelist:
         plt.matshow(emission)
         plt.colorbar()
         plt.savefig(f'./test-clean-part_emissions/{model_number}_{str(b).zfill(2)}.png', dpi=300)
+        plt.close()

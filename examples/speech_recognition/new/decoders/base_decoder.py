@@ -9,6 +9,7 @@ from typing import Any, Dict, List
 import torch
 from fairseq.data.dictionary import Dictionary
 from fairseq.models.fairseq_model import FairseqModel
+import numpy as np
 
 
 class BaseDecoder:
@@ -48,7 +49,8 @@ class BaseDecoder:
             model = models[0]
             encoder_out = model(**encoder_input)
             emissions = model.get_normalized_probs(encoder_out, log_probs=False)
-            print(emissions[0])
+            emissions_numpy = emissions.cpu().numpy()
+            
             '''
             if hasattr(model, "get_logits"):
                 emissions = model.get_logits(encoder_out)

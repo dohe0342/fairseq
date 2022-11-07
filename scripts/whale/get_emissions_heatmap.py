@@ -11,5 +11,5 @@ for filename in tqdm(filelist):
     for b, emission in tqdm(enumerate(emissions), leave=False):
         plt.matshow(emission)
         plt.colorbar()
-        plt.savefig(f'./test-clean-part_emissions/{model_number}_{str(b).zfill(2)}.pdf', dpi=300)
+        plt.savefig(f'./test-clean-part_emissions/{model_number}_{str(b).zfill(2)}.pdf')
         plt.close()

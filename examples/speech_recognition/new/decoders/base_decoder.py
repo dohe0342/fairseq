@@ -43,11 +43,12 @@ class BaseDecoder:
         models: List[FairseqModel],
         encoder_input: Dict[str, Any],
     ) -> torch.FloatTensor:
-       
+        
         if len(models) == 1:
             model = models[0]
             encoder_out = model(**encoder_input)
             emissions = model.get_normalized_probs(encoder_out, log_probs=False)
+            print(emissions['encoder_out'].size())
             '''
             if hasattr(model, "get_logits"):
                 emissions = model.get_logits(encoder_out)

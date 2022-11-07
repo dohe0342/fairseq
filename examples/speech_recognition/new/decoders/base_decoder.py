@@ -35,6 +35,7 @@ class BaseDecoder:
             k: v for k, v in sample["net_input"].items() if k != "prev_output_tokens"
         }
         emissions = self.get_emissions(models, encoder_input)
+        print(emissions.keys())
         #return (self.decode(emissions[0]), emissions[1], emissions[2])
         return self.decode(emissions)
 

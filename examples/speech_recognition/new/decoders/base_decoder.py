@@ -49,7 +49,7 @@ class BaseDecoder:
             encoder_out = model(**encoder_input)
             print(encoder_out['encoder_out'].size())
             emissions = model.get_normalized_probs(encoder_out, log_probs=False)
-            print(emissions
+            print(emissions.size())
             '''
             if hasattr(model, "get_logits"):
                 emissions = model.get_logits(encoder_out)

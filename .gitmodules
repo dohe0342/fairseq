@@ -1,0 +1,3 @@
+[submodule "fairseq/criterions/fairseq/criterions/enctc"]
+	path = fairseq/criterions/fairseq/criterions/enctc
+	url = https://github.com/liuhu-bigeye/enctc.crnn.git

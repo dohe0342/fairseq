@@ -178,7 +178,7 @@ def ctc_ent_cost(out, targets, sizes, target_sizes, use_softmax=True, use_log=Tr
         return H, costs
 
 def test_seg_ctc(use_mine=True, use_log=False):
-    size = 43
+    size = 100
     voca_size = 37
     n = 20
 

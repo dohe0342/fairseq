@@ -215,4 +215,4 @@ if __name__ == '__main__':
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
     os.environ["CUDA_VISIBLE_DEVICES"]="3"
     print('_________')
-    test_seg_ctc(use_mine=False, use_log=True)
+    test_seg_ctc(use_mine=True, use_log=True)

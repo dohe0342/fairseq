@@ -756,13 +756,30 @@ class CtcCriterion(FairseqCriterion):
 
         if c_total > 0:
             metrics.log_derived(
-                "uer",
+                "uer1",
                 lambda meters: safe_round(
-                    meters["_c_errors"].sum * 100.0 / meters["_c_total"].sum, 3
+                    meters["_c_errors_1"].sum * 100.0 / meters["_c_total_1"].sum, 3
                 )
-                if meters["_c_total"].sum > 0
+                if meters["_c_total_1"].sum > 0
                 else float("nan"),
             )
+            metrics.log_derived(
+                "uer2",
+                lambda meters: safe_round(
+                    meters["_c_errors_2"].sum * 100.0 / meters["_c_total_2"].sum, 3
+                )
+                if meters["_c_total_2"].sum > 0
+                else float("nan"),
+            )
+            metrics.log_derived(
+                "uer3",
+                lambda meters: safe_round(
+                    meters["_c_errors_3"].sum * 100.0 / meters["_c_total_3"].sum, 3
+                )
+                if meters["_c_total_3"].sum > 0
+                else float("nan"),
+            )
+
         if w_total > 0:
             metrics.log_derived(
                 "wer",

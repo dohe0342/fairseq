@@ -295,7 +295,7 @@ class CtcCriterion(FairseqCriterion):
         return True
 
 
-@register_criterion("multictc", dataclass=CtcCriterionConfig)
+@register_criterion("enctc", dataclass=CtcCriterionConfig)
 class CtcCriterion(FairseqCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(task)
@@ -528,8 +528,7 @@ class CtcCriterion(FairseqCriterion):
         return True
 
 
-
-@register_criterion("enctc", dataclass=CtcCriterionConfig)
+@register_criterion("multictc", dataclass=CtcCriterionConfig)
 class CtcCriterion(FairseqCriterion):
     def __init__(self, cfg: CtcCriterionConfig, task: FairseqTask):
         super().__init__(task)

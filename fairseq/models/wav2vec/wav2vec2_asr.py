@@ -239,7 +239,7 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
     )
     MTL: bool = field(
         default=False,
-        metadata={"help": "use wavlm"},
+        metadata={"help": "use multiple ctc loss"},
     )
 
 

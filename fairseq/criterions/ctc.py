@@ -630,6 +630,73 @@ class CtcCriterion(FairseqCriterion):
             import editdistance
 
             with torch.no_grad():
+                lprobs_t = 0
+                for lprobs in lprobs_list:
+                    lprobs_t += lprobs.transpose(0, 1).float().contiguous().cpu()
+                
+                lprobs_t /= len(lprobs_list)
+
+                c_err = 0
+                c_len = 0
+                w_errs = 0
+                w_len = 0
+                wv_errs = 0
+                for lp, t, inp_l in zip(
+                    lprobs_t,
+                    sample["target_label"]
+                    if "target_label" in sample
+                    else sample["target"],
+                    input_lengths,
+                ):
+                    lp = lp[:inp_l].unsqueeze(0)
+
+                    decoded = None
+                    if self.w2l_decoder is not None:
+                        decoded = self.w2l_decoder.decode(lp)
+                        if len(decoded) < 1:
+                            decoded = None
+                        else:
+                            decoded = decoded[0]
+                            if len(decoded) < 1:
+                                decoded = None
+                            else:
+                                decoded = decoded[0]
+
+                    p = (t != self.task.target_dictionary.pad()) & (
+                        t != self.task.target_dictionary.eos()
+                    )
+                    targ = t[p]
+                    targ_units = self.task.target_dictionary.string(targ)
+                    targ_units_arr = targ.tolist()
+
+                    toks = lp.argmax(dim=-1).unique_consecutive()
+                    pred_units_arr = toks[toks != self.blank_idx].tolist()
+
+                    c_err += editdistance.eval(pred_units_arr, targ_units_arr)
+                    c_len += len(targ_units_arr)
+
+                    targ_words = post_process(targ_units, self.post_process).split()
+
+                    pred_units = self.task.target_dictionary.string(pred_units_arr)
+                    pred_words_raw = post_process(pred_units, self.post_process).split()
+
+                    if decoded is not None and "words" in decoded:
+                        pred_words = decoded["words"]
+                        w_errs += editdistance.eval(pred_words, targ_words)
+                        wv_errs += editdistance.eval(pred_words_raw, targ_words)
+                    else:
+                        dist = editdistance.eval(pred_words_raw, targ_words)
+                        w_errs += dist
+                        wv_errs += dist
+
+                    w_len += len(targ_words)
+
+                logging_output[f"wv_errors_{enum}"] = wv_errs
+                logging_output[f"w_errors_{enum}"] = w_errs
+                logging_output[f"w_total_{enum}"] = w_len
+                logging_output[f"c_errors_{enum}"] = c_err
+                logging_output[f"c_total_{enum}"] = c_len
+
                 for enum, lprobs in enumerate(lprobs_list):
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()
 

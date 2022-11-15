@@ -810,6 +810,12 @@ class CtcCriterion(FairseqCriterion):
         w_errors3 = sum(log.get("w_errors_3", 0) for log in logging_outputs)
         wv_errors3 = sum(log.get("wv_errors_3", 0) for log in logging_outputs)
         w_total3 = sum(log.get("w_total_3", 0) for log in logging_outputs)
+        
+        metrics.log_scalar("_c_errors", c_errors1)
+        metrics.log_scalar("_c_total", c_total1)
+        metrics.log_scalar("_w_errors", w_errors1)
+        metrics.log_scalar("_wv_errors", wv_errors1)
+        metrics.log_scalar("_w_total", w_total1)
 
         metrics.log_scalar("_c_errors_1", c_errors1)
         metrics.log_scalar("_c_total_1", c_total1)

@@ -278,6 +278,8 @@ class Wav2VecCtc(BaseFairseqModel):
             w2v_encoder = Wav2VecEncoderViewMaker(cfg, len(task.target_dictionary))
         elif cfg.wavlm:
             w2v_encoder = WavLMEncoder(cfg, len(task.target_dictionary))
+        elif cfg.MTL:
+            w2v_encoder = Wav2VecEncoderMTL(cfg, len(task.target_dictionary))
         else:
             w2v_encoder = Wav2VecEncoder(cfg, 32)
             #w2v_encoder = Wav2VecEncoder(cfg, len(task.target_dictionary))

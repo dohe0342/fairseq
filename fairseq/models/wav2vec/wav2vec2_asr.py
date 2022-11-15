@@ -711,35 +711,6 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
         
         self.proj = [self.proj1, self.proj2, self.proj3]
 
-    def forward(self, tgt_layer, source, padding_mask, **kwargs):
-        w2v_args = {
-            "source": source,
-            "padding_mask": padding_mask,
-            "mask": self.apply_mask and self.training,
-        }
-
-        ft = self.freeze_finetune_updates <= self.num_updates
-        with torch.no_grad() if not ft else contextlib.ExitStack():
-            res = self.w2v_model.extract_features(**w2v_args)
-
-            x = res["x"]
-            padding_mask = res["padding_mask"]
-
-            # B x T x C -> T x B x C
-            x = x.transpose(0, 1)
-
-        x = self.final_dropout(x)
-
-        if self.proj:
-            x = self.proj[tgt_layer-1](x)
-
-        return {
-            "encoder_out": x,  # T x B x C
-            "padding_mask": padding_mask,  # B x T,
-            "layer_results": res["layer_results"],
-        }
-
-
 
 class WavLMEncoder(FairseqEncoder):
     def __init__(self, cfg: Wav2Vec2AsrConfig, output_size=None):

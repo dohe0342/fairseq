@@ -180,7 +180,7 @@ def ctc_ent_cost(out, targets, sizes, target_sizes, use_softmax=True, use_log=Tr
 def test_seg_ctc(use_mine=True, use_log=False):
     size = 6    ## batch_size
     voca_size = 31  ## character num
-    n = 1000    ## sequence length
+    n = 2000    ## sequence length
 
     np.random.seed(1234)
     pred_len_np = np.ones([n])*size
@@ -206,7 +206,7 @@ def test_seg_ctc(use_mine=True, use_log=False):
             cost = criterion(pred, token, sizes, target_sizes)
             glog.info('%d, cost: %s'% (i, cost.data.item()))
 
-        optimizer = T.optim.Adam([pred], lr=3e-1)#, nesterov=True)
+        optimizer = T.optim.Adam([pred], lr=3e-2)#, nesterov=True)
         optimizer.zero_grad()
         (cost).backward()
         optimizer.step()

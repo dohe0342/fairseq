@@ -772,6 +772,8 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
             if normalize:
                 logits = utils.log_softmax(logits.float(), dim=-1)
 
+            output.append(logits)
+
         return logits
 
     def get_normalized_probs(self, net_output, log_probs):

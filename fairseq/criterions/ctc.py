@@ -781,7 +781,7 @@ class CtcCriterion(FairseqCriterion):
                 else float("nan"),
             )
 
-        if w_total > 0:
+        if w_total1 > 0:
             metrics.log_derived(
                 "wer1",
                 lambda meters: safe_round(

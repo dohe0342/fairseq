@@ -782,21 +782,56 @@ class CtcCriterion(FairseqCriterion):
 
         if w_total > 0:
             metrics.log_derived(
-                "wer",
+                "wer1",
                 lambda meters: safe_round(
-                    meters["_w_errors"].sum * 100.0 / meters["_w_total"].sum, 3
+                    meters["_w_errors_1"].sum * 100.0 / meters["_w_total_1"].sum, 3
                 )
-                if meters["_w_total"].sum > 0
+                if meters["_w_total_1"].sum > 0
                 else float("nan"),
             )
             metrics.log_derived(
-                "raw_wer",
+                "raw_wer1",
                 lambda meters: safe_round(
-                    meters["_wv_errors"].sum * 100.0 / meters["_w_total"].sum, 3
+                    meters["_wv_errors_1"].sum * 100.0 / meters["_w_total_1"].sum, 3
                 )
-                if meters["_w_total"].sum > 0
+                if meters["_w_total_1"].sum > 0
                 else float("nan"),
             )
+            
+            metrics.log_derived(
+                "wer2",
+                lambda meters: safe_round(
+                    meters["_w_errors_2"].sum * 100.0 / meters["_w_total_2"].sum, 3
+                )
+                if meters["_w_total_2"].sum > 0
+                else float("nan"),
+            )
+            metrics.log_derived(
+                "raw_wer2",
+                lambda meters: safe_round(
+                    meters["_wv_errors_2"].sum * 100.0 / meters["_w_total_2"].sum, 3
+                )
+                if meters["_w_total_2"].sum > 0
+                else float("nan"),
+            )
+            
+            metrics.log_derived(
+                "wer3",
+                lambda meters: safe_round(
+                    meters["_w_errors_3"].sum * 100.0 / meters["_w_total_3"].sum, 3
+                )
+                if meters["_w_total_3"].sum > 0
+                else float("nan"),
+            )
+            metrics.log_derived(
+                "raw_wer3",
+                lambda meters: safe_round(
+                    meters["_wv_errors_3"].sum * 100.0 / meters["_w_total_3"].sum, 3
+                )
+                if meters["_w_total_3"].sum > 0
+                else float("nan"),
+            )
+
 
     @staticmethod
     def logging_outputs_can_be_summed() -> bool:

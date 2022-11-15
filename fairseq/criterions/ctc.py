@@ -691,11 +691,12 @@ class CtcCriterion(FairseqCriterion):
 
                     w_len += len(targ_words)
 
-                logging_output[f"wv_errors_{enum}"] = wv_errs
-                logging_output[f"w_errors_{enum}"] = w_errs
-                logging_output[f"w_total_{enum}"] = w_len
-                logging_output[f"c_errors_{enum}"] = c_err
-                logging_output[f"c_total_{enum}"] = c_len
+                logging_output[f"wv_errors"] = wv_errs
+                logging_output[f"w_errors"] = w_errs
+                logging_output[f"w_total"] = w_len
+                logging_output[f"c_errors"] = c_err
+
+                logging_output[f"c_total"] = c_len
 
                 for enum, lprobs in enumerate(lprobs_list):
                     lprobs_t = lprobs.transpose(0, 1).float().contiguous().cpu()

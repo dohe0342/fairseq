@@ -711,6 +711,10 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
         
         self.proj = [self.proj1, self.proj2, self.proj3]
 
+        self.blank_mode= "add"
+        self.blank_weight = 0.
+
+
     def forward(self, source, padding_mask, **kwargs):
         cnn_fgsm = kwargs['cnn_fgsm'] if 'cnn_fgsm' in kwargs else None
         cnn_feat = kwargs['cnn_feat'] if 'cnn_feat' in kwargs else None

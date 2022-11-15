@@ -844,7 +844,6 @@ class CtcCriterion(FairseqCriterion):
                 if meters["_c_total"].sum > 0
                 else float("nan"),
             )
-
             metrics.log_derived(
                 "uer1",
                 lambda meters: safe_round(
@@ -870,7 +869,7 @@ class CtcCriterion(FairseqCriterion):
                 else float("nan"),
             )
 
-        if w_total1 > 0:
+        if w_total > 0:
             metrics.log_derived(
                 "wer1",
                 lambda meters: safe_round(

@@ -602,7 +602,7 @@ class CtcCriterion(FairseqCriterion):
         with torch.backends.cudnn.flags(enabled=False):
             loss = 0
             for lprobs in lprobs_list:
-                loss = F.ctc_loss(
+                loss += F.ctc_loss(
                     lprobs,
                     targets_flat,
                     input_lengths,

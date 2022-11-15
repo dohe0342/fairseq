@@ -835,7 +835,16 @@ class CtcCriterion(FairseqCriterion):
         metrics.log_scalar("_wv_errors_3", wv_errors3)
         metrics.log_scalar("_w_total_3", w_total3)
 
-        if c_total1 > 0:
+        if c_total > 0:
+            metrics.log_derived(
+                "uer",
+                lambda meters: safe_round(
+                    meters["_c_errors"].sum * 100.0 / meters["_c_total"].sum, 3
+                )
+                if meters["_c_total"].sum > 0
+                else float("nan"),
+            )
+
             metrics.log_derived(
                 "uer1",
                 lambda meters: safe_round(

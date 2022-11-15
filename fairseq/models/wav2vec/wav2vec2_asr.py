@@ -750,7 +750,7 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
             "encoder_out_list": x_list,
         }
     
-    def get_logits(self, net_output, logits, normalize=False):
+    def get_logits(self, net_output, logits_list, normalize=False):
         if self.blank_weight != 0:
             if self.blank_mode == "add":
                 logits[..., 0] += self.blank_weight

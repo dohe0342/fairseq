@@ -736,8 +736,10 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
             
         x = self.final_dropout(x)
         
+        x_list = []
         if self.proj:
-            x = self.proj(x)
+            for proj in self.proj:
+                x_list.append(proj(x))
         
         return {
             "encoder_out": x,  # T x B x C

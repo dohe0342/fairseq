@@ -718,17 +718,18 @@ class CtcCriterion(FairseqCriterion):
                 "nll_loss", loss_sum / ntokens / math.log(2), ntokens, round=3
             )
 
-        c_errors = sum(log.get("c_errors", 0) for log in logging_outputs)
-        metrics.log_scalar("_c_errors", c_errors)
-        c_total = sum(log.get("c_total", 0) for log in logging_outputs)
-        metrics.log_scalar("_c_total", c_total)
-        w_errors = sum(log.get("w_errors", 0) for log in logging_outputs)
-        metrics.log_scalar("_w_errors", w_errors)
-        wv_errors = sum(log.get("wv_errors", 0) for log in logging_outputs)
-        metrics.log_scalar("_wv_errors", wv_errors)
-        w_total = sum(log.get("w_total", 0) for log in logging_outputs)
-        metrics.log_scalar("_w_total", w_total)
+        c_errors1 = sum(log.get("c_errors_1", 0) for log in logging_outputs)
+        c_total1 = sum(log.get("c_total_1", 0) for log in logging_outputs)
+        w_errors1 = sum(log.get("w_errors_1", 0) for log in logging_outputs)
+        wv_errors1 = sum(log.get("wv_errors_1", 0) for log in logging_outputs)
+        w_total1 = sum(log.get("w_total_1", 0) for log in logging_outputs)
 
+        metrics.log_scalar("_c_errors_1", c_errors1)
+        metrics.log_scalar("_c_total_1", c_total1)
+        metrics.log_scalar("_w_errors_1", w_errors1)
+        metrics.log_scalar("_wv_errors_1", wv_errors1)
+        metrics.log_scalar("_w_total_1", w_total1)
+        
         if c_total > 0:
             metrics.log_derived(
                 "uer",

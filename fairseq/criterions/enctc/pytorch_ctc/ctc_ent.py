@@ -206,7 +206,7 @@ def test_seg_ctc(use_mine=True, use_log=False):
             cost = criterion(pred, token, sizes, target_sizes)
             glog.info('%d, cost: %s'% (i, cost.data.item()))
 
-        optimizer = T.optim.Adam([pred], lr=3e-2)#, nesterov=True)
+        optimizer = T.optim.Adam([pred], lr=3e-1)#, nesterov=True)
         optimizer.zero_grad()
         (cost).backward()
         optimizer.step()

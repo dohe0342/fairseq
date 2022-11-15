@@ -778,9 +778,9 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
         logits_list = self.get_logits(net_output, net_output["encoder_out_list"])
 
         if log_probs:
-            return [utils.log_softmax(logit.float(), dim=-1) for logit in logits]
+            return [utils.log_softmax(logits.float(), dim=-1) for logits in logits_list]
         else:
-            return [utils.softmax(logit.float(), dim=-1) for logit in logits]
+            return [utils.softmax(logits.float(), dim=-1) for logits in logits_list]
 
 
 class WavLMEncoder(FairseqEncoder):

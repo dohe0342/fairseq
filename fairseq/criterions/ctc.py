@@ -723,6 +723,18 @@ class CtcCriterion(FairseqCriterion):
         w_errors1 = sum(log.get("w_errors_1", 0) for log in logging_outputs)
         wv_errors1 = sum(log.get("wv_errors_1", 0) for log in logging_outputs)
         w_total1 = sum(log.get("w_total_1", 0) for log in logging_outputs)
+        
+        c_errors2 = sum(log.get("c_errors_2", 0) for log in logging_outputs)
+        c_total2 = sum(log.get("c_total_2", 0) for log in logging_outputs)
+        w_errors2 = sum(log.get("w_errors_2", 0) for log in logging_outputs)
+        wv_errors2 = sum(log.get("wv_errors_2", 0) for log in logging_outputs)
+        w_total2 = sum(log.get("w_total_2", 0) for log in logging_outputs)
+        
+        c_errors3 = sum(log.get("c_errors_3", 0) for log in logging_outputs)
+        c_total3 = sum(log.get("c_total_3", 0) for log in logging_outputs)
+        w_errors3 = sum(log.get("w_errors_3", 0) for log in logging_outputs)
+        wv_errors3 = sum(log.get("wv_errors_3", 0) for log in logging_outputs)
+        w_total3 = sum(log.get("w_total_3", 0) for log in logging_outputs)
 
         metrics.log_scalar("_c_errors_1", c_errors1)
         metrics.log_scalar("_c_total_1", c_total1)
@@ -730,6 +742,18 @@ class CtcCriterion(FairseqCriterion):
         metrics.log_scalar("_wv_errors_1", wv_errors1)
         metrics.log_scalar("_w_total_1", w_total1)
         
+        metrics.log_scalar("_c_errors_2", c_errors2)
+        metrics.log_scalar("_c_total_2", c_total2)
+        metrics.log_scalar("_w_errors_2", w_errors2)
+        metrics.log_scalar("_wv_errors_2", wv_errors2)
+        metrics.log_scalar("_w_total_2", w_total2)
+        
+        metrics.log_scalar("_c_errors_3", c_errors3)
+        metrics.log_scalar("_c_total_3", c_total3)
+        metrics.log_scalar("_w_errors_3", w_errors3)
+        metrics.log_scalar("_wv_errors_3", wv_errors3)
+        metrics.log_scalar("_w_total_3", w_total3)
+
         if c_total > 0:
             metrics.log_derived(
                 "uer",

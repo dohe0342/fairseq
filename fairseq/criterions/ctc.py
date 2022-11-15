@@ -786,6 +786,12 @@ class CtcCriterion(FairseqCriterion):
             metrics.log_scalar(
                 "nll_loss", loss_sum / ntokens / math.log(2), ntokens, round=3
             )
+        
+        c_errors = sum(log.get("c_errors", 0) for log in logging_outputs)
+        c_total = sum(log.get("c_total", 0) for log in logging_outputs)
+        w_errors = sum(log.get("w_errors", 0) for log in logging_outputs)
+        wv_errors = sum(log.get("wv_errors", 0) for log in logging_outputs)
+        w_total = sum(log.get("w_total", 0) for log in logging_outputs)
 
         c_errors1 = sum(log.get("c_errors_1", 0) for log in logging_outputs)
         c_total1 = sum(log.get("c_total_1", 0) for log in logging_outputs)

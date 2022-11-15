@@ -747,6 +747,7 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
             "conv_feat": res["conv_feat"],
             "padding_mask": padding_mask,  # B x T,
             "layer_results": res["layer_results"],
+            "encoder_out_list": x_list,
         }
 
 

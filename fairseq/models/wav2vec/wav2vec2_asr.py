@@ -237,6 +237,11 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "use wavlm"},
     )
+    multi: bool = field(
+        default=False,
+        metadata={"help": "use wavlm"},
+    )
+
 
 
 @dataclass

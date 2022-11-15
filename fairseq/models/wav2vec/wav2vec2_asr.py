@@ -774,7 +774,7 @@ class Wav2VecEncoderMTL(Wav2VecEncoder):
 
             output.append(logits)
 
-        return logits
+        return output
 
     def get_normalized_probs(self, net_output, log_probs):
         """Get normalized probabilities (or log probs) from a net's output."""

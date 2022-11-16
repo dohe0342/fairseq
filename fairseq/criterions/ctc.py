@@ -756,11 +756,11 @@ class CtcCriterion(FairseqCriterion):
 
                         w_len += len(targ_words)
 
-                    logging_output[f"wv_errors_{enum}"] = wv_errs
-                    logging_output[f"w_errors_{enum}"] = w_errs
-                    logging_output[f"w_total_{enum}"] = w_len
-                    logging_output[f"c_errors_{enum}"] = c_err
-                    logging_output[f"c_total_{enum}"] = c_len
+                    logging_output[f"wv_errors_{enum+1}"] = wv_errs
+                    logging_output[f"w_errors_{enum+1}"] = w_errs
+                    logging_output[f"w_total_{enum+1}"] = w_len
+                    logging_output[f"c_errors_{enum+1}"] = c_err
+                    logging_output[f"c_total_{enum+1}"] = c_len
 
         return loss, sample_size, logging_output
 

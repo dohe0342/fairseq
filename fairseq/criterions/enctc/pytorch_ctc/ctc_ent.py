@@ -199,7 +199,7 @@ def test_seg_ctc(use_mine=True, use_log=False):
         if use_mine:
             H, cost = ctc_ent_cost(pred, token, sizes, target_sizes, use_log=use_log)
             glog.info('%d, cost: %s, entropy: %s'% (i, cost.data.item(), H.data.item()))
-            cost = 0.9*cost - 0.1*H
+            cost = 0.9*cost + 0.1*H
         else:
             from warpctc_pytorch import CTCLoss
             criterion = CTCLoss().cuda()

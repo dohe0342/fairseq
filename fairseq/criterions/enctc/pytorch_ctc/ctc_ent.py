@@ -1,5 +1,6 @@
 #coding=utf-8
 import os
+import torch
 import torch as T
 from torch.autograd import Variable
 import numpy as np
@@ -9,6 +10,7 @@ import pickle
 
 import copy
 import time
+import sys
 
 cuda = True
 if cuda:
@@ -223,7 +225,6 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
         optimizer.step()
 
 if __name__ == '__main__':
-    import sys
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
     os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
     alpha = float(sys.argv[1])

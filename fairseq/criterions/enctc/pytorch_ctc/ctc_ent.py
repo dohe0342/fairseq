@@ -227,4 +227,4 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
     alpha = float(sys.argv[1])
     print(f'_________alpha________')
-    test_seg_ctc(use_mine=True, use_log=True, alpha)
+    test_seg_ctc(use_mine=True, use_log=True, alpha=alpha)

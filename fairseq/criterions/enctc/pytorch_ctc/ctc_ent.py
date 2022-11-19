@@ -188,7 +188,7 @@ def random_seed(seed):
     random.seed(seed)
 
 
-def test_seg_ctc(use_mine=True, use_log=False):
+def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
     size = 1000    ## sequence length
     voca_size = 31  ## character num
     n = 6    ## batch size

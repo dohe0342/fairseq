@@ -177,12 +177,22 @@ def ctc_ent_cost(out, targets, sizes, target_sizes, use_softmax=True, use_log=Tr
     else:
         return H, costs
 
+
+def random_seed(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.deterministic = True
+    np.random.seed(seed)
+    random.seed(seed)
+
+
 def test_seg_ctc(use_mine=True, use_log=False):
     size = 1000    ## sequence length
     voca_size = 31  ## character num
     n = 6    ## batch size
-
-    np.random.seed(1234)
+    
     pred_len_np = np.ones([n])*size
     pred_np = np.random.random([size, n, voca_size+1])
     pred_np = np.log(pred_np)

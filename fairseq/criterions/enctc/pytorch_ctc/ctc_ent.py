@@ -11,6 +11,7 @@ import pickle
 import copy
 import time
 import sys
+import random
 
 cuda = True
 if cuda:

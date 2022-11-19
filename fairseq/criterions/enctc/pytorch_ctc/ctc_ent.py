@@ -211,7 +211,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
     for i in range(50):
         if use_mine:
             H, cost = ctc_ent_cost(pred, token, sizes, target_sizes, use_log=use_log)
-            glog.info('%d, cost: %s, entropy: %s'% (i, cost.data.item(), H.data.item()))
+            glog.info('%d, cost: %:.4f, entropy: %:.4f'% (i, cost.data.item(), H.data.item()))
             cost = alpha*cost - (1-alpha)*H
             #cost = 0.9*cost - 0.1*H
         else:

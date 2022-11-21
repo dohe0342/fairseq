@@ -118,7 +118,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     recurrence_relation = (m_eye(length) + m_eye(length, k=1)).repeat(batch, 1, 1) + m_eye(length, k=2).repeat(batch, 1, 1) * sec_diag[:, None, :]	# (batch, 2U+1, 2U+1)
     recurrence_relation = eps_nan * (T.ones_like(recurrence_relation) - recurrence_relation)
 
-    print('sec diag = ', sec_diag)
+    print('sec diag = ', sec_diag.item())
     print('recurrence relation = ', recurrence_relation)
     exit()
 

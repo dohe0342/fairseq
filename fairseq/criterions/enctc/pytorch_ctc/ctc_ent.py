@@ -119,7 +119,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     recurrence_relation = eps_nan * (T.ones_like(recurrence_relation) - recurrence_relation)
 
     print('sec diag = ', sec_diag.item())
-    print('recurrence relation = ', recurrence_relation)
+    print('recurrence relation = ', recurrence_relation.item())
     exit()
 
     # alpha

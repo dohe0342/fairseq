@@ -120,6 +120,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
     print('sec diag = ', sec_diag)
     print('recurrence relation = ', recurrence_relation)
+    exit()
 
     # alpha
     alpha_t = T.cat((pred[0, :, :2], T.ones(batch, 2*U-1).type(floatX)*eps_nan), dim=1) # (batch, 2U+1)

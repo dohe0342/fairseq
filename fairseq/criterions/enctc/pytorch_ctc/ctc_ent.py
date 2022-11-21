@@ -192,15 +192,15 @@ def random_seed(seed):
 
 
 def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
-    size = 1500    ## sequence length
-    voca_size = 31  ## character num
-    n = 10    ## batch size
+    size = 5    ## sequence length
+    voca_size = 1  ## character num
+    n = 1    ## batch size
     
     pred_len_np = np.ones([n])*size
     pred_np = np.random.random([size, n, voca_size+1])
     pred_np = np.log(pred_np)
 
-    token_len_np = np.random.randint(low=100, high=500, size=n)
+    token_len_np = np.random.randint(low=2, high=4, size=n)
     token_np = np.random.randint(voca_size, size=token_len_np.sum())+1
 
     pred = Variable(floatX(pred_np), requires_grad=True)

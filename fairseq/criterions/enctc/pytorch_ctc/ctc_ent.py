@@ -101,6 +101,11 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     # token_with_blank
     token_with_blank = T.cat((T.zeros(batch, U, 1).type(longX), token[:, :, None]), dim=2).view(batch, -1)    # (batch, 2U)
     token_with_blank = T.cat((token_with_blank, T.zeros(batch, 1).type(longX)), dim=1)  # (batch, 2U+1)
+
+    print('pred = ', pred)
+    print('pred len = ', pred_len)
+    print('token = ', token)
+    print('token len = ', token_len)
     print(token_with_blank)
     exit()
     length = token_with_blank.size(1)

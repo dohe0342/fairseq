@@ -112,6 +112,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     pred = pred[T.arange(0, Time).type(longX)[:, None, None], T.arange(0, batch).type(longX)[None, :, None], token_with_blank[None, :]]  # (T, batch, 2U+1)
 
     print('new pred = ', pred)
+    exit()
 
     # recurrence relation
     sec_diag = T.cat((T.zeros((batch, 2)).type(floatX), T.ne(token_with_blank[:, :-2], token_with_blank[:, 2:]).type(floatX)), dim=1) * T.ne(token_with_blank, blank).type(floatX)	# (batch, 2U+1)

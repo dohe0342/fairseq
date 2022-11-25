@@ -185,7 +185,8 @@ class KenLMDecoder(BaseDecoder):
 
             for result in nbest_results:
                 for x in result.words:
-                    self.word_dict.get_entry(x)
+                    if x >= 0:
+                        self.word_dict.get_entry(x)
             hypos.append(
                 [
                     {

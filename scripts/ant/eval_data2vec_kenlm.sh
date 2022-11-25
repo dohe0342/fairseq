@@ -13,7 +13,7 @@ do
 		task.labels=ltr \
 		decoding.type=kenlm \
 		decoding.lmweight=2. decoding.wordscore=-1. decoding.silweight=0 \
-		decoding.lmpath=/workspace/models/lm_model/unit_4-gram.arpa \
+		decoding.lmpath=/workspace/models/lm_model/4-gram.arpa \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon_prune.lst \
 		decoding.unique_wer_file=false \
 		dataset.gen_subset=$subset \

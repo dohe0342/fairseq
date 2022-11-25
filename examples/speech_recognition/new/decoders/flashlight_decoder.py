@@ -180,7 +180,7 @@ class KenLMDecoder(BaseDecoder):
         for b in range(B):
             emissions_ptr = emissions.data_ptr() + 4 * b * emissions.stride(0)
             results = self.decoder.decode(emissions_ptr, T, N)
-            print('fuck@@@@@@@@@@@@@@@@')
+            print(results)
 
             nbest_results = results[: self.nbest]
             hypos.append(

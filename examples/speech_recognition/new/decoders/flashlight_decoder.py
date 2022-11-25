@@ -183,7 +183,7 @@ class KenLMDecoder(BaseDecoder):
 
             nbest_results = results[: self.nbest]
 
-            for result in nbest_results:
+            for result in results:
                 for x in result.words:
                     if x >= 0:
                         print(self.word_dict.get_entry(x), end=' ')

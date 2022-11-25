@@ -182,6 +182,7 @@ class KenLMDecoder(BaseDecoder):
             results = self.decoder.decode(emissions_ptr, T, N)
 
             nbest_results = results[: self.nbest]
+            print(nbest_results)
             hypos.append(
                 [
                     {

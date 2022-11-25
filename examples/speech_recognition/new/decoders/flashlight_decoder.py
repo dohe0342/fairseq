@@ -126,7 +126,7 @@ class KenLMDecoder(BaseDecoder):
                 self.unitlm,
             )
         else:
-            #assert self.unitlm, "Lexicon-free decoding requires unit LM"
+            assert self.unitlm, "Lexicon-free decoding requires unit LM"
 
             d = {w: [[w]] for w in tgt_dict.symbols}
             self.word_dict = create_word_dict(d)

@@ -157,9 +157,9 @@ class Data2VecAudioModel(BaseFairseqModel):
         #self.mask_emb = nn.Parameter(
         #    torch.FloatTensor(cfg.encoder_embed_dim).uniform_()
         #)
-        self.mask_emb = nn.Parameter(
-            torch.cuda.HalfTensor(cfg.encoder_embed_dim).uniform_()
-        )
+        #self.mask_emb = nn.Parameter(
+        #    torch.FloatTensor(cfg.encoder_embed_dim).uniform_()
+        #)
 
         self.encoder = TransformerEncoder(cfg)
         self.layer_norm = LayerNorm(self.extractor_embed)

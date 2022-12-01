@@ -258,6 +258,7 @@ class Data2VecAudioModel(BaseFairseqModel):
         self.mask_emb = self.mask_emb.type(torch.cuda.FloatTensor)
         print(self.mask_emb.type)
         print(x.type)
+        print('')
 
         if self.mask_prob > 0:
             if mask_indices is None:

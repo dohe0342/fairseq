@@ -113,6 +113,7 @@ def get_annealed_rate(start, end, curr_step, total_steps):
 class Data2VecAudioModel(BaseFairseqModel):
     def __init__(self, cfg: Data2VecAudioConfig):
         super().__init__()
+        logging.info(cfg)
         self.cfg = cfg
 
         feature_enc_layers = eval(cfg.conv_feature_layers)

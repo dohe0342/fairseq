@@ -256,6 +256,7 @@ class Data2VecAudioModel(BaseFairseqModel):
             x[mask_channel_indices] = 0
         
         self.mask_emb = self.mask_emb.type(torch.cuda.FloatTensor)
+
         if self.mask_prob > 0:
             if mask_indices is None:
                 mask_indices = compute_mask_indices(
@@ -272,7 +273,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                     mask_dropout=self.cfg.mask_dropout,
                 )
                 mask_indices = torch.from_numpy(mask_indices).to(x.device)
-            x = index_put(x, mask_indices, self.mask_emb.type(torch.cuda.FloatTensor))
+            x = index_put(x, mask_indices, self.mask_emb)
         else:
             mask_indices = None
 

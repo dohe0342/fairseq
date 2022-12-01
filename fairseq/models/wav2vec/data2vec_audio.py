@@ -154,12 +154,9 @@ class Data2VecAudioModel(BaseFairseqModel):
 
         self.feature_grad_mult = cfg.feature_grad_mult
         
-        #self.mask_emb = nn.Parameter(
-        #    torch.FloatTensor(cfg.encoder_embed_dim).uniform_()
-        #)
-        #self.mask_emb = nn.Parameter(
-        #    torch.FloatTensor(cfg.encoder_embed_dim).uniform_()
-        #)
+        self.mask_emb = nn.Parameter(
+            torch.FloatTensor(cfg.encoder_embed_dim).uniform_()
+        )
 
         self.encoder = TransformerEncoder(cfg)
         self.layer_norm = LayerNorm(self.extractor_embed)

@@ -103,13 +103,6 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     token_with_blank = T.cat((T.zeros(batch, U, 1).type(longX), token[:, :, None]), dim=2).view(batch, -1)    # (batch, 2U)
     token_with_blank = T.cat((token_with_blank, T.zeros(batch, 1).type(longX)), dim=1)  # (batch, 2U+1)
     
-    if 1:
-        print('pred = ', pred)
-        print('pred len = ', pred_len)
-        print('token = ', token)
-        print('token len = ', token_len)
-        print('token with blank = ', token_with_blank)
-        exit()
     length = token_with_blank.size(1)
 
     pred = pred[T.arange(0, Time).type(longX)[:, None, None], T.arange(0, batch).type(longX)[None, :, None], token_with_blank[None, :]]  # (T, batch, 2U+1)
@@ -126,6 +119,18 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
     alphas = alpha_t[None] # (1, batch, 2U+1)
     betas = beta_t[None] # (1, batch, 2U+1)
+    
+    if 1:
+        print('pred = ', pred)
+        print('pred len = ', pred_len)
+        print('token = ', token)
+        print('token len = ', token_len)
+        print('token with blank = ', token_with_blank)
+        print('sec_diag = ', sec_diag)
+        print('reccurence relation = ', recurrence_relation)
+        print('alpha t = ', alpha_t)
+        print('beta t = ', beta_t)
+        exit()
 
     # dynamic programming
     # (T, batch, 2U+1)

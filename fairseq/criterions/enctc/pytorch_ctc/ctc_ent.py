@@ -101,26 +101,21 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     # token_with_blank
     token_with_blank = T.cat((T.zeros(batch, U, 1).type(longX), token[:, :, None]), dim=2).view(batch, -1)    # (batch, 2U)
     token_with_blank = T.cat((token_with_blank, T.zeros(batch, 1).type(longX)), dim=1)  # (batch, 2U+1)
-
-    print('pred = ', pred)
-    print('pred len = ', pred_len)
-    print('token = ', token)
-    print('token len = ', token_len)
-    print('token with blank = ', token_with_blank)
+    
+    if 0:
+        print('pred = ', pred)
+        print('pred len = ', pred_len)
+        print('token = ', token)
+        print('token len = ', token_len)
+        print('token with blank = ', token_with_blank)
     length = token_with_blank.size(1)
 
     pred = pred[T.arange(0, Time).type(longX)[:, None, None], T.arange(0, batch).type(longX)[None, :, None], token_with_blank[None, :]]  # (T, batch, 2U+1)
-
-    print('new pred = ', pred)
 
     # recurrence relation
     sec_diag = T.cat((T.zeros((batch, 2)).type(floatX), T.ne(token_with_blank[:, :-2], token_with_blank[:, 2:]).type(floatX)), dim=1) * T.ne(token_with_blank, blank).type(floatX)	# (batch, 2U+1)
     recurrence_relation = (m_eye(length) + m_eye(length, k=1)).repeat(batch, 1, 1) + m_eye(length, k=2).repeat(batch, 1, 1) * sec_diag[:, None, :]	# (batch, 2U+1, 2U+1)
     recurrence_relation = eps_nan * (T.ones_like(recurrence_relation) - recurrence_relation)
-
-    print('sec diag = ', sec_diag.item())
-    print('recurrence relation = ', recurrence_relation.item())
-    exit()
 
     # alpha
     alpha_t = T.cat((pred[0, :, :2], T.ones(batch, 2*U-1).type(floatX)*eps_nan), dim=1) # (batch, 2U+1)

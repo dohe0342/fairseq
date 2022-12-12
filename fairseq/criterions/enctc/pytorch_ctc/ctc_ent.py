@@ -253,7 +253,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
         step_time = time.time() - step_time
         
         glog.info(f"loss elapsed time = {loss_cal_time} s")
-        glog.info(f"backward elapsed time = {loss_cal_time} s")
+        glog.info(f"backward elapsed time = {backward_cal_time} s")
         glog.info(f"step elapsed time = {loss_cal_time} s")
 
 

@@ -199,7 +199,7 @@ def random_seed(seed):
 
 
 def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
-    size = 5    ## sequence length
+    size = 1000    ## sequence length
     voca_size = 1  ## character num
     n = 1    ## batch size
     

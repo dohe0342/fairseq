@@ -254,7 +254,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
         
         glog.info(f"loss elapsed time = {loss_cal_time} s")
         glog.info(f"backward elapsed time = {backward_cal_time} s")
-        glog.info(f"step elapsed time = {loss_cal_time} s")
+        glog.info(f"step elapsed time = {step_time} s")
 
 
 if __name__ == '__main__':

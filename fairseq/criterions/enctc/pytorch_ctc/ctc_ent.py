@@ -260,4 +260,4 @@ if __name__ == '__main__':
     alpha = float(sys.argv[2])
     random_seed(777)
     print(f'_________alpha={alpha}_________')
-    test_seg_ctc(use_mine=True, use_log=False, alpha=alpha)
+    test_seg_ctc(use_mine=True, use_log=True, alpha=alpha)

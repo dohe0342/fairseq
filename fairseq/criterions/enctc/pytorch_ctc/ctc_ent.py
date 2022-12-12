@@ -130,7 +130,6 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
         print('reccurence relation = ', recurrence_relation)
         print('alpha t = ', alpha_t)
         print('beta t = ', beta_t)
-        exit()
 
     # dynamic programming
     # (T, batch, 2U+1)
@@ -149,6 +148,10 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
     alpha = collect_label(alphas)
     beta = collect_label(betas)
+    
+    if 1:
+        print('collect alpha = ', alpha)
+        print('collect beta = ', beta)
 
     H = T.exp(beta-alpha) + alpha
     costs = -alpha

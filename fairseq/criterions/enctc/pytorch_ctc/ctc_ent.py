@@ -152,6 +152,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     if 1:
         print('collect alpha = ', alpha)
         print('collect beta = ', beta)
+        exit()
 
     H = T.exp(beta-alpha) + alpha
     costs = -alpha

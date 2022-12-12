@@ -241,11 +241,21 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
             criterion = CTCLoss().cuda()
             cost = criterion(pred, token, sizes, target_sizes)
             glog.info('%d, cost: %s'% (i, cost.data.item()))
-
+        
         optimizer = T.optim.Adam([pred], lr=3e-1)#, nesterov=True)
         optimizer.zero_grad()
+        backward_cal_time = time.time()
         (cost).backward()
+        backward_cal_time = time.time() - backward_cal_time
+
+        step_time = time.time()
         optimizer.step()
+        step_time = time.time() - step_time
+        
+        glog.info(f"loss elapsed time = {loss_cal_time} s")
+        glog.info(f"backward elapsed time = {loss_cal_time} s")
+        glog.info(f"step elapsed time = {loss_cal_time} s")
+
 
 if __name__ == '__main__':
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152

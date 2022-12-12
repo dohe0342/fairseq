@@ -268,6 +268,6 @@ if __name__ == '__main__':
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
     os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
     alpha = float(sys.argv[2])
-    random_seed(781)
+    random_seed(778)
     print(f'_________alpha={alpha}_________')
     test_seg_ctc(use_mine=True, use_log=True, alpha=alpha)

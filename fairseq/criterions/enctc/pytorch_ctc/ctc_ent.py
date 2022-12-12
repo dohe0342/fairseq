@@ -150,8 +150,8 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     beta = collect_label(betas)
     
     if 1:
-        print('collect alpha = ', alpha)
-        print('collect beta = ', beta)
+        print('collect alpha = ', alpha.tolist())
+        print('collect beta = ', beta.tolist())
         exit()
 
     H = T.exp(beta-alpha) + alpha

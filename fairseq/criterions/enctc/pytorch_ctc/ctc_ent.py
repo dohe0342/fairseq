@@ -78,8 +78,8 @@ def ctc_ent_loss(pred, pred_len, token, token_len, blank=0):
     alpha = collect_label(alphas)
     beta = collect_label(betas)
 
-    #H = -beta/alpha + T.log(alpha+eps)
-    H = -T.log(beta+eps)
+    H = -beta/alpha + T.log(alpha+eps)
+    #H = -T.log(beta+eps)
     costs = -T.log(alpha+eps)
     return H, costs
 
@@ -144,7 +144,8 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     alpha = collect_label(alphas)
     beta = collect_label(betas)
 
-    H = T.exp(beta-alpha) + alpha
+    H = -T.log(beta+eps)
+    #H = T.exp(beta-alpha) + alpha
     costs = -alpha
     return H, costs
 

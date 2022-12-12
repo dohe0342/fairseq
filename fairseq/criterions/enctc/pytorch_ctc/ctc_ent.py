@@ -141,6 +141,9 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
         alphas = T.cat((alphas, alpha_t[None]), dim=0)
         betas = T.cat((betas, beta_t[None]), dim=0)
 
+        if 1:
+            print('alphas = ', alphas)
+
     def collect_label(probability):
         labels_2 = probability[pred_len-1, T.arange(batch).type(longX), 2*token_len-1]
         labels_1 = probability[pred_len-1, T.arange(batch).type(longX), 2*token_len]

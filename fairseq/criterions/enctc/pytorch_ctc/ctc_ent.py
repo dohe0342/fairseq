@@ -209,7 +209,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
     pred_np = np.random.random([size, n, voca_size+1])
     pred_np = np.log(pred_np)
 
-    token_len_np = np.random.randint(low=100, high=200, size=n)
+    token_len_np = np.random.randint(low=1, high=4, size=n)
     token_np = np.random.randint(voca_size, size=token_len_np.sum())+1
 
     pred = Variable(floatX(pred_np), requires_grad=True)

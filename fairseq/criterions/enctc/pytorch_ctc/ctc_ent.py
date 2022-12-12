@@ -121,15 +121,15 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     betas = beta_t[None] # (1, batch, 2U+1)
     
     if 1:
-        print('pred = ', pred.item())
-        print('pred len = ', pred_len)
-        print('token = ', token)
-        print('token len = ', token_len)
-        print('token with blank = ', token_with_blank)
-        print('sec_diag = ', sec_diag)
-        print('reccurence relation = ', recurrence_relation)
-        print('alpha t = ', alpha_t)
-        print('beta t = ', beta_t)
+        print('pred = ', pred.tolist())
+        print('pred len = ', pred_len.tolist())
+        print('token = ', token.tolist())
+        print('token len = ', token_len.tolist())
+        print('token with blank = ', token_with_blank.tolist())
+        print('sec_diag = ', sec_diag.tolist())
+        print('reccurence relation = ', recurrence_relation.tolist())
+        print('alpha t = ', alpha_t.tolist())
+        print('beta t = ', beta_t.tolist())
 
     # dynamic programming
     # (T, batch, 2U+1)

@@ -219,7 +219,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
         if use_mine:
             loss_cal_time = time.time()
             H, cost = ctc_ent_cost(pred, token, sizes, target_sizes, use_log=use_log)
-            loss_cal_time = time.time - loss_cal_time
+            loss_cal_time = time.time() - loss_cal_time
 
             #glog.info(f'{i}, cost: {cost.data.item():.3f}, entropy: {H.data.item():.3f}')
             print(f'{i}, cost: {cost.data.item():.8f}, entropy: {H.data.item():.8f}')

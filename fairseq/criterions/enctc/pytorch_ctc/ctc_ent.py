@@ -121,7 +121,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     betas = beta_t[None] # (1, batch, 2U+1)
     
     if 1:
-        print('pred = ', pred)
+        print('pred = ', pred.item())
         print('pred len = ', pred_len)
         print('token = ', token)
         print('token len = ', token_len)

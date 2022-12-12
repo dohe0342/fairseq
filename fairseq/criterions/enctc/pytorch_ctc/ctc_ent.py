@@ -153,7 +153,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     alpha = collect_label(alphas)
     beta = collect_label(betas)
     
-    if 0:
+    if 1:
         print('collect alpha = ', alpha.tolist())
         print('collect beta = ', beta.tolist())
         exit()

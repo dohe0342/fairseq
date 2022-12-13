@@ -135,6 +135,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
     # dynamic programming
     # (T, batch, 2U+1)
+    forward_time = time.time()
     for t in T.arange(1, Time).type(longX):
         alpha_t = log_batch_dot(alpha_t, recurrence_relation) + pred[t]
         beta_t = log_sum_exp(log_batch_dot(beta_t, recurrence_relation) + pred[t], T.log(-pred[t]+eps) + alpha_t)
@@ -144,6 +145,9 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
         if 0:
             print('alphas = ', alphas)
+    forward_time = time.time() - forward_time
+
+    print('forward time = ', forward_time)
 
     def collect_label(probability):
         labels_2 = probability[pred_len-1, T.arange(batch).type(longX), 2*token_len-1]

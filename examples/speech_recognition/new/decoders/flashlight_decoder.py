@@ -88,8 +88,7 @@ class KenLMDecoder(BaseDecoder):
             self.word_dict = create_word_dict(self.lexicon)
             self.unk_word = self.word_dict.get_index("<unk>")
 
-            try: self.lm = KenLM(cfg.lmpath, self.word_dict)
-            except: self.lm = ''
+            self.lm = KenLM(cfg.lmpath, self.word_dict)
             self.trie = Trie(self.vocab_size, self.silence)
 
             start_state = self.lm.start(False)

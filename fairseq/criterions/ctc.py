@@ -135,6 +135,8 @@ class CtcCriterion(FairseqCriterion):
         
         logging.info(lprobs.size())
         logging.info(input_lengths)
+        logging.info(target_lengths)
+        exit()
 
         with torch.backends.cudnn.flags(enabled=False):
             loss = F.ctc_loss(

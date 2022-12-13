@@ -134,6 +134,7 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
         
         logging.info(lprobs.size())
+        logging.info(lprobs[-1][-1])
         logging.info(input_lengths)
         logging.info(target_lengths)
         exit()

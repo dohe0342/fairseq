@@ -375,7 +375,8 @@ class Data2VecAudioModel(BaseFairseqModel):
             padding_mask = (1 - padding_mask.flip([-1]).cumsum(-1).flip([-1])).bool()
         else:
             padding_mask = None
-
+        
+        logging.info(f"output length = {output_lengths}")
         '''
         if self.cfg.ch_prune_idx != -1:
             num = int(self.cfg.ch_prune_idx)

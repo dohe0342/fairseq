@@ -134,10 +134,10 @@ class CtcCriterion(FairseqCriterion):
         else:
             target_lengths = pad_mask.sum(-1)
         
-        logging.info(lprobs.size())
+        #logging.info(lprobs.size())
         #logging.info(lprobs[-1][-1])
-        logging.info(input_lengths)
-        logging.info(target_lengths)
+        #logging.info(input_lengths)
+        #logging.info(target_lengths)
         
         loss_time = time.time()
         with torch.backends.cudnn.flags(enabled=False):
@@ -151,12 +151,12 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
         loss_time = time.time() - loss_time
-
+        
         backward_time = time.time()
         loss.backward()
         backward_time = time.time() - backward_time
-        logging.info(f"loss time = {loss_time} s")
-        logging.info(f"backward time = {backward_time} s")
+        #logging.info(f"loss time = {loss_time} s")
+        #logging.info(f"backward time = {backward_time} s")
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

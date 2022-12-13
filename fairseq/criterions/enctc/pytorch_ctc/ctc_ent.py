@@ -138,10 +138,10 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     forward_time = time.time()
     for t in T.arange(1, Time).type(longX):
         alpha_t = log_batch_dot(alpha_t, recurrence_relation) + pred[t]
-        beta_t = log_sum_exp(log_batch_dot(beta_t, recurrence_relation) + pred[t], T.log(-pred[t]+eps) + alpha_t)
+        #beta_t = log_sum_exp(log_batch_dot(beta_t, recurrence_relation) + pred[t], T.log(-pred[t]+eps) + alpha_t)
 
         alphas = T.cat((alphas, alpha_t[None]), dim=0)
-        betas = T.cat((betas, beta_t[None]), dim=0)
+        #betas = T.cat((betas, beta_t[None]), dim=0)
 
         if 0:
             print('alphas = ', alphas)

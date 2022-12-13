@@ -151,7 +151,12 @@ class CtcCriterion(FairseqCriterion):
                 zero_infinity=self.zero_infinity,
             )
         loss_time = time.time() - loss_time
+
+        backward_time = time.time()
+        loss.backward()
+        backward_time = time.time() - backward_time
         logging.info(f"loss time = {loss_time} s")
+        logging.info(f"backward time = {backward_time} s")
 
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()

@@ -4,6 +4,7 @@
 # the root directory of this source tree. An additional grant of patent rights
 # can be found in the PATENTS file in the same directory.
 
+import logging
 import math
 from argparse import Namespace
 from dataclasses import dataclass, field
@@ -133,6 +134,7 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
     
         logging.info(input_lengths)
+
         with torch.backends.cudnn.flags(enabled=False):
             loss = F.ctc_loss(
                 lprobs,

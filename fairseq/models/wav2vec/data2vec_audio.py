@@ -364,6 +364,7 @@ class Data2VecAudioModel(BaseFairseqModel):
                 features.shape[:2], dtype=features.dtype, device=features.device
             )
 
+            logging.info(f"output length = {output_lengths}")
             # these two operations makes sure that all values
             # before the output lengths indices are attended to
             padding_mask[
@@ -376,7 +377,6 @@ class Data2VecAudioModel(BaseFairseqModel):
         else:
             padding_mask = None
         
-        logging.info(f"output length = {output_lengths}")
         '''
         if self.cfg.ch_prune_idx != -1:
             num = int(self.cfg.ch_prune_idx)

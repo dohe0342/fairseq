@@ -116,6 +116,7 @@ class KenLMDecoder(BaseDecoder):
             )
 
             self.decoder = LexiconDecoder(
+                '',
                 self.decoder_opts,
                 self.trie,
                 self.lm,

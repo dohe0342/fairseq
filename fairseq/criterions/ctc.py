@@ -152,6 +152,7 @@ class CtcCriterion(FairseqCriterion):
             )
         loss_time = time.time() - loss_time
         logging.info(f"loss time = {loss_time} s")
+
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )

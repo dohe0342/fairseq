@@ -230,7 +230,7 @@ def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
     sizes = Variable(T.IntTensor(pred_len_np))
     target_sizes = Variable(T.IntTensor(token_len_np))
 
-    for i in range(50):
+    for i in range(1):
         if use_mine:
             loss_cal_time = time.time()
             H, cost = ctc_ent_cost(pred, token, sizes, target_sizes, use_log=use_log)

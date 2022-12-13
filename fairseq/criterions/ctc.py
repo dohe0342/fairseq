@@ -134,6 +134,7 @@ class CtcCriterion(FairseqCriterion):
             target_lengths = pad_mask.sum(-1)
     
         logging.info(input_lengths)
+        exit()
 
         with torch.backends.cudnn.flags(enabled=False):
             loss = F.ctc_loss(

@@ -83,6 +83,7 @@ def ctc_ent_loss(pred, pred_len, token, token_len, blank=0):
     costs = -T.log(alpha+eps)
     return H, costs
 
+
 def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     '''
     :param pred: (Time, batch, voca_size+1)

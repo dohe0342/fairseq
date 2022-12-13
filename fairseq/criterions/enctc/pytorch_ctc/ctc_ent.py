@@ -157,6 +157,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
 
     alpha = collect_label(alphas)
     #beta = collect_label(betas)
+    beta = torch.cuda.FloatTensor([0])
     
     if 0:
         print('collect alpha = ', alpha.tolist())

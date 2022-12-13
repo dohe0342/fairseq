@@ -214,9 +214,9 @@ def random_seed(seed):
 
 
 def test_seg_ctc(use_mine=True, use_log=False, alpha=1.0):
-    size = 5    ## sequence length
-    voca_size = 2  ## character num
-    n = 1    ## batch size
+    size = 1000    ## sequence length
+    voca_size = 32  ## character num
+    n = 10    ## batch size
     
     pred_len_np = np.ones([n])*size
     pred_np = np.random.random([size, n, voca_size+1])

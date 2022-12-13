@@ -17,7 +17,7 @@ do
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
 		decoding.unique_wer_file=false \
 		dataset.gen_subset=$subset \
-		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_100h.pt \
+		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_960h.pt \
 		common_eval.quiet=true \
 	   	decoding.beam=1500 \
 		distributed_training.distributed_world_size=1

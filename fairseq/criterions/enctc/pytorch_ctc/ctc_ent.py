@@ -121,7 +121,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     alphas = alpha_t[None] # (1, batch, 2U+1)
     betas = beta_t[None] # (1, batch, 2U+1)
     
-    if 1:
+    if 0:
         print('pred = ', pred.tolist())
         print('pred len = ', pred_len.tolist())
         print('token = ', token.tolist())
@@ -141,7 +141,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
         alphas = T.cat((alphas, alpha_t[None]), dim=0)
         betas = T.cat((betas, beta_t[None]), dim=0)
 
-        if 1:
+        if 0:
             print('alphas = ', alphas)
 
     def collect_label(probability):
@@ -153,7 +153,7 @@ def ctc_ent_loss_log(pred, pred_len, token, token_len, blank=0):
     alpha = collect_label(alphas)
     beta = collect_label(betas)
     
-    if 1:
+    if 0:
         print('collect alpha = ', alpha.tolist())
         print('collect beta = ', beta.tolist())
         exit()

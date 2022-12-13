@@ -138,7 +138,8 @@ class CtcCriterion(FairseqCriterion):
         #logging.info(lprobs[-1][-1])
         logging.info(input_lengths)
         logging.info(target_lengths)
-
+        
+        loss_time = time.time()
         with torch.backends.cudnn.flags(enabled=False):
             loss = F.ctc_loss(
                 lprobs,
@@ -149,7 +150,8 @@ class CtcCriterion(FairseqCriterion):
                 reduction="sum",
                 zero_infinity=self.zero_infinity,
             )
-
+        loss_time = time.time() - loss_time
+        logging.info(f"loss time = {loss_time} s")
         ntokens = (
             sample["ntokens"] if "ntokens" in sample else target_lengths.sum().item()
         )

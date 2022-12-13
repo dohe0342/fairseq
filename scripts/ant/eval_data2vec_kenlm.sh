@@ -12,7 +12,7 @@ do
 		task.data=/workspace/LibriSpeech/manifests \
 		task.labels=ltr \
 		decoding.type=kenlm \
-		decoding.lmweight=0. decoding.wordscore=0. decoding.silweight=0 \
+		decoding.lmweight=5. decoding.wordscore=0. decoding.silweight=0 \
 		decoding.lmpath=/workspace/models/lm_model/4-gram.bin \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
 		decoding.unique_wer_file=false \

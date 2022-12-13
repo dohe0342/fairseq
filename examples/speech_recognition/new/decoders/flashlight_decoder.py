@@ -104,7 +104,6 @@ class KenLMDecoder(BaseDecoder):
             self.trie.smear(SmearingMode.MAX)
 
             self.decoder_opts = LexiconDecoderOptions(
-                lm_type='',
                 beam_size=cfg.beam,
                 beam_size_token=cfg.beamsizetoken or len(tgt_dict),
                 beam_threshold=cfg.beamthreshold,

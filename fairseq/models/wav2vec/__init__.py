@@ -6,4 +6,4 @@
 from .wav2vec import *  # noqa
 from .wav2vec2 import *  # noqa
 from .wav2vec2_asr import *  # noqa
-#from .data2vec_audio import *
+from .data2vec_audio import *

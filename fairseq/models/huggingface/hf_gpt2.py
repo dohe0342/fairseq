@@ -79,7 +79,7 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
         )
         self.model = GPT2LMHeadModel(config)
         '''
-        model = GPT2LMHeadModel.from_pretrained('gpt2')
+        self.model = GPT2LMHeadModel.from_pretrained('gpt2')
 
         # set zero embedding for padding symbol
         self.pad_idx = task.target_dictionary.pad()

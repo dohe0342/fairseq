@@ -63,7 +63,8 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
             )
 
         super().__init__(task.target_dictionary)
-
+        
+        '''
         config = GPT2Config(
             vocab_size=len(task.target_dictionary),
             n_positions=args.max_target_positions + 1,
@@ -77,6 +78,8 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
             layer_norm_epsilon=1e-6,
         )
         self.model = GPT2LMHeadModel(config)
+        '''
+        model = GPT2LMHeadModel.from_pretrained('gpt2')
 
         # set zero embedding for padding symbol
         self.pad_idx = task.target_dictionary.pad()

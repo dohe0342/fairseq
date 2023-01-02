@@ -48,7 +48,7 @@ class HuggingFaceGPT2LanguageModel(FairseqLanguageModel):
     @classmethod
     def build_model(cls, args, task):
         """Build a new model instance."""
-        default_architecture(args)
+        #default_architecture(args)
         return cls(HuggingFaceGPT2Decoder(args, task))
 
 

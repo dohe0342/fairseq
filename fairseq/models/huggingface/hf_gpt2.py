@@ -95,7 +95,8 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
         encoder_out=None,
     ):
         features = self.extract_features(prev_output_tokens, incremental_state)
-        lm_logits = self.model.lm_head(features)
+        #lm_logits = self.model.lm_head(features)
+        features = lm_logits
         return (lm_logits,)
 
     def extract_features(

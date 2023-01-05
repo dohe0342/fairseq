@@ -117,13 +117,21 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
             .to(prev_output_tokens)
             .repeat(prev_output_tokens.size(0), 1)
         )
-
+        
+        '''
         outputs = self.model.transformer(
             input_ids=prev_output_tokens,
             past=past,
             attention_mask=attention_mask,
             position_ids=position_ids,
         )
+        '''
+        outputs = self.model.transformer(
+            input_ids=prev_output_tokens,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+        )
+
         last_hidden_states = outputs[0]
 
         if incremental_state:

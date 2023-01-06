@@ -313,6 +313,9 @@ class FairseqLM(LM):
                     res, log_probs=True, sample=None
                 )
 
+                print(torch.from_numpy(curr_state.prefix).cuda().size())
+                print(probs.size())
+
                 if new_incremental_state is not None:
                     new_incremental_state = apply_to_sample(
                         lambda x: x.cpu(), new_incremental_state

@@ -315,6 +315,7 @@ class FairseqLM(LM):
 
                 print(torch.from_numpy(curr_state.prefix).cuda().size())
                 print(probs.size())
+                exit()
 
                 if new_incremental_state is not None:
                     new_incremental_state = apply_to_sample(

@@ -407,6 +407,7 @@ class FairseqLMDecoder(BaseDecoder):
                     _, score = self.lm.score(start_state, word_idx, no_cache=True)
 
                     print(word_idx, score)
+                    exit()
 
                 for spelling in spellings:
                     spelling_idxs = [tgt_dict.index(token) for token in spelling]

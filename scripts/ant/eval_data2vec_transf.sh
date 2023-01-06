@@ -14,7 +14,7 @@ do
 		decoding.type=fairseqlm \
 		decoding.lmweight=1.0 decoding.wordscore=0. decoding.silweight=0 \
 		decoding.lmpath=/workspace/models/lm_model/lm_librispeech_word_transformer.pt \
-		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
+		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon_lower.lst \
 		decoding.unique_wer_file=false \
 		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_960h.pt \

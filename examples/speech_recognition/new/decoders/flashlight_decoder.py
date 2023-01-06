@@ -242,6 +242,9 @@ class FairseqLM(LM):
         state = LMState()
         prefix = torch.LongTensor([[self.dictionary.eos()]])
         incremental_state = {} if self.save_incremental else None
+
+        print(self.model)
+
         with torch.no_grad():
             print(prefix)
             res = self.model(prefix.cuda(), incremental_state=incremental_state)

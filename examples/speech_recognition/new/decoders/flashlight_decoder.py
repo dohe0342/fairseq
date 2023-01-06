@@ -331,6 +331,7 @@ class FairseqLM(LM):
         
         score = curr_state.probs[token_index].item()
         print(score)
+        exit()
 
         trim_cache(self.max_cache)
 

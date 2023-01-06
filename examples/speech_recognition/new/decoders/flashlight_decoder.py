@@ -255,7 +255,10 @@ class FairseqLM(LM):
         )
 
         logging.info(self.states)
+
         self.stateq.append(state)
+
+        exit()
 
         return state
 

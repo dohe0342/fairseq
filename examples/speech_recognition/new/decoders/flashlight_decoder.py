@@ -629,7 +629,7 @@ class HuggingFaceLM(LM):
         gc.collect()
 
 
-class FairseqLMDecoder(BaseDecoder):
+class HuggingFaceLMDecoder(BaseDecoder):
     def __init__(self, cfg: FlashlightDecoderConfig, tgt_dict: Dictionary) -> None:
         super().__init__(tgt_dict)
 

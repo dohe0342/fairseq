@@ -245,7 +245,7 @@ class FairseqLM(LM):
         with torch.no_grad():
             print(prefix)
             res = self.model(prefix.cuda(), incremental_state=incremental_state)
-            print(res[0])
+            print(res[1])
             probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
 
         if incremental_state is not None:

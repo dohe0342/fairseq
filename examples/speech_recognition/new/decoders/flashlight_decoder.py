@@ -656,6 +656,8 @@ class HuggingFaceLMDecoder(BaseDecoder):
         lm_args.model['_name'] = "hf_gpt2"
         model = HuggingFaceGPT2Decoder(lm_args, task)
 
+        del checkpoint
+
         self.trie = Trie(self.vocab_size, self.silence)
 
         self.word_dict = task.dictionary

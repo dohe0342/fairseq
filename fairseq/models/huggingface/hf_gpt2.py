@@ -94,6 +94,7 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
         incremental_state: Optional[Dict[str, List[torch.Tensor]]] = None,
         encoder_out=None,
     ):
+        print(prev_output_tokens)
         features = self.extract_features(prev_output_tokens, incremental_state)
         #lm_logits = self.model.lm_head(features)
         lm_logits = features

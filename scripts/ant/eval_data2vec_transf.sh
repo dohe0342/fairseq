@@ -11,8 +11,8 @@ do
 		task=audio_finetuning \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.labels=ltr \
-		decoding.type=kenlm \
-		decoding.lmweight=1. decoding.wordscore=0. decoding.silweight=0 \
+		decoding.type=fairseqlm \
+		decoding.lmweight=1.0 decoding.wordscore=0. decoding.silweight=0 \
 		decoding.lmpath=/workspace/models/lm_model/lm_librispeech_word_transformer.pt \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon.lst \
 		decoding.unique_wer_file=false \

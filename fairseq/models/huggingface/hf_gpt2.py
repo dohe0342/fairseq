@@ -84,8 +84,8 @@ class HuggingFaceGPT2Decoder(FairseqIncrementalDecoder):
 
         # set zero embedding for padding symbol
         self.pad_idx = task.target_dictionary.pad()
-        self.model.transformer.wte.weight.data[self.pad_idx].zero_()
-        self.model.transformer.wpe.weight.data[0].zero_()
+        #self.model.transformer.wte.weight.data[self.pad_idx].zero_()
+        #self.model.transformer.wpe.weight.data[0].zero_()
 
     def forward(
         self,

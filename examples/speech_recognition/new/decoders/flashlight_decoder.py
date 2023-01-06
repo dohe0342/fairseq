@@ -328,8 +328,9 @@ class FairseqLM(LM):
             if not no_cache:
                 self.states[state] = curr_state
                 self.stateq.append(state)
-
+        
         score = curr_state.probs[token_index].item()
+        print(score)
 
         trim_cache(self.max_cache)
 

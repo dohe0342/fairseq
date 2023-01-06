@@ -486,7 +486,7 @@ class FairseqLMDecoder(BaseDecoder):
         return hypos
 
 
-class FairseqLM(LM):
+class HuggingFaceLM(LM):
     def __init__(self, dictionary: Dictionary, model: FairseqModel) -> None:
         super().__init__()
 

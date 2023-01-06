@@ -30,7 +30,7 @@ def Decoder(
 
         return FairseqLMDecoder(cfg, tgt_dict)
     if cfg.type == "huggingfacelm":
-        from .flashlight_decoder import FairseqLMDecoder
+        from .flashlight_decoder import HuggingFaceLMDecoder
 
         return FairseqLMDecoder(cfg, tgt_dict)
 

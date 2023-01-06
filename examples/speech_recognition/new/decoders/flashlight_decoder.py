@@ -240,7 +240,8 @@ class FairseqLM(LM):
 
     def start(self, start_with_nothing: bool) -> LMState:
         state = LMState()
-        prefix = torch.LongTensor([[self.dictionary.eos()]])
+        #prefix = torch.LongTensor([[self.dictionary.eos()]])
+        prefix = torch.LongTensor([[50256]])
         incremental_state = {} if self.save_incremental else None
 
         #print(self.model)

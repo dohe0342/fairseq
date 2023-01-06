@@ -243,12 +243,12 @@ class FairseqLM(LM):
         prefix = torch.LongTensor([[self.dictionary.eos()]])
         incremental_state = {} if self.save_incremental else None
 
-        print(self.model)
+        #print(self.model)
 
         with torch.no_grad():
             print(prefix)
             res = self.model(prefix.cuda(), incremental_state=incremental_state)
-            print(res[0].size())
+            print(res[0])
             probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
 
         if incremental_state is not None:
@@ -261,7 +261,7 @@ class FairseqLM(LM):
 
         self.stateq.append(state)
 
-        exit()
+        #exit()
 
         return state
 

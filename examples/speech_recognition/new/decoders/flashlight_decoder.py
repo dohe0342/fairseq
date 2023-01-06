@@ -261,7 +261,7 @@ class FairseqLM(LM):
 
         self.stateq.append(state)
 
-        #exit()
+        exit()
 
         return state
 

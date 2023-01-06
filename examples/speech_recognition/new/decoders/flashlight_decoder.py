@@ -653,8 +653,8 @@ class HuggingFaceLMDecoder(BaseDecoder):
             lm_args.task.data = osp.dirname(cfg.lmpath)
 
         task = tasks.setup_task(lm_args.task)
-        model = task.build_model(lm_args.model)
-        model.load_state_dict(checkpoint["model"], strict=False)
+        lm_args.model['_name'] = "hf_gpt2"
+        model = HuggingFaceGPT2Decoder(lm_args, task)
 
         self.trie = Trie(self.vocab_size, self.silence)
 

@@ -250,6 +250,7 @@ class FairseqLM(LM):
             res = self.model(prefix.cuda(), incremental_state=incremental_state)
             print(res[0])
             probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
+            print(probs[0, -1])
 
         if incremental_state is not None:
             incremental_state = apply_to_sample(lambda x: x.cpu(), incremental_state)

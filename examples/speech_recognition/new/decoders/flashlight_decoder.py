@@ -283,6 +283,7 @@ class FairseqLM(LM):
         (LMState, float): pair of (new state, score for the current word)
         """
         curr_state = self.states[state]
+        print(curr_state)
 
         def trim_cache(targ_size: int) -> None:
             while len(self.stateq) > targ_size:

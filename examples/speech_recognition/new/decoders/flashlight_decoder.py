@@ -313,7 +313,7 @@ class FairseqLM(LM):
                     res, log_probs=True, sample=None
                 )
 
-                print(torch.from_numpy(curr_state.prefix).cuda().size())
+                print(torch.from_numpy(curr_state.prefix).cuda())
                 print(probs.size())
                 exit()
 

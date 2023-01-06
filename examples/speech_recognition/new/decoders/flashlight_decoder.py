@@ -251,6 +251,7 @@ class FairseqLM(LM):
             print(res[0])
             probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
             print(res[0].size())
+            print(probs[0].size())
             print(probs[0, -1])
 
         if incremental_state is not None:

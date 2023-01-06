@@ -32,6 +32,6 @@ def Decoder(
     if cfg.type == "huggingfacelm":
         from .flashlight_decoder import HuggingFaceLMDecoder
 
-        return FairseqLMDecoder(cfg, tgt_dict)
+        return HuggingFaceLMDecoder(cfg, tgt_dict)
 
     raise NotImplementedError(f"Invalid decoder name: {cfg.name}")

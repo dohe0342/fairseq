@@ -253,6 +253,8 @@ class FairseqLM(LM):
         self.states[state] = FairseqLMState(
             prefix.numpy(), incremental_state, probs[0, -1].cpu().numpy()
         )
+
+        logging.info(self.states)
         self.stateq.append(state)
 
         return state

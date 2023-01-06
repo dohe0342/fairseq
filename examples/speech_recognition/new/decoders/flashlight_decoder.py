@@ -262,8 +262,6 @@ class FairseqLM(LM):
 
         self.stateq.append(state)
 
-        exit()
-
         return state
 
     def score(

@@ -240,8 +240,7 @@ class FairseqLM(LM):
 
     def start(self, start_with_nothing: bool) -> LMState:
         state = LMState()
-        #prefix = torch.LongTensor([[self.dictionary.eos()]])
-        prefix = torch.LongTensor([[50256]])
+        prefix = torch.LongTensor([[self.dictionary.eos()]])
         incremental_state = {} if self.save_incremental else None
 
         #print(self.model)
@@ -284,6 +283,9 @@ class FairseqLM(LM):
         (LMState, float): pair of (new state, score for the current word)
         """
         curr_state = self.states[state]
+        print(curr_state)
+        print(state)
+        exit()
         #print(curr_state.probs.shape)
         #exit()
 
@@ -411,7 +413,7 @@ class FairseqLMDecoder(BaseDecoder):
                     word_idx = self.word_dict.index(word)
                     _, score = self.lm.score(start_state, word_idx, no_cache=True)
 
-                    #print(word_idx, score)
+                    print(word_idx, score)
 
                 for spelling in spellings:
                     spelling_idxs = [tgt_dict.index(token) for token in spelling]

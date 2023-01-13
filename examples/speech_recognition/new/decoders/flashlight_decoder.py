@@ -484,6 +484,7 @@ class FairseqLMDecoder(BaseDecoder):
             results = self.decoder.decode(emissions_ptr, T, N)
 
             nbest_results = results[: self.nbest]
+            print(nbest_results[0].tokens)
             print(nbest_results[0].score)
             exit()
             hypos.append([make_hypo(result) for result in nbest_results])

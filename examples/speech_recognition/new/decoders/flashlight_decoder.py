@@ -283,9 +283,6 @@ class FairseqLM(LM):
         (LMState, float): pair of (new state, score for the current word)
         """
         curr_state = self.states[state]
-        print(curr_state)
-        print(state)
-        exit()
         #print(curr_state.probs.shape)
         #exit()
 

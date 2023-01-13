@@ -482,9 +482,10 @@ class FairseqLMDecoder(BaseDecoder):
         for b in range(B):
             emissions_ptr = emissions.data_ptr() + 4 * b * emissions.stride(0)
             results = self.decoder.decode(emissions_ptr, T, N)
-            print(results[:])
 
             nbest_results = results[: self.nbest]
+            print(nbest_results)
+            exit()
             hypos.append([make_hypo(result) for result in nbest_results])
             self.lm.empty_cache()
 

@@ -182,6 +182,10 @@ class KenLMDecoder(BaseDecoder):
             results = self.decoder.decode(emissions_ptr, T, N)
 
             nbest_results = results[: self.nbest]
+            for result in results:
+                print(result.tokens)
+                print(result.score)
+            exit()
 
             for result in results:
                 for x in result.words:

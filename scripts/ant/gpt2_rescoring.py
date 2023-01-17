@@ -29,6 +29,7 @@ class GPT2Decoder():
                 output = self.model(input_ids[0][:i+1].unsqueeze(0))
                 #print(output["logits"].size())
                 score_list.append(output["logits"][-1][-1][input_ids[0][i+1]])
+                print(score_list[-1])
         print(sum(score_list))
 
         return None

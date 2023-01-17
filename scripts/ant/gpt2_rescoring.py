@@ -52,3 +52,5 @@ if __name__ == "__main__":
                 for s, am_score in score_dict.items():
                     lm_score = decoder.lm_score(s)
                     updated_score = decoder.update_score(s, am_score, lm_score)
+                    print(updated_score)
+                exit()

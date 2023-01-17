@@ -8,13 +8,21 @@ model_id = "gpt2"
 model = GPT2LMHeadModel.from_pretrained(model_id).to(device)
 tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
 
-test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
-encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
+text = 'I am a student.'
+encodings = tokenizer(text, return_tensors="pt")
 
-max_length = model.config.n_positions
-stride = 512
-seq_len = encodings.input_ids.size(1)
+outputs = model(input_ids)
+print(outputs)
 
+#test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
+#encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
+
+#max_length = model.config.n_positions
+#stride = 512
+#seq_len = encodings.input_ids.size(1)
+
+
+'''
 nlls = []
 prev_end_loc = 0
 for begin_loc in tqdm(range(0, seq_len, stride)):
@@ -40,3 +48,4 @@ for begin_loc in tqdm(range(0, seq_len, stride)):
         break
 
 ppl = torch.exp(torch.stack(nlls).sum() / end_loc)
+'''

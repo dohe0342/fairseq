@@ -40,9 +40,11 @@ class GPT2Decoder():
 if __name__ == "__main__":
     decoder = GPT2Decoder(lm_weight=0.05)
     
-    f = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
+    hyps = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
+    refs = open('./dev-clean.tgt', 'r').readlines()
+
     score_dict = {}
-    for enum, line in enumerate(f):
+    for enum, line in enumerate(hyps):
         line = line.strip()
         try: score = float(line)
         except:
@@ -52,7 +54,6 @@ if __name__ == "__main__":
                 for s, am_score in score_dict.items():
                     lm_score = decoder.lm_score(s)
                     final_score = decoder.update_score(s, am_score, lm_score)
-                    #print(updated_score)
                     score_dict[s] = final_score
                 score_dict = sorted(score_dict.items(), key=lambda x:x[1], reverse=True)
                 for s, final_score in score_dict:

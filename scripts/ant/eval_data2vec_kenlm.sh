@@ -2,7 +2,7 @@ git pull
 subset=$1
 #model=$1
 
-for subset in $subset #"dev-clean" "dev-other" "test-clean" "test-other" 
+for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
 do
 	echo "====================   $model // $subset   ===================="
 	python /workspace/fairseq/examples/speech_recognition/new/infer.py \
@@ -20,5 +20,5 @@ do
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_960h.pt \
 		common_eval.quiet=true \
 	   	decoding.beam=50 \
-		distributed_training.distributed_world_size=1
+		distributed_training.distributed_world_size=1 > "$subset"_hypo.txt
 done

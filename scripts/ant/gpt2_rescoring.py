@@ -46,6 +46,7 @@ class GPT2Decoder():
         
         return score_dict
 
+
 if __name__ == "__main__":
     metric = WordErrorRate()
     decoder = GPT2Decoder(lm_weight=0.1, ins_p=-1)

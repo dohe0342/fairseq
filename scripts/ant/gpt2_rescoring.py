@@ -67,4 +67,5 @@ if __name__ == "__main__":
                 print('hyp: ', score_dict[0][0])
                 print('ref: ', refs[count])
                 print('')
+                count += 1
 

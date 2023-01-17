@@ -80,7 +80,6 @@ if __name__ == "__main__":
                 lm_hyps.append(score_dict[0][0])
                 score_dict = {}
                 count += 1
-                print(count / len(refs))
 
     wer = metric(lm_hyps, refs[:count])
     print(wer)

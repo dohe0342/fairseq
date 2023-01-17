@@ -55,6 +55,6 @@ if __name__ == "__main__":
                     #print(updated_score)
                     score_dict[s] = final_score
                 score_dict = sorted(score_dict.items(), key=lambda x:x[1], reverse=True)
-                for s, final_score in score_dict.items():
+                for s, final_score in score_dict:
                     print(s, final_score)
                 exit()

@@ -52,8 +52,9 @@ if __name__ == "__main__":
     
     hyps = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
     refs = open('./dev-clean.tgt', 'r').readlines()
-
+    
     score_dict = {}
+    count = 0
     for enum, line in enumerate(hyps):
         line = line.strip()
         try: score = float(line)

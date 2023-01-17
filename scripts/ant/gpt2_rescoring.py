@@ -18,7 +18,7 @@ class GPT2Decoder():
     def score(self, sentence):
         encodings = self.tokenizer(sentence, return_tensors="pt")
         encodings = encodings.to(self.device)
-        print(encodings["input_ids"].size())
+        #print(encodings["input_ids"].size())
         input_ids = torch.cat([self.eos, encodings["input_ids"]])
         
         score_list = []

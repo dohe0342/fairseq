@@ -20,5 +20,5 @@ do
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_960h.pt \
 		common_eval.quiet=true \
 	   	decoding.beam=50 \
-		distributed_training.distributed_world_size=1 | tee "$subset"_w2v_b_100h_hypo.txt
+		distributed_training.distributed_world_size=1 | tee "$subset"_w2v-b-100h_hypo.txt
 done

@@ -36,6 +36,15 @@ class GPT2Decoder():
         
         return final_score
 
+    def update_dict(self, score_dict):
+        for s, am_score in score_dict.items():
+            lm_score = self.lm_score(s)
+            final_score = self.update_score(s, am_score, lm_score)
+            score_dict[s] = final_score
+        score_dict = sorted(score_dict.items(), key=lambda x:x[1], reverse=True)
+        for s, final_score in score_dict:
+            print(s, final_score)
+        exit()
 
 if __name__ == "__main__":
     decoder = GPT2Decoder(lm_weight=0.05)

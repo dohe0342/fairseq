@@ -194,7 +194,7 @@ class KenLMDecoder(BaseDecoder):
                     if x >= 0:
                         print(self.word_dict.get_entry(x), end=' ')
                 print('')
-            exit()
+            print('')
             hypos.append(
                 [
                     {

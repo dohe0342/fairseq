@@ -23,8 +23,8 @@ class GPT2Decoder():
         score_list = []
         
         with torch.no_grad():
-            for i in range(len(input_ids)):
-                output = self.model(input[:i+1])
+            for i in range(1, len(input_ids)):
+                output = self.model(input[:i])
 
 
 print(encodings)

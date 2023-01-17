@@ -33,6 +33,8 @@ class GPT2Decoder():
                 score_list.append(output["logits"][-1][-1][input_ids[i+1]])
         print(score_list)
 
+        return None
+
 '''
 print(encodings)
 encodings = encodings.to(device)

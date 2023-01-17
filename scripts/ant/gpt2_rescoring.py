@@ -24,15 +24,15 @@ class GPT2Decoder():
         
         score_list = []
         
-        with torch.no_grad():
-            for i in range(0, len(input_ids)-1):
-                print('hi!')
-                print(input_ids.size())
-                print(input_ids[0].size())
-                output = self.model(input_ids[0][:i+1])
-                print(output["logits"].size())
-                print(output["logits"][-1][-1][input_ids[i+1]])
-                score_list.append(output["logits"][-1][-1][input_ids[i+1]])
+        #with torch.no_grad():
+        for i in range(0, len(input_ids)-1):
+            print('hi!')
+            print(input_ids.size())
+            print(input_ids[0].size())
+            output = self.model(input_ids[0][:i+1])
+            print(output["logits"].size())
+            print(output["logits"][-1][-1][input_ids[i+1]])
+            score_list.append(output["logits"][-1][-1][input_ids[i+1]])
         print(score_list)
 
         return None

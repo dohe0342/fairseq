@@ -38,7 +38,7 @@ class GPT2Decoder():
 
 
 if __name__ == "__main__":
-    decoder = GPT2Decoder(lm_weight=0.5)
+    decoder = GPT2Decoder(lm_weight=0.05)
     
     f = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
     score_dict = {}

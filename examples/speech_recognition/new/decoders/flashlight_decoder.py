@@ -183,6 +183,7 @@ class KenLMDecoder(BaseDecoder):
 
             nbest_results = results[: self.nbest]
             for result in results:
+                print(result.words)
                 print(result.tokens)
                 print(result.score)
             exit()

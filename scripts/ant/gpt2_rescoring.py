@@ -54,7 +54,7 @@ class GPT2Decoder():
 
 if __name__ == "__main__":
     metric = WordErrorRate()
-    decoder = GPT2Decoder(lm_weight=0.05, ins_p=-1)
+    decoder = GPT2Decoder(lm_weight=0.87, ins_p=-1)
     #decoder = GPT2Decoder(lm_weight=0.87, ins_p=-1)
     
     hyps = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()

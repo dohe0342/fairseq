@@ -16,7 +16,8 @@ encodings = encodings.to(device)
 
 with torch.no_grad():
     outputs = model(encodings["input_ids"])
-print(outputs.keys())
+#print(outputs.keys())
+print(outputs["logits"].size())
 
 #test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
 #encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")

@@ -490,6 +490,8 @@ class FairseqLMDecoder(BaseDecoder):
             nbest_results = results[: self.nbest]
             
             hypos.append([make_hypo(result) for result in nbest_results])
+            print(hypos)
+            exit()
 
             self.lm.empty_cache()
 

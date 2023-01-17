@@ -2,7 +2,7 @@ git pull
 #subset=$1
 #model=$1
 
-for subset in "dev-clean" "dev-other" "test-clean" "test-other" 
+for subset in "test-other" #"dev-clean" "dev-other" "test-clean" "test-other" 
 do
 	echo "====================   $model // $subset   ===================="
 	python /workspace/fairseq/examples/speech_recognition/new/infer.py \

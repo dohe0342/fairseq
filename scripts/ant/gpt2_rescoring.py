@@ -15,7 +15,7 @@ class GPT2Decoder():
         self.ins_p = ins_p
         self.eos = torch.tensor([50256]).to(self.device).unsqueeze(0)
     
-    def score(self, sentence):
+    def lm_score(self, sentence):
         sentence = sentence.lower()
 
         encodings = self.tokenizer(sentence, return_tensors="pt")
@@ -30,6 +30,8 @@ class GPT2Decoder():
                 score_list.append(output["logits"][-1][-1][input_ids[0][i+1]])
 
         return sum(score_list).item()
+    
+    
 
 
 if __name__ == "__main__":
@@ -46,6 +48,3 @@ if __name__ == "__main__":
             else:
                 for s, am_score in score_dict.items():
                     score = decoder.score(s)
-                    
-    
-    

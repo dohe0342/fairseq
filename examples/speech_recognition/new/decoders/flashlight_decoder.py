@@ -188,7 +188,8 @@ class KenLMDecoder(BaseDecoder):
             #    print(result.score)
 
             #exit()
-
+            
+            '''
             for result in results:
                 for x in result.words:
                     if x >= 0:
@@ -196,6 +197,7 @@ class KenLMDecoder(BaseDecoder):
                 print('')
                 print(result.score)
             print('\n')
+            '''
             hypos.append(
                 [
                     {

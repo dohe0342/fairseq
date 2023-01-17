@@ -5,11 +5,16 @@ from tqdm import tqdm
 
 
 class GPT2Decoder():
-    def __init__(self, model_id="gpt2", device="cuda"):
+    def __init__(self, model_id="gpt2", device="cuda", lm_weight=2.0, ins_p=-0.5):
         self.device = device
         self.model_id = model_id
         self.model = GPT2LMHeadModel.from_pretrained(model_id).to(device)
         self.tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
+
+        self.lm_weight = lm_weight
+        self.ins_p = ins_p
+    
+    def score(self, sentence,
 
 text = 'I am a student.'
 encodings = tokenizer(text, return_tensors="pt")

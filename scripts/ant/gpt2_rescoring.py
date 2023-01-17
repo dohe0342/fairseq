@@ -62,6 +62,6 @@ if __name__ == "__main__":
                 score_dict[line] = float(hyps[enum+1].strip())
             else:
                 score_dict = decoder.update_dict(score_dict)
-        print('hyp: ', score_dict[0][0])
-        print('ref: ', refs[enum])
-        print('')
+            print('hyp: ', score_dict[0][0])
+            print('ref: ', refs[enum])
+            print('')

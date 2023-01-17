@@ -79,4 +79,5 @@ if __name__ == "__main__":
             break
 
     wer = metric(lm_hyps, refs[:count])
+    origin_wer = metric(hyps[0], ref[0])
     print(wer)

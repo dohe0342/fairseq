@@ -15,7 +15,7 @@ print(encodings)
 encodings = encodings.to(device)
 
 outputs = model(encodings["input_ids"])
-print(outputs)
+print(outputs.keys())
 
 #test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
 #encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")

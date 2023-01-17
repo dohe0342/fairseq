@@ -30,10 +30,8 @@ class GPT2Decoder():
             for i in range(0, len(input_ids[0])-1):
                 output = self.model(input_ids[0][:i+1].unsqueeze(0))
                 log_prob = F.log_softmax(output["logits"], dim=2)
-                print(log_prob.size())
-                exit()
                 #score_list.append(output["logits"][-1][-1][input_ids[0][i+1]])
-                score_list.append(log_prob[input_ids[0][i+1]])
+                score_list.append(log_prob[-1][-1][input_ids[0][i+1]])
 
         return sum(score_list).item()
     

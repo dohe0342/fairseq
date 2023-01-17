@@ -65,6 +65,6 @@ if __name__ == "__main__":
                 score_dict = decoder.update_dict(score_dict)
                 score_dict = {}
                 print('hyp: ', score_dict[0][0])
-                print('ref: ', refs[enum])
+                print('ref: ', refs[count])
                 print('')
 

@@ -20,7 +20,7 @@ class GPT2Decoder():
         encodings = encodings.to(self.device)
         print(self.eos.size())
         print(encodings["input_ids"].size())
-        input_ids = torch.cat([self.eos, encodings["input_ids"]])
+        input_ids = torch.cat([self.eos, encodings["input_ids"]], dim=1)
         
         score_list = []
         

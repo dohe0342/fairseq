@@ -17,7 +17,7 @@ class GPT2Decoder():
     
     def score(self, sentence):
         sentence = sentence.lower()
-        sentence[0] = sentence[0].upper()
+        #sentence[0] = sentence[0].upper()
 
         encodings = self.tokenizer(sentence, return_tensors="pt")
         encodings = encodings.to(self.device)

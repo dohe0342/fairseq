@@ -11,6 +11,7 @@ tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
 text = 'I am a student.'
 encodings = tokenizer(text, return_tensors="pt")
 
+print(encodings)
 outputs = model(encodings)
 print(outputs)
 

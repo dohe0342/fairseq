@@ -58,8 +58,8 @@ if __name__ == "__main__":
     #decoder = GPT2Decoder(lm_weight=0.87, ins_p=-1)
     
     subset = sys.argv[1]
-    hyps = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
-    refs = open('./dev-clean.tgt', 'r').readlines()
+    hyps = open(f'./{subset}_w2v-b-100h_hypo.txt', 'r').readlines()
+    refs = open(f'./{subset}.tgt', 'r').readlines()
 
     lm_hyps = []
 

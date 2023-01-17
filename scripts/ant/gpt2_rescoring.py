@@ -80,4 +80,4 @@ if __name__ == "__main__":
 
     wer = metric(lm_hyps, refs[:count])
     origin_wer = metric(hyps[0], ref[0])
-    print(wer)
+    print(origin_wer, wer)

@@ -48,5 +48,5 @@ if __name__ == "__main__":
                 score_dict[line] = float(f[enum+1].strip())
             else:
                 for s, am_score in score_dict.items():
-                    score = decoder.lm_score(s)
-                    updated_score = 
+                    lm_score = decoder.lm_score(s)
+                    updated_score = decoder.update_score(s, am_score, lm_score)

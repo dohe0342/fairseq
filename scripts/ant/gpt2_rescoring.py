@@ -51,6 +51,10 @@ if __name__ == "__main__":
             else:
                 for s, am_score in score_dict.items():
                     lm_score = decoder.lm_score(s)
-                    updated_score = decoder.update_score(s, am_score, lm_score)
-                    print(updated_score)
+                    final_score = decoder.update_score(s, am_score, lm_score)
+                    #print(updated_score)
+                    score_dict[s] = final_score
+                score_dict = sorted(score_dict.items(), key=x:x[1], reverse=True)
+                for s, final_score in score_dict.items():
+                    print(s, final_score)
                 exit()

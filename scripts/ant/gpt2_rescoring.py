@@ -49,6 +49,6 @@ if __name__ == "__main__":
             else:
                 #print(score_dict)
                 for s, am_score in score_dict.items():
-                    decoder.score(s)
+                    decoder.score(s.lower())
                 exit()
             

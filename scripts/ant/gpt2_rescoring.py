@@ -17,12 +17,9 @@ class GPT2Decoder():
     
     def score(self, sentence):
         sentence = sentence.lower()
-        #sentence[0] = sentence[0].upper()
 
         encodings = self.tokenizer(sentence, return_tensors="pt")
         encodings = encodings.to(self.device)
-        #print(self.eos.size())
-        #print(encodings["input_ids"].size())
         input_ids = torch.cat([self.eos, encodings["input_ids"]], dim=1)
         
         score_list = []
@@ -30,12 +27,9 @@ class GPT2Decoder():
         with torch.no_grad():
             for i in range(0, len(input_ids[0])-1):
                 output = self.model(input_ids[0][:i+1].unsqueeze(0))
-                #print(output["logits"].size())
                 score_list.append(output["logits"][-1][-1][input_ids[0][i+1]])
-                #print(score_list[-1])
-        print(sum(score_list))
 
-        return None
+        return sum(score_list)
 
 
 if __name__ == "__main__":

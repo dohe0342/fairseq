@@ -182,17 +182,18 @@ class KenLMDecoder(BaseDecoder):
             results = self.decoder.decode(emissions_ptr, T, N)
 
             nbest_results = results[: self.nbest]
-            for result in results:
-                print(result.words)
-                print(result.tokens)
-                print(result.score)
-            exit()
-
             #for result in results:
-            #    for x in result.words:
-            #        if x >= 0:
-            #            print(self.word_dict.get_entry(x), end=' ')
-            #    print('')
+            #    print(result.words)
+            #    print(result.tokens)
+            #    print(result.score)
+
+            #exit()
+
+            for result in results:
+                for x in result.words:
+                    if x >= 0:
+                        print(self.word_dict.get_entry(x), end=' ')
+                print('')
             hypos.append(
                 [
                     {

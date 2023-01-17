@@ -1,6 +1,7 @@
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 from datasets import load_dataset
 import torch
+from torchmetrics import WordErrorRate
 from tqdm import tqdm
 
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     
     score_dict = {}
     count = 0
-    for enum, line in enumerate(hyps):
+    for enum, line in tqdm(enumerate(hyps)):
         line = line.strip()
         try: score = float(line)
         except:

@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 
 class GPT2Decoder():
-    def __init__(self, model_id, device):
+    def __init__(self, model_id, device="cuda"):
         device = "cuda"
         model_id = "gpt2"
         model = GPT2LMHeadModel.from_pretrained(model_id).to(device)

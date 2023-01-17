@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 #print('')
                 score_dict = {}
                 count += 1
-        if count > 0:
+        if count > 10:
             break
 
     wer = metric(lm_hyps, refs[:count])

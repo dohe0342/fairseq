@@ -13,7 +13,8 @@ encodings = tokenizer(text, return_tensors="pt")
 
 print(encodings)
 encodings = encodings.to(device)
-outputs = model(encodings)
+
+outputs = model(encodings["input_ids"])
 print(outputs)
 
 #test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")

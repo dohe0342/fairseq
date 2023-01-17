@@ -14,7 +14,8 @@ encodings = tokenizer(text, return_tensors="pt")
 print(encodings)
 encodings = encodings.to(device)
 
-outputs = model(encodings["input_ids"])
+with torch.no_grad():
+    outputs = model(encodings["input_ids"])
 print(outputs.keys())
 
 #test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")

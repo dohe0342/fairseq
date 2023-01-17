@@ -16,6 +16,9 @@ class GPT2Decoder():
         self.eos = torch.tensor([50256]).to(self.device).unsqueeze(0)
     
     def score(self, sentence):
+        sentence = sentence.lower()
+        sentence[0] = sentence[0].upper()
+
         encodings = self.tokenizer(sentence, return_tensors="pt")
         encodings = encodings.to(self.device)
         #print(self.eos.size())
@@ -49,8 +52,6 @@ if __name__ == "__main__":
             else:
                 #print(score_dict)
                 for s, am_score in score_dict.items():
-                    s = s.lower()
-                    s[0] = s[0].upper()
                     decoder.score(s)
                 exit()
     

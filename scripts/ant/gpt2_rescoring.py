@@ -59,6 +59,7 @@ if __name__ == "__main__":
     refs = open('./dev-clean.tgt', 'r').readlines()
 
     lm_hyps = []
+    hyps = [h.strip() for h in hyps]
     refs = [r.strip() for r in refs]
     
     score_dict = {}

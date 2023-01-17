@@ -23,8 +23,9 @@ class GPT2Decoder():
         score_list = []
         
         with torch.no_grad():
-            for input in input_ids:
-                self.model(
+            for i in range(len(input_ids)):
+                output = self.model(input[:i+1)
+
 
 print(encodings)
 encodings = encodings.to(device)

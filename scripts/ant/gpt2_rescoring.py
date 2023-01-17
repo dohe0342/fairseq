@@ -50,6 +50,3 @@ if __name__ == "__main__":
                 print(score_dict)
                 exit()
             
-    for s in sentences:
-        decoder.score(s)
-        

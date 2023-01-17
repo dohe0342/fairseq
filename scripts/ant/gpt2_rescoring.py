@@ -13,9 +13,16 @@ class GPT2Decoder():
 
         self.lm_weight = lm_weight
         self.ins_p = ins_p
+        self.eos = 50256
     
     def score(self, sentence):
         encodings = tokenizer(sentence, return_tensors="pt")
+        encodings = encodings.to(device)
+        input_ids = [self.eos] + encodings["input_ids"]
+        score_list = []
+        
+        with torch.no_grad():
+            
 
 print(encodings)
 encodings = encodings.to(device)

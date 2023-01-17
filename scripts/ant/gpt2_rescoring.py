@@ -14,10 +14,8 @@ class GPT2Decoder():
         self.lm_weight = lm_weight
         self.ins_p = ins_p
     
-    def score(self, sentence,
-
-text = 'I am a student.'
-encodings = tokenizer(text, return_tensors="pt")
+    def score(self, sentence):
+        encodings = tokenizer(sentence, return_tensors="pt")
 
 print(encodings)
 encodings = encodings.to(device)

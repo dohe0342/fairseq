@@ -76,7 +76,7 @@ if __name__ == "__main__":
                 score_dict[line] = float(hyps[enum+1].strip())
             elif len(line) == 0 and len(score_dict) != 0:
                 score_dict = decoder.update_dict(score_dict)
-
+                print(score_dict[0][0])
                 lm_hyps.append(score_dict[0][0])
                 score_dict = {}
                 count += 1

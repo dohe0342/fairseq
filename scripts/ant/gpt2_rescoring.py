@@ -12,6 +12,7 @@ text = 'I am a student.'
 encodings = tokenizer(text, return_tensors="pt")
 
 print(encodings)
+encodings = encodings.to(device)
 outputs = model(encodings)
 print(outputs)
 

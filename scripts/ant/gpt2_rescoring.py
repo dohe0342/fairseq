@@ -46,6 +46,9 @@ if __name__ == "__main__":
         except:
             if len(line) != 0:
                 score_dict[line] = float(f[enum+1].strip())
+            else:
+                print(score_dict)
+                exit()
             
     for s in sentences:
         decoder.score(s)

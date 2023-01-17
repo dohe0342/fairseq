@@ -32,7 +32,9 @@ class GPT2Decoder():
         return sum(score_list).item()
     
     def update_score(self, sentence, am_score, lm_score):
+        final_score = am_score + self.lm_weight*lm_score + self.ins_p*len(sentence.split())
         
+        return final_score
 
 
 if __name__ == "__main__":

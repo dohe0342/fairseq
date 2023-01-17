@@ -27,6 +27,7 @@ class GPT2Decoder():
         with torch.no_grad():
             for i in range(0, len(input_ids)-1):
                 print('hi!')
+                print(input_ids.size())
                 print(input_ids[0].size())
                 output = self.model(input_ids[0][:i+1])
                 print(output["logits"].size())

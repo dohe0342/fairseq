@@ -31,7 +31,8 @@ class GPT2Decoder():
 
         return sum(score_list).item()
     
-    
+    def update_score(self, sentence_dict, lm_score):
+        
 
 
 if __name__ == "__main__":
@@ -47,4 +48,4 @@ if __name__ == "__main__":
                 score_dict[line] = float(f[enum+1].strip())
             else:
                 for s, am_score in score_dict.items():
-                    score = decoder.score(s)
+                    score = decoder.lm_score(s)

@@ -49,10 +49,14 @@ class GPT2Decoder():
         return score_dict
 
 if __name__ == "__main__":
+    metric = WordErrorRate()
     decoder = GPT2Decoder(lm_weight=0.87, ins_p=-1)
     
     hyps = open('./dev-clean_w2v-b-100h_hypo.txt', 'r').readlines()
     refs = open('./dev-clean.tgt', 'r').readlines()
+
+    lm_hyps = []
+    refs = [r.strip() for r in refs]
     
     score_dict = {}
     count = 0
@@ -64,9 +68,14 @@ if __name__ == "__main__":
                 score_dict[line] = float(hyps[enum+1].strip())
             elif len(line) == 0 and len(score_dict) != 0:
                 score_dict = decoder.update_dict(score_dict)
-                print('hyp: ', score_dict[0][0])
-                print('ref: ', refs[count])
-                print('')
+
+                lm_hyps.append(score_dict[0][0])
+                #print('hyp: ', score_dict[0][0])
+                #print('ref: ', refs[count])
+                #print('')
                 score_dict = {}
                 count += 1
+        if count > 5:
+            break
 
+    metric(lm_hyps, refs[:count])

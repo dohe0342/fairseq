@@ -62,7 +62,6 @@ if __name__ == "__main__":
             if len(line) != 0:
                 score_dict[line] = float(hyps[enum+1].strip())
             elif len(line) == 0 and len(score_dict) != 0:
-                print(score_dict)
                 score_dict = decoder.update_dict(score_dict)
                 print('hyp: ', score_dict[0][0])
                 print('ref: ', refs[count])

@@ -480,7 +480,6 @@ class InferenceProcessor:
             self.num_sentences += sample["id"].numel()
 
     def log_generation_time(self) -> None:
-        '''
         logger.info(
             "Processed %d sentences (%d tokens) in %.1fs %.2f "
             "sentences per second, %.2f tokens per second)",
@@ -490,8 +489,6 @@ class InferenceProcessor:
             self.num_sentences / (self.gen_timer.sum + 1e-6),
             1.0 / (self.gen_timer.avg + 1e-6),
         )
-        '''
-        return None
 
 
 def parse_wer(wer_file: Path) -> float:

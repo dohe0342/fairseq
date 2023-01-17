@@ -194,7 +194,7 @@ class KenLMDecoder(BaseDecoder):
                     if x >= 0:
                         print(self.word_dict.get_entry(x), end=' ')
                 print('')
-            print('\n\n')
+            print('\n')
             hypos.append(
                 [
                     {
@@ -208,7 +208,6 @@ class KenLMDecoder(BaseDecoder):
                     for result in nbest_results
                 ]
             )
-        exit()
         #for b in range(B):
         #    for enum, result in enumerate(nbest_results):
         #        hypos[b][enum]["words"].append(viterbi_sentence[b][-1])

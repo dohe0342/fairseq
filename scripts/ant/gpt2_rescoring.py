@@ -1,6 +1,7 @@
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 from datasets import load_dataset
 import torch
+import torch.nn.functional as F
 from torchmetrics import WordErrorRate
 from tqdm import tqdm
 
@@ -28,6 +29,7 @@ class GPT2Decoder():
         with torch.no_grad():
             for i in range(0, len(input_ids[0])-1):
                 output = self.model(input_ids[0][:i+1].unsqueeze(0))
+                log_prob = F.log_softmax(output["logits"], dim=2)
                 score_list.append(output["logits"][-1][-1][input_ids[0][i+1]])
 
         return sum(score_list).item()

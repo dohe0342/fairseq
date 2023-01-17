@@ -24,7 +24,7 @@ class GPT2Decoder():
         
         with torch.no_grad():
             for i in range(len(input_ids)):
-                output = self.model(input[:i+1)
+                output = self.model(input[:i+1])
 
 
 print(encodings)

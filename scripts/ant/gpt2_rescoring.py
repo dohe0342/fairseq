@@ -47,6 +47,7 @@ if __name__ == "__main__":
             if len(line) != 0:
                 score_dict[line] = float(f[enum+1].strip())
             else:
-                print(score_dict)
-                exit()
+                #print(score_dict)
+                for s, am_score in score_dict.items():
+                    decoder.score(s)
             

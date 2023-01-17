@@ -193,7 +193,7 @@ class KenLMDecoder(BaseDecoder):
                 for x in result.words:
                     if x >= 0:
                         print(self.word_dict.get_entry(x), end=' ')
-                #print('result.score')
+                print('')
                 print(result.score)
             print('\n')
             hypos.append(

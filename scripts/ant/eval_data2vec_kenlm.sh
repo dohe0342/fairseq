@@ -1,5 +1,5 @@
 git pull
-subset=$1
+#subset=$1
 #model=$1
 
 for subset in "dev-clean" "dev-other" "test-clean" "test-other" 

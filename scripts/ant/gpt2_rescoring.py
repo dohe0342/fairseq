@@ -11,7 +11,7 @@ tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
 text = 'I am a student.'
 encodings = tokenizer(text, return_tensors="pt")
 
-outputs = model(input_ids)
+outputs = model(encodings)
 print(outputs)
 
 #test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")

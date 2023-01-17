@@ -51,7 +51,7 @@ if __name__ == "__main__":
                 for s, am_score in score_dict.items():
                     s = s.lower()
                     s[0] = s[0].upper()
-                    decoder.score(s.lower())
+                    decoder.score(s)
                 exit()
     
     

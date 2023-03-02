@@ -80,7 +80,7 @@ def get_annealed_rate(start, end, curr_step, total_steps):
     return end - r * pct_remaining
 
 
-@register_model("data2vec_text", dataclass=Data2VecTextConfig)
+@register_model("data2vec_text2", dataclass=Data2VecTextConfig)
 class Data2VecTextModel(FairseqEncoderModel):
     def __init__(self, cfg: Data2VecTextConfig, encoder):
         super().__init__(encoder)

@@ -719,14 +719,11 @@ class Wav2Vec2Model(BaseFairseqModel):
         
         enc_input = x.clone()
         
-        #x, layer_results, dropped_layer = self.encoder(
-        outputs = self.encoder(
+        x, layer_results, dropped_layer = self.encoder(
                 x, 
                 padding_mask=padding_mask, 
                 layer=layer
         )
-        x = outputs[0]
-        layer_results = outputs[1]
         
         if features_newview is not None:
             x_new, _, _ = self.encoder(

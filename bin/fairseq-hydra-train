@@ -1,4 +1,4 @@
-#!/opt/conda/bin/python3
+#!/opt/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'fairseq','console_scripts','fairseq-hydra-train'
 import re
 import sys

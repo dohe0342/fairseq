@@ -1207,10 +1207,11 @@ class CtcCriterion(FairseqCriterion):
 
         #conv_feat.grad.sign_()
         
-        eps = torch.norm(conv_feat.grad)
-        print(torch.norm(10*conv_feat.grad/eps))
+        #eps = torch.norm(conv_feat.grad)
+        #print(torch.norm(10*conv_feat.grad/eps))
         
-        conv_feat = conv_feat + eps*conv_feat.grad 
+        #conv_feat = conv_feat + eps*conv_feat.grad 
+        conv_feat = conv_feat + 10*conv_feat.grad/eps
         
         if 0:
             origin = origin.reshape(-1, 512)

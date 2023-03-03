@@ -1207,7 +1207,7 @@ class CtcCriterion(FairseqCriterion):
 
         #conv_feat.grad.sign_()
         
-        eps = conv_feat.grad.sum()
+        eps = torch.norm(conv_feat.grad)
         print(eps)
         
         conv_feat = conv_feat + eps*conv_feat.grad 

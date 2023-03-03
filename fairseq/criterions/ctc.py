@@ -1208,6 +1208,7 @@ class CtcCriterion(FairseqCriterion):
         conv_feat.grad.sign_()
         
         eps = sum(conv_feat.grad)
+        print(eps)
         
         conv_feat = conv_feat + eps*conv_feat.grad 
         

@@ -1149,6 +1149,7 @@ class CtcCriterion(FairseqCriterion):
     
     def forward_and_get_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
         sample["net_input"]["cnn_fgsm"] = True
+        print(sample["net_input"].keys())
         
         net_output = model(**sample["net_input"])
         

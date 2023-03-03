@@ -1149,7 +1149,6 @@ class CtcCriterion(FairseqCriterion):
     
     def forward_and_get_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
         sample["net_input"]["cnn_fgsm"] = True
-        print(sample["net_input"].keys())
         
         net_output = model(**sample["net_input"])
         
@@ -1207,6 +1206,7 @@ class CtcCriterion(FairseqCriterion):
         origin = conv_feat.data.clone()
 
         conv_feat.grad.sign_()
+        
         conv_feat = conv_feat + eps*conv_feat.grad 
         
         if 0:

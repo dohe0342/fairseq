@@ -20,7 +20,7 @@ from fairseq.dataclass import FairseqDataclass
 from fairseq.data.data_utils import post_process
 from fairseq.tasks import FairseqTask
 from fairseq.logging.meters import safe_round
-
+import numpy as np
 
 @dataclass
 class CtcCriterionConfig(FairseqDataclass):
@@ -1147,8 +1147,7 @@ class CtcCriterion(FairseqCriterion):
 
         return loss, sample_size, logging_output
     
-    def forward_and_get_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False):
-        print(sample)
+    def forward_and_get_cnn_fgsm(self, model, sample, optimizer, ignore_grad=False, update_num=0):
         sample["net_input"]["cnn_fgsm"] = True
         
         net_output = model(**sample["net_input"])
@@ -1213,6 +1212,10 @@ class CtcCriterion(FairseqCriterion):
         
         #conv_feat = conv_feat + eps*conv_feat.grad 
         conv_feat = conv_feat + 10*conv_feat.grad/eps
+        if 5705 in sample["id"]:
+            index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
+            print(conv_feat.size())
+            np.save(f'fgsm_5705_'
         
         if 0:
             origin = origin.reshape(-1, 512)

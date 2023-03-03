@@ -1212,7 +1212,6 @@ class CtcCriterion(FairseqCriterion):
         
         #conv_feat = conv_feat + eps*conv_feat.grad 
         conv_feat = conv_feat + 10*conv_feat.grad/eps
-        print(sample["net_input"]['source'])
         
         if 0:
             origin = origin.reshape(-1, 512)

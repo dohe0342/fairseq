@@ -1215,7 +1215,7 @@ class CtcCriterion(FairseqCriterion):
         if 5705 in sample["id"]:
             index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
             print(conv_feat.size())
-            np.save(f'fgsm_5705_'
+            np.save(f'fgsm_5705_{update_num}.npy', conv_feat[index].detach().cpu().numpy())
         
         if 0:
             origin = origin.reshape(-1, 512)

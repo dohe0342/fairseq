@@ -1205,7 +1205,7 @@ class CtcCriterion(FairseqCriterion):
 
         origin = conv_feat.data.clone()
 
-        conv_feat.grad.sign_()
+        #conv_feat.grad.sign_()
         
         eps = conv_feat.grad.sum()
         print(eps)

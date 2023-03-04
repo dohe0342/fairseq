@@ -1610,6 +1610,7 @@ class CtcCriterionViewmaker(FairseqCriterion):
         }
         
         if 5705 in sample["id"]:
+            conv_feat = net_output["pac_output"]
             index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
             print(conv_feat.size())
             np.save(f'pac_5705_{update_num}.npy', conv_feat[index].detach().cpu().numpy())

@@ -1608,6 +1608,11 @@ class CtcCriterionViewmaker(FairseqCriterion):
             "nsentences": sample["id"].numel(),
             "sample_size": sample_size,
         }
+        
+        if 5705 in sample["id"]:
+            index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
+            print(conv_feat.size())
+            np.save(f'pac_5705_{update_num}.npy', conv_feat[index].detach().cpu().numpy())
 
         if not model.training:
             import editdistance

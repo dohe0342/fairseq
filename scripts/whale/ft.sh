@@ -17,7 +17,7 @@ then
 				checkpoint.save_dir=/home/work/workspace/fairseq/scripts/whale/outputs/$1 \
 				criterion._name=viewmaker \
 				+model.viewmaker=true \
-				+model.init_viewmaker=true 
+				#+model.init_viewmaker=true 
 		else
 			fairseq-hydra-train \
 				--config-dir /home/work/workspace/fairseq/examples/wav2vec/config/finetuning \

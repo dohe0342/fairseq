@@ -736,7 +736,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             x = x_stack[:bs]
             x_new = x_stack[bs:]
             layer_results = layer_results[:int(len(layer_results)/2)]
-            padding_mask = padding_mask[:bs]
+            padding_mask = padding_mask[:bs] if padding_mask is not None else None
 
         else:
             x, layer_results, dropped_layer = self.encoder(

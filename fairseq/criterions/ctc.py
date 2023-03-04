@@ -1212,11 +1212,10 @@ class CtcCriterion(FairseqCriterion):
         
         #conv_feat = conv_feat + eps*conv_feat.grad 
         conv_feat = conv_feat + 10*conv_feat.grad/eps
-        print(sample["id"].size(), sample["id"])
-        if 5705 in sample["id"]:
-            index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
-            print(conv_feat.size())
-            np.save(f'fgsm_5705_{update_num}.npy', conv_feat[index].detach().cpu().numpy())
+        if 27211 in sample["id"]:
+            #index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
+            #print(conv_feat.size())
+            np.save(f'fgsm_{update_num}.npy', conv_feat.detach().cpu().numpy())
         
         if 0:
             origin = origin.reshape(-1, 512)

@@ -1848,6 +1848,7 @@ class Wav2VecEncoderViewMaker(Wav2VecEncoder):
             "layer_results": res["layer_results"],
             "loss": res["loss"],
             "conv_feat": None,
+            "pac_output": res["pac_output"],
             #"conv_feat": res["conv_feat"],
         }
 

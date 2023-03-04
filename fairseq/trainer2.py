@@ -862,6 +862,9 @@ class Trainer(object):
         extra_kwargs = {}
         if self.cfg.ema.store_ema and getattr(self.task, "uses_ema", False):
             extra_kwargs["ema_model"] = self.ema.get_model()
+            
+        extra_kwargs["fgsm"] = self.cfg.model.fgsm
+        extra_kwargs["viewmaker"] = self.cfg.model.viewmaker
         
         #extra_kwargs["uses_branch_v1"] = self.cfg.model.branch_ctc_v1
         #extra_kwargs["uses_branch_v2"] = self.cfg.model.branch_ctc_v2
@@ -875,7 +878,6 @@ class Trainer(object):
             #    for k in sample['net_input']:
             #        print(k)
             #print('sample size = ', sample['net_input']['source'].size())
-            extra_kwargs["viewmaker"] = self.cfg.model.viewmaker
             def maybe_no_sync():
                 """
                 Whenever *samples* contains more than one mini-batch, we

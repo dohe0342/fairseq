@@ -241,6 +241,10 @@ class Wav2Vec2AsrConfig(FairseqDataclass):
         default=False,
         metadata={"help": "use multiple ctc loss"},
     )
+    
+    fgsm: bool = field(
+        default=False,
+    )
 
 
 

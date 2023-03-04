@@ -626,7 +626,7 @@ class FairseqTask(object):
                         #lambda_ = -0.00003 ## for wav2vec2 vox 960h train
                         #lambda_ = -0.0001 ## for wav2vec2 vox 960h train
                         #lambda_ = -0.00001*(1+torch.cos(torch.tensor(update_num)*math.pi/1810.)) ## for hubert
-                        lambda_ = -0.0001
+                        lambda_ = -0.00001
                         optimizer[1].backward(lambda_*loss[0][1]+loss[1])
                     #optimizer[1].backward(-0.001*loss[0][1])
                     #loss[0][1] /= sample_size

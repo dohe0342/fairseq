@@ -1537,7 +1537,6 @@ class CtcCriterionViewmaker(FairseqCriterion):
         self.sentence_avg = cfg.sentence_avg
 
     def forward(self, model, sample, reduce=True, update_num=0):
-        print(update_num)
         net_output = model(**sample["net_input"])
         lprobs = model.w2v_encoder.get_normalized_probs(
             net_output, log_probs=True

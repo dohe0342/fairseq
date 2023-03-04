@@ -738,9 +738,9 @@ class Wav2Vec2Model(BaseFairseqModel):
 
         else:
             x, layer_results, dropped_layer = self.encoder(
-                    x, 
-                    padding_mask=padding_mask, 
-                    layer=layer
+                x, 
+                padding_mask=padding_mask, 
+                layer=layer
             )
         
         if 0:

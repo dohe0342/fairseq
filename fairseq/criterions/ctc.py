@@ -1211,7 +1211,7 @@ class CtcCriterion(FairseqCriterion):
         #print(torch.norm(10*conv_feat.grad/eps))
         
         #conv_feat = conv_feat + eps*conv_feat.grad 
-        conv_feat = conv_feat + 10*conv_feat.grad/eps
+        conv_feat = conv_feat + 50*conv_feat.grad/eps
         if 5705 in sample["id"]:
             index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
             print(conv_feat.size())

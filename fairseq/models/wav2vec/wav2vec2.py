@@ -722,13 +722,18 @@ class Wav2Vec2Model(BaseFairseqModel):
         enc_input = x.clone()
         
         if features_newview is not None:
-            print('x new:', x_new.size())
-            print('x: ', x.size())
-            x_new, _, _ = self.encoder(
-                x_new, 
+            #print('x new:', x_new.size())
+            #print('x: ', x.size())
+            x_stack = torch.cat((x, x_new), dim=0)
+            
+            x_stack, _, _ = self.encoder(
+                x_stack, 
                 padding_mask=padding_mask, 
                 layer=layer
-        )
+            )
+            bs = int(x_stack.size(0)/2)
+            x = x_stack[:bs]
+            x_new = x_stack[bs:]
         else:
             x, layer_results, dropped_layer = self.encoder(
                     x, 

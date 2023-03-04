@@ -1217,7 +1217,7 @@ class CtcCriterion(FairseqCriterion):
         conv_feat = conv_feat + 10*conv_feat.grad/eps
         if 27211 in sample["id"]:
             #index = (sample["id"] == 5705).nonzero(as_tuple=True)[0].item()
-            print(conv_feat.size())
+            print(sample["id"], conv_feat.size())
             np.save(f'fgsm_{update_num}.npy', conv_feat.detach().cpu().numpy())
         
         if 0:

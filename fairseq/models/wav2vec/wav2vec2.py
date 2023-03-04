@@ -722,6 +722,8 @@ class Wav2Vec2Model(BaseFairseqModel):
         enc_input = x.clone()
         
         if features_newview is not None:
+            print('x new:', x_new.size())
+            print('x: ', x.size())
             x_new, _, _ = self.encoder(
                 x_new, 
                 padding_mask=padding_mask, 

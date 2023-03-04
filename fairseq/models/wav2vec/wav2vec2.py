@@ -648,6 +648,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         loss = None
         features_newview = None
         x_new = None
+        pac_output = None
         if cnn_fgsm is not None:
             features_diff = torch.autograd.Variable(conv_features.data, requires_grad=True)
 
@@ -655,6 +656,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             criterion = nn.MSELoss(reduction='mean')
             features_newview, delta = viewmaker(conv_features, padding_mask)
             loss = criterion(features_newview.reshape(-1, 512), features.reshape(-1, 512))
+            pac_output = features_newview.clone()
 
         if self.post_extract_proj is not None:
             if cnn_fgsm is None:

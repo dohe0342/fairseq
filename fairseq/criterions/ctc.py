@@ -1211,6 +1211,7 @@ class CtcCriterion(FairseqCriterion):
         #print(torch.norm(10*conv_feat.grad/eps))
         
         #conv_feat = conv_feat + eps*conv_feat.grad 
+        origin_convfeat = conv_feat.clone()
 
         conv_feat = conv_feat + 10*conv_feat.grad/eps
         if 27211 in sample["id"]:

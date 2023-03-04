@@ -725,8 +725,7 @@ class Wav2Vec2Model(BaseFairseqModel):
             #print('x new:', x_new.size())
             #print('x: ', x.size())
             x_stack = torch.cat((x, x_new), dim=0)
-            print(padding_mask)
-            padding_mask = torch.cat((padding_mask, padding_mask), dim=0)
+            padding_mask = torch.cat((padding_mask, padding_mask), dim=0) if padding_mask is not None
             
             x_stack, layer_results, dropped_layer = self.encoder(
                 x_stack, 

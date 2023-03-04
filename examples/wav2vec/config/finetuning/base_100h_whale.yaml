@@ -22,6 +22,7 @@ dataset:
   skip_invalid_size_inputs_valid_test: true
   train_subset: train-100
   valid_subset: dev-other
+  validate_after_updates: 79000
 
 distributed_training:
   ddp_backend: legacy_ddp

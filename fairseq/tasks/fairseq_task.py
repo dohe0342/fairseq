@@ -576,12 +576,11 @@ class FairseqTask(object):
             return loss, sample_size, logging_output
         
         elif viewmaker:
-            print(update_num)
             model.train()
             model.set_num_updates(update_num)
             with torch.autograd.profiler.record_function("forward"):
                 with torch.cuda.amp.autocast(enabled=(isinstance(optimizer, AMPOptimizer))):
-                    loss, sample_size, logging_output = criterion(model, sample, update_num)
+                    loss, sample_size, logging_output = criterion(model, sample, update_num=update_num)
                     
             if len(optimizer) == 1:
                 if ignore_grad:

@@ -724,6 +724,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         if features_newview is not None:
             #print('x new:', x_new.size())
             #print('x: ', x.size())
+            '''
             x_stack = torch.cat((x, x_new), dim=0)
             padding_mask = torch.cat((padding_mask, padding_mask), dim=0) if padding_mask is not None else None
             
@@ -737,6 +738,18 @@ class Wav2Vec2Model(BaseFairseqModel):
             x_new = x_stack[bs:]
             layer_results = layer_results[:int(len(layer_results)/2)]
             padding_mask = padding_mask[:bs] if padding_mask is not None else None
+            '''
+            x_new, _, _ = self.encoder(
+                x_new, 
+                padding_mask=padding_mask, 
+                layer=layer
+            )
+
+            x, layer_results, dropped_layer = self.encoder(
+                x, 
+                padding_mask=padding_mask, 
+                layer=layer
+            )
 
         else:
             x, layer_results, dropped_layer = self.encoder(

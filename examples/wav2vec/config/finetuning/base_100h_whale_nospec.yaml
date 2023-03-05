@@ -50,7 +50,7 @@ lr_scheduler:
 model:
   _name: wav2vec_ctc
   w2v_path: ???
-  apply_mask: true
+  apply_mask: false
   mask_prob: 0.0
   mask_channel_prob: 0.0
   mask_channel_length: 64

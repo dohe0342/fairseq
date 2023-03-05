@@ -152,9 +152,8 @@ class CtcCriterion(FairseqCriterion):
             )
         loss_time = time.time() - loss_time
         
-        backward_time = time.time()
-        loss.backward()
-        backward_time = time.time() - backward_time
+        #loss.backward()
+        #backward_time = time.time() - backward_time
         #logging.info(f"loss time = {loss_time} s")
         #logging.info(f"backward time = {backward_time} s")
 

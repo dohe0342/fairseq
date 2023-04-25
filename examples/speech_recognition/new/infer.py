@@ -405,10 +405,6 @@ class InferenceProcessor:
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]
 
-        print(target_sentence)
-        exit()
-        
-        '''
         if padding_mask is not None:
             padding_mask = ~padding_mask
             padding_mask.int()
@@ -432,7 +428,6 @@ class InferenceProcessor:
                 print(zero_count.sum().item(), padding_mask[enum].cpu().sum().item())
             else:
                 print(zero_count.sum().item(), zero_count.size()[0])
-        '''
         '''
             import random
             import numpy as np

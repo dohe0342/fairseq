@@ -48,6 +48,9 @@ class BaseDecoder:
         if len(models) == 1:
             model = models[0]
             encoder_out = model(**encoder_input)
+            temp_out = encoder_out['encoder_out'].cpu().numpy()
+            np.save('/workspace/jieun/temp.npy', temp_out)
+            
             
             emissions = model.get_normalized_probs(encoder_out, log_probs=True)
             #emissions_numpy = emissions.cpu().numpy()

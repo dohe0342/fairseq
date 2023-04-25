@@ -406,6 +406,7 @@ class InferenceProcessor:
             target_sentence += label_dict[i.item()]
 
         print(target_sentence)
+        exit()
         
         '''
         if padding_mask is not None:

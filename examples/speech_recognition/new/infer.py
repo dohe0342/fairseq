@@ -405,10 +405,6 @@ class InferenceProcessor:
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]
         
-        print('target sentence = ')
-        print(target_sentence)
-        print('\n\n')
-        exit()
         '''
         if padding_mask is not None:
             padding_mask = ~padding_mask

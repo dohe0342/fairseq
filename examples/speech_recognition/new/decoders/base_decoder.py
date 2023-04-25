@@ -48,7 +48,9 @@ class BaseDecoder:
         if len(models) == 1:
             model = models[0]
             encoder_out = model(**encoder_input)
-            print(encoder_out['encoder_out'])
+            temp_out = encoder_out['encoder_out']
+            import numpy as np
+            np.save('./temp.npy', temp_out.cpu().numpy())
             emissions = model.get_normalized_probs(encoder_out, log_probs=True)
             #emissions_numpy = emissions.cpu().numpy()
             #np.save(f'/home/work/workspace/fairseq/scripts/whale/test-clean-part_emissions/0_{emissions.size()[0]}.npy', emissions_numpy)

@@ -401,7 +401,8 @@ class InferenceProcessor:
         
         target_sentence = ''
         hypo_sentence = ''
-        print(sample.keys())
+
+        print(hypos.keys())
         
         for i in sample['target'][0]:
             target_sentence += label_dict[i.item()]

@@ -9,7 +9,7 @@ do
 		--config-dir /workspace/fairseq/examples/speech_recognition/new/conf \
 		--config-name infer \
 		task=audio_finetuning \
-		task.data=/workspace/LibriSpeech/manifests \
+		task.data=/DB/LibriSpeech/manifests \
 		task.labels=ltr \
 		decoding.type=fairseqlm \
 		decoding.lmweight=0.87 decoding.wordscore=-1.0 decoding.silweight=0 \

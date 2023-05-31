@@ -4,7 +4,7 @@ CUDA_VISIBLE_DEVICES=$3 python /workspace/fairseq/examples/speech_recognition/in
   /workspace/LibriSpeech/manifests \
   --task audio_finetuning \
   --nbest 1 \
-  --path /workspace/models/wav2vec_models/$model \
+  --path /workspace/models/wav2vec_model/$model \
   --gen-subset $subset \
   --results-path /workspace/fairseq/examples/wav2vec/ctc_eval \
   --w2l-decoder fairseqlm \

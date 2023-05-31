@@ -19,6 +19,6 @@ do
 		dataset.gen_subset=$subset \
 		common_eval.path=/workspace/models/wav2vec_model/wav2vec_small_100h.pt \
 		common_eval.quiet=false \
-	   	decoding.beam=20 \
+	   	decoding.beam=500 \
 		distributed_training.distributed_world_size=1
 done

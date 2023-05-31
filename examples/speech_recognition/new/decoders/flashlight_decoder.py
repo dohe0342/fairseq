@@ -81,7 +81,6 @@ class KenLMDecoder(BaseDecoder):
 
         self.nbest = cfg.nbest
         self.unitlm = cfg.unitlm
-        self.viterbi = ViterbiDecoder(tgt_dict)
 
         if cfg.lexicon:
             self.lexicon = load_words(cfg.lexicon)
@@ -128,8 +127,9 @@ class KenLMDecoder(BaseDecoder):
         else:
             assert self.unitlm, "Lexicon-free decoding requires unit LM"
 
-            d = {w: [[w]] for w in tgt_dict.symbols}
-            self.word_dict = create_word_dict(d)
+            self.word_dict = flDictionary()
+            for sym in tgt_dict.symbols:
+                self.word_dict.add_entry(sym, tgt_dict.index(sym))
             self.lm = KenLM(cfg.lmpath, self.word_dict)
             self.decoder_opts = LexiconFreeDecoderOptions(
                 beam_size=cfg.beam,
@@ -169,35 +169,13 @@ class KenLMDecoder(BaseDecoder):
         self,
         emissions: torch.FloatTensor,
     ) -> List[List[Dict[str, torch.LongTensor]]]:
-        
         B, T, N = emissions.size()
-        #viterbi_hypos = self.viterbi.decode(emissions)
-        #viterbi_sentence = [post_process(self.tgt_dict.string( \
-        #                        viterbi_hypos[b][0]["tokens"].int().cpu()), 'letter') \
-        #                    for b in range(B)]
-        
         hypos = []
         for b in range(B):
             emissions_ptr = emissions.data_ptr() + 4 * b * emissions.stride(0)
             results = self.decoder.decode(emissions_ptr, T, N)
 
             nbest_results = results[: self.nbest]
-            #for result in results:
-            #    print(result.words)
-            #    print(result.tokens)
-            #    print(result.score)
-
-            #exit()
-            
-            '''
-            for result in results:
-                for x in result.words:
-                    if x >= 0:
-                        print(self.word_dict.get_entry(x), end=' ')
-                print('')
-                print(result.score)
-            print('\n')
-            '''
             hypos.append(
                 [
                     {
@@ -211,10 +189,6 @@ class KenLMDecoder(BaseDecoder):
                     for result in nbest_results
                 ]
             )
-        #for b in range(B):
-        #    for enum, result in enumerate(nbest_results):
-        #        hypos[b][enum]["words"].append(viterbi_sentence[b][-1])
-        
         return hypos
 
 
@@ -251,24 +225,15 @@ class FairseqLM(LM):
         state = LMState()
         prefix = torch.LongTensor([[self.dictionary.eos()]])
         incremental_state = {} if self.save_incremental else None
-
-        #print(self.model)
-
         with torch.no_grad():
-            #print(prefix)
             res = self.model(prefix.cuda(), incremental_state=incremental_state)
-            #print(res[0])
             probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
-            #print(res[0].size())
-            #print(probs[0].size())
-            #print(probs[0, -1])
 
         if incremental_state is not None:
             incremental_state = apply_to_sample(lambda x: x.cpu(), incremental_state)
         self.states[state] = FairseqLMState(
             prefix.numpy(), incremental_state, probs[0, -1].cpu().numpy()
         )
-
         self.stateq.append(state)
 
         return state
@@ -292,8 +257,6 @@ class FairseqLM(LM):
         (LMState, float): pair of (new state, score for the current word)
         """
         curr_state = self.states[state]
-        #print(curr_state.probs.shape)
-        #exit()
 
         def trim_cache(targ_size: int) -> None:
             while len(self.stateq) > targ_size:
@@ -324,9 +287,6 @@ class FairseqLM(LM):
                     res, log_probs=True, sample=None
                 )
 
-                #print(torch.from_numpy(curr_state.prefix).cuda())
-                #print(probs.size())
-
                 if new_incremental_state is not None:
                     new_incremental_state = apply_to_sample(
                         lambda x: x.cpu(), new_incremental_state
@@ -339,10 +299,8 @@ class FairseqLM(LM):
             if not no_cache:
                 self.states[state] = curr_state
                 self.stateq.append(state)
-        
+
         score = curr_state.probs[token_index].item()
-        #print(score)
-        #exit()
 
         trim_cache(self.max_cache)
 
@@ -401,277 +359,6 @@ class FairseqLMDecoder(BaseDecoder):
         task = tasks.setup_task(lm_args.task)
         model = task.build_model(lm_args.model)
         model.load_state_dict(checkpoint["model"], strict=False)
-
-        self.trie = Trie(self.vocab_size, self.silence)
-
-        self.word_dict = task.dictionary
-        self.unk_word = self.word_dict.unk()
-        self.lm = FairseqLM(self.word_dict, model)
-
-        if self.lexicon:
-            start_state = self.lm.start(False)
-            for i, (word, spellings) in enumerate(self.lexicon.items()):
-                if self.unitlm:
-                    word_idx = i
-                    self.idx_to_wrd[i] = word
-                    score = 0
-                else:
-                    word_idx = self.word_dict.index(word)
-                    _, score = self.lm.score(start_state, word_idx, no_cache=True)
-
-                for spelling in spellings:
-                    spelling_idxs = [tgt_dict.index(token) for token in spelling]
-                    assert (
-                        tgt_dict.unk() not in spelling_idxs
-                    ), f"{spelling} {spelling_idxs}"
-                    self.trie.insert(spelling_idxs, word_idx, score)
-            self.trie.smear(SmearingMode.MAX)
-
-            self.decoder_opts = LexiconDecoderOptions(
-                beam_size=cfg.beam,
-                beam_size_token=cfg.beamsizetoken or len(tgt_dict),
-                beam_threshold=cfg.beamthreshold,
-                lm_weight=cfg.lmweight,
-                word_score=cfg.wordscore,
-                unk_score=cfg.unkweight,
-                sil_score=cfg.silweight,
-                log_add=False,
-                criterion_type=CriterionType.CTC,
-            )
-
-            self.decoder = LexiconDecoder(
-                self.decoder_opts,
-                self.trie,
-                self.lm,
-                self.silence,
-                self.blank,
-                self.unk_word,
-                [],
-                self.unitlm,
-            )
-        else:
-            assert self.unitlm, "Lexicon-free decoding requires unit LM"
-
-            d = {w: [[w]] for w in tgt_dict.symbols}
-            self.word_dict = create_word_dict(d)
-            self.lm = KenLM(cfg.lmpath, self.word_dict)
-            self.decoder_opts = LexiconFreeDecoderOptions(
-                beam_size=cfg.beam,
-                beam_size_token=cfg.beamsizetoken or len(tgt_dict),
-                beam_threshold=cfg.beamthreshold,
-                lm_weight=cfg.lmweight,
-                sil_score=cfg.silweight,
-                log_add=False,
-                criterion_type=CriterionType.CTC,
-            )
-            self.decoder = LexiconFreeDecoder(
-                self.decoder_opts, self.lm, self.silence, self.blank, []
-            )
-
-    def decode(
-        self,
-        emissions: torch.FloatTensor,
-    ) -> List[List[Dict[str, torch.LongTensor]]]:
-        B, T, N = emissions.size()
-        hypos = []
-
-        def make_hypo(result: DecodeResult) -> Dict[str, Any]:
-            hypo = {
-                "tokens": self.get_tokens(result.tokens),
-                "score": result.score,
-            }
-            if self.lexicon:
-                hypo["words"] = [
-                    self.idx_to_wrd[x] if self.unitlm else self.word_dict[x]
-                    for x in result.words
-                    if x >= 0
-                ]
-            return hypo
-
-        for b in range(B):
-            emissions_ptr = emissions.data_ptr() + 4 * b * emissions.stride(0)
-            results = self.decoder.decode(emissions_ptr, T, N)
-
-            nbest_results = results[: self.nbest]
-            
-            hypos.append([make_hypo(result) for result in nbest_results])
-
-            self.lm.empty_cache()
-
-        return hypos
-
-
-class HuggingFaceLM(LM):
-    def __init__(self, dictionary: Dictionary, model: FairseqModel) -> None:
-        super().__init__()
-
-        self.dictionary = dictionary
-        self.model = model
-        self.unk = self.dictionary.unk()
-
-        self.save_incremental = False  # this currently does not work properly
-        self.max_cache = 20_000
-
-        if torch.cuda.is_available():
-            model.cuda()
-        model.eval()
-        model.make_generation_fast_()
-
-        self.states = {}
-        self.stateq = deque()
-
-    def start(self, start_with_nothing: bool) -> LMState:
-        state = LMState()
-        prefix = torch.LongTensor([[self.dictionary.eos()]])
-        incremental_state = {} if self.save_incremental else None
-
-        #print(self.model)
-
-        with torch.no_grad():
-            #print(prefix)
-            res = self.model(prefix.cuda(), incremental_state=incremental_state)
-            #print(res[0])
-            probs = self.model.get_normalized_probs(res, log_probs=True, sample=None)
-            #print(res[0].size())
-            #print(probs[0].size())
-            #print(probs[0, -1])
-
-        if incremental_state is not None:
-            incremental_state = apply_to_sample(lambda x: x.cpu(), incremental_state)
-        self.states[state] = FairseqLMState(
-            prefix.numpy(), incremental_state, probs[0, -1].cpu().numpy()
-        )
-
-        self.stateq.append(state)
-
-        return state
-
-    def score(
-        self,
-        state: LMState,
-        token_index: int,
-        no_cache: bool = False,
-    ) -> Tuple[LMState, int]:
-        """
-        Evaluate language model based on the current lm state and new word
-        Parameters:
-        -----------
-        state: current lm state
-        token_index: index of the word
-                     (can be lexicon index then you should store inside LM the
-                      mapping between indices of lexicon and lm, or lm index of a word)
-        Returns:
-        --------
-        (LMState, float): pair of (new state, score for the current word)
-        """
-        curr_state = self.states[state]
-
-        def trim_cache(targ_size: int) -> None:
-            while len(self.stateq) > targ_size:
-                rem_k = self.stateq.popleft()
-                rem_st = self.states[rem_k]
-                rem_st = FairseqLMState(rem_st.prefix, None, None)
-                self.states[rem_k] = rem_st
-
-        if curr_state.probs is None:
-            new_incremental_state = (
-                curr_state.incremental_state.copy()
-                if curr_state.incremental_state is not None
-                else None
-            )
-            with torch.no_grad():
-                if new_incremental_state is not None:
-                    new_incremental_state = apply_to_sample(
-                        lambda x: x.cuda(), new_incremental_state
-                    )
-                elif self.save_incremental:
-                    new_incremental_state = {}
-
-                res = self.model(
-                    torch.from_numpy(curr_state.prefix).cuda(),
-                    incremental_state=new_incremental_state,
-                )
-                probs = self.model.get_normalized_probs(
-                    res, log_probs=True, sample=None
-                )
-
-                #print(torch.from_numpy(curr_state.prefix).cuda())
-                #print(probs.size())
-
-                if new_incremental_state is not None:
-                    new_incremental_state = apply_to_sample(
-                        lambda x: x.cpu(), new_incremental_state
-                    )
-
-                curr_state = FairseqLMState(
-                    curr_state.prefix, new_incremental_state, probs[0, -1].cpu().numpy()
-                )
-
-            if not no_cache:
-                self.states[state] = curr_state
-                self.stateq.append(state)
-
-        score = curr_state.probs[token_index].item()
-
-        trim_cache(self.max_cache)
-
-        outstate = state.child(token_index)
-        if outstate not in self.states and not no_cache:
-            prefix = np.concatenate(
-                [curr_state.prefix, torch.LongTensor([[token_index]])], -1
-            )
-            incr_state = curr_state.incremental_state
-
-            self.states[outstate] = FairseqLMState(prefix, incr_state, None)
-
-        if token_index == self.unk:
-            score = float("-inf")
-
-        return outstate, score
-
-    def finish(self, state: LMState) -> Tuple[LMState, int]:
-        """
-        Evaluate eos for language model based on the current lm state
-        Returns:
-        --------
-        (LMState, float): pair of (new state, score for the current word)
-        """
-        return self.score(state, self.dictionary.eos())
-
-    def empty_cache(self) -> None:
-        self.states = {}
-        self.stateq = deque()
-        gc.collect()
-
-
-class HuggingFaceLMDecoder(BaseDecoder):
-    def __init__(self, cfg: FlashlightDecoderConfig, tgt_dict: Dictionary) -> None:
-        super().__init__(tgt_dict)
-
-        self.nbest = cfg.nbest
-        self.unitlm = cfg.unitlm
-
-        self.lexicon = load_words(cfg.lexicon) if cfg.lexicon else None
-        self.idx_to_wrd = {}
-
-        checkpoint = torch.load(cfg.lmpath, map_location="cpu")
-
-        if "cfg" in checkpoint and checkpoint["cfg"] is not None:
-            lm_args = checkpoint["cfg"]
-        else:
-            lm_args = convert_namespace_to_omegaconf(checkpoint["args"])
-
-        if not OmegaConf.is_dict(lm_args):
-            lm_args = OmegaConf.create(lm_args)
-
-        with open_dict(lm_args.task):
-            lm_args.task.data = osp.dirname(cfg.lmpath)
-
-        task = tasks.setup_task(lm_args.task)
-        lm_args.model['_name'] = "hf_gpt2"
-        model = HuggingFaceGPT2Decoder(lm_args, task)
-
-        del checkpoint
 
         self.trie = Trie(self.vocab_size, self.silence)
 

@@ -52,7 +52,7 @@ class BaseDecoder:
             emissions = model.get_normalized_probs(encoder_out, log_probs=False)
             
             temp_out = emissions.cpu().numpy()
-            np.save('/workspace/jieun/temp.npy', temp_out)
+            #np.save('/workspace/jieun/temp.npy', temp_out)
 
             #emissions_numpy = emissions.cpu().numpy()
             #np.save(f'/home/work/workspace/fairseq/scripts/whale/test-clean-part_emissions/0_{emissions.size()[0]}.npy', emissions_numpy)

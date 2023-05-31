@@ -12,7 +12,7 @@ do
 		task.data=/workspace/LibriSpeech/manifests \
 		task.labels=ltr \
 		decoding.type=fairseqlm \
-		decoding.lmweight=0.0 decoding.wordscore=0. decoding.silweight=0 \
+		decoding.lmweight=0.87 decoding.wordscore=-1.0 decoding.silweight=0 \
 		decoding.lmpath=/workspace/models/lm_model/lm_librispeech_word_transformer.pt \
 		decoding.lexicon=/workspace/models/lm_model/librispeech_lexicon_lower.lst \
 		decoding.unique_wer_file=false \

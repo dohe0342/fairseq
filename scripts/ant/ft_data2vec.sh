@@ -6,7 +6,7 @@ if [ $mode == "w2v" ]
 then
 	fairseq-hydra-train \
 		--config-dir /workspace/fairseq/examples/wav2vec/config/finetuning \
-		--config-name base_960h_ant \
+		--config-name base_100h_ant \
 		task.data=/workspace/LibriSpeech/manifests \
 		task.normalize=false \
 		model.w2v_path=/workspace/models/wav2vec_model/wav2vec_small.pt \

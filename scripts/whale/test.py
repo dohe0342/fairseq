@@ -5,7 +5,7 @@ import matplotlib as plt
 a = torch.randn(642, 768)
 b = torch.randn(56, 768)
 lm_am_sim_cp = torch.matmul(a, b)
-print(lm_am_sim_cp)
+print(lm_am_sim_cp.size())
 
 plt.matshow(lm_am_sim_cp.numpy())
 plt.colorbar()

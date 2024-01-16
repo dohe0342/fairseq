@@ -1,6 +1,12 @@
 import numpy as np
 import torch
 import matplotlib as plt 
+
+a = torch.randn(642, 768)
+b = torch.randn(56, 768)
+lm_am_sim_cp = torch.matmul(a, b)
+print(lm_am_sim_cp)
+
 plt.matshow(lm_am_sim_cp.numpy())
 plt.colorbar()
 if not os.path.exists(f'/home/work/workspace/fairseq/scripts/whale/png/cross_attn'):
